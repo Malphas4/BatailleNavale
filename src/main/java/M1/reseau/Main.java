@@ -15,5 +15,16 @@ public class Main {
             // for you, but you can always add more by pressing Ctrl+8.
             System.out.println("i = " + i);
         }
+       // client  Testclient = new client();
+       // serveur Testserveur = new serveur();
+
+        try {
+           // Testclient.unClient();
+         //   Testserveur.unServeur();
+
+        } catch (Exception e) {
+           // e.printStackTrace();
+        }
+
     }
 }

@@ -8,11 +8,19 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
     /**
-     * This class implements java socket M1.reseau.client
-     * @author pankaj
+     * This class implements java socket M1.reseau.ClientTCP
+     * @author Malphas
      *
      */
     public class ClientTCP {
+        /**
+         * A rajouter DP état pour la file d'attente
+         * @param args
+         * @throws UnknownHostException
+         * @throws IOException
+         * @throws ClassNotFoundException
+         * @throws InterruptedException
+         */
         public static void main(String[] args)throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException{
             //get the localhost IP address, if server is running on some other IP, you need to use that
             InetAddress host = InetAddress.getLocalHost();

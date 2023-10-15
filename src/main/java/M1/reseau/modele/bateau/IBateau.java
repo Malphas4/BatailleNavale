@@ -1,5 +1,7 @@
 package M1.reseau.modele.bateau;
 
-public interface IBateau {
+import M1.reseau.modele.monde.grille.Grille;
 
+public interface IBateau {
+    boolean isSurLaGrille(Grille grille);
 }

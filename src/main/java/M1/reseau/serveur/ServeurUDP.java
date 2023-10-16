@@ -3,7 +3,7 @@ import java.io.*;
 import java.net.*;
 public class ServeurUDP {
 
-    final static int port = 8532;
+    public final static int port = 8532;
     final static int taille = 1024;
     final static byte buffer[] = new byte[taille];
 

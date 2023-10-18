@@ -6,11 +6,6 @@ import M1.reseau.modele.monde.grille.Grille;
 
 public class Grille32x32 extends Grille {
     @Override
-    public void creerGrille() {
-
-    }
-
-    @Override
     public void ajouterCase(ICase _case) {
 
     }

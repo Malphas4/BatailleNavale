@@ -20,7 +20,7 @@ public abstract class Case implements ICase {
         set_x(_x);
     }
 
-    public int getX() {
+    public int get_x() {
         return _x;
     }
 

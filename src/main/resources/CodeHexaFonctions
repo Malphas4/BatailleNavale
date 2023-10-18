@@ -1,0 +1,12 @@
+00 identification et échange d'ID pour reconnexion
+01 envoi d'une case
+02 envoi d'un message dans chat général
+03 envoi d'un message dans chat privé
+05 selection d'un salon de jeu
+06 abandon de la partie
+07 selection du type de partie
+08 envoi du choix de la selection
+09 message faux
+0A début file attente
+0B mise a jour file attente
+0C chaine invalide

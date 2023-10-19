@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FabriqueCaseNormalTest {
 
-    CaseNormal _case;
+    private CaseNormal _case;
 
     @BeforeEach
     void setUp() {

@@ -18,6 +18,7 @@ public abstract class Case implements ICase {
      */
     public Case(int _x, int _y) {
         set_x(_x);
+        set_y(_y);
     }
 
     public int get_x() {

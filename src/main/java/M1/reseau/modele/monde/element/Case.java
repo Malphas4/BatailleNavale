@@ -1,5 +1,9 @@
 package M1.reseau.modele.monde.element;
 
+import M1.reseau.modele.monde.element.visitor.IVisitorCase;
+
+import java.util.Objects;
+
 public abstract class Case implements ICase {
     /**
      * Déclaration des variables
@@ -14,9 +18,10 @@ public abstract class Case implements ICase {
      */
     public Case(int _x, int _y) {
         set_x(_x);
+        set_y(_y);
     }
 
-    public int getX() {
+    public int get_x() {
         return _x;
     }
 
@@ -32,5 +37,23 @@ public abstract class Case implements ICase {
     public void set_y(int _y) {
         if (_y < 1) throw new IllegalArgumentException("CaseNormal : y est inférieur à 1.");
         this._y = _y;
+    }
+
+    @Override
+    public void accepte(IVisitorCase _ivc) {
+        _ivc.visite(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Case aCase = (Case) o;
+        return _x == aCase._x && get_y() == aCase.get_y();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_x, get_y());
     }
 }

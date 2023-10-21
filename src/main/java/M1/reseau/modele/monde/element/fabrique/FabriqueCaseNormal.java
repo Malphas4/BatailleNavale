@@ -1,7 +1,7 @@
 package M1.reseau.modele.monde.element.fabrique;
 
-import M1.reseau.modele.monde.element.type.CaseNormal;
 import M1.reseau.modele.monde.element.ICase;
+import M1.reseau.modele.monde.element.type.CaseNormal;
 
 public class FabriqueCaseNormal implements IFabriqueCase {
     @Override

@@ -1,8 +1,10 @@
 package M1.reseau.modele.jeu;
 
-import M1.reseau.modele.monde.element.Case;
+import M1.reseau.modele.joueur.IJoueur;
 
 public interface IPartie {
+    void commencer();
     void tourSuivant();
-    void getJoueurCourant();
+    IJoueur getJoueurCourant();
+    void fin();
 }

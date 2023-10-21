@@ -51,7 +51,7 @@ class CaseToucheTest {
         assertEquals(2, this._case3.get_y());
 
         /* Verification de l'override de == */
-        assertTrue(this._case1.equals(this._case3));
+        assertEquals(this._case1, this._case3);
     }
 
     @Test
@@ -68,7 +68,7 @@ class CaseToucheTest {
         assertNotEquals(2, this._case2.get_y());
 
         /* Verification de l'override de == */
-        assertFalse(this._case1.equals(this._case2));
+        assertNotEquals(this._case1, this._case2);
     }
 
 }

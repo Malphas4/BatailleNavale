@@ -1,4 +1,4 @@
-package M1.reseau.COR;
+package M1.reseau.client.CdrClient;
 
 public class expertCase extends Expert{
     public void traiter(String requete){

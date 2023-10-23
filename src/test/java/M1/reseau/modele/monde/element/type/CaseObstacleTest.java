@@ -6,35 +6,35 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CaseNormalTest {
+class CaseObstacleTest {
 
-    private CaseNormal _case1;
-    private CaseNormal _case2;
-    private CaseNormal _case3;
+    private CaseObstacle _case1;
+    private CaseObstacle _case2;
+    private CaseObstacle _case3;
 
     @BeforeEach
     void setUp() {
-        this._case1 = new CaseNormal(1, 2);
-        this._case2 = new CaseNormal(2, 1);
-        this._case3 = new CaseNormal(1, 2);
+        this._case1 = new CaseObstacle(1, 2);
+        this._case2 = new CaseObstacle(2, 1);
+        this._case3 = new CaseObstacle(1, 2);
     }
 
     @Test
     void testConstructeur() {
-        ICase _case = new CaseNormal(1, 2);
+        ICase _case = new CaseObstacle(1, 2);
 
         /* Verification de l'existence de l'objet */
         assertNotNull(_case);
 
         /* Verificiation de l'instanciation de l'objet*/
-        assertInstanceOf(CaseNormal.class, _case);
+        assertInstanceOf(CaseObstacle.class, _case);
 
         /* Verification des attributs de l'objet */
         assertEquals(1, _case.get_x());
         assertEquals(2, _case.get_y());
 
         /* Vérification de la methode pour verifier si on peut placer un objet sur la case */
-        assertTrue(_case.isPlacable());
+        assertFalse(_case.isPlacable());
     }
 
     @Test
@@ -70,4 +70,5 @@ class CaseNormalTest {
         /* Verification de l'override de == */
         assertFalse(this._case1.equals(this._case2));
     }
+
 }

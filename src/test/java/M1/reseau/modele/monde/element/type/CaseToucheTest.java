@@ -6,35 +6,35 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CaseNormalTest {
+class CaseToucheTest {
 
-    private CaseNormal _case1;
-    private CaseNormal _case2;
-    private CaseNormal _case3;
+    private CaseTouche _case1;
+    private CaseTouche _case2;
+    private CaseTouche _case3;
 
     @BeforeEach
     void setUp() {
-        this._case1 = new CaseNormal(1, 2);
-        this._case2 = new CaseNormal(2, 1);
-        this._case3 = new CaseNormal(1, 2);
+        this._case1 = new CaseTouche(1, 2);
+        this._case2 = new CaseTouche(2, 1);
+        this._case3 = new CaseTouche(1, 2);
     }
 
     @Test
     void testConstructeur() {
-        ICase _case = new CaseNormal(1, 2);
+        ICase _case = new CaseTouche(1, 2);
 
         /* Verification de l'existence de l'objet */
         assertNotNull(_case);
 
         /* Verificiation de l'instanciation de l'objet*/
-        assertInstanceOf(CaseNormal.class, _case);
+        assertInstanceOf(CaseTouche.class, _case);
 
         /* Verification des attributs de l'objet */
         assertEquals(1, _case.get_x());
         assertEquals(2, _case.get_y());
 
         /* Vérification de la methode pour verifier si on peut placer un objet sur la case */
-        assertTrue(_case.isPlacable());
+        assertFalse(_case.isPlacable());
     }
 
     @Test
@@ -51,7 +51,7 @@ class CaseNormalTest {
         assertEquals(2, this._case3.get_y());
 
         /* Verification de l'override de == */
-        assertTrue(this._case1.equals(this._case3));
+        assertEquals(this._case1, this._case3);
     }
 
     @Test
@@ -68,6 +68,7 @@ class CaseNormalTest {
         assertNotEquals(2, this._case2.get_y());
 
         /* Verification de l'override de == */
-        assertFalse(this._case1.equals(this._case2));
+        assertNotEquals(this._case1, this._case2);
     }
+
 }

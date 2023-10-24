@@ -1,0 +1,9 @@
+
+  "parametre":{
+      "connexion": {
+      "port": 8080,
+      "serveur": "localhost",
+      "client": "localhost",
+      "portUDP": 8532},
+  }
+

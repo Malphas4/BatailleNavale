@@ -1,5 +1,6 @@
 package M1.reseau.modele.monde.element.fabrique;
 
+import M1.reseau.modele.monde.element.ICase;
 import M1.reseau.modele.monde.element.type.CaseNormal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,16 +9,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FabriqueCaseNormalTest {
 
-    private CaseNormal _case;
+    private FabriqueCaseNormal _fabrique;
 
     @BeforeEach
     void setUp() {
-        this._case = (CaseNormal) (new FabriqueCaseNormal()).creerCase(1, 1);
+        this._fabrique = new FabriqueCaseNormal();
     }
 
     @Test
-    void creerCaseTest() {
+    void testcreerCase() {
+        ICase _case = this._fabrique.creerCase(1, 2);
+        assertInstanceOf(CaseNormal.class, _case);
         assertEquals(1, _case.get_x());
-        assertEquals(1, _case.get_y());
+        assertEquals(2, _case.get_y());
+        assertTrue(_case.isPlacable());
     }
 }

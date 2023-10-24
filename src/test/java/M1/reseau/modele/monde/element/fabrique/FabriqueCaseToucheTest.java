@@ -1,25 +1,25 @@
 package M1.reseau.modele.monde.element.fabrique;
 
 import M1.reseau.modele.monde.element.ICase;
-import M1.reseau.modele.monde.element.type.CaseObstacle;
+import M1.reseau.modele.monde.element.type.CaseTouche;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FabriqueCaseObstacleTest {
+class FabriqueCaseToucheTest {
 
-    private FabriqueCaseObstacle _fabrique;
+    private FabriqueCaseTouche _fabrique;
 
     @BeforeEach
     void setUp() {
-        this._fabrique = new FabriqueCaseObstacle();
+        this._fabrique = new FabriqueCaseTouche();
     }
 
     @Test
     void testcreerCase() {
         ICase _case = this._fabrique.creerCase(1, 2);
-        assertInstanceOf(CaseObstacle.class, _case);
+        assertInstanceOf(CaseTouche.class, _case);
         assertEquals(1, _case.get_x());
         assertEquals(2, _case.get_y());
         assertFalse(_case.isPlacable());

@@ -17,5 +17,42 @@ public class ServeurUDP {
             System.out.println(data.getAddress());
             socket.send(data);
         }
+
+
     }
+    public DatagramSocket initialiseUDP (int port) throws Exception{
+
+        try {
+            DatagramSocket socket = new DatagramSocket(port);
+            byte[] buffer = new byte[taille];
+            return socket;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public void attenteConnexion(int buffer, DatagramSocket socket ) throws Exception{
+        while(true)
+        {
+            DatagramPacket data = new DatagramPacket(buffer,buffer.length);
+            socket.receive(data);
+            System.out.println(data.getAddress());
+            socket.send(data);
+        }
+    }
+    public void finConnexion(int buffer, DatagramSocket socket ) throws Exception{
+        while(true)
+        {
+            DatagramPacket data = new DatagramPacket(buffer,buffer.length);
+            socket.receive(data);
+            System.out.println(data.getAddress());
+            socket.send(data);
+        }
+    }
+    public void attributionID(int buffer, DatagramSocket socket ) throws Exception{
+
+    }
+
+
 }

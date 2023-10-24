@@ -1,10 +1,10 @@
-package M1.reseau.COR;
+package M1.reseau.client.CdrClient;
 
 public class Expert {
 
 
-    public M1.reseau.COR.Expert _suivant = null;
-    public void  Suivant(M1.reseau.COR.Expert sv){
+    public Expert _suivant = null;
+    public void  Suivant(Expert sv){
         _suivant = sv;
     }
 

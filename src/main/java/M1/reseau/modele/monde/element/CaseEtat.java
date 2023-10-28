@@ -12,7 +12,10 @@ public abstract class CaseEtat extends Case {
         super(_x, _y);
     }
 
-    /* Les cases états sont nécessairement implacable car on definit la placabilite d'une case à l'initialisation */
+    /**
+     * Les cases états sont nécessairement implacable car on définit la placabilite d'une case à l'initialisation
+     * @return
+     */
     @Override
     public boolean isPlacable() {
         return false;

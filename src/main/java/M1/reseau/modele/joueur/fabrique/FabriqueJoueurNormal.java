@@ -1,7 +1,7 @@
 package M1.reseau.modele.joueur.fabrique;
 
 import M1.reseau.modele.joueur.IJoueur;
-import M1.reseau.modele.joueur.JoueurNormal;
+import M1.reseau.modele.joueur.type.JoueurNormal;
 
 public class FabriqueJoueurNormal implements IFabriqueJoueur {
     @Override

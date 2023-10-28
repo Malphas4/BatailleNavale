@@ -1,52 +1,182 @@
 package M1.reseau.modele.monde.grille;
 
 import M1.reseau.modele.bateau.IBateau;
+import M1.reseau.modele.exception.IGrilleException;
 import M1.reseau.modele.monde.element.ICase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Grille implements IGrille {
-    private int _largeur;
+public class Grille implements IGrille {
     private int _longueur;
+    private int _largeur;
 
-    private List<ICase> _cases = new ArrayList<>();
-    private List<IBateau> _bateaux = new ArrayList<>();
+    private List<ICase> _listeCase = new ArrayList<>();
+    private List<IBateau> _listeBateau = new ArrayList<>();
 
-    public Grille() {
-
+    /**
+     *
+     */
+    public Grille(int _longueur, int _largeur) {
+        set_longueur(_longueur);
+        set_largeur(_largeur);
     }
 
-    public int get_largeur() {
-        return _largeur;
-    }
-
-    public void set_largeur(int _largeur) {
-        if (_largeur <= 0) throw new IllegalArgumentException("Grille : La largeur doit être supérieur à 0");
-        this._largeur = _largeur;
-    }
-
+    /**
+     *
+     * @return
+     */
     public int get_longueur() {
-        return _longueur;    }
+        return _longueur;
+    }
 
+    /**
+     *
+     * @param _longueur
+     */
     public void set_longueur(int _longueur) {
         if (_longueur <= 0) throw new IllegalArgumentException("Grille : La longueur doit être supérieur à 0.");
         this._longueur = _longueur;
     }
 
-    public List<ICase> getCases() {
-        return _cases;
+    /**
+     *
+     * @return
+     */
+    public int get_largeur() {
+        return _largeur;
     }
 
+    /**
+     *
+     * @param _largeur
+     */
+    public void set_largeur(int _largeur) {
+        if (_largeur <= 0) throw new IllegalArgumentException("Grille : La largeur doit être supérieur à 0");
+        this._largeur = _largeur;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<ICase> get_listeCase() {
+        return _listeCase;
+    }
+
+    /**
+     *
+     * @param _cases
+     */
     public void setCases(List<ICase> _cases) {
-        this._cases = _cases;
+        this._listeCase = _cases;
     }
 
-    public List<IBateau> getBateaux() {
-        return _bateaux;
+    /**
+     *
+     * @return
+     */
+    public List<IBateau> get_listeBateau() {
+        return _listeBateau;
     }
 
+    /**
+     *
+     * @param _bateaux
+     */
     public void setBateaux(List<IBateau> _bateaux) {
-        this._bateaux = _bateaux;
+        this._listeBateau = _bateaux;
     }
+
+    /**
+     *
+     * @param _case
+     * @return
+     */
+    @Override
+    public boolean isDansLaGrille(ICase _case) {
+        if (_case == null) throw new IllegalArgumentException("Grille : La case ne peut pas être null.");
+        return get_listeCase().contains(_case);
+    }
+
+    /**
+     *
+     * @param _bateau
+     * @return
+     */
+    @Override
+    public boolean isDansLaGrille(IBateau _bateau) {
+        if (_bateau == null) throw new IllegalArgumentException("Grille : Le bateau ne peut pas être null.");
+        return get_listeBateau().contains(_bateau);
+    }
+
+    /**
+     *
+     * @param _case
+     * @throws IGrilleException
+     */
+    @Override
+    public void ajouterCase(ICase _case) throws IGrilleException {
+        /* Verification case n'est pas null */
+        if (_case == null) throw new IllegalArgumentException("Grille8x8 : La case a ajouté ne peut pas être null.");
+
+        /* Verification case est dans la grille */
+        if (_case.get_x() <= 0 && _case.get_x() > get_longueur()) throw new IGrilleException("Grille8x8 : La coordonnée x de la case ne sont pas dans la grille");
+        if (_case.get_y() <= 0 && _case.get_y() > get_largeur()) throw new IGrilleException("Grille8x8 : La coordonnée x de la case ne sont pas dans la grille");
+
+        /* On ajoute la case dans la liste de la grille */
+        get_listeCase().add(_case);
+    }
+
+    /**
+     *
+     * @param _case
+     * @throws IGrilleException
+     */
+    @Override
+    public void supprimerCase(ICase _case) throws IGrilleException {
+        /* Verification case n'est pas null */
+        if (_case == null) throw new IllegalArgumentException("Grille8x8 : La case a ajouté ne peut pas être null.");
+
+        /* Verification case est dans la liste de la grille */
+        if (!get_listeCase().contains(_case)) throw new IGrilleException("Grille8x8 : La case n'est pas dans la liste de la grille.");
+
+        /* On supprime la case dans la liste de la grille */
+        get_listeCase().remove(_case);
+    }
+
+    /**
+     *
+     * @param _bateau
+     * @throws IGrilleException
+     */
+    @Override
+    public void ajouterBateau(IBateau _bateau) throws IGrilleException {
+        /* Verification bateau n'est pas null */
+        if (_bateau == null) throw new IllegalArgumentException("Grille8x8 : Le bateau a ajouté ne peut pas être null.");
+
+        /* Verication bateau est sur la grille */
+        if (!_bateau.isSurLaGrille(this)) throw new IGrilleException("Grille8x8 : Le bateau doit être sur la grille.");
+
+        /* On ajoute le bateau dans la liste de la grille */
+        this.get_listeBateau().add(_bateau);
+    }
+
+    /**
+     *
+     * @param _bateau
+     * @throws IGrilleException
+     */
+    @Override
+    public void supprimerBateau(IBateau _bateau) throws IGrilleException {
+        /* Verification bateau n'est pas null */
+        if (_bateau == null) throw new IllegalArgumentException("Grille8x8 : La case a ajouté ne peut pas être null.");
+
+        /* Verification bateau est dans la liste de la grille */
+        if (!this.get_listeCase().contains(_bateau)) throw new IGrilleException("Grille8x8 : Le bateau n'est pas dans la liste de la grille.");
+
+        /* On supprime la case dans la liste de la grille */
+        this.get_listeCase().remove(_bateau);
+    }
+
 }

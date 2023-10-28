@@ -10,7 +10,9 @@ public class Bateau3Case extends Bateau {
     }
 
     @Override
-    public boolean isSurLaGrille(Grille grille) {
-        return false;
+    public int get_maxCase() {
+        return 3;
     }
+
+
 }

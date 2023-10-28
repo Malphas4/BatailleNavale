@@ -1,5 +1,7 @@
 package M1.reseau.modele.joueur;
 
+import M1.reseau.modele.exception.IJoueurException;
+import M1.reseau.modele.joueur.visitor.IVisitorJoueur;
 import M1.reseau.modele.monde.grille.IGrille;
 
 import java.util.Map;
@@ -40,5 +42,10 @@ public abstract class Joueur implements IJoueur {
 
     public void set_tgrille(Map<Joueur, IGrille> _tgrille) {
         this._tgrille = _tgrille;
+    }
+
+    @Override
+    public void accepte(IVisitorJoueur _ivj) throws IJoueurException {
+        _ivj.visite(this);
     }
 }

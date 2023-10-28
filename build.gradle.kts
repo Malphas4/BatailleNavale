@@ -1,14 +1,11 @@
 plugins {
     id("java")
-    //id ("application")
-   // id ("org.openjfx.javafxplugin") version "0.0.9"
-   // id (org.beryx.jlink) version "2.12.0"
+    id("application")
+    id("org.openjfx.javafxplugin") version "0.0.8"
 }
 
 group = "M1.reseau"
 version = "1.0-SNAPSHOT"
-
-
 
 repositories {
     mavenCentral()
@@ -27,5 +24,3 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
-
-

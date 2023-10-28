@@ -10,8 +10,8 @@
         <Scene>
             <AnchorPane prefHeight="200" prefWidth="200">
             <children>
-               <Button fx:id="_btnJeuLocal" layoutX="56.0" layoutY="75.0" mnemonicParsing="false" onAction="#accesLocal" text="jouer en local" />
-               <Button fx:id="_btnJeuMulti" layoutX="38.0" layoutY="120.0" mnemonicParsing="false" onAction="#accesLobby" text="Jouer en multijoueur" />
+               <Button fx:id="_btnJeuLocal" layoutX="37.0" layoutY="46.0" mnemonicParsing="false" onAction="#accesLocal" prefHeight="25.0" prefWidth="126.0" text="jouer en local" />
+               <Button fx:id="_btnJeuMulti" layoutX="38.0" layoutY="120.0" mnemonicParsing="false" onAction="#accesLobby" prefHeight="25.0" prefWidth="126.0" text="Jouer en multijoueur" />
             </children></AnchorPane>
         </Scene>
     </scene>

@@ -1,7 +1,6 @@
 package M1.reseau.modele.monde.element.type;
 
 import M1.reseau.modele.monde.element.CaseEtat;
-import M1.reseau.modele.joueur.visitor.IVisitorJoueur;
 
 public class CaseTouche extends CaseEtat {
     /**

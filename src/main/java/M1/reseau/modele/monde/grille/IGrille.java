@@ -1,7 +1,6 @@
 package M1.reseau.modele.monde.grille;
 
 import M1.reseau.modele.bateau.IBateau;
-import M1.reseau.modele.exception.IBateauException;
 import M1.reseau.modele.exception.IGrilleException;
 import M1.reseau.modele.monde.element.ICase;
 

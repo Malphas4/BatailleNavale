@@ -1,7 +1,6 @@
 package M1.reseau.modele.bateau.type;
 
 import M1.reseau.modele.bateau.Bateau;
-import M1.reseau.modele.monde.grille.Grille;
 
 public class Bateau4Case extends Bateau {
 

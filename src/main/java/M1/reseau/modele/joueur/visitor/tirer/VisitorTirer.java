@@ -66,8 +66,6 @@ public class VisitorTirer implements IVisitorJoueur {
             get_grille().ajouterCase(_newcase);
         } catch (IGrilleException e) {
             System.err.println("VisitorTirer : La case n'a pas pu être supprimé de la grille");
-        } catch (IBateauException e) {
-            System.err.println("VisitorTirer : La case n'a pas pu être ajouté à la grille");
         }
     }
 }

@@ -5,7 +5,7 @@ public class ServeurUDP {
 
     public final static int port = 8532;
     final static int taille = 1024;
-    final static byte buffer[] = new byte[taille];
+    final static byte[] buffer = new byte[taille];
 
     public static void main(String argv[]) throws Exception
     {
@@ -32,7 +32,7 @@ public class ServeurUDP {
         }
         return null;
     }
-    public void attenteConnexion(int buffer, DatagramSocket socket ) throws Exception{
+    public void attenteConnexion( DatagramSocket socket ) throws Exception{
         while(true)
         {
             DatagramPacket data = new DatagramPacket(buffer,buffer.length);
@@ -41,7 +41,7 @@ public class ServeurUDP {
             socket.send(data);
         }
     }
-    public void finConnexion(int buffer, DatagramSocket socket ) throws Exception{
+    public void finConnexion(DatagramSocket socket ) throws Exception{
         while(true)
         {
             DatagramPacket data = new DatagramPacket(buffer,buffer.length);

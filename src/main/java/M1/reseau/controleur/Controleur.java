@@ -1,6 +1,6 @@
 package M1.reseau.controleur;
 
-public class controleur {
+public class Controleur {
    // @FXML
 
 }

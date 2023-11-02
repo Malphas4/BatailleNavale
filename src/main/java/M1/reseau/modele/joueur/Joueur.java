@@ -3,7 +3,7 @@ package M1.reseau.modele.joueur;
 import M1.reseau.modele.exception.IJoueurException;
 import M1.reseau.modele.joueur.visitor.IVisitorJoueur;
 
-public abstract class Joueur implements IJoueur {
+public class Joueur implements IJoueur {
 
     private String _pseudo;
 
@@ -16,11 +16,11 @@ public abstract class Joueur implements IJoueur {
         this._pseudo = _pseudo;
     }
 
-    public String getPseudo() {
+    public String get_pseudo() {
         return _pseudo;
     }
 
-    public void setPseudo(String _pseudo) {
+    public void set_pseudo(String _pseudo) {
         this._pseudo = _pseudo;
     }
 

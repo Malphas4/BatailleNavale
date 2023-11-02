@@ -34,4 +34,8 @@ public class JoueurNormal extends Joueur {
         this._grilleTouche = _grilleTouche;
     }
 
+    public void add_grilleTouche(String _pseudo, IGrille _grille) {
+        get_grilleTouche().put(new Joueur(_pseudo), _grille);
+    }
+
 }

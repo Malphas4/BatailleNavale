@@ -6,6 +6,7 @@ import M1.reseau.modele.monde.element.ICase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Grille implements IGrille {
     private int _longueur;
@@ -181,4 +182,16 @@ public class Grille implements IGrille {
         this.get_listeCase().remove(_bateau);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Grille grille = (Grille) o;
+        return get_longueur() == grille.get_longueur() && get_largeur() == grille.get_largeur() && Objects.equals(get_listeCase(), grille.get_listeCase()) && Objects.equals(get_listeBateau(), grille.get_listeBateau());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(get_longueur(), get_largeur(), get_listeCase(), get_listeBateau());
+    }
 }

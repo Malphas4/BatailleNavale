@@ -9,7 +9,8 @@ public class FabriqueGrille implements IFabriqueGrille {
     private int _largeur;
 
     public FabriqueGrille(int _longueur, int _largeur) {
-
+        set_longueur(_longueur);
+        set_largeur(_largeur);
     }
 
     public int get_longueur() {

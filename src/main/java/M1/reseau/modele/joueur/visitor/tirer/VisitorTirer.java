@@ -1,6 +1,5 @@
 package M1.reseau.modele.joueur.visitor.tirer;
 
-import M1.reseau.modele.exception.IBateauException;
 import M1.reseau.modele.exception.IGrilleException;
 import M1.reseau.modele.exception.IJoueurException;
 import M1.reseau.modele.joueur.IJoueur;

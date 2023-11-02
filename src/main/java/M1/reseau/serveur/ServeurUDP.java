@@ -1,6 +1,7 @@
 package M1.reseau.serveur;
-import java.io.*;
-import java.net.*;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 public class ServeurUDP {
 
     public final static int port = 8532;

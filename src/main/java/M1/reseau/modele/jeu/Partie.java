@@ -1,10 +1,5 @@
 package M1.reseau.modele.jeu;
 
-import M1.reseau.modele.joueur.IJoueur;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class Partie implements IPartie {
     private int _nbTour;
 

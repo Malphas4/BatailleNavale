@@ -3,6 +3,8 @@ package M1.reseau.modele.joueur;
 import M1.reseau.modele.exception.IJoueurException;
 import M1.reseau.modele.joueur.visitor.IVisitorJoueur;
 
+import java.util.Objects;
+
 public class Joueur implements IJoueur {
 
     private String _pseudo;
@@ -27,5 +29,18 @@ public class Joueur implements IJoueur {
     @Override
     public void accepte(IVisitorJoueur _ivj) throws IJoueurException {
         _ivj.visite(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Joueur joueur = (Joueur) o;
+        return Objects.equals(get_pseudo(), joueur.get_pseudo());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(get_pseudo());
     }
 }

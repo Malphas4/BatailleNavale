@@ -1,7 +1,6 @@
 package M1.reseau.modele.bateau.type;
 
 import M1.reseau.modele.bateau.Bateau;
-import M1.reseau.modele.monde.grille.Grille;
 
 public class Bateau3Case extends Bateau {
 
@@ -10,7 +9,9 @@ public class Bateau3Case extends Bateau {
     }
 
     @Override
-    public boolean isSurLaGrille(Grille grille) {
-        return false;
+    public int get_maxCase() {
+        return 3;
     }
+
+
 }

@@ -1,4 +1,4 @@
 package M1.reseau.controleur;
 
-public class controleurPseudo {
+public class ControleurPseudo {
 }

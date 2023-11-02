@@ -13,6 +13,10 @@ public class CaseNormal extends Case {
         super(_x, _y);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isPlacable() {
         return true;

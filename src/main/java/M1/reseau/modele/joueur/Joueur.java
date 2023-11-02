@@ -1,44 +1,46 @@
 package M1.reseau.modele.joueur;
 
-import M1.reseau.modele.monde.grille.IGrille;
+import M1.reseau.modele.exception.IJoueurException;
+import M1.reseau.modele.joueur.visitor.IVisitorJoueur;
 
-import java.util.Map;
+import java.util.Objects;
 
-public abstract class Joueur implements IJoueur {
-    private String pseudo;
-    private IGrille _jgrille; /* Grille du joueur */
-    private Map<Joueur, IGrille> _tgrille; /* Grille de touche */
+public class Joueur implements IJoueur {
+
+    private String _pseudo;
 
     public Joueur() {
-        this.pseudo = "Joueur";
+        this._pseudo = "Joueur";
     }
 
-    public Joueur(String pseudo) {
-        if (pseudo.trim().isEmpty()) throw new IllegalArgumentException("Joueur : pseudo est vide.");
-        this.pseudo = pseudo;
+    public Joueur(String _pseudo) {
+        if (_pseudo.trim().isEmpty()) throw new IllegalArgumentException("Joueur : pseudo est vide.");
+        this._pseudo = _pseudo;
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public String get_pseudo() {
+        return _pseudo;
     }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void set_pseudo(String _pseudo) {
+        this._pseudo = _pseudo;
     }
 
-    public IGrille get_jgrille() {
-        return _jgrille;
+    @Override
+    public void accepte(IVisitorJoueur _ivj) throws IJoueurException {
+        _ivj.visite(this);
     }
 
-    public void set_jgrille(IGrille _jgrille) {
-        this._jgrille = _jgrille;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Joueur joueur = (Joueur) o;
+        return Objects.equals(get_pseudo(), joueur.get_pseudo());
     }
 
-    public Map<Joueur, IGrille> get_tgrille() {
-        return _tgrille;
-    }
-
-    public void set_tgrille(Map<Joueur, IGrille> _tgrille) {
-        this._tgrille = _tgrille;
+    @Override
+    public int hashCode() {
+        return Objects.hash(get_pseudo());
     }
 }

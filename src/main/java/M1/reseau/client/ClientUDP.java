@@ -1,8 +1,10 @@
 package M1.reseau.client;
+
 import M1.reseau.serveur.ServeurUDP;
 
-import java.io.*;
-import java.net.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 public class ClientUDP {
     final static int taille = 1024;
     final static byte buffer[] = new byte[taille];

@@ -1,7 +1,6 @@
 package M1.reseau.modele.monde.element.type;
 
 import M1.reseau.modele.monde.element.CaseEtat;
-import M1.reseau.modele.monde.element.visitor.IVisitorCase;
 
 public class CaseRate extends CaseEtat {
     /**
@@ -12,10 +11,5 @@ public class CaseRate extends CaseEtat {
      */
     public CaseRate(int _x, int _y) {
         super(_x, _y);
-    }
-
-    @Override
-    public void accepte(IVisitorCase _ivc) {
-
     }
 }

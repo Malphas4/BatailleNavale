@@ -1,15 +1,9 @@
 package M1.reseau.modele.jeu;
 
-import M1.reseau.modele.joueur.IJoueur;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class Partie implements IPartie {
     private int _nbTour;
-    private List<IJoueur> _joueurs = new ArrayList<>();
 
-    public Partie(String pseudo) {
+    public Partie() {
         set_nbTour(0);
     }
 
@@ -26,11 +20,4 @@ public abstract class Partie implements IPartie {
         this._nbTour = _nbTour;
     }
 
-    public List<IJoueur> get_joueurs() {
-        return _joueurs;
-    }
-
-    public void set_joueurs(List<IJoueur> _joueurs) {
-        this._joueurs = _joueurs;
-    }
 }

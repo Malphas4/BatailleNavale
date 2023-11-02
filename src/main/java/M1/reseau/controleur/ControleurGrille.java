@@ -1,4 +1,4 @@
 package M1.reseau.controleur;
 
-public class controleurAttente {
+public class ControleurGrille {
 }

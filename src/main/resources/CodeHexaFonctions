@@ -1,4 +1,4 @@
-0C identification et échange d'ID pour reconnexion
+00 chaine invalide
 01 envoi d'une case
 02 envoi d'un message dans chat général
 03 envoi d'un message dans chat privé
@@ -9,4 +9,5 @@
 09 message faux
 0A début file attente
 0B mise a jour file attente
-00 chaine invalide
+0C identification et échange d'ID pour reconnexion
+

@@ -5,7 +5,7 @@ chrono
 timeout + temps du tours
 comptabilisation du nb tours et du temps total
 reconnexion si coupure
-contraintes d everifiation des données
+contraintes de verifiation des données
 protection anti dos/ddos
 choix de la limite de temps et de joueur avec creation de salon
 choix du salon

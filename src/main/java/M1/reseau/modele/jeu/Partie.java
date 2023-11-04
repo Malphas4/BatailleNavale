@@ -1,6 +1,7 @@
 package M1.reseau.modele.jeu;
 
 public abstract class Partie implements IPartie {
+
     private int _nbTour;
 
     public Partie() {

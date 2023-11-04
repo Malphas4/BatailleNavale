@@ -1,20 +1,21 @@
-package M1.reseau.modele.compteur;
+package M1.reseau.modele.compteur.type;
 
+import M1.reseau.modele.compteur.Compteur;
 import M1.reseau.modele.exception.ICompteurException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CompteurTest {
+class CompteurMaxTest {
 
-    private Compteur _compteur1;
-    private Compteur _compteur2;
+    private CompteurMax _compteur1;
+    private CompteurMax _compteur2;
 
     @BeforeEach
     void setUp() {
-        _compteur1 = new Compteur();
-        _compteur2 = new Compteur(10);
+        _compteur1 = new CompteurMax();
+        _compteur2 = new CompteurMax(10, 30);
     }
 
     @Test
@@ -22,8 +23,8 @@ class CompteurTest {
         /* Vérification que compteur n'est pas null */
         assertNotNull(_compteur1);
 
-        /* Vérification des attributs */
-        assertEquals(0, _compteur1.get_compteur());
+        /* Vérification des attributs  */
+        assertEquals(1024, _compteur1.get_max());
     }
 
     @Test
@@ -32,16 +33,16 @@ class CompteurTest {
         assertNotNull(_compteur2);
 
         /* Vérification des attributs */
-        assertEquals(10, _compteur2.get_compteur());
+        assertEquals(30, _compteur2.get_max());
     }
 
     @Test
-    void set_compteurTest() {
+    void set_maxTest() {
         /* On set le compteur à 20 */
-        _compteur1.set_compteur(20);
+        _compteur1.set_max(20);
 
         /* On vérifie le nouveau compteur */
-        assertEquals(20, _compteur1.get_compteur());
+        assertEquals(20, _compteur1.get_max());
     }
 
     @Test
@@ -51,6 +52,16 @@ class CompteurTest {
             assertEquals(2, _compteur1.get_compteur());
         } catch (ICompteurException e) {
             fail();
+        }
+    }
+
+    @Test
+    void incrementeErrorTest() {
+        try {
+            _compteur2.incremente(30);
+            fail();
+        } catch (ICompteurException e) {
+            assertNotEquals(40, _compteur1.get_compteur());
         }
     }
 

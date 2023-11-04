@@ -2,16 +2,13 @@ package M1.reseau.modele.jeu;
 
 import M1.reseau.modele.exception.IPartieException;
 import M1.reseau.modele.joueur.IJoueur;
-import M1.reseau.modele.joueur.fabrique.FabriqueJoueurNormal;
 import M1.reseau.modele.joueur.type.JoueurNormal;
-import M1.reseau.modele.monde.grille.Grille;
 
 public class PartieDistance extends Partie {
 
     private boolean _statut;
 
-    private JoueurNormal _joueur1;
-    private JoueurNormal _joueur2;
+    private JoueurNormal _joueur;
 
     public PartieDistance(int _nbjoueur) {
         super(_nbjoueur);
@@ -30,20 +27,12 @@ public class PartieDistance extends Partie {
         this._statut = _statut;
     }
 
-    public JoueurNormal get_joueur1() {
-        return _joueur1;
+    public JoueurNormal get_joueur() {
+        return _joueur;
     }
 
-    public void set_joueur1(JoueurNormal _joueur1) {
-        this._joueur1 = _joueur1;
-    }
-
-    public JoueurNormal get_joueur2() {
-        return _joueur2;
-    }
-
-    public void set_joueur2(JoueurNormal _joueur2) {
-        this._joueur2 = _joueur2;
+    public void set_joueur(JoueurNormal _joueur) {
+        this._joueur = _joueur;
     }
 
     @Override
@@ -59,7 +48,7 @@ public class PartieDistance extends Partie {
 
     @Override
     public IJoueur getJoueurCourant() {
-        return (get_nbTour() % 2 == 0) ? get_joueur1() : get_joueur2();
+        return get_joueur();
     }
 
     @Override

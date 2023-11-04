@@ -6,47 +6,14 @@ import M1.reseau.modele.monde.grille.Grille;
 import M1.reseau.modele.monde.grille.IGrille;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Bateau implements IBateau {
 
-    private int _orientation;
     private List<ICase> _listCase;
 
-    /**
-     *
-     * @param _orientation
-     */
-    public Bateau(int _orientation) {
-        set_orientation(_orientation);
-    }
+    public Bateau() {
 
-    /**
-     *
-     * @param _grille
-     * @param _orientation
-     * @param _listCase
-     * @throws IBateauException
-     */
-    public Bateau(Grille _grille, int _orientation, List<ICase> _listCase) throws IBateauException {
-        set_orientation(_orientation);
-        set_case(_grille, _listCase);
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int get_orientation() {
-        return _orientation;
-    }
-
-    /**
-     *
-     * @param _orientation
-     */
-    public void set_orientation(int _orientation) {
-        if (_orientation != 0 && _orientation != 1) throw new IllegalArgumentException("Bateau : L'orientation du bateau doit être 0 (vertical) ou 1 (horizontal).");
-        this._orientation = _orientation;
     }
 
     /**
@@ -69,25 +36,16 @@ public abstract class Bateau implements IBateau {
         this._listCase = _case;
     }
 
-    /**
-     *
-     * @param _grille
-     * @return
-     */
     @Override
-    public boolean isSurLaGrille(IGrille _grille) {
-        for (ICase _case : get_listeCase()) {
-            if (!_grille.get_listeCase().contains(_case)) return false;
-        }
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bateau bateau = (Bateau) o;
+        return Objects.equals(_listCase, bateau._listCase);
     }
 
     @Override
-    public void ajouterCase(ICase _case) throws IBateauException {
-        if (_case == null) throw new IllegalArgumentException("Bateau1Case ; Le bateau ne peut pas être null.");
-        if (get_listeCase().size() >= get_maxCase()) throw new IBateauException("Bateau1Case : Le bateau ne peut pas avoir plus de 1 case maximum.");
-        get_listeCase().add(_case);
+    public int hashCode() {
+        return Objects.hash(_listCase);
     }
-
-    public abstract int get_maxCase();
 }

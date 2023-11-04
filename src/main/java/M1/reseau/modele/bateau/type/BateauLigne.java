@@ -3,10 +3,6 @@ package M1.reseau.modele.bateau.type;
 import M1.reseau.modele.bateau.Bateau;
 import M1.reseau.modele.exception.IBateauException;
 import M1.reseau.modele.monde.element.ICase;
-import M1.reseau.modele.monde.grille.Grille;
-import M1.reseau.modele.monde.grille.IGrille;
-
-import java.util.List;
 
 public class BateauLigne extends Bateau {
 
@@ -23,19 +19,6 @@ public class BateauLigne extends Bateau {
     public void set_maxCase(int _maxCase) {
         if (_maxCase < 0) throw new IllegalArgumentException("BateauLigne : Le maximum de case doit être supérieur à 0.");
         this._maxCase = _maxCase;
-    }
-
-    /**
-     *
-     * @param _grille
-     * @return
-     */
-    @Override
-    public boolean isSurLaGrille(IGrille _grille) {
-        for (ICase _case : get_listeCase()) {
-            if (!_grille.get_listeCase().contains(_case)) return false;
-        }
-        return true;
     }
 
     @Override

@@ -4,8 +4,6 @@ import M1.reseau.modele.exception.IJoueurException;
 import M1.reseau.modele.joueur.Joueur;
 import M1.reseau.modele.monde.grille.Grille;
 
-import java.util.Map;
-
 public class JoueurNormal extends Joueur {
 
     private Grille _grilleJoueur; /* Grille du joueur */

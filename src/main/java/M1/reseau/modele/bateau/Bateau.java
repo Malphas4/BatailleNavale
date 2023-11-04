@@ -8,7 +8,7 @@ import M1.reseau.modele.monde.grille.IGrille;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Bateau implements IBateau {
+public class Bateau implements IBateau {
 
     private List<ICase> _listCase;
 
@@ -47,5 +47,25 @@ public abstract class Bateau implements IBateau {
     @Override
     public int hashCode() {
         return Objects.hash(_listCase);
+    }
+
+
+    /**
+     *
+     * @param _grille
+     * @return
+     */
+    @Override
+    public boolean isSurLaGrille(IGrille _grille) {
+        for (ICase _case : get_listeCase()) {
+            if (!_grille.get_listeCase().contains(_case)) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void ajouterCase(ICase _case) throws IBateauException {
+        if (_case == null) throw new IllegalArgumentException("Bateau1Case ; Le bateau ne peut pas être null.");
+        get_listeCase().add(_case);
     }
 }

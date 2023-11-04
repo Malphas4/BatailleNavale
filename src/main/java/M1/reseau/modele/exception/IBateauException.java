@@ -3,15 +3,17 @@ package M1.reseau.modele.exception;
 public class IBateauException extends Exception {
     private String _err;
 
-    public IBateauException(String _err) {
-        this._err = _err;
+    public IBateauException(String err) {
+        super(err);
+        setErr(err);
     }
 
-    public String get_err() {
+    public String getErr() {
         return _err;
     }
 
-    public void set_err(String _err) {
+    public void setErr(String _err) {
+        if (_err.trim().isEmpty()) throw new IllegalArgumentException("IGrilleException : le message d'erreur est vide.");
         this._err = _err;
     }
 }

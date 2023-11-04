@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("org.openjfx.javafxplugin") version "0.0.8"
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 group = "M1.reseau"
@@ -10,10 +10,10 @@ repositories {
     mavenCentral()
 }
 
-/*javafx {
+javafx {
     version = "17"
     modules("javafx.controls", "javafx.fxml")
-}*/
+}
 
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))

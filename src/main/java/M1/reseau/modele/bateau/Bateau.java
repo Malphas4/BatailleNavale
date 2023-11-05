@@ -17,10 +17,18 @@ public class Bateau implements IBateau {
         set_listeCase(new ArrayList<>());
     }
 
+    /**
+     *
+     * @return
+     */
     public UUID get_uuid() {
         return _uuid;
     }
 
+    /**
+     *
+     * @param _uuid
+     */
     public void set_uuid(UUID _uuid) {
         if (_uuid == null) throw new IllegalArgumentException("Bateau : Le uuid ne peut pas être null.");
         this._uuid = _uuid;

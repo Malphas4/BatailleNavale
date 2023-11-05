@@ -2,9 +2,12 @@ package M1.reseau.modele.bateau;
 
 import M1.reseau.modele.exception.IBateauException;
 import M1.reseau.modele.monde.element.ICase;
-import M1.reseau.modele.monde.grille.IGrille;
+
+import java.util.List;
 
 public interface IBateau {
-    boolean isSurLaGrille(IGrille grille);
-    void ajouterCase(ICase _case) throws IBateauException;
+    List<ICase> get_listeCase();
+    void set_listeCase(List<ICase> _listeCase);
+    void add_case(ICase _case) throws IBateauException;
+    void remove_case(ICase _case) throws IBateauException;
 }

@@ -127,6 +127,9 @@ public class Grille implements IGrille {
         if (_case.get_x() <= 0 && _case.get_x() > get_longueur()) throw new IGrilleException("Grille : La coordonnée x de la case ne sont pas dans la grille");
         if (_case.get_y() <= 0 && _case.get_y() > get_largeur()) throw new IGrilleException("Grille : La coordonnée x de la case ne sont pas dans la grille");
 
+        /* Vérification que la case n'est pas déjà dans la grille */
+        if (isDansLaGrille(_case)) throw new IGrilleException("Grille : La case est déjà dans la grille.");
+
         /* On ajoute la case dans la liste de la grille */
         get_listeCase().add(_case);
     }
@@ -158,8 +161,11 @@ public class Grille implements IGrille {
         /* Verification bateau n'est pas null */
         if (_bateau == null) throw new IllegalArgumentException("Grille : Le bateau a ajouté ne peut pas être null.");
 
-        /* Verication bateau est sur la grille */
-        if (!_bateau.isSurLaGrille(this)) throw new IGrilleException("Grille : Le bateau doit être sur la grille.");
+        /* Verification bateau n'est pas dans la liste de la grille */
+        if (get_listeBateau().contains(_bateau)) throw new IGrilleException("Grille : Le bateau est déjà dans la liste de la grille.");
+
+        /* Vérification que le bateau n'est pas déjà dans la grille */
+        if (isDansLaGrille(_bateau)) throw new IGrilleException("Grille : Le bateau est déjà dans la grille.");
 
         /* On ajoute le bateau dans la liste de la grille */
         this.get_listeBateau().add(_bateau);
@@ -176,10 +182,10 @@ public class Grille implements IGrille {
         if (_bateau == null) throw new IllegalArgumentException("Grille : La case a ajouté ne peut pas être null.");
 
         /* Verification bateau est dans la liste de la grille */
-        if (!this.get_listeCase().contains(_bateau)) throw new IGrilleException("Grille : Le bateau n'est pas dans la liste de la grille.");
+        if (!get_listeBateau().contains(_bateau)) throw new IGrilleException("Grille : Le bateau n'est pas dans la liste de la grille.");
 
         /* On supprime la case dans la liste de la grille */
-        this.get_listeCase().remove(_bateau);
+        get_listeBateau().remove(_bateau);
     }
 
     @Override

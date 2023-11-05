@@ -10,14 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class GrilleTest {
 
     private Grille _grille;
-    private Grille _grille4x8;
-    private Grille _grille8x16;
+    private Grille _grille4x4;
+    private Grille _grille8x8;
 
     @BeforeEach
     void setUp() {
         this._grille = new Grille(8, 8);
-        this._grille4x8 = new Grille(4, 8);
-        this._grille8x16 = new Grille(4, 8);
+        this._grille4x4 = new Grille(4, 4);
+        this._grille8x8 = new Grille(8, 8);
     }
 
     @Test
@@ -39,6 +39,34 @@ class GrilleTest {
         /* On vérifie que ces listes ne contiennent aucun élément */
         assertEquals(0, _grille.get_listeCase().size());
         assertEquals(0, _grille.get_listeBateau().size());
+    }
+
+    @Test
+    void egaliteGrilleTest() {
+        /* On vérifie que _grille n'est pas null */
+        assertNotNull(_grille);
+        assertNotNull(_grille8x8);
+
+        /* Verification attributs */
+        assertEquals(_grille.get_longueur(), _grille8x8.get_longueur());
+        assertEquals(_grille.get_largeur(), _grille8x8.get_largeur());
+
+        /* Vérification égalité */
+        assertEquals(_grille, _grille8x8);
+    }
+
+    @Test
+    void nonEgaliteGrilleTest() {
+        /* On vérifie que _grille n'est pas null */
+        assertNotNull(_grille);
+        assertNotNull(_grille4x4);
+
+        /* Verification attributs */
+        assertNotEquals(_grille.get_longueur(), _grille4x4.get_longueur());
+        assertNotEquals(_grille.get_largeur(), _grille4x4.get_largeur());
+
+        /* Vérification égalité */
+        assertNotEquals(_grille, _grille4x4);
     }
 
     @Test

@@ -2,6 +2,7 @@ package M1.reseau.modele.joueur.type;
 
 import M1.reseau.modele.exception.IJoueurException;
 import M1.reseau.modele.joueur.Joueur;
+import M1.reseau.modele.joueur.visitor.IVisitorJoueur;
 import M1.reseau.modele.monde.grille.Grille;
 
 public class JoueurNormal extends Joueur {
@@ -33,6 +34,11 @@ public class JoueurNormal extends Joueur {
         if (get_grilleJoueur().get_longueur() != _grilleTouche.get_longueur()) throw new IJoueurException("JoueurNormal : La grille n'a pas la même longueur.");
 
         this._grilleTouche = _grilleTouche;
+    }
+
+    @Override
+    public void accepte(IVisitorJoueur _ivj) throws IJoueurException {
+        _ivj.visite(this);
     }
 
 }

@@ -27,11 +27,29 @@ public class BateauLigne extends Bateau {
         this._maxCase = _maxCase;
     }
 
+    /**
+     *
+     * @param _case
+     * @throws IBateauException
+     */
     @Override
     public void add_case(ICase _case) throws IBateauException {
-        if (_case == null) throw new IllegalArgumentException("Bateau1Case ; Le bateau ne peut pas être null.");
-        if (get_listeCase().size() >= get_maxCase()) throw new IBateauException("Bateau1Case : Le bateau ne peut pas dépasser le nombre de case maximum.");
-        if (get_listeCase().contains(_case)) throw new IBateauException("Bateau : La case est déjà dans la liste.");
+        if (_case == null) throw new IllegalArgumentException("BateauLigne ; Le bateau ne peut pas être null.");
+        if (get_listeCase().size() >= get_maxCase()) throw new IBateauException("BateauLigne : Le bateau ne peut pas dépasser le nombre de case maximum.");
+        if (get_listeCase().contains(_case)) throw new IBateauException("BateauLigne : La case est déjà dans la liste.");
         get_listeCase().add(_case);
+    }
+
+    /**
+     *
+     * @param _case
+     * @throws IBateauException
+     */
+    @Override
+    public void remove_case(ICase _case) throws IBateauException {
+        if (_case == null) throw new IllegalArgumentException("BateauLigne : La case ne peut pas être null.");
+        if (get_listeCase().isEmpty()) throw new IBateauException("BateauLigne : La liste de case ne peut pas être vide.");
+        if (!get_listeCase().contains(_case)) throw new IBateauException("BateauLigne : La case n'est pas dans la liste.");
+        get_listeCase().remove(_case);
     }
 }

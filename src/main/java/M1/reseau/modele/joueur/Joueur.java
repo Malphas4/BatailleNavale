@@ -5,15 +5,15 @@ import M1.reseau.modele.joueur.visitor.IVisitorJoueur;
 
 import java.util.Objects;
 
-public class Joueur implements IJoueur {
+public abstract class Joueur implements IJoueur {
 
     private String _pseudo;
 
-    public Joueur() {
+    protected Joueur() {
         this._pseudo = "Joueur";
     }
 
-    public Joueur(String _pseudo) {
+    protected Joueur(String _pseudo) {
         if (_pseudo.trim().isEmpty()) throw new IllegalArgumentException("Joueur : pseudo est vide.");
         this._pseudo = _pseudo;
     }
@@ -24,11 +24,6 @@ public class Joueur implements IJoueur {
 
     public void set_pseudo(String _pseudo) {
         this._pseudo = _pseudo;
-    }
-
-    @Override
-    public void accepte(IVisitorJoueur _ivj) throws IJoueurException {
-        _ivj.visite(this);
     }
 
     @Override

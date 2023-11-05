@@ -1,4 +1,4 @@
-package M1.reseau.modele.jeu;
+package M1.reseau.modele.partie;
 
 import M1.reseau.modele.exception.IPartieException;
 import M1.reseau.modele.joueur.IJoueur;

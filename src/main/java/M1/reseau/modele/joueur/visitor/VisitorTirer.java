@@ -1,8 +1,10 @@
-package M1.reseau.modele.joueur.visitor.tirer;
+package M1.reseau.modele.joueur.visitor;
 
 import M1.reseau.modele.exception.IGrilleException;
 import M1.reseau.modele.exception.IJoueurException;
 import M1.reseau.modele.joueur.IJoueur;
+import M1.reseau.modele.joueur.Joueur;
+import M1.reseau.modele.joueur.type.JoueurNormal;
 import M1.reseau.modele.joueur.visitor.IVisitorJoueur;
 import M1.reseau.modele.monde.element.ICase;
 import M1.reseau.modele.monde.element.type.CaseBateau;
@@ -39,7 +41,7 @@ public class VisitorTirer implements IVisitorJoueur {
     }
 
     @Override
-    public void visite(IJoueur _joueur) throws IJoueurException {
+    public void visite(JoueurNormal _joueur) throws IJoueurException {
         /* Verification arguments non null */
         if (get_grille() == null) throw new IllegalArgumentException("VisitorTirer : La grille ne peut pas être null.");
         if (get_case() == null) throw new IllegalArgumentException("VisitorTirer : La case ne peut pas être null.");

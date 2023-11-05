@@ -1,6 +1,7 @@
 package M1.reseau.modele.joueur.visitor.tirer;
 
-import M1.reseau.modele.joueur.IJoueur;
+import M1.reseau.modele.joueur.type.JoueurNormal;
+import M1.reseau.modele.joueur.visitor.VisitorTirer;
 import M1.reseau.modele.monde.element.ICase;
 import M1.reseau.modele.monde.grille.Grille;
 
@@ -11,7 +12,7 @@ public class VisitorTirerCroix extends VisitorTirer {
     }
 
     @Override
-    public void visite(IJoueur _joueur) {
+    public void visite(JoueurNormal _joueur) {
 
     }
 }

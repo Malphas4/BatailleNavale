@@ -1,4 +1,4 @@
-package M1.reseau.modele.jeu;
+package M1.reseau.modele.partie;
 
 public abstract class Partie implements IPartie {
 

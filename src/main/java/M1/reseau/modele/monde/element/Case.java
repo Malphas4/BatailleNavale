@@ -14,7 +14,7 @@ public abstract class Case implements ICase {
      * @param _x
      * @param _y
      */
-    public Case(int _x, int _y) {
+    protected Case(int _x, int _y) {
         set_x(_x);
         set_y(_y);
     }
@@ -42,6 +42,11 @@ public abstract class Case implements ICase {
      */
     public int get_y() {
         return this._y;
+    }
+
+    @Override
+    public boolean isPlacable() {
+        return true;
     }
 
     /**

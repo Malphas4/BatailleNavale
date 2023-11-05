@@ -8,7 +8,7 @@ public abstract class CaseEtat extends Case {
      * @param _x
      * @param _y
      */
-    public CaseEtat(int _x, int _y) {
+    protected CaseEtat(int _x, int _y) {
         super(_x, _y);
     }
 

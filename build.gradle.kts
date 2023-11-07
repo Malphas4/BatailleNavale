@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("application")
     id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
@@ -12,7 +13,7 @@ repositories {
 
 javafx {
     version = "17"
-    modules("javafx.controls", "javafx.fxml")
+    modules("javafx.controls", "javafx.fxml") //"javafx.base", "javafx.graphics"
 }
 
 dependencies {
@@ -23,3 +24,5 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+//mainClassName (M1.reseau.Main)

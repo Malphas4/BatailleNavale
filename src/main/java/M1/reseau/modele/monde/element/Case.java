@@ -1,11 +1,13 @@
 package M1.reseau.modele.monde.element;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public abstract class Case implements ICase {
     /**
      * Déclaration des variables
      */
+    private UUID _uuid = UUID.randomUUID();
     private int _x;
     private int _y;
 
@@ -17,6 +19,14 @@ public abstract class Case implements ICase {
     protected Case(int _x, int _y) {
         set_x(_x);
         set_y(_y);
+    }
+
+    public UUID get_uuid() {
+        return _uuid;
+    }
+
+    public void set_uuid(UUID _uuid) {
+        this._uuid = _uuid;
     }
 
     /**
@@ -58,25 +68,16 @@ public abstract class Case implements ICase {
         this._y = _y;
     }
 
-    /**
-     *
-     * @param o
-     * @return
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Case aCase = (Case) o;
-        return _x == aCase._x && get_y() == aCase.get_y();
+        return get_x() == aCase.get_x() && get_y() == aCase.get_y();
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(_x, get_y());
+        return Objects.hash(get_uuid(), get_x(), get_y());
     }
 }

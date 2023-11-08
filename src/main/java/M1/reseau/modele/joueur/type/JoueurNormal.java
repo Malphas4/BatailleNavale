@@ -10,9 +10,10 @@ public class JoueurNormal extends Joueur {
     private Grille _grilleJoueur; /* Grille du joueur */
     private Grille _grilleTouche; /* Grille de touche */
 
-    public JoueurNormal(String _pseudo, Grille _grilleJoueur) {
+    public JoueurNormal(String _pseudo, Grille _grilleJoueur, Grille _grilleTouche) throws IJoueurException {
         super(_pseudo);
-        this._grilleJoueur = _grilleJoueur;
+        set_grilleJoueur(_grilleJoueur);
+        set_grilleTouche(_grilleTouche);
     }
 
     public Grille get_grilleJoueur() {

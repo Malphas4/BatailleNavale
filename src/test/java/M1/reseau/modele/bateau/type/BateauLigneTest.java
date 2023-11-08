@@ -130,4 +130,10 @@ class BateauLigneTest {
             assertTrue(_bateauPlein.get_listeCase().contains(_case1));
         }
     }
+
+    @Test
+    void nonEgaliteBateauTest() {
+        /*  Vérification de la non égalité entre 2 bateaux */
+        assertNotEquals(_bateauVide, _bateauPlein);
+    }
 }

@@ -2,6 +2,7 @@ package M1.reseau.modele.monde.grille;
 
 import M1.reseau.modele.bateau.IBateau;
 import M1.reseau.modele.exception.IGrilleException;
+import M1.reseau.modele.monde.element.Case;
 import M1.reseau.modele.monde.element.ICase;
 
 import java.util.ArrayList;
@@ -73,6 +74,13 @@ public class Grille implements IGrille {
      */
     public void set_listeCase(List<ICase> _cases) {
         this._listeCase = _cases;
+    }
+
+    public ICase get_caseParCoord(int _x, int _y) throws IGrilleException {
+        for (ICase _case : get_listeCase()) {
+            if (_case.get_x() == _x && _case.get_y() == _y) return _case;
+        }
+        throw new IGrilleException("Grille : La case (x, y) n'existe pas.");
     }
 
     /**
@@ -193,7 +201,7 @@ public class Grille implements IGrille {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grille grille = (Grille) o;
-        return get_longueur() == grille.get_longueur() && get_largeur() == grille.get_largeur() && Objects.equals(get_listeCase(), grille.get_listeCase()) && Objects.equals(get_listeBateau(), grille.get_listeBateau());
+        return get_longueur() == grille.get_longueur() && get_largeur() == grille.get_largeur();
     }
 
     @Override

@@ -21,4 +21,9 @@ public class CaseBateau extends Case {
     public boolean isPlacable() {
         return false;
     }
+
+    @Override
+    public boolean isTirable() {
+        return true;
+    }
 }

@@ -33,8 +33,9 @@ class CaseToucheTest {
         assertEquals(1, _case.get_x());
         assertEquals(2, _case.get_y());
 
-        /* Vérification de la methode pour verifier si on peut placer un objet sur la case */
+        /* Vérification méthode abstraite */
         assertFalse(_case.isPlacable());
+        assertFalse(_case.isTirable());
     }
 
     @Test

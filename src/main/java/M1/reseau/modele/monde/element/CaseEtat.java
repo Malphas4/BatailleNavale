@@ -21,4 +21,8 @@ public abstract class CaseEtat extends Case {
         return false;
     }
 
+    @Override
+    public boolean isTirable() {
+        return false;
+    }
 }

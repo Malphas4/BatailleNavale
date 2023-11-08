@@ -1,7 +1,9 @@
 package M1.reseau.modele.monde.grille;
 
 import M1.reseau.modele.exception.IGrilleException;
+import M1.reseau.modele.monde.element.ICase;
 import M1.reseau.modele.monde.element.type.*;
+import M1.reseau.modele.monde.grille.fabrique.FabriqueGrille;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -67,6 +69,39 @@ class GrilleTest {
 
         /* Vérification égalité */
         assertNotEquals(_grille, _grille4x4);
+    }
+
+    @Test
+    void get_caseParCoordTest() {
+        /* On cherche la case (4, 4) dans une grille 8x8 */
+        Grille _grilleCustom = (Grille) (new FabriqueGrille(8, 8)).creerGrille();
+
+        ICase _case;
+
+        try {
+            _case = _grilleCustom.get_caseParCoord(4, 4);
+            assertNotNull(_case);
+            assertInstanceOf(CaseNormal.class, _case);
+            assertEquals(4, _case.get_x());
+            assertEquals(4, _case.get_y());
+        } catch (IGrilleException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void get_caseParCoordErreurPasDansLaGrilleTest() {
+        /* On cherche la case (4, 4) dans une grille 8x8 */
+        Grille _grilleCustom = (Grille) (new FabriqueGrille(8, 8)).creerGrille();
+
+        ICase _case = null;
+
+        try {
+            _case = _grilleCustom.get_caseParCoord(10, 10);
+            fail();
+        } catch (IGrilleException e) {
+            assertNull(_case);
+        }
     }
 
     @Test

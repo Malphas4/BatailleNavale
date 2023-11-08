@@ -21,4 +21,9 @@ public class CaseObstacle extends Case {
     public boolean isPlacable() {
         return false;
     }
+
+    @Override
+    public boolean isTirable() {
+        return false;
+    }
 }

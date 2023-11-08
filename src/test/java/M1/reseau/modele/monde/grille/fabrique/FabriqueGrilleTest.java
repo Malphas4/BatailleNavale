@@ -48,7 +48,7 @@ class FabriqueGrilleTest {
         assertNotNull(_grille1.get_listeBateau());
 
         /* On vérifie que les listes soit de taille 0 */
-        assertEquals(0, _grille1.get_listeCase().size());
+        assertEquals(4*8, _grille1.get_listeCase().size());
         assertEquals(0, _grille1.get_listeBateau().size());
     }
 }

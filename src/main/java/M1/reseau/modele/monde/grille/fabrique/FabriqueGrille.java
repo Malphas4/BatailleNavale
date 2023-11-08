@@ -1,5 +1,7 @@
 package M1.reseau.modele.monde.grille.fabrique;
 
+import M1.reseau.modele.exception.IGrilleException;
+import M1.reseau.modele.monde.element.type.CaseNormal;
 import M1.reseau.modele.monde.grille.Grille;
 import M1.reseau.modele.monde.grille.IGrille;
 
@@ -33,6 +35,18 @@ public class FabriqueGrille implements IFabriqueGrille {
 
     @Override
     public IGrille creerGrille() {
-        return new Grille(get_longueur(), get_largeur());
+        Grille _grille = new Grille(get_longueur(), get_largeur());
+
+        for (int i = 1; i <= _longueur; i++) {
+            for (int j = 1; j <= _largeur; j++) {
+                CaseNormal _case = new CaseNormal(i, j);
+                try {
+                    _grille.ajouterCase(_case);
+                } catch (IGrilleException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return _grille;
     }
 }

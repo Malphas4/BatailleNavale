@@ -22,4 +22,9 @@ public class CaseNormal extends Case {
         return true;
     }
 
+    @Override
+    public boolean isTirable() {
+        return true;
+    }
+
 }

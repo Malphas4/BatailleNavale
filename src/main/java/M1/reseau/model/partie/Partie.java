@@ -2,8 +2,14 @@ package M1.reseau.model.partie;
 
 public abstract class Partie implements IPartie {
 
+    /***************************************
+     * Déclaration des variables
+     ***************************************/
     private int _nbTour;
 
+    /***************************************
+     * Déclaration des constructeurs
+     ***************************************/
     public Partie() {
         set_nbTour(0);
     }
@@ -12,6 +18,9 @@ public abstract class Partie implements IPartie {
         set_nbTour(0);
     }
 
+    /***************************************
+     * Déclaration des méthodes
+     ***************************************/
     public int get_nbTour() {
         return _nbTour;
     }

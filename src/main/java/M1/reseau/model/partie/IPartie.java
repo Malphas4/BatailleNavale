@@ -4,8 +4,8 @@ import M1.reseau.model.exception.IPartieException;
 import M1.reseau.model.joueur.IJoueur;
 
 public interface IPartie {
-    void commencer();
+    void commencer() throws IPartieException;
     void tourSuivant() throws IPartieException;
-    IJoueur getJoueurCourant();
+    IJoueur getJoueurCourant() throws IPartieException;
     void fin();
 }

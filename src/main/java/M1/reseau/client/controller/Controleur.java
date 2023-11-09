@@ -1,5 +1,4 @@
-package M1.reseau.controleur;
-import javafx.stage.Stage;
+package M1.reseau.client.controller;
 
 public class Controleur {
    // @FXML

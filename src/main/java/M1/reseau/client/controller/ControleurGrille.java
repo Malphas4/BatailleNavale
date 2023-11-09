@@ -1,4 +1,4 @@
-package M1.reseau.controleur;
+package M1.reseau.client.controller;
 
 
 import javafx.event.ActionEvent;

@@ -1,9 +1,8 @@
-package M1.reseau.model.game.type.distance;
+package M1.reseau.model.game.distance;
 
 import M1.reseau.model.exception.IJoueurException;
-import M1.reseau.model.player.type.JoueurNormal;
+import M1.reseau.model.player.classic.JoueurNormal;
 import M1.reseau.model.world.grid.Grille;
-import M1.reseau.model.game.distance.PartieDistance;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

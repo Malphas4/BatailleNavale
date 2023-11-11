@@ -2,7 +2,7 @@ package M1.reseau.model.player.visitor;
 
 import M1.reseau.model.exception.IGrilleException;
 import M1.reseau.model.exception.IJoueurException;
-import M1.reseau.model.player.type.JoueurNormal;
+import M1.reseau.model.player.classic.JoueurNormal;
 import M1.reseau.model.world.element.ICase;
 import M1.reseau.model.world.element.classic.CaseBateau;
 import M1.reseau.model.world.element.state.CaseRate;

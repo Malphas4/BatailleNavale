@@ -1,5 +1,6 @@
 package M1.reseau.model.counter.type;
 
+import M1.reseau.model.counter.classic.CompteurMax;
 import M1.reseau.model.exception.ICompteurException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

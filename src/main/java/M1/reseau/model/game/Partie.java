@@ -9,25 +9,30 @@ public abstract class Partie implements IPartie {
     /***************************************
      * Déclaration des variables
      ***************************************/
-    private UUID _uuid = UUID.randomUUID();
-    private int _nbTour;
+    private UUID _uuid = UUID.randomUUID(); /* ID unique de la partie*/
+    private int _nbTour; /* Nombre de tour sur la partie par défaut à 0 */
 
     /**
      * Etat de la partie
      * Plus tard peut être remplacer par un DP State
      */
-    private boolean _commence = false;
-    private boolean _pause = false;
-    private boolean _termine = false;
+    private boolean _commence = false; /* Est-ce que la partie a commencée ? */
+    private boolean _pause = false; /* Est-ce que la partie est en pause ? */
+    private boolean _termine = false; /* Est-ce que la partie est terminée ? */
 
     /**
      * Définition de la grille
      */
-    private FabriqueGrille _fabriqueGrille;
+    private FabriqueGrille _fabriqueGrille; /* Définit le constructeur de grille pour les joueurs */
 
     /***************************************
      * Déclaration des constructeurs
      ***************************************/
+    /**
+     * Constructeur par défaut de Partie
+     * @param _longueur Longueur de la grille
+     * @param _largeur Largeur de la grille
+     */
     public Partie(int _longueur, int _largeur) {
         set_nbTour(0);
         set_fabriqueGrille(new FabriqueGrille(_longueur, _largeur));
@@ -38,7 +43,7 @@ public abstract class Partie implements IPartie {
      * Déclaration des getters et setters
      ***************************************/
     /**
-     *
+     * Getter du UUID
      * @return
      */
     public UUID get_uuid() {
@@ -46,7 +51,7 @@ public abstract class Partie implements IPartie {
     }
 
     /**
-     *
+     * Setter du UUID
      * @param _uuid
      */
     public void set_uuid(UUID _uuid) {
@@ -54,12 +59,16 @@ public abstract class Partie implements IPartie {
         this._uuid = _uuid;
     }
 
+    /**
+     * Getter du nombre de tour
+     * @return Nombre de tour
+     */
     public int get_nbTour() {
         return _nbTour;
     }
 
     /**
-     *
+     * Setter du nombre de tour
      * @param _nbTour
      */
     public void set_nbTour(int _nbTour) {
@@ -68,15 +77,15 @@ public abstract class Partie implements IPartie {
     }
 
     /**
-     *
-     * @return
+     * Getter du statut de début
+     * @return la partie a-t-elle commencée ?
      */
     public boolean is_commence() {
         return _commence;
     }
 
     /**
-     *
+     * Setter du statut de début
      * @param _commence
      */
     public void set_commence(boolean _commence) {
@@ -84,15 +93,15 @@ public abstract class Partie implements IPartie {
     }
 
     /**
-     *
-     * @return
+     * Getter du statut de pause
+     * @return La partie est-elle en pause ?
      */
     public boolean is_pause() {
         return _pause;
     }
 
     /**
-     *
+     * Setter du statut de pause
      * @param _pause
      */
     public void set_pause(boolean _pause) {
@@ -100,15 +109,15 @@ public abstract class Partie implements IPartie {
     }
 
     /**
-     *
-     * @return
+     * Getter du statut de fin
+     * @return La partie est-elle terminée ?
      */
     public boolean is_termine() {
         return _termine;
     }
 
     /**
-     *
+     * Setter du statut de fin
      * @param _termine
      */
     public void set_termine(boolean _termine) {
@@ -116,18 +125,19 @@ public abstract class Partie implements IPartie {
     }
 
     /**
-     *
-     * @return
+     * Getter de la fabrique de grille
+     * @return Une grille fabriquée
      */
     public FabriqueGrille get_fabriqueGrille() {
         return _fabriqueGrille;
     }
 
     /**
-     *
+     * Setter de la fabrique de grille
      * @param _fabriqueGrille
      */
     public void set_fabriqueGrille(FabriqueGrille _fabriqueGrille) {
+        if (_fabriqueGrille == null) throw new IllegalArgumentException("Partie : La fabrique ne peut pas être null.");
         this._fabriqueGrille = _fabriqueGrille;
     }
 

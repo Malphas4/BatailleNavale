@@ -5,7 +5,7 @@ import M1.reseau.model.exception.IPartieException;
 import M1.reseau.model.world.grid.Grille;
 import M1.reseau.model.game.Partie;
 import M1.reseau.model.player.IJoueur;
-import M1.reseau.model.player.type.JoueurNormal;
+import M1.reseau.model.player.classic.JoueurNormal;
 
 public class PartieDistance extends Partie {
 
@@ -18,7 +18,7 @@ public class PartieDistance extends Partie {
      * Gestion de l'autre joueur à partir du serveur, ici la grille du joueur adverse,
      * se trouvera dans la grille de touche du joueur
      */
-    private JoueurNormal _joueur;*
+    private JoueurNormal _joueur;
     private boolean _aGagner = false;
     private boolean _tourJoueur = false;
 

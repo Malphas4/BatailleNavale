@@ -1,6 +1,6 @@
 package M1.reseau.model.player.visitor.tirer;
 
-import M1.reseau.model.player.type.JoueurNormal;
+import M1.reseau.model.player.classic.JoueurNormal;
 import M1.reseau.model.player.visitor.VisitorTirer;
 import M1.reseau.model.world.element.ICase;
 import M1.reseau.model.world.grid.Grille;

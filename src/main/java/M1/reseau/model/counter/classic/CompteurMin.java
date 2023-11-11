@@ -1,4 +1,4 @@
-package M1.reseau.model.counter.type;
+package M1.reseau.model.counter.classic;
 
 import M1.reseau.model.counter.Compteur;
 import M1.reseau.model.exception.ICompteurException;

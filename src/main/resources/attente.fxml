@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.stage.Stage?>
 
-<Stage xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="M1.reseau.controleur.ControleurAttente">
+<Stage xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="M1.reseau.client.controller.ControleurAttente">
     <scene>
         <Scene>
             <AnchorPane prefHeight="200" prefWidth="200">

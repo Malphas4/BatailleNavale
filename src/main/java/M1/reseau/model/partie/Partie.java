@@ -14,10 +14,6 @@ public abstract class Partie implements IPartie {
         set_nbTour(0);
     }
 
-    public Partie(int _nbjoueur) {
-        set_nbTour(0);
-    }
-
     /***************************************
      * Déclaration des méthodes
      ***************************************/

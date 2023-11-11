@@ -149,7 +149,9 @@ public class PartieDistance extends Partie {
 
     /**
      *
-     * @throws IPartieException
+     * @throws IPartieException On vérifie que le joueur n'est pas null
+     * @throws IPartieException La partie n'a pas encore commencé
+     * @throws IPartieException La partie n'est pas terminé
      */
     @Override
     public void commencer() throws IPartieException {
@@ -168,6 +170,7 @@ public class PartieDistance extends Partie {
         if (!is_commence()) throw new IPartieException("PartieDistance : Le partie n'a pas commencé.");
         if (is_termine()) throw new IPartieException("PartieDistance : La partie est déjà terminé.");
         if (get_joueur() == null) throw new IPartieException("PartieDistance : Le joueur ne peut pas être null. Le tour ne peut pas passer.");
+        /* On modifie le nombre de tour et on change l'état du tour joueur */
         set_nbTour(get_nbTour() + 1);
         set_tourJoueur(!is_tourJoueur());
     }

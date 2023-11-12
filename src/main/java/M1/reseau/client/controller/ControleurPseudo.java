@@ -30,6 +30,14 @@ public class ControleurPseudo {
 
     @FXML
     void validationPseudo(ActionEvent event) {
+        System.out.print("connect\n");
+
+
+    }
+    @FXML
+    void inscriptionPseudo(ActionEvent event) {
+        System.out.print("inscription\n");
+
 
     }
 

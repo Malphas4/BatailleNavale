@@ -44,10 +44,10 @@ public class ControleurLobby {
     void joindreSalon(ActionEvent event) {
 
             //change de stage
-            Node node = (Node) event.getSource();
-            Stage thisStage = (Stage) node.getScene().getWindow();
+         //   Node node = (Node) event.getSource();
+         //   Stage thisStage = (Stage) node.getScene().getWindow();
           //  commitToDatabase();
-            thisStage.hide();
+          //  thisStage.hide();
 
     }
 

@@ -6,10 +6,7 @@ import java.io.IOException;
 import M1.reseau.client.controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
@@ -23,7 +20,7 @@ public class Main extends Application{
             launch();
 
         } catch (Exception e) {
-           // e.printStackTrace();
+            e.printStackTrace();
 
         }
 
@@ -34,27 +31,27 @@ public class Main extends Application{
     @Override
     public void start(Stage stage) throws Exception{
 
-
             FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));
-            Scene sceneMenu = (Scene) menuLoader.load();
+            Scene sceneMenu = menuLoader.load();
 
             ControleurMenu ControleurMenu = menuLoader.getController();
 
             FXMLLoader pseudoLoader = new FXMLLoader(getClass().getResource("/pseudo.fxml"));
-            Scene scenePseudo=(Scene) pseudoLoader.load();
+            Scene scenePseudo = pseudoLoader.load();
             ControleurPseudo ControleurPseudo = pseudoLoader.getController();
 
             FXMLLoader attenteLoader = new FXMLLoader(getClass().getResource("/attenteV2.fxml"));
-            Scene sceneAttente=(Scene) attenteLoader.load();
+            Scene sceneAttente = attenteLoader.load();
             ControleurAttente ControleurAttente = attenteLoader.getController();
 
-   /*
+
             FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
-            Scene sceneLobby=(Scene) lobbyLoader.load();
-            ControleurLobby ControleurLobby = menuLoader.getController();
-   */
+            Scene sceneLobby = lobbyLoader.load();
+            ControleurLobby ControleurLobby = lobbyLoader.getController();
+
+
             FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
-            Scene sceneGrille=(Scene) grilleLoader.load();
+            Scene sceneGrille = grilleLoader.load();
             ControleurGrille ControleurGrille = grilleLoader.getController();
 
             //initialisation des modeles
@@ -85,10 +82,6 @@ public class Main extends Application{
             primaryStage.show();
              */
 
-
-       /* } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
 

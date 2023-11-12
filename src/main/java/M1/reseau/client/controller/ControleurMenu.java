@@ -26,16 +26,21 @@ import javafx.stage.Stage;
 
         @FXML
         void accesLobby(ActionEvent event) {
+            System.out.print("Aller au Lobby\n");
 
         }
 
         @FXML
         void accesLocal(ActionEvent event) {
+            System.out.print("Jouer en local\n");
+
 
         }
 
         @FXML
         void quitter(ActionEvent event) {
+            System.out.print("au revoir\n");
+
 
         }
 

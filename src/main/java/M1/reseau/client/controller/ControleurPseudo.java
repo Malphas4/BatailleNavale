@@ -11,7 +11,10 @@ import javafx.scene.layout.Pane;
 public class ControleurPseudo {
 
     @FXML
-    private Button _btnPseudo;
+    private Button _btnPseudoConnexion;
+
+    @FXML
+    private Button _btnPseudoInscription;
 
     @FXML
     private TextField _champPseudo;
@@ -31,4 +34,3 @@ public class ControleurPseudo {
     }
 
 }
-

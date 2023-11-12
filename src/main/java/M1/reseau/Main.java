@@ -4,7 +4,6 @@ package M1.reseau;
 import java.io.IOException;
 
 import M1.reseau.client.controller.*;
-import M1.reseau.controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -15,6 +15,7 @@ public abstract class Partie implements IPartie {
     /**
      * Etat de la partie
      * Plus tard peut être remplacer par un DP State
+     * Pause pour l'instant ne sera pas implémenté dans les fonctionnalités
      */
     private boolean _commence = false; /* Est-ce que la partie a commencée ? */
     private boolean _pause = false; /* Est-ce que la partie est en pause ? */
@@ -141,4 +142,23 @@ public abstract class Partie implements IPartie {
         this._fabriqueGrille = _fabriqueGrille;
     }
 
+    /***************************************
+     * Override méthode de base
+     ***************************************/
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "Partie{" +
+                "_uuid=" + _uuid +
+                ", _nbTour=" + _nbTour +
+                ", _commence=" + _commence +
+                ", _pause=" + _pause +
+                ", _termine=" + _termine +
+                ", _fabriqueGrille=" + _fabriqueGrille +
+                '}';
+    }
 }

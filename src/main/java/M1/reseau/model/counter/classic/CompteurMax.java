@@ -31,4 +31,12 @@ public class CompteurMax extends Compteur {
         if (get_compteur() + i > get_max()) throw new ICompteurException("Compteur : Le compteur doit être inférieur ou égale au maximum défini.");
         set_compteur(get_compteur() + i);
     }
+
+    @Override
+    public String toString() {
+        return "CompteurMax{" +
+                "_max=" + _max +
+                ", " + super.toString() +
+                "}";
+    }
 }

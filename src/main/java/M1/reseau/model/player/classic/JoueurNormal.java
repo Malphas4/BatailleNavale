@@ -42,4 +42,12 @@ public class JoueurNormal extends Joueur {
         _ivj.visite(this);
     }
 
+    @Override
+    public String toString() {
+        return "JoueurNormal{" +
+                "_grilleJoueur=" + _grilleJoueur +
+                ", _grilleTouche=" + _grilleTouche +
+                ", " + super.toString() +
+                "}";
+    }
 }

@@ -67,8 +67,9 @@ public class FabriqueGrille implements IFabriqueGrille {
 
     @Override
     public String toString() {
-        return "FabriqueGrille," +
+        return "FabriqueGrille{" +
                 "_longueur=" + _longueur +
-                ", _largeur=" + _largeur;
+                ", _largeur=" + _largeur +
+                '}';
     }
 }

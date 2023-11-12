@@ -49,4 +49,13 @@ public class CompteurMinMax extends Compteur {
         if (get_compteur() - i < get_min()) throw new ICompteurException("Compteur : Le compteur doit être supérieur ou égale au minimum défini.");
         set_compteur(get_compteur() - i);
     }
+
+    @Override
+    public String toString() {
+        return "CompteurMinMax{" +
+                "_max=" + _max +
+                ", _min=" + _min +
+                ", " + super.toString() +
+                "}";
+    }
 }

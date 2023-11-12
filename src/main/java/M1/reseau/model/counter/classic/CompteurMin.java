@@ -31,4 +31,12 @@ public class CompteurMin extends Compteur {
         if (get_compteur() - i < get_min()) throw new ICompteurException("Compteur : Le compteur doit être supérieur ou égale au minimum défini.");
         set_compteur(get_compteur() - i);
     }
+
+    @Override
+    public String toString() {
+        return "CompteurMin{" +
+                "_min=" + _min +
+                ", " + super.toString() +
+                "}";
+    }
 }

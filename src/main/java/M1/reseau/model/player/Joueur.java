@@ -12,7 +12,7 @@ public abstract class Joueur implements IJoueur {
     private String _pseudo;
 
     /***************************************
-     * Déclaration des variables de classe
+     * Déclaration des constructeurs
      ***************************************/
     protected Joueur() {
         this._pseudo = "Joueur";
@@ -21,6 +21,14 @@ public abstract class Joueur implements IJoueur {
     protected Joueur(String _pseudo) {
         if (_pseudo.trim().isEmpty()) throw new IllegalArgumentException("Joueur : pseudo est vide.");
         this._pseudo = _pseudo;
+    }
+
+    public UUID get_uuid() {
+        return _uuid;
+    }
+
+    public void set_uuid(UUID _uuid) {
+        this._uuid = _uuid;
     }
 
     public String get_pseudo() {
@@ -42,5 +50,13 @@ public abstract class Joueur implements IJoueur {
     @Override
     public int hashCode() {
         return Objects.hash(get_pseudo());
+    }
+
+    @Override
+    public String toString() {
+        return "Joueur{" +
+                "_uuid=" + _uuid +
+                ", _pseudo='" + _pseudo + '\'' +
+                '}';
     }
 }

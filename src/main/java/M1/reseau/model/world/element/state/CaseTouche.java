@@ -11,4 +11,9 @@ public class CaseTouche extends CaseEtat {
     public CaseTouche(int _x, int _y) {
         super(_x, _y);
     }
+
+    @Override
+    public String toString() {
+        return "CaseTouche{" + super.toString() + "}";
+    }
 }

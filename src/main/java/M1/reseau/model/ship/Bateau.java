@@ -64,4 +64,12 @@ public abstract class Bateau implements IBateau {
     public int hashCode() {
         return Objects.hash(get_uuid(), get_listeCase());
     }
+
+    @Override
+    public String toString() {
+        return "Bateau{" +
+                "_uuid=" + _uuid +
+                ", _listeCase=" + _listeCase +
+                '}';
+    }
 }

@@ -52,4 +52,12 @@ public class BateauLigne extends Bateau {
         if (!get_listeCase().contains(_case)) throw new IBateauException("BateauLigne : La case n'est pas dans la liste.");
         get_listeCase().remove(_case);
     }
+
+    @Override
+    public String toString() {
+        return "BateauLigne{" +
+                "_maxCase=" + _maxCase +
+                ", " + super.toString() +
+                "}";
+    }
 }

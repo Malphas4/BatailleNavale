@@ -27,5 +27,8 @@ public class CaseBateau extends Case {
         return true;
     }
 
-
+    @Override
+    public String toString() {
+        return "CaseBateau{" + super.toString() + "}";
+    }
 }

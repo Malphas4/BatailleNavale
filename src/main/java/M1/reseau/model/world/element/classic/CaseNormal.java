@@ -27,4 +27,8 @@ public class CaseNormal extends Case {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "CaseNormal{" + super.toString() + "}";
+    }
 }

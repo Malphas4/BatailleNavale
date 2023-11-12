@@ -68,4 +68,11 @@ public class Compteur implements ICompteur {
         if (i <= 0) throw new IllegalArgumentException("Compteur : i doit être supérieur à 0.");
         set_compteur(get_compteur() - i);
     }
+
+    @Override
+    public String toString() {
+        return "Compteur{" +
+                "_compteur=" + _compteur +
+                '}';
+    }
 }

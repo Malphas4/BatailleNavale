@@ -12,4 +12,9 @@ public class CaseRate extends CaseEtat {
     public CaseRate(int _x, int _y) {
         super(_x, _y);
     }
+
+    @Override
+    public String toString() {
+        return "CaseRate{" + super.toString() + "}";
+    }
 }

@@ -71,4 +71,12 @@ public class VisitorTirer implements IVisitorJoueur {
             System.err.println("VisitorTirer : La case n'a pas pu être supprimé de la grille");
         }
     }
+
+    @Override
+    public String toString() {
+        return "VisitorTirer{" +
+                "_grille=" + _grille +
+                ", _case=" + _case +
+                '}';
+    }
 }

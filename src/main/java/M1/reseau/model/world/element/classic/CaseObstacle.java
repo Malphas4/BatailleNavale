@@ -26,4 +26,9 @@ public class CaseObstacle extends Case {
     public boolean isTirable() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "CaseObstacle{" + super.toString() + "}";
+    }
 }

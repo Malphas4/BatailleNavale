@@ -22,7 +22,7 @@ public class Grille implements IGrille {
         set_longueur(_longueur);
         set_largeur(_largeur);
         set_listeCase(new ArrayList<>());
-        set_listBateau(new ArrayList<>());
+        set_listeBateau(new ArrayList<>());
     }
 
     /**
@@ -94,7 +94,7 @@ public class Grille implements IGrille {
      *
      * @param _bateaux
      */
-    public void set_listBateau(List<IBateau> _bateaux) {
+    public void set_listeBateau(List<IBateau> _bateaux) {
         this._listeBateau = _bateaux;
     }
 
@@ -206,5 +206,15 @@ public class Grille implements IGrille {
     @Override
     public int hashCode() {
         return Objects.hash(get_longueur(), get_largeur(), get_listeCase(), get_listeBateau());
+    }
+
+    @Override
+    public String toString() {
+        return "Grille{" +
+                "_longueur=" + _longueur +
+                ", _largeur=" + _largeur +
+                ", _listeCase=" + _listeCase +
+                ", _listeBateau=" + _listeBateau +
+                '}';
     }
 }

@@ -157,4 +157,16 @@ public class PartieDistance extends Partie {
         set_termine(true);
     }
 
+    /***************************************
+     * Override des méthodes de Partie
+     ***************************************/
+    @Override
+    public String toString() {
+        return "PartieDistance{" +
+                "_joueur=" + _joueur +
+                ", _aGagner=" + _aGagner +
+                ", _tourJoueur=" + _tourJoueur +
+                ", " + super.toString() +
+                "}";
+    }
 }

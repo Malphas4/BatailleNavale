@@ -57,7 +57,7 @@ public class Main extends Application{
             Parent nodeMenu=menuLoader.load();
             ControleurMenu ControleurMenu = menuLoader.getController();
 
-
+            /*
             FXMLLoader pseudoLoader = new FXMLLoader(getClass().getResource("pseudo.fxml"));
             Parent nodePseudo=pseudoLoader.load();
             ControleurPseudo ControleurPseudo = pseudoLoader.getController();
@@ -73,7 +73,7 @@ public class Main extends Application{
             FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("grille.fxml"));
             Parent nodeGrille=grilleLoader.load();
             ControleurGrille ControleurGrille = grilleLoader.getController();
-
+        */
             //initialisation des modeles
             //            DataModel model = new DataModel();
             //            ControleurMenu.initModel(model);

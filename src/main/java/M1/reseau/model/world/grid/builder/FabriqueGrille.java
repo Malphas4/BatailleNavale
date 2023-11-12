@@ -5,6 +5,8 @@ import M1.reseau.model.world.element.classic.CaseNormal;
 import M1.reseau.model.world.grid.Grille;
 import M1.reseau.model.world.grid.IGrille;
 
+import java.util.Objects;
+
 public class FabriqueGrille implements IFabriqueGrille {
 
     private int _longueur;
@@ -48,5 +50,25 @@ public class FabriqueGrille implements IFabriqueGrille {
             }
         }
         return _grille;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FabriqueGrille that = (FabriqueGrille) o;
+        return get_longueur() == that.get_longueur() && get_largeur() == that.get_largeur();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(get_longueur(), get_largeur());
+    }
+
+    @Override
+    public String toString() {
+        return "FabriqueGrille," +
+                "_longueur=" + _longueur +
+                ", _largeur=" + _largeur;
     }
 }

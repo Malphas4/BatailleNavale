@@ -48,7 +48,7 @@ public class PartieLocale extends Partie {
      * @param _joueur1
      */
     public void set_joueur1(JoueurNormal _joueur1) {
-        if (_joueur2 == null) throw new IllegalArgumentException("PartieLocale : Le joueur1 ne peut pas être null.");
+        if (_joueur1 == null) throw new IllegalArgumentException("PartieLocale : Le joueur1 ne peut pas être null.");
         this._joueur1 = _joueur1;
     }
 
@@ -188,7 +188,17 @@ public class PartieLocale extends Partie {
     public void fin() throws IPartieException {
         if (!is_commence()) throw new IPartieException("PartieLocale : La partie n'a pas encore commencé.");
         if (is_termine()) throw new IPartieException("PartieLocale : La partie est déjà terminé.");
-        if (!is_aGagner1() || !is_aGagner2()) throw new IPartieException("PartieLocale : Aucun des 2 joueurs n'ont gagnés.");
+        if (!is_aGagner1() && !is_aGagner2()) throw new IPartieException("PartieLocale : Aucun des 2 joueurs n'ont gagnés.");
         set_termine(true);
+    }
+
+    @Override
+    public String toString() {
+        return "PartieLocale{" +
+                "_joueur1=" + _joueur1 +
+                ", _aGagner1=" + _aGagner1 +
+                ", _joueur2=" + _joueur2 +
+                ", _aGagner2=" + _aGagner2 +
+                "," + super.toString() + "}";
     }
 }

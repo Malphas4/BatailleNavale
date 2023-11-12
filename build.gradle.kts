@@ -13,6 +13,8 @@ repositories {
 
 javafx {
     version = "17"
+    //possible solution
+    //sdk = "/Library/Java/Extensions/javafx-sdk-17.0.9" // Path to your javafx sdk
     modules("javafx.controls", "javafx.fxml") //"javafx.base", "javafx.graphics"
 }
 
@@ -25,4 +27,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-//mainClassName (M1.reseau.Main)
+application {
+    mainClass = "M1.reseau.Main"
+}

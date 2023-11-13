@@ -4,10 +4,10 @@ public class InformationsUtilisateur {
 
     private static InformationsUtilisateur _informationsUtilisateur;
 
-    /* Informations utilisateurs*/
+    /* Informations utilisateurs */
+    private String _pseudo;
 
     private InformationsUtilisateur() {
-
     }
 
     public static InformationsUtilisateur getInstance() {
@@ -17,8 +17,14 @@ public class InformationsUtilisateur {
         return _informationsUtilisateur;
     }
 
-    public static String setPseudo(String _pseudo) {
+    public String get_pseudo() {
+        return _pseudo;
+    }
 
+    public void set_pseudo(String _pseudo) {
+        if (_pseudo == null) throw new IllegalArgumentException("InformationsUtilisateur : Le pseudo ne peut pas être null.");
+        if (_pseudo.trim().isEmpty()) throw new IllegalArgumentException("InformationsUtilisateur : Le pseudo ne peut pas être vide.");
+        this._pseudo = _pseudo;
     }
 
 }

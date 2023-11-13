@@ -46,7 +46,7 @@ public class ControleurPseudo {
             System.out.print("connection pseudo : " + _champPseudo.getText() + "\n");
 
             //Mise a jour du pseudonyme dans l'instance
-            InformationsUtilisateur.getInstance().setPseudo(_champPseudo.getText());
+            InformationsUtilisateur.getInstance().set_pseudo(_champPseudo.getText());
 
 
             FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));

@@ -9,6 +9,12 @@
 09 message faux
 0A début file attente
 0B mise a jour file attente
-0C identification et échange d'ID pour reconnexion
+0C identification du pseudo existant avec le mot de passe
+0D fermeture Application
+0E demande de la  liste des parties/salons
+10 envoi d'un pseudo à valider
+11 refus du pseudonyme par le serveur avec consignes pour le changement
+
+
 0D information au jouer que c'est son tour
 

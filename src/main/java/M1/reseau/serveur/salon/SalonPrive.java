@@ -1,4 +1,4 @@
-package M1.reseau.serveur;
+package M1.reseau.serveur.salon;
 
 public class SalonPrive extends Salon{
     private String  _motDePasse="0ùBx2";

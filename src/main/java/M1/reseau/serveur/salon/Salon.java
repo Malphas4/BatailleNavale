@@ -1,9 +1,9 @@
-package M1.reseau.serveur;
+package M1.reseau.serveur.salon;
 
 public class Salon implements ISalon {
 
-    public String _nom="";
-    String _description="";
+    public String _nom;
+    String _description;
     int _nbMaxJoueur=2;
     int _nbConnecte=0;
 
@@ -17,7 +17,6 @@ public class Salon implements ISalon {
     public  Salon() {
         this._nom = "NomDeBase";
         this._description = "partie classique";
-;
     }
 
     public String getNom() {
@@ -50,5 +49,11 @@ public class Salon implements ISalon {
 
     public void decrementNbConnecte() {
         this._nbConnecte--;
+    }
+
+    @Override
+    public String infos() {
+        return "nom : "+_nom+"\n description : "+_description +"\n taille du salon : "+
+                _nbMaxJoueur +" nombre de connection au salon :"+_nbConnecte;
     }
 }

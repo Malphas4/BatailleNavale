@@ -4,6 +4,7 @@ package M1.reseau;
 import java.io.IOException;
 
 import M1.reseau.client.controller.*;
+import M1.reseau.utilities.InformationsUtilisateur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,10 @@ public class Main extends Application{
     public static void main(String[] args) {
        // client  Testclient = new client();
        // serveur Testserveur = new serveur();
+
+        //instantation des informations utilisateur
+        InformationsUtilisateur.getInstance();
+
         try {
             // Testclient.unClient();
             //   Testserveur.unServeur();
@@ -29,10 +34,7 @@ public class Main extends Application{
     @Override
     public void start(Stage stage) throws Exception{
 
-            FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));
-            Scene sceneMenu = menuLoader.load();
 
-            ControleurMenu ControleurMenu = menuLoader.getController();
 
             FXMLLoader pseudoLoader = new FXMLLoader(getClass().getResource("/pseudo.fxml"));
             Scene scenePseudo = pseudoLoader.load();
@@ -47,10 +49,11 @@ public class Main extends Application{
             Scene sceneLobby = lobbyLoader.load();
             ControleurLobby ControleurLobby = lobbyLoader.getController();
 
-
+            /*
             FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
             Scene sceneGrille = grilleLoader.load();
             ControleurGrille ControleurGrille = grilleLoader.getController();
+        */
 
             //initialisation des modeles
             //fonction
@@ -63,7 +66,7 @@ public class Main extends Application{
             Pane paneTest = new Pane();
             Scene sceneTest = new Scene(paneTest, 800, 600);*/
 
-            stage.setScene(sceneMenu);
+            stage.setScene(scenePseudo);
 
             stage.show();
 

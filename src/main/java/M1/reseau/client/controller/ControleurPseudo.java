@@ -1,6 +1,7 @@
 package M1.reseau.client.controller;
 
 
+import M1.reseau.utilities.InformationsUtilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,9 +40,14 @@ public class ControleurPseudo {
         System.out.print("connect\n");
         Stage stageActuel = null;
         if (_champPseudo.getText().trim().isEmpty()) {
+            //alerte AF
             _msgErreur.setText("Veuillez entrer un pseudo");
         } else {
             System.out.print("connection pseudo : " + _champPseudo.getText() + "\n");
+
+            //Mise a jour du pseudonyme dans l'instance
+            InformationsUtilisateur.getInstance().setPseudo(_champPseudo.getText());
+
 
             FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));
             Scene sceneGrille = menuLoader.load();
@@ -51,7 +57,6 @@ public class ControleurPseudo {
             stageActuel.setScene(sceneGrille);
             stageActuel.show();
 
-            stageActuel.setUserData(_champPseudo.getText());
         }
 
     }

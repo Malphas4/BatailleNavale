@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Scene?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<Scene xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="M1.reseau.client.controller.ControleurPseudo">
+<Scene xmlns="http://javafx.com/javafx/17.0.9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="M1.reseau.client.controller.ControleurPseudo">
     <AnchorPane prefHeight="200" prefWidth="200">
       <children>
-         <Pane fx:id="_panePseudo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <Pane fx:id="_panePseudo" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
             <children>
-               <Button fx:id="_btnPseudoConnexion" layoutX="190.0" layoutY="269.0" mnemonicParsing="false" onAction="#validationPseudo" text="Se connecter" />
+               <Button fx:id="_btnPseudoConnexion" layoutX="190.0" layoutY="288.0" mnemonicParsing="false" onAction="#validationPseudo" text="Se connecter" />
                <TextField fx:id="_champPseudo" layoutX="190.0" layoutY="214.0" prefHeight="25.0" prefWidth="220.0" text="pseudonyme" />
                <TextArea fx:id="_msgConsigne" editable="false" layoutX="190.0" layoutY="24.0" prefHeight="80.0" prefWidth="220.0" text="Entrer un pseudonyme :&#10;Entre 8 et 20 caracteres&#10;etc ..." wrapText="true" />
                <TextArea fx:id="_msgErreur" editable="false" layoutX="190.0" layoutY="111.0" prefHeight="89.0" prefWidth="220.0" text="message si consignes non respectées " wrapText="true" />
-               <Button fx:id="_btnPseudoInscription" layoutX="326.0" layoutY="269.0" mnemonicParsing="false" onAction="#inscriptionPseudo" prefHeight="25.0" prefWidth="84.0" text="S'inscrire" />
+               <Button fx:id="_btnPseudoInscription" layoutX="326.0" layoutY="288.0" mnemonicParsing="false" onAction="#inscriptionPseudo" prefHeight="25.0" prefWidth="84.0" text="S'inscrire" />
+               <PasswordField fx:id="_mdp" layoutX="190.0" layoutY="249.0" prefHeight="25.0" prefWidth="218.0" />
             </children>
          </Pane>
       </children></AnchorPane>

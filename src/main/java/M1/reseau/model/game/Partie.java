@@ -143,7 +143,7 @@ public abstract class Partie implements IPartie {
     }
 
     /***************************************
-     * Override méthode de base
+     * Override méthode de Partie
      ***************************************/
 
     /**

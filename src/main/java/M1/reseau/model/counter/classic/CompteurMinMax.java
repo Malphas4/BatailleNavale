@@ -5,6 +5,10 @@ import M1.reseau.model.exception.ICompteurException;
 
 public class CompteurMinMax extends Compteur {
 
+    /***************************************
+     * Déclaration des variables
+     ***************************************/
+
     private int _max;
     private int _min;
 

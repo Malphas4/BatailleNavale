@@ -69,6 +69,14 @@ public class Compteur implements ICompteur {
         set_compteur(get_compteur() - i);
     }
 
+    /***************************************
+     * Override des méthodes de Compteur
+     ***************************************/
+
+    /**
+     * Méthode de transformation en String
+     * @return Le compteur sous forme de String
+     */
     @Override
     public String toString() {
         return "Compteur{" +

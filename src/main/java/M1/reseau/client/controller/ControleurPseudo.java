@@ -37,20 +37,22 @@ public class ControleurPseudo {
     @FXML
     void validationPseudo(ActionEvent event)throws IOException {
         System.out.print("connect\n");
-        if( _champPseudo.getText().trim().isEmpty()){
+        Stage stageActuel = null;
+        if (_champPseudo.getText().trim().isEmpty()) {
             _msgErreur.setText("Veuillez entrer un pseudo");
-        }
-        else{
-            System.out.print("connection pseudo : "+_champPseudo.getText()+"\n");
+        } else {
+            System.out.print("connection pseudo : " + _champPseudo.getText() + "\n");
 
             FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));
             Scene sceneGrille = menuLoader.load();
+
             //ControleurMenu _controleurMenu = menuLoader.getController();
-            Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stageActuel.setScene(sceneGrille);
             stageActuel.show();
-        }
 
+            stageActuel.setUserData(_champPseudo.getText());
+        }
 
     }
     @FXML

@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextFlow;
+import javafx.scene.control.PasswordField;
 
 public class ControleurGrille {
 
@@ -43,6 +44,8 @@ public class ControleurGrille {
 
     }
 
+    @FXML
+    private PasswordField _mdp;
     @FXML
     void Abandonner(ActionEvent event) {
 

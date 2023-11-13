@@ -1,4 +1,4 @@
-package M1.reseau.serveur;
+package M1.reseau.serveur.salon;
 
 public  interface ISalon {
 
@@ -9,4 +9,6 @@ public  interface ISalon {
     public void setNbConnecte(int nbConnecte);
     public void incrementNbConnecte();
     public void decrementNbConnecte();
+
+    String infos();
 }

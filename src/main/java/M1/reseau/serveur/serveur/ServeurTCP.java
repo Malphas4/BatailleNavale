@@ -1,12 +1,15 @@
 package M1.reseau.serveur.serveur;
 
 import M1.reseau.serveur.salon.Salon;
+import M1.reseau.serveur.salon.SalonPrive;
+import M1.reseau.serveur.singletons.SingletonUDP;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,6 +34,16 @@ public class ServeurTCP {
         ArrayList<Salon> _listeSalons=new ArrayList<>();
         boolean _statusServeur=true;
 
+        //instantation du singleton UDP
+        try {
+            SingletonUDP.getInstance();
+        } catch (SocketException e) {
+            throw new RuntimeException(e);
+        }
+
+        /* thread avec UDP tournant en arrière plan*/
+
+
         //commande console pour gérer le serveur
         System.out.println("commandes !\n" +
                 "ls pour la liste des salons\n" +
@@ -47,15 +60,33 @@ public class ServeurTCP {
         } else if ("ls".equals(str1)) {
             System.out.print("Informations des salons :\n");
             for (Salon iterSalon:_listeSalons) {
-                //if (_listeSalons.isEmpty()){
-                //}else
-                System.out.print("  "+iterSalon.infos()+"\n");
+                if (_listeSalons.isEmpty())
+                    System.out.print("  Aucun salon n'est disponible\n");
+                else
+                    System.out.print("  "+iterSalon.infos()+"\n");
+            }
+
+        } else if ("ns".equals(str1)) {
+            System.out.print("creation d'un salon :\n");
+            for (int i= 0; i < 3; i++) {
+                System.out.print("Difficulté du nouveau salon ? \n options possibles \n f pour facile \n d pour difficile \n m pour moyen"+"\n");
+                String difficulte=input.nextLine();
+
+                System.out.print("nb joueur de base 2 pas modifiable pour l'instant\n");
+                //int _nbJoueur=2;
+                System.out.print("mot de passe? laisser vide pour ne pas en attribuer\n");
+                String _mdp=input.nextLine();
+                if (_mdp.trim().isEmpty()){
+                    _listeSalons.add(new Salon(difficulte,"partie classique"));
+                }else {
+                    _listeSalons.add( new SalonPrive(difficulte,"partie privée",_mdp));
+                }
 
             }
 
         }
-
         //keep listens indefinitely until receives 'exit' call or program terminates
+        //Pas bon, singletonTCP ou thread pour gestion de multiples clients
         while(_statusServeur){
             System.out.println("Attente de connexion ...");
             //creating socket and waiting for M1.reseau.client connection
@@ -78,13 +109,30 @@ public class ServeurTCP {
             if(message.equalsIgnoreCase("exit")){
                 System.out.println("Au revoir");
                 _statusServeur=false;
-            };
+                SingletonUDP.fermetureSocket();
+            }
         }
         System.out.println(" extinction du serveur!!");
         //close the ServerSocket object
         serveur.close();
     }
 
+    /**
+    * Thread UDP
+    * Theard qui gère les échanges UDP
+    * utilisé pour la connection et l'inscription des joueurs
+    */
+    Thread threadUDP = new Thread(new Runnable() {
+    @Override
+    public void run() {
+        try {
+            SingletonUDP.getInstance().message("test");
+            System.out.printf(SingletonUDP.getInstance().reception());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    });
 
 
 }

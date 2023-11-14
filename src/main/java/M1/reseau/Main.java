@@ -3,7 +3,9 @@ package M1.reseau;
 
 import java.io.IOException;
 
+import M1.reseau.client.ClientUDP;
 import M1.reseau.client.controller.*;
+import M1.reseau.serveur.singletons.SingletonUDP;
 import M1.reseau.utilities.InformationsUtilisateur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ public class Main extends Application{
 
         //instantation des informations utilisateur
         InformationsUtilisateur.getInstance();
+        SingletonUDP.getInstance();
 
         try {
             // Testclient.unClient();

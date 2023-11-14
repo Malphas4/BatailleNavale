@@ -5,12 +5,15 @@ import java.net.*;
 
 public class SingletonUDP {
 
-    //instance
+    /**
+     * intance
+     */
     private static SingletonUDP _singletonUDP;
 
-    /*
+    /**
     * Données de l'instance du socket UDP
-    * */
+    *
+    */
     final DatagramSocket socketUDP;//= new DatagramSocket();
     final int _taille = 1024;
     final byte[] _buffer = new byte[_taille];
@@ -20,7 +23,6 @@ public class SingletonUDP {
 
     /**
      * Constructeur privé
-     * un seul socket UDP est nécessaire pour le serveur
      */
     private SingletonUDP(int port, String ad) throws UnknownHostException, SocketException {
         _port = 7777;
@@ -38,6 +40,15 @@ public class SingletonUDP {
         this.socketUDP = new DatagramSocket();
     }
 
+    /**
+     * envoi d'un message apr UDP
+     * @param s message à envoyer de type String
+    *  @throws IOException
+     *  @throws UnknownHostException
+     *  @throws SocketException
+     *  La demande de message est bloquante pour l'intant
+     *  Une option pour abandonner la'tente de réponse est à prévoir en 2 3 lignes de codes
+     */
     public void message(String s) throws IOException {
         //Message de type string deviens de type data pour l'envoi
         byte[] data = (s).getBytes();
@@ -48,6 +59,13 @@ public class SingletonUDP {
 
     }
 
+    /**
+     * reception d'un message avec UDP
+     *  @return message recu de type String
+     *  @throws IOException
+     *  La lecture d'un socket vide est une erreur pour l'intant
+     *  une option pour ignorer le message vide est à faire
+     */
     public String reception() throws IOException {
         DatagramPacket recu = new DatagramPacket(_buffer, _taille);
         socketUDP.receive(recu);
@@ -56,7 +74,10 @@ public class SingletonUDP {
         return data;
     }
 
-    public void fermetureSocket() {
+    /**
+     * fermeture du socket
+     */
+    public  void fermetureSocket() {
         socketUDP.close();
     }
 
@@ -77,6 +98,7 @@ public class SingletonUDP {
 
     /**
      * Point d'accès pour l'instance unique du singleton
+     * Initialisation si nécessaire inclus dans la fonction
      */
     public static SingletonUDP getInstance() throws SocketException, UnknownHostException {
         if (_singletonUDP == null) {
@@ -85,10 +107,3 @@ public class SingletonUDP {
         return SingletonUDP._singletonUDP;
     }
 }
-/*
-*
-*         DatagramPacket dataSent = new DatagramPacket(data,data.length,serveur,7777 );
-        DatagramSocket socket = new DatagramSocket();
-        socket.send(dataSent);
-        DatagramPacket dataRecieved = new DatagramPacket(new byte[taille],taille);
-        socket.receive(dataRecieved);*/

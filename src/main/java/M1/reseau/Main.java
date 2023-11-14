@@ -2,6 +2,8 @@ package M1.reseau;
 
 
 import java.io.IOException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 import M1.reseau.client.ClientUDP;
 import M1.reseau.client.controller.*;
@@ -20,7 +22,13 @@ public class Main extends Application{
 
         //instantation des informations utilisateur
         InformationsUtilisateur.getInstance();
-        SingletonUDP.getInstance();
+        try {
+            SingletonUDP.getInstance();
+        } catch (SocketException e) {
+            throw new RuntimeException(e);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             // Testclient.unClient();

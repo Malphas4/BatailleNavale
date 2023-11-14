@@ -50,18 +50,21 @@ public class ControleurPseudo {
             //alerte AF
             _msgErreur.setText("Veuillez entrer un pseudo");
         } else {
-            System.out.print("connection pseudo : " + _champPseudo.getText() + "\n");
+            String _pseudo=_champPseudo.getText();
+            System.out.print("connection pseudo : " +  _pseudo + "\n");
 
             //Mise a jour du pseudonyme dans l'instance
              InformationsUtilisateur.getInstance().set_pseudo(_champPseudo.getText());
-             SingletonUDP.getInstance().message("codePseudo:"+_champPseudo.getText());
-            // _messageServeur=SingletonUDP.getInstance().reception();
-           //  SingletonUDP.getInstance().message("codeMdp:"+_mdp.getText());
+             SingletonUDP.getInstance().message("codePseudo:"+_pseudo);
+             _messageServeur=SingletonUDP.getInstance().reception();
+             SingletonUDP.getInstance().message("codeMdp:"+_mdp.getText());
 
             //injection du pseudo dans le controleur Lobby et Grille
             //FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
             //ControleurGrille controleurGrille = grilleLoader.getController();
             //appel d'une fonction de Grille ou appel de setPseudo par exemple
+
+
 
             FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));
             Scene sceneMenu = menuLoader.load();

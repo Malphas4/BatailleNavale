@@ -1,4 +1,4 @@
 package M1.reseau.serveur.bot;
 
-public class MediumMode {
+public class MediumMode extends Mode {
 }

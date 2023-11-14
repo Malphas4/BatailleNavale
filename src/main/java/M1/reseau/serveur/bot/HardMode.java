@@ -1,4 +1,4 @@
 package M1.reseau.serveur.bot;
 
-public class HardMode {
+public class HardMode extends Mode {
 }

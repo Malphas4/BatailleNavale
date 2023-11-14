@@ -14,19 +14,18 @@ public class SingletonUDP {
     * Données de l'instance du socket UDP
     *
     */
-    final DatagramSocket socketUDP;//= new DatagramSocket();
+    static  DatagramSocket socketUDP;//= new DatagramSocket();
     final int _taille = 1024;
     final byte[] _buffer = new byte[_taille];
     int _port = 7777;
-    ;
-    InetAddress _adr= InetAddress.getByName("localhost");;
+    InetAddress _adr= InetAddress.getByName("localhost");
 
     /**
      * Constructeur privé
      */
     private SingletonUDP(int port, String ad) throws UnknownHostException, SocketException {
-        _port = 7777;
-        InetAddress _adr = InetAddress.getByName(ad);
+        _port = port;
+        this._adr = InetAddress.getByName(ad);
         // création d'une socket, sans la lier à un port particulier
         this.socketUDP = new DatagramSocket();
 
@@ -36,18 +35,18 @@ public class SingletonUDP {
      * un seul socket UDP est nécessaire pour le serveur
      */
     private SingletonUDP() throws UnknownHostException, SocketException {
-        InetAddress _adr = InetAddress.getByName("localhost");
+        //InetAddress _adr = InetAddress.getByName("localhost");
         this.socketUDP = new DatagramSocket();
     }
 
     /**
      * envoi d'un message apr UDP
      * @param s message à envoyer de type String
-    *  @throws IOException
-     *  @throws UnknownHostException
-     *  @throws SocketException
-     *  La demande de message est bloquante pour l'intant
-     *  Une option pour abandonner la'tente de réponse est à prévoir en 2 3 lignes de codes
+    *  @throws IOException gestion IO exception
+     * @throws UnknownHostException gestion host inconnu (ici localhost initialement
+     * @throws SocketException
+     * La demande de message est bloquante pour l'intant
+     * Une option pour abandonner la'tente de réponse est à prévoir en 2 3 lignes de codes
      */
     public void message(String s) throws IOException {
         //Message de type string deviens de type data pour l'envoi
@@ -77,12 +76,14 @@ public class SingletonUDP {
     /**
      * fermeture du socket
      */
-    public  void fermetureSocket() {
+    public static void fermetureSocket() {
         socketUDP.close();
     }
 
 
-    /** Holder */
+    /*Holder
+     * Pas utilisé
+     * */
     /*private static class SingletonHolder
     {
         /** Instance unique non préinitialisée *//*

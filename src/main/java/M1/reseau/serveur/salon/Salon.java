@@ -6,6 +6,18 @@ public class Salon implements ISalon {
     String _description;
     int _nbMaxJoueur=2;
     int _nbConnecte=0;
+    //variable qui decide du temsp pour chaque tours
+    int _temps=30;
+    //variable gérant la différence de temps entre l'horloge serveur et la partie
+    int debutPartie=0;
+
+    //fonction pour récupérer l'horloge serveur
+    //classe singleton possible AF.
+    public int getServeurHorloge(
+    ) {
+        return debutPartie;
+    }
+
 
 
 

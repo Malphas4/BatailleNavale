@@ -8,6 +8,8 @@ public class Salon implements ISalon {
     int _nbConnecte=0;
 
 
+
+
     public  Salon(String nom, String description, int nbMax) {
         this._nom = nom;
         this._description = description;
@@ -15,6 +17,11 @@ public class Salon implements ISalon {
         this._nbConnecte = 0;
     }
     public  Salon() {
+        this._nom = "NomDeBase";
+        this._description = "partie classique";
+    }
+
+    public Salon(String difficulte, String _description) {
         this._nom = "NomDeBase";
         this._description = "partie classique";
     }

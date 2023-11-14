@@ -8,6 +8,11 @@ public class SalonPrive extends Salon{
      _motDePasse=motDePasse;
     }
 
+    public SalonPrive(String difficulte, String partiePrivee, String mdp) {
+        super(difficulte,partiePrivee);
+        _motDePasse=mdp;
+    }
+
     public String getMotDePasse() {
         return _motDePasse;
     }

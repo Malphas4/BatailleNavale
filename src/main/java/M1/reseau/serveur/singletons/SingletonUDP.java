@@ -76,8 +76,11 @@ public class SingletonUDP {
     /**
      * fermeture du socket
      */
-    public static void fermetureSocket() {
-        socketUDP.close();
+    public static void fermetureSocket()  {
+        try{
+            if(socketUDP != null) socketUDP.close();
+        }catch (Exception e){ e.printStackTrace();}
+
     }
 
 

@@ -1,6 +1,7 @@
 package M1.reseau.client.controller;
 
 
+import M1.reseau.serveur.singletons.SingletonUDP;
 import M1.reseau.utilities.InformationsUtilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -36,9 +38,14 @@ public class ControleurPseudo {
     private Pane _panePseudo;
 
     @FXML
+    private PasswordField _mdp;
+
+
+    @FXML
     void validationPseudo(ActionEvent event)throws IOException {
         System.out.print("connect\n");
         Stage stageActuel = null;
+        String _messageServeur;
         if (_champPseudo.getText().trim().isEmpty()) {
             //alerte AF
             _msgErreur.setText("Veuillez entrer un pseudo");
@@ -46,15 +53,22 @@ public class ControleurPseudo {
             System.out.print("connection pseudo : " + _champPseudo.getText() + "\n");
 
             //Mise a jour du pseudonyme dans l'instance
-            InformationsUtilisateur.getInstance().set_pseudo(_champPseudo.getText());
+             InformationsUtilisateur.getInstance().set_pseudo(_champPseudo.getText());
+             SingletonUDP.getInstance().message("codePseudo:"+_champPseudo.getText());
+            // _messageServeur=SingletonUDP.getInstance().reception();
+           //  SingletonUDP.getInstance().message("codeMdp:"+_mdp.getText());
 
+            //injection du pseudo dans le controleur Lobby et Grille
+            //FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
+            //ControleurGrille controleurGrille = grilleLoader.getController();
+            //appel d'une fonction de Grille ou appel de setPseudo par exemple
 
             FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));
-            Scene sceneGrille = menuLoader.load();
+            Scene sceneMenu = menuLoader.load();
 
             //ControleurMenu _controleurMenu = menuLoader.getController();
             stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stageActuel.setScene(sceneGrille);
+            stageActuel.setScene(sceneMenu);
             stageActuel.show();
 
         }

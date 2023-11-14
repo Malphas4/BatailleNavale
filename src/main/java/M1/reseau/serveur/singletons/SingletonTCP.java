@@ -41,7 +41,8 @@ public class SingletonTCP implements Serializable
 
     /** Point d'accès pour l'instance unique du singleton */
     public static SingletonTCP getInstance()
-    {   return INSTANCE;
+    {
+        return INSTANCE;
     }
 
     /** Sécurité anti-désérialisation */

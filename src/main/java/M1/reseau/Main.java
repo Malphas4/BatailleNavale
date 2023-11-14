@@ -22,6 +22,8 @@ public class Main extends Application{
 
         //instantation des informations utilisateur
         InformationsUtilisateur.getInstance();
+
+        //instantation du singleton UDP
         try {
             SingletonUDP.getInstance();
         } catch (SocketException e) {
@@ -44,8 +46,6 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) throws Exception{
-
-
 
             FXMLLoader pseudoLoader = new FXMLLoader(getClass().getResource("/pseudo.fxml"));
             Scene scenePseudo = pseudoLoader.load();

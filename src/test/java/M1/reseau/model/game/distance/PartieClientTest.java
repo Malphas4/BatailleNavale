@@ -9,18 +9,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PartieDistanceTest {
+class PartieClientTest {
 
-    private PartieDistance _partieVide;
-    private PartieDistance _partiePleine;
+    private PartieClient _partieVide;
+    private PartieClient _partiePleine;
 
     @BeforeEach
     void setUp() {
         /* Initialisation de la partie vide */
-        _partieVide = new PartieDistance(8, 8);
+        _partieVide = new PartieClient(8, 8);
 
         /*Initialisation de la partie pleine */
-        _partiePleine = new PartieDistance(8, 8);
+        _partiePleine = new PartieClient(8, 8);
         try {
             _partiePleine.ajouterJoueur("Joueur 1");
         } catch (IPartieException e) {

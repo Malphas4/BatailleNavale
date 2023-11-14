@@ -7,7 +7,7 @@ import M1.reseau.model.game.Partie;
 import M1.reseau.model.player.IJoueur;
 import M1.reseau.model.player.classic.JoueurNormal;
 
-public class PartieDistance extends Partie {
+public class PartieClient extends Partie {
 
     /***************************************
      * Déclaration des variables de classe
@@ -30,7 +30,7 @@ public class PartieDistance extends Partie {
      * @param _longueur
      * @param _largeur
      */
-    public PartieDistance(int _longueur, int _largeur) {
+    public PartieClient(int _longueur, int _largeur) {
         super(_longueur, _largeur);
     }
 
@@ -51,7 +51,7 @@ public class PartieDistance extends Partie {
      * @param _joueur
      */
     public void set_joueur(JoueurNormal _joueur) {
-        if (_joueur == null) throw new IllegalArgumentException("PartieDistance : Le joueur ne peut pas être null.");
+        if (_joueur == null) throw new IllegalArgumentException("PartieClient : Le joueur ne peut pas être null.");
         this._joueur = _joueur;
     }
 
@@ -99,9 +99,9 @@ public class PartieDistance extends Partie {
      */
     @Override
     public void commencer() throws IPartieException {
-        if (_joueur == null) throw new IPartieException("PartieDistance : La partie ne peut pas commencer tant que le joueur est null.");
-        if (is_commence()) throw new IPartieException("PartieDistance : Le partie a déjà commencé.");
-        if (is_termine()) throw new IPartieException("PartieDistance : La partie est terminé.");
+        if (_joueur == null) throw new IPartieException("PartieClient : La partie ne peut pas commencer tant que le joueur est null.");
+        if (is_commence()) throw new IPartieException("PartieClient : Le partie a déjà commencé.");
+        if (is_termine()) throw new IPartieException("PartieClient : La partie est terminé.");
         set_commence(true);
     }
 
@@ -111,9 +111,9 @@ public class PartieDistance extends Partie {
      */
     @Override
     public void tourSuivant() throws IPartieException {
-        if (!is_commence()) throw new IPartieException("PartieDistance : Le partie n'a pas commencé.");
-        if (is_termine()) throw new IPartieException("PartieDistance : La partie est déjà terminé.");
-        if (get_joueur() == null) throw new IPartieException("PartieDistance : Le joueur ne peut pas être null. Le tour ne peut pas passer.");
+        if (!is_commence()) throw new IPartieException("PartieClient : Le partie n'a pas commencé.");
+        if (is_termine()) throw new IPartieException("PartieClient : La partie est déjà terminé.");
+        if (get_joueur() == null) throw new IPartieException("PartieClient : Le joueur ne peut pas être null. Le tour ne peut pas passer.");
         /* On modifie le nombre de tour et on change l'état du tour joueur */
         set_nbTour(get_nbTour() + 1);
         set_tourJoueur(!is_tourJoueur());
@@ -126,8 +126,8 @@ public class PartieDistance extends Partie {
      */
     @Override
     public IJoueur getJoueurCourant() throws IPartieException {
-        if (_joueur == null) throw new IPartieException("PartieDistance : Le joueur n'est pas défini. Impossible de récupérer le joueur courant.");
-        if (!is_tourJoueur()) throw new IPartieException("PartieDistance : Ce n'est pas le tour du joueur.");
+        if (_joueur == null) throw new IPartieException("PartieClient : Le joueur n'est pas défini. Impossible de récupérer le joueur courant.");
+        if (!is_tourJoueur()) throw new IPartieException("PartieClient : Ce n'est pas le tour du joueur.");
         return get_joueur();
     }
 
@@ -137,7 +137,7 @@ public class PartieDistance extends Partie {
      */
     @Override
     public void ajouterJoueur(String _pseudo) throws IPartieException {
-        if (is_commence()) throw new IPartieException("PartieDistance : Le joueur ne peut pas être ajouter en cours de partie.");
+        if (is_commence()) throw new IPartieException("PartieClient : Le joueur ne peut pas être ajouter en cours de partie.");
 
         try {
             set_joueur(new JoueurNormal(_pseudo, (Grille) get_fabriqueGrille().creerGrille(), (Grille) get_fabriqueGrille().creerGrille()));
@@ -152,8 +152,8 @@ public class PartieDistance extends Partie {
      */
     @Override
     public void fin() throws IPartieException {
-        if (!is_commence()) throw new IPartieException("PartieDistance : La partie n'a pas encore commencé.");
-        if (is_termine()) throw new IPartieException("PartieDistance : La partie est déjà terminé.");
+        if (!is_commence()) throw new IPartieException("PartieClient : La partie n'a pas encore commencé.");
+        if (is_termine()) throw new IPartieException("PartieClient : La partie est déjà terminé.");
         set_termine(true);
     }
 
@@ -162,7 +162,7 @@ public class PartieDistance extends Partie {
      ***************************************/
     @Override
     public String toString() {
-        return "PartieDistance{" +
+        return "PartieClient{" +
                 "_joueur=" + _joueur +
                 ", _aGagner=" + _aGagner +
                 ", _tourJoueur=" + _tourJoueur +

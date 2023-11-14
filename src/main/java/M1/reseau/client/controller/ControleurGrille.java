@@ -29,6 +29,12 @@ public class ControleurGrille {
     private AnchorPane _panPartie;
     @FXML
     private TextField _textChatpartie;
+    @FXML
+    private PasswordField _mdp;
+
+    /*********************************
+     * Déclaration des constructeurs
+     *********************************/
 
     public ControleurGrille() {
 
@@ -44,8 +50,6 @@ public class ControleurGrille {
 
     }
 
-    @FXML
-    private PasswordField _mdp;
     @FXML
     void Abandonner(ActionEvent event) {
 

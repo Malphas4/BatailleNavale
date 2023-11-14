@@ -7,7 +7,7 @@ import M1.reseau.model.game.Partie;
 import M1.reseau.model.player.classic.JoueurNormal;
 import M1.reseau.model.world.grid.Grille;
 
-public class PartieLocale extends Partie {
+public class PartieServeur extends Partie {
 
     /***************************************
      * Déclaration des variables de classe
@@ -27,7 +27,7 @@ public class PartieLocale extends Partie {
      * @param _longueur Longueur de la grille
      * @param _largeur Largeur de la grille
      */
-    public PartieLocale(int _longueur, int _largeur) {
+    public PartieServeur(int _longueur, int _largeur) {
         super(_longueur, _largeur);
     }
 
@@ -48,7 +48,7 @@ public class PartieLocale extends Partie {
      * @param _joueur1
      */
     public void set_joueur1(JoueurNormal _joueur1) {
-        if (_joueur1 == null) throw new IllegalArgumentException("PartieLocale : Le joueur1 ne peut pas être null.");
+        if (_joueur1 == null) throw new IllegalArgumentException("PartieServeur : Le joueur1 ne peut pas être null.");
         this._joueur1 = _joueur1;
     }
 
@@ -81,7 +81,7 @@ public class PartieLocale extends Partie {
      * @param _joueur2
      */
     public void set_joueur2(JoueurNormal _joueur2) {
-        if (_joueur2 == null) throw new IllegalArgumentException("PartieLocale : Le joueur2 ne peut pas être null.");
+        if (_joueur2 == null) throw new IllegalArgumentException("PartieServeur : Le joueur2 ne peut pas être null.");
         this._joueur2 = _joueur2;
     }
 
@@ -114,10 +114,10 @@ public class PartieLocale extends Partie {
      */
     @Override
     public void commencer() throws IPartieException {
-        if (get_joueur1() == null) throw new IPartieException("PartieLocale : La partie ne peut pas commencer tant que le joueur1 est null.");
-        if (get_joueur2() == null) throw new IPartieException("PartieLocale : La partie ne peut pas commencer tant que le joueur2 est null.");
-        if (is_commence()) throw new IPartieException("PartieLocale : Le partie a déjà commencé.");
-        if (is_termine()) throw new IPartieException("PartieLocale : La partie est terminé.");
+        if (get_joueur1() == null) throw new IPartieException("PartieServeur : La partie ne peut pas commencer tant que le joueur1 est null.");
+        if (get_joueur2() == null) throw new IPartieException("PartieServeur : La partie ne peut pas commencer tant que le joueur2 est null.");
+        if (is_commence()) throw new IPartieException("PartieServeur : Le partie a déjà commencé.");
+        if (is_termine()) throw new IPartieException("PartieServeur : La partie est terminé.");
         set_commence(true);
     }
 
@@ -130,10 +130,10 @@ public class PartieLocale extends Partie {
      */
     @Override
     public void tourSuivant() throws IPartieException {
-        if (!is_commence()) throw new IPartieException("PartieLocale : Le partie n'a pas commencé.");
-        if (is_termine()) throw new IPartieException("PartieLocale : La partie est déjà terminé.");
-        if (get_joueur1() == null) throw new IPartieException("PartieLocale : Le joueur1 ne peut pas être null. Le tour ne peut pas passer.");
-        if (get_joueur2() == null) throw new IPartieException("PartieLocale : Le joueur2 ne peut pas être null. Le tour ne peut pas passer.");
+        if (!is_commence()) throw new IPartieException("PartieServeur : Le partie n'a pas commencé.");
+        if (is_termine()) throw new IPartieException("PartieServeur : La partie est déjà terminé.");
+        if (get_joueur1() == null) throw new IPartieException("PartieServeur : Le joueur1 ne peut pas être null. Le tour ne peut pas passer.");
+        if (get_joueur2() == null) throw new IPartieException("PartieServeur : Le joueur2 ne peut pas être null. Le tour ne peut pas passer.");
         /* On modifie le nombre de tour et on change l'état du tour joueur */
         set_nbTour(get_nbTour() + 1);
     }
@@ -147,9 +147,9 @@ public class PartieLocale extends Partie {
     @Override
     public IJoueur getJoueurCourant() throws IPartieException {
         if (get_joueur1() == null)
-            throw new IPartieException("PartieLocale : Le joueur1 ne peut pas être null. La récupération du joueur courant est impossible.");
+            throw new IPartieException("PartieServeur : Le joueur1 ne peut pas être null. La récupération du joueur courant est impossible.");
         if (get_joueur2() == null)
-            throw new IPartieException("PartieLocale : Le joueur2 ne peut pas être null. La récupération du joueur courant est impossible.");
+            throw new IPartieException("PartieServeur : Le joueur2 ne peut pas être null. La récupération du joueur courant est impossible.");
         return (get_nbTour() % 2 == 0) ? get_joueur1() : get_joueur2();
     }
 
@@ -161,7 +161,7 @@ public class PartieLocale extends Partie {
     @Override
     public void ajouterJoueur(String _pseudo) throws IPartieException {
         if (get_joueur1() != null && get_joueur2() != null)
-            throw new IPartieException("PartieLocale : L'ajout d'un joueur est impossible. Les joueurs sur la partie sont déjà définis.");
+            throw new IPartieException("PartieServeur : L'ajout d'un joueur est impossible. Les joueurs sur la partie sont déjà définis.");
 
         /* Création du nouveau joueur */
         JoueurNormal _joueur = null;
@@ -186,15 +186,15 @@ public class PartieLocale extends Partie {
      */
     @Override
     public void fin() throws IPartieException {
-        if (!is_commence()) throw new IPartieException("PartieLocale : La partie n'a pas encore commencé.");
-        if (is_termine()) throw new IPartieException("PartieLocale : La partie est déjà terminé.");
-        if (!is_aGagner1() && !is_aGagner2()) throw new IPartieException("PartieLocale : Aucun des 2 joueurs n'ont gagnés.");
+        if (!is_commence()) throw new IPartieException("PartieServeur : La partie n'a pas encore commencé.");
+        if (is_termine()) throw new IPartieException("PartieServeur : La partie est déjà terminé.");
+        if (!is_aGagner1() && !is_aGagner2()) throw new IPartieException("PartieServeur : Aucun des 2 joueurs n'ont gagnés.");
         set_termine(true);
     }
 
     @Override
     public String toString() {
-        return "PartieLocale{" +
+        return "PartieServeur{" +
                 "_joueur1=" + _joueur1 +
                 ", _aGagner1=" + _aGagner1 +
                 ", _joueur2=" + _joueur2 +

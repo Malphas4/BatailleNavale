@@ -10,19 +10,19 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PartieLocaleTest {
+class PartieServeurTest {
 
-    private PartieLocale _partieVide;
-    private PartieLocale _partieJ1;
-    private PartieLocale _partieJ12;
+    private PartieServeur _partieVide;
+    private PartieServeur _partieJ1;
+    private PartieServeur _partieJ12;
 
     @BeforeEach
     void setUp() {
         /* Initialisation d'une partie à vide */
-        _partieVide = new PartieLocale(8, 8);
+        _partieVide = new PartieServeur(8, 8);
 
         /* Initialisation d'une partie avec 1 joueur */
-        _partieJ1 = new PartieLocale(8, 8);
+        _partieJ1 = new PartieServeur(8, 8);
         try {
             _partieJ1.ajouterJoueur("Joueur 1");
         } catch (IPartieException e) {
@@ -30,7 +30,7 @@ class PartieLocaleTest {
         }
 
         /* Initialisation d'une partie avec 2 joueurs */
-        _partieJ12 = new PartieLocale(8, 8);
+        _partieJ12 = new PartieServeur(8, 8);
         try {
             _partieJ12.ajouterJoueur("Joueur 1");
             _partieJ12.ajouterJoueur("Joueur 2");

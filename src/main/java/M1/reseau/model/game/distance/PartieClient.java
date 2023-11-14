@@ -2,6 +2,8 @@ package M1.reseau.model.game.distance;
 
 import M1.reseau.model.exception.IJoueurException;
 import M1.reseau.model.exception.IPartieException;
+import M1.reseau.model.world.element.ICase;
+import M1.reseau.model.world.element.classic.CaseBateau;
 import M1.reseau.model.world.grid.Grille;
 import M1.reseau.model.game.Partie;
 import M1.reseau.model.player.IJoueur;
@@ -132,6 +134,17 @@ public class PartieClient extends Partie {
     }
 
     /**
+     * @return
+     * @throws IPartieException
+     */
+    @Override
+    public IJoueur getJoueurAdverse() throws IPartieException {
+        if (_joueur == null) throw new IPartieException("PartieClient : Le joueur n'est pas défini. Impossible de récupérer le joueur courant.");
+        if (is_tourJoueur()) throw new IPartieException("PartieClient : Ce n'est pas le tour du joueur.");
+        return get_joueur();
+    }
+
+    /**
      *
      * @param _pseudo
      */
@@ -155,6 +168,16 @@ public class PartieClient extends Partie {
         if (!is_commence()) throw new IPartieException("PartieClient : La partie n'a pas encore commencé.");
         if (is_termine()) throw new IPartieException("PartieClient : La partie est déjà terminé.");
         set_termine(true);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public boolean gagnant() {
+        for (ICase _case : get_joueur().get_grilleJoueur().get_listeCase())
+            if (_case instanceof CaseBateau) return false;
+        return true;
     }
 
     /***************************************

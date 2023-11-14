@@ -4,7 +4,10 @@ import M1.reseau.model.exception.IJoueurException;
 import M1.reseau.model.exception.IPartieException;
 import M1.reseau.model.player.IJoueur;
 import M1.reseau.model.game.Partie;
+import M1.reseau.model.player.Joueur;
 import M1.reseau.model.player.classic.JoueurNormal;
+import M1.reseau.model.world.element.ICase;
+import M1.reseau.model.world.element.classic.CaseBateau;
 import M1.reseau.model.world.grid.Grille;
 
 public class PartieServeur extends Partie {
@@ -154,6 +157,21 @@ public class PartieServeur extends Partie {
     }
 
     /**
+     * Méthode de gestion du joueur courant
+     * @return Joueur courant
+     * @throws IPartieException Le joueur 1 est null
+     * @throws IPartieException Le joueur 2 est null
+     */
+    @Override
+    public IJoueur getJoueurAdverse() throws IPartieException {
+        if (get_joueur1() == null)
+            throw new IPartieException("PartieServeur : Le joueur1 ne peut pas être null. La récupération du joueur courant est impossible.");
+        if (get_joueur2() == null)
+            throw new IPartieException("PartieServeur : Le joueur2 ne peut pas être null. La récupération du joueur courant est impossible.");
+        return (get_nbTour() % 2 == 1) ? get_joueur1() : get_joueur2();
+    }
+
+    /**
      * Gestion de l'ajout de joueur dans la partie
      * @param _pseudo
      * @throws IPartieException Le joueur 1 et 2 ne sont pas null
@@ -190,6 +208,27 @@ public class PartieServeur extends Partie {
         if (is_termine()) throw new IPartieException("PartieServeur : La partie est déjà terminé.");
         if (!is_aGagner1() && !is_aGagner2()) throw new IPartieException("PartieServeur : Aucun des 2 joueurs n'ont gagnés.");
         set_termine(true);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public boolean gagnant() {
+        JoueurNormal _joueur = null;
+        try {
+            _joueur = (JoueurNormal) getJoueurCourant();
+        } catch (IPartieException e) {
+            throw new RuntimeException(e);
+        }
+        for (ICase _case : _joueur.get_grilleJoueur().get_listeCase())
+            if (_case instanceof CaseBateau) return false;
+
+        // On update le statut gagnant
+        if (get_nbTour() % 2 == 1) set_aGagner1(true);
+        else set_aGagner2(true);
+
+        return true;
     }
 
     @Override

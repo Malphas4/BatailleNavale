@@ -7,6 +7,8 @@ public interface IPartie {
     void commencer() throws IPartieException;
     void tourSuivant() throws IPartieException;
     IJoueur getJoueurCourant() throws IPartieException;
+    IJoueur getJoueurAdverse() throws IPartieException;
     void ajouterJoueur(String _pseudo) throws IPartieException;
     void fin() throws IPartieException;
+    boolean gagnant();
 }

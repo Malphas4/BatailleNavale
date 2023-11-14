@@ -1,5 +1,7 @@
 package M1.reseau.serveur.salon;
 
+import M1.reseau.serveur.serveur.chatGlobal.ClientHandler;
+
 public class Salon implements ISalon {
 
     public String _nom;
@@ -10,6 +12,15 @@ public class Salon implements ISalon {
     int _temps=30;
     //variable gérant la différence de temps entre l'horloge serveur et la partie
     int debutPartie=0;
+
+    /**
+     * Les handlers contiennent les thread des 2 joueurs
+     * afin de communiquer avec le chat local
+     * et de s'envoyer les données
+     * */
+    ClientHandler _handlerJ1=null;
+    ClientHandler _handlerJ2=null;
+
 
     //fonction pour récupérer l'horloge serveur
     //classe singleton possible AF.

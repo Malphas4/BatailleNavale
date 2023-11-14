@@ -38,7 +38,7 @@ public class ControleurMenu {
     void accesLobby(ActionEvent event)throws IOException {
         System.out.print("Aller au Lobby\n");
 
-        FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/pseudo.fxml"));
+        FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml.fxml"));
         Scene sceneLobby = lobbyLoader.load();
         //ControleurLobby _controleurLobby = lobbyLoader.getController();
 

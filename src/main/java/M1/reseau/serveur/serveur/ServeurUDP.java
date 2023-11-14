@@ -14,6 +14,8 @@ public class ServeurUDP {
 
     public static void main(String argv[]) throws Exception
     {
+
+
         final InetAddress _adr= java.net.InetAddress.getByName("localhost");
         DatagramSocket socket = new DatagramSocket(port);
         while(true) {

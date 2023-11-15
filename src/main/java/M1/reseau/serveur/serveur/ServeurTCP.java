@@ -51,12 +51,26 @@ public class ServeurTCP {
 
 
         Thread threadUDP = new Thread(new Runnable() {
+            String _msg="";
             @Override
             public void run() {
                 while (_statusServeurUDP) {
+                    System.out.print("test");
+                    System.out.print("UDP en arriere plan\n");
                     try {
-                        System.out.printf(SingletonUDP.getInstance().reception());
-                        SingletonUDP.getInstance().message("test");
+                        _msg=SingletonUDP.getInstance().reception();
+                        System.out.printf(_msg);
+                        //SingletonUDP.getInstance().message("test");
+                        String[] _msgT=_msg.split(":");
+                        if(_msgT[0].equals("0C")) {
+                            String[] _msgID = _msgT[1].split(";");
+                            if (_msgID[0].equals("test") && _msgID[1].equals("000")) {
+                                SingletonUDP.getInstance().message("1C");
+                            }else if (_msgID[0].equals("test") && !(_msgID[1].equals("000"))){
+                                SingletonUDP.getInstance().message("1E");
+                            }else
+                                SingletonUDP.getInstance().message("1D");
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -123,31 +137,36 @@ public class ServeurTCP {
             //keep listens indefinitely until receives 'exit' call or program terminates
             //Pas bon, singletonTCP ou thread pour gestion de multiples clients
             //a sortir
-            while (_statusServeur) {
-                System.out.println("Attente de connexion ...");
-                //creating socket and waiting for M1.reseau.client connection
-                Socket socket = serveur.accept();
-                //read from socket to ObjectInputStream object
-                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-                //convert ObjectInputStream object to String
-                // String message = "YOLO";
-                String message = (String) ois.readObject();
-                System.out.println("Message reçu: " + message);
-                //create ObjectOutputStream object
-                ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-                //write object to Socket
-                oos.writeObject("Case touchee " + message);
-                //close resources
-                ois.close();
-                oos.close();
-                socket.close();
-                //terminate the server if M1.reseau.client sends exit request
-                if (message.equalsIgnoreCase("exit")) {
-                    System.out.println("Au revoir");
-                    _statusServeur = false;
-                    SingletonUDP.fermetureSocket();
-                }
+
             }
+
+            //serveur TCP
+        while (_statusServeur) {
+            System.out.println("Attente de connexion ...");
+            //creating socket and waiting for M1.reseau.client connection
+            Socket socket = serveur.accept();
+            //read from socket to ObjectInputStream object
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            //convert ObjectInputStream object to String
+            // String message = "YOLO";
+            String message = (String) ois.readObject();
+            System.out.println("Message reçu: " + message);
+            //create ObjectOutputStream object
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            //write object to Socket
+            oos.writeObject("Case touchee " + message);
+            //close resources
+            ois.close();
+            oos.close();
+            socket.close();
+            //terminate the server if M1.reseau.client sends exit request
+            if (message.equalsIgnoreCase("exit")) {
+                System.out.println("Au revoir");
+                _statusServeur = false;
+                SingletonUDP.fermetureSocket();
+            }
+
+
             System.out.println(" extinction du serveur!!");
             //close the ServerSocket object
             serveur.close();

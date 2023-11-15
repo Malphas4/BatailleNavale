@@ -43,21 +43,33 @@ public class ControleurPseudo {
 
     @FXML
     void validationPseudo(ActionEvent event)throws IOException {
-        System.out.print("connect\n");
-        Stage stageActuel = null;
-        String _messageServeur;
-        if (_champPseudo.getText().trim().isEmpty()) {
-            //alerte AF
-            _msgErreur.setText("Veuillez entrer un pseudo");
-        } else {
-            String _pseudo=_champPseudo.getText();
-            System.out.print("connection pseudo : " +  _pseudo + "\n");
 
+        //recuperation du stage si changement de fenetre
+        Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));
+        ControleurMenu _controleurMenu = menuLoader.getController();
+        Scene sceneMenu = menuLoader.load();
+        System.out.print("bouton validation pseudo\n");
+        String _messageServeur;
+        String _pseudo=_champPseudo.getText();
+        String _mdpInput=_mdp.getText();
+        String _connexion="";
+
+
+        if (_pseudo.trim().isEmpty()||_pseudo.equals("Pseudonyme")) {
+            //alerte AF
+            _msgConsigne.setText("Pseudo manquant ! Veuillez entrer votre speudo et votre mot de passe");
+            System.out.print("pseudo vide\n");
+        } else if (_mdpInput.trim().isEmpty()){
+            _msgConsigne.setText("Pseudo manquant ! Veuillez entrer votre mot de passe");
+            System.out.print("mdp vide\n");
+        }else if(!( _pseudo.isEmpty() ||_mdpInput.isEmpty())) {
+            _connexion = "0C:".concat(_pseudo).concat(";").concat(_mdpInput);
+            System.out.print(_connexion);
             //Mise a jour du pseudonyme dans l'instance
-             InformationsUtilisateur.getInstance().set_pseudo(_champPseudo.getText());
-             SingletonUDP.getInstance().message("codePseudo:"+_pseudo);
-             _messageServeur=SingletonUDP.getInstance().reception();
-             SingletonUDP.getInstance().message("codeMdp:"+_mdp.getText());
+            InformationsUtilisateur.getInstance().set_pseudo(_pseudo);
+            SingletonUDP.getInstance().message(_connexion);
+            _messageServeur = SingletonUDP.getInstance().reception();
 
             //injection du pseudo dans le controleur Lobby et Grille
             //FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
@@ -65,18 +77,19 @@ public class ControleurPseudo {
             //appel d'une fonction de Grille ou appel de setPseudo par exemple
 
 
+            // traitement de la chaine COR pour savoir quel message traiter
+            String[] _msgT = _messageServeur.split(":");
+            //messahe valide selon COR a la fin
+            if (_msgT[0].equals("1C")) {
+                stageActuel.setScene(sceneMenu);
 
-            FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));
-            Scene sceneMenu = menuLoader.load();
-
-            //ControleurMenu _controleurMenu = menuLoader.getController();
-            stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stageActuel.setScene(sceneMenu);
-            stageActuel.show();
-
+            }
         }
+        stageActuel.show();
 
     }
+
+
     @FXML
     void inscriptionPseudo(ActionEvent event) {
         System.out.print("inscription\n");

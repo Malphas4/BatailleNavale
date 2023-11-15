@@ -11,7 +11,7 @@
             <children>
                <Button fx:id="_btnPseudoConnexion" layoutX="190.0" layoutY="288.0" mnemonicParsing="false" onAction="#validationPseudo" text="Se connecter" />
                <TextField fx:id="_champPseudo" layoutX="190.0" layoutY="214.0" prefHeight="25.0" prefWidth="220.0" text="pseudonyme" />
-               <TextArea fx:id="_msgConsigne" editable="false" layoutX="190.0" layoutY="24.0" prefHeight="80.0" prefWidth="220.0" text="Entrer un pseudonyme :&#10;Entre 8 et 20 caracteres&#10;etc ..." wrapText="true" />
+               <TextArea fx:id="_msgConsigne" editable="false" layoutX="190.0" layoutY="24.0" prefHeight="80.0" prefWidth="220.0" text="Entrer votre pseudonyme et votre mot" wrapText="true" />
                <TextArea fx:id="_msgErreur" editable="false" layoutX="190.0" layoutY="111.0" prefHeight="89.0" prefWidth="220.0" text="message si consignes non respectées " wrapText="true" />
                <Button fx:id="_btnPseudoInscription" layoutX="326.0" layoutY="288.0" mnemonicParsing="false" onAction="#inscriptionPseudo" prefHeight="25.0" prefWidth="84.0" text="S'inscrire" />
                <PasswordField fx:id="_mdp" layoutX="190.0" layoutY="249.0" prefHeight="25.0" prefWidth="218.0" />

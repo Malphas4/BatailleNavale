@@ -60,11 +60,11 @@ public class Main extends Application{
             Scene sceneLobby = lobbyLoader.load();
             ControleurLobby ControleurLobby = lobbyLoader.getController();
 
-            /*
+
             FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
             Scene sceneGrille = grilleLoader.load();
             ControleurGrille ControleurGrille = grilleLoader.getController();
-        */
+
 
             //initialisation des modeles
             //fonction
@@ -76,8 +76,13 @@ public class Main extends Application{
             /*generation de la fenetre
             Pane paneTest = new Pane();
             Scene sceneTest = new Scene(paneTest, 800, 600);*/
-
-            stage.setScene(scenePseudo);
+        stage.setResizable(false);
+        //stage.setScene(sceneLobby);
+        stage.setScene(sceneGrille);
+        stage.setTitle("Bataille navale Prenium");
+        //stage.initModality(Modality.NONE);
+        //stage.getIcons().add(ImageCache.getInstance().get(".png"));
+        //Image de bateau a mettre
 
             stage.show();
 

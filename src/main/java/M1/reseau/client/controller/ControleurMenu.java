@@ -1,6 +1,8 @@
 package M1.reseau.client.controller;
 
 
+import M1.reseau.serveur.singletons.SingletonTCP;
+import M1.reseau.serveur.singletons.SingletonUDP;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,6 +73,9 @@ public class ControleurMenu {
     void quitter(ActionEvent event) {
         System.out.print("au revoir\n");
         Platform.exit();
+        //fermeture serveur UDP et TCP AF
+        //SingletonUDP.fermetureSocket();
+        //SingletonTCP.fermetureSocket();
         System.exit(0);
     }
 

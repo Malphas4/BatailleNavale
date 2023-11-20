@@ -1,17 +1,9 @@
 package M1.reseau.serveur.serveur;
-import M1.reseau.model.exception.IGrilleException;
-import M1.reseau.model.exception.IJoueurException;
-import M1.reseau.model.exception.IPartieException;
 import M1.reseau.model.game.local.PartieServeur;
-import M1.reseau.model.player.classic.JoueurNormal;
-import M1.reseau.model.player.visitor.VisitorEstTire;
-import M1.reseau.model.player.visitor.VisitorTirer;
-import M1.reseau.model.world.element.ICase;
 
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class EchoServerThreaded2 {
 

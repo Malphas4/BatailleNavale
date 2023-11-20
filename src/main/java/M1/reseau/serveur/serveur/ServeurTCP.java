@@ -19,7 +19,7 @@ import java.util.Scanner;
 /**
  * This class implements a TCP/IP java Socket server
  * @author malphas
- *
+ * @Deprecated
  */
 public class ServeurTCP {
 

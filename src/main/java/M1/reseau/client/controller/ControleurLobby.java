@@ -1,6 +1,8 @@
 package M1.reseau.client.controller;
 
 import M1.reseau.serveur.salon.Salon;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,8 +14,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Node;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 
 public class ControleurLobby {
@@ -49,6 +53,7 @@ public class ControleurLobby {
     void envoisChatGeneral(ActionEvent event) {
         String _msgm=_chatInput.getText();
         System.out.println(_msgm);
+        // SingletonTCP.getInstance().message("code:".concat(InformationsUtilisateurs.getInstance.get_pseudo().concat(";").concat(_msgm));
         //envoi au serveur d'un message global
 
 
@@ -89,35 +94,15 @@ public class ControleurLobby {
             });
 
             _listeSalon.getChildren().add(b);
+            fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
+            fiveSecondsWonder.play();
 
         }
 
     }
     @FXML
     void majSalons(ActionEvent event) {
-        //try {
-            //connection = database.getConnection();
-            //statement = connection.createStatement();
 
-            //resultSet = statement.executeQuery(sqlQuery);
-            //demande au serveur la liste des salons
-            //singletonTCP.getInstance.message("");
-            //seperation pour recuperer le code
-
-            //separation pour recuperer la liste des salons
-           /* for (:
-                 ) {
-
-
-                //Creation du bouton et du l'event
-
-                for (:
-                     ) {
-                    bloucle pr recuperer le nom et creer
-                }
-
-
-            }*/
          Button _tempBtn =new Button("test");
          _tempBtn.setId("4");
          _listeBtnSalon.add(_tempBtn);
@@ -126,22 +111,53 @@ public class ControleurLobby {
             public void handle(ActionEvent event) {
                 System.out.println("test btn dynamique");
             }
+        });
+
+        _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
+        _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
+
+
+    }
+    /*Obsolète
+    Timer timerSalons = new Timer();
+          timerSalons.schedule(new TimerTask(){
+
+        @Override
+        public void run() {
+            System.out.println("timer maj salon");
+
+        }
+    }, 10000);*/
+
+    @FXML
+    void majSalonsTimer() {
+
+        Button _tempBtn = new Button("test");
+        _tempBtn.setId("4");
+        _listeBtnSalon.add(_tempBtn);
+        _tempBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("test btn dynamique");
+            }
         });//handle button click
 
 
-
         //}
-            _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
-            _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
-
-       /* } catch (SQLException e) {
-            e.printStackTrace();
-        } finally{
-            resultSet.close();
-            statement.close();
-            connection.close;
-        }*/
+        _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
+        _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
     }
+    Timeline fiveSecondsWonder = new Timeline(
+            new KeyFrame(Duration.seconds(5),
+                    new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //System.out.println("Mise a jour des salons");
+                            majSalons(event);
+                        }
+                    }));
+
 
 }
 

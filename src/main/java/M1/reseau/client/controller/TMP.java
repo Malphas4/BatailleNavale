@@ -23,38 +23,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class TMP {
-}
-package M1.reseau.client.controller;
 
 
 
-        import M1.reseau.model.exception.IPartieException;
-        import M1.reseau.model.game.Partie;
-        import M1.reseau.model.game.distance.PartieClient;
-        import M1.reseau.serveur.singletons.SingletonTCP;
 
-        import M1.reseau.utilities.InformationsUtilisateur;
-        import com.sun.jdi.Value;
-        import javafx.scene.control.Label;
-        import javafx.scene.layout.AnchorPane;
-        import javafx.scene.layout.Pane;
-
-        import javafx.application.Platform;
-        import javafx.event.ActionEvent;
-        import javafx.fxml.FXML;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.Node;
-        import javafx.scene.Scene;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.TextArea;
-        import javafx.scene.control.TextField;
-        import javafx.scene.layout.*;
-        import javafx.scene.paint.Color;
-        import javafx.scene.shape.Rectangle;
-        import javafx.scene.text.TextFlow;
-        import javafx.scene.control.PasswordField;
-        import javafx.stage.Stage;
-        import java.io.IOException;
 
 public class ControleurGrille {
 
@@ -111,10 +83,10 @@ public class ControleurGrille {
     int _longueur, _largeur = 6;//AF apres recuperation coté serveur
     //= 0;
     //definition des couleurs
-    Color _couleurRocher=Color.DARKGREY;
-    Color _couleurPasDeCible=Color.DARKSLATEBLUE;
-    Color _couleurBateau=Color.FORESTGREEN;
-    Color _couleurEpave=Color.DARKRED;
+    Color _couleurRocher = Color.DARKGREY;
+    Color _couleurPasDeCible = Color.DARKSLATEBLUE;
+    Color _couleurBateau = Color.FORESTGREEN;
+    Color _couleurEpave = Color.DARKRED;
 
 
     /*********************************
@@ -370,5 +342,6 @@ public class ControleurGrille {
         }
         return _maGrille;
     }
+}
 }
 

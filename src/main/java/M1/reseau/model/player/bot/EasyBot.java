@@ -7,8 +7,8 @@ import M1.reseau.model.world.grid.Grille;
 public class EasyBot extends Bot {
 
 
-    public EasyBot(String _pseudo, Grille _grilleBot, Grille _grilleTouche) throws IJoueurException {
-        super(_pseudo, _grilleBot, _grilleTouche);
+    public EasyBot(Grille _grilleBot, Grille _grilleTouche) throws IJoueurException {
+        super("Easy Bot", _grilleBot, _grilleTouche);
     }
 
     /**

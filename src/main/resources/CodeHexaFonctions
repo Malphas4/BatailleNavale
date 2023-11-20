@@ -15,6 +15,10 @@
 10 envoi d'un pseudo à valider
 11 refus du pseudonyme par le serveur avec consignes pour le changement
 
-
+12 demande d'inscription
+13 compte deja existant
+1C validation connexion
+1D demande inscription
+1E mdp faux
 0D information au jouer que c'est son tour
 

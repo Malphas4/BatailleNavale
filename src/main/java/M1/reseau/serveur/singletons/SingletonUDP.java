@@ -76,17 +76,20 @@ public class SingletonUDP {
     /**
      * fermeture du socket
      */
-    public static void fermetureSocket() {
-        socketUDP.close();
+    public static void fermetureSocket()  {
+        try{
+            if(socketUDP != null) socketUDP.close();
+        }catch (Exception e){ e.printStackTrace();}
+
     }
 
 
     /*Holder
      * Pas utilisé
      * */
-    /*private static class SingletonHolder
+    private static class SingletonHolder
     {
-        /** Instance unique non préinitialisée *//*
+        /** Instance unique non préinitialisée */
         private final static SingletonUDP instance;
         static {
             try {
@@ -95,7 +98,7 @@ public class SingletonUDP {
                 throw new RuntimeException(e);
             }
         }
-    }*/
+    }
 
     /**
      * Point d'accès pour l'instance unique du singleton

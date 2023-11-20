@@ -13,7 +13,7 @@ public class SingletonTCP implements Serializable
 {
     InetAddress host = InetAddress.getLocalHost();
    //pour socket client AF
-    // Socket socket = null;
+   Socket socket = null;
     ObjectOutputStream oos = null;
     ObjectInputStream ois = null;
     private static ServerSocket serveur;
@@ -48,5 +48,12 @@ public class SingletonTCP implements Serializable
     /** Sécurité anti-désérialisation */
     private Object readResolve() {
         return INSTANCE;
+    }
+
+    public static void fermetureSocket()  {
+        try{
+            if(serveur != null) serveur.close();
+        }catch (IOException e){ e.printStackTrace();}
+
     }
 }

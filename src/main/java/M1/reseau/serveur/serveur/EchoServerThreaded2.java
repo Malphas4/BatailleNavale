@@ -1,6 +1,8 @@
 package M1.reseau.serveur.serveur;
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
+
 public class EchoServerThreaded2 {
 
 
@@ -44,9 +46,11 @@ public class EchoServerThreaded2 {
     class Handler extends Thread {
         ServerSocket servSock;
         int threadNumber;
+        ArrayList<Handler> _handlerTCP =new ArrayList<>();
 
         /** Construct a Handler. */
         Handler(ServerSocket s, int i) {
+
             servSock = s;
             threadNumber = i;
             setName("Thread " + threadNumber);
@@ -66,7 +70,7 @@ public class EchoServerThreaded2 {
                         clientSocket = servSock.accept();
                     }
                     System.out.println(getName() + " starting, IP=" +
-                            clientSocket.getInetAddress());
+                                    clientSocket.getInetAddress());
                     BufferedReader is = new BufferedReader(
                             new InputStreamReader(clientSocket.getInputStream()));
                     PrintStream os = new PrintStream(

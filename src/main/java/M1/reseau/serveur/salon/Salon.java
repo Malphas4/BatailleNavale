@@ -1,5 +1,9 @@
 package M1.reseau.serveur.salon;
 
+import M1.reseau.serveur.serveur.chatGlobal.ClientHandler;
+
+import java.util.ArrayList;
+
 public class Salon implements ISalon {
 
     public String _nom;
@@ -10,6 +14,19 @@ public class Salon implements ISalon {
     int _temps=30;
     //variable gérant la différence de temps entre l'horloge serveur et la partie
     int debutPartie=0;
+
+    /**
+     * Les handlers contiennent les thread des 2 joueurs
+     * afin de communiquer avec le chat local
+     * et de s'envoyer les données
+     * */
+    ClientHandler _handlerJ1=null;
+    ClientHandler _handlerJ2=null;
+    // ArrayList vide qui contient les joueurs dont il faut transmettre les infos de la partie
+    // pour une partie a n joueurs, il faudrait creer une autre array liste des joueurs et utiliser leurs pseudo pour les differencier
+    ArrayList<ClientHandler> spectateurs=new ArrayList<>();
+
+
 
     //fonction pour récupérer l'horloge serveur
     //classe singleton possible AF.

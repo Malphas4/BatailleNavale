@@ -7,6 +7,8 @@ public class InformationsUtilisateur {
     /* Informations utilisateurs */
     private String _pseudo;
 
+    //1 pour multi, 0 pour solo
+    private int _typePartie;
     private InformationsUtilisateur() {
     }
 
@@ -25,6 +27,14 @@ public class InformationsUtilisateur {
         if (_pseudo == null) throw new IllegalArgumentException("InformationsUtilisateur : Le pseudo ne peut pas être null.");
         if (_pseudo.trim().isEmpty()) throw new IllegalArgumentException("InformationsUtilisateur : Le pseudo ne peut pas être vide.");
         this._pseudo = _pseudo;
+    }
+    public int get_typePartie() {
+        return _typePartie;
+    }
+
+    public void set_typePartie(int typePartie) {
+        if (_typePartie>=2||_typePartie<0) throw new IllegalArgumentException("InformationsUtilisateur : Le type de partie ne peut pas être différent de 1 ou 0.");
+        this._typePartie = typePartie;
     }
 
 }

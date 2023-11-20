@@ -1,6 +1,10 @@
 package M1.reseau.client.view;
 
+import M1.reseau.serveur.serveur.chatGlobal.
+        ServeurChatTCP;
+
 import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -105,12 +109,17 @@ public class Client {
         }
     }
         /*public static void main ...
-        Scanner scanner= new Scanner(System.in);
-        System?out.print("mot de passe ?\n");
-        String.scanner.nextLine();
-        Socket _socket=new Socket("localhost",9732);
-        Client client = new Client;
+
 
 
      */
+
+
+    public static void main(String[] args) throws IOException {
+        Scanner scanner= new Scanner(System.in);
+        System.out.print("mot de passe ?\n");
+        String msg=scanner.nextLine();
+        Socket _socket=new Socket("localhost",18000);
+        Client client = new Client(_socket,msg);
+    }
 }

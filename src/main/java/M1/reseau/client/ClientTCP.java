@@ -36,7 +36,7 @@ import java.util.Scanner;
             String _message;
             while (_boucle){
                 //establish socket connection to server
-                socket = new Socket(host.getHostName(), 9876);
+                socket = new Socket(host.getHostName(), 18000);
                 //write to socket using ObjectOutputStream
                 oos = new ObjectOutputStream(socket.getOutputStream());
                 System.out.println("votre message :");

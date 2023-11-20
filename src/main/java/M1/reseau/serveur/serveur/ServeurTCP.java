@@ -125,14 +125,16 @@ public class ServeurTCP {
             //write object to Socket
             oos.writeObject("Case touchee " + message);
             //close resources
-            ois.close();
+            /*ois.close();
             oos.close();
-            socket.close();
+            socket.close();*/
             //terminate the server if M1.reseau.client sends exit request
             if (message.equalsIgnoreCase("exit")) {
                 System.out.println("Au revoir");
                 _statusServeur = false;
                 SingletonUDP.fermetureSocket();
+                ois.close();
+                oos.close();
             }
 
 

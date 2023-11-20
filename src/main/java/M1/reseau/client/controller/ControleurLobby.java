@@ -63,17 +63,21 @@ public class ControleurLobby {
     void joindreSalon(ActionEvent event) {
 
             //change de stage
-         //   Node node = (Node) event.getSource();
-         //   Stage thisStage = (Stage) node.getScene().getWindow();
-          //  commitToDatabase();
-          //  thisStage.hide();
 
+          //  thisStage.hide();
+        /*quand l'id du salon est sélectin éet change,
+        il faut demnder au serveur les infos dudit salon
+        , les afficher dans le label prévu
+        rendre ce bouton visible et interractif
+        et n'envoyer la validation que and ce bouton est cliqué
+         */
 
 
     }
 
     @FXML
     void selectionSalon(MouseEvent event) {
+        //pas utile car event générés dynamiquement
 
 
     }

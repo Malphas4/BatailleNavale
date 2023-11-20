@@ -79,7 +79,7 @@ public class Main extends Application{
         stage.setResizable(false);
         //stage.setScene(sceneLobby);
         stage.setScene(sceneGrille);
-        stage.setTitle("Bataille navale Prenium");
+        stage.setTitle("Bataille navale");
         //stage.initModality(Modality.NONE);
         //stage.getIcons().add(ImageCache.getInstance().get(".png"));
         //Image de bateau a mettre

@@ -70,9 +70,9 @@ public class ControleurPseudo {
             //Mise a jour du pseudonyme dans l'instance
             InformationsUtilisateur.getInstance().set_pseudo(_pseudo);
 
-            //envoi et cepetion du message
-           // SingletonUDP.getInstance().message(_connexion);
-            //_messageServeur = SingletonUDP.getInstance().reception();
+            //envoi et repetion du message
+            SingletonUDP.getInstance().message(_connexion);
+            _messageServeur = SingletonUDP.getInstance().reception();
 
             //injection du pseudo dans le controleur Lobby et Grille
             //FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));

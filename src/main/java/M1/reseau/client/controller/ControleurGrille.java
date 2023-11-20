@@ -2,6 +2,7 @@ package M1.reseau.client.controller;
 
 
 
+import M1.reseau.model.game.distance.PartieClient;
 import M1.reseau.serveur.singletons.SingletonTCP;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import java.io.IOException;
 
 public class ControleurGrille {
 
+
     @FXML
     private Button _btnAbandon;
     @FXML
@@ -29,7 +31,7 @@ public class ControleurGrille {
     @FXML
     private Button _btnQuitter;
     @FXML
-    private TextFlow _chatPartie;
+    private TextArea _chatPartie;
     @FXML
     private TextArea _infoParties;
     @FXML
@@ -41,13 +43,38 @@ public class ControleurGrille {
     @FXML
     private Pane _panGrilles;
 
+    @FXML
+    private Button _btnContreTorpille;
+
+    @FXML
+    private Button _btnCroiseur;
+
+    @FXML
+    private Button _btnPorteAv;
+    @FXML
+    private Scene _sceneGrille;
+
+
+    @FXML
+    private Button _btnRotation;
+
+    @FXML
+    private Button _btnTorpilleur;
+
+    @FXML
+    private Button _btnValidationPause;
+
+
 
      //variables du controleur
      Boolean _placementbateaux;
      Boolean _porteAvions,_croiseur,_contreTorpilleurs,_torpilleur=false;
      Boolean _monTour=false;
-    int _hauteur,largeur=6;//AF apres recuperation coté serveur
+    int _hauteur,largeur=8;//AF apres recuperation coté serveur
     //= 0;
+
+    int _typeBateau = 0;
+    int _nbBateau = 0;
 
 
 
@@ -138,11 +165,11 @@ public class ControleurGrille {
         //on envoie le message d'abandon
         // SingletonTCP.getInstance().message("code:".concat(InformationsUtilisateurs.getInstance.get_pseudo()));
         //on retourne au Lobby
-        FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
+        FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
         try {
-            Scene sceneGrille=grilleLoader.load();
+            Scene sceneLobby = lobbyLoader.load();
             Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stageActuel.setScene(sceneGrille);
+            stageActuel.setScene(sceneLobby);
             stageActuel.show();
         } catch (IOException e) {
             System.out.print("erreur lors du retour au lobby, fermeture de l'application");
@@ -173,5 +200,50 @@ public class ControleurGrille {
         System.exit(0);
 
     }
+
+
+    @FXML
+    void RotationBateau(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ValiderPoser(ActionEvent event) {
+
+    }
+
+    @FXML
+    void selectionContreTorpille(ActionEvent event) {
+        _typeBateau = 3;
+    }
+
+    @FXML
+    void selectionCroiseur(ActionEvent event) {
+        _typeBateau = 4;
+    }
+
+    @FXML
+    void selectionPorteAv(ActionEvent event) {
+        _typeBateau = 5;
+    }
+
+    @FXML
+    void selectionTorpilleur(ActionEvent event) {
+        _typeBateau = 2;
+
+    }
+
+
+
+    void modifCase(int x, int y, Color c, boolean proprio) {
+        String _id;
+        if (proprio) {
+            _id = "#".concat(String.valueOf(x).concat(String.valueOf(y)).concat("g1"));
+        } else {
+            _id = "#".concat(String.valueOf(x).concat(String.valueOf(y)).concat("g2"));
+        }
+        _sceneGrille.lookup(_id);
+    }
+
 
 }

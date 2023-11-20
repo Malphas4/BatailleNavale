@@ -269,7 +269,7 @@ public class ControleurGrille {
                                 break;
 
                             case 3:
-                                System.out.println("contre torpi");
+                                System.out.println("contre torpie");
                                 if ((_x + _typeBateau) < _maPartie.get_fabriqueGrille().get_largeur() && (_y + _typeBateau) < _maPartie.get_fabriqueGrille().get_longueur()) {
                                     modifCase(_x, _y, _couleurBateau, true);
                                     modifCase(_x + 1, _y, _couleurBateau, true);

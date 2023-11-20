@@ -154,6 +154,9 @@ public class ControleurGrille {
 
     @FXML
     void EnvoyerMessage(ActionEvent event) {
+        String _msgTransit=_textChatpartie.getText();
+        //on envoie au serveur le message avec le code pour le chat local
+        // SingletonTCP.getInstance().message("code:".concat(InformationsUtilisateurs.getInstance.get_pseudo().concat(";").concat(_msgTransit)));
 
     }
 
@@ -170,10 +173,5 @@ public class ControleurGrille {
         System.exit(0);
 
     }
-
-
-
-
-
 
 }

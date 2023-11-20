@@ -65,11 +65,11 @@ public class ControleurLobby {
             //change de stage
 
           //  thisStage.hide();
-        /*quand l'id du salon est sélectin éet change,
-        il faut demnder au serveur les infos dudit salon
+        /*quand l'id du salon est selection éet change,
+        il faut demander au serveur les infos dudit salon
         , les afficher dans le label prévu
-        rendre ce bouton visible et interractif
-        et n'envoyer la validation que and ce bouton est cliqué
+        rendre ce bouton visible et interactif
+        et n'envoyer la validation que quand ce bouton est cliqué
          */
 
 
@@ -122,16 +122,6 @@ public class ControleurLobby {
 
 
     }
-    /*Obsolète
-    Timer timerSalons = new Timer();
-          timerSalons.schedule(new TimerTask(){
-
-        @Override
-        public void run() {
-            System.out.println("timer maj salon");
-
-        }
-    }, 10000);*/
 
     @FXML
     void majSalonsTimer() {
@@ -145,22 +135,22 @@ public class ControleurLobby {
                 System.out.println("test btn dynamique");
             }
         });//handle button click
-
-
-        //}
         _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
         _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
+
+
     }
     Timeline fiveSecondsWonder = new Timeline(
-            new KeyFrame(Duration.seconds(5),
-                    new EventHandler<ActionEvent>() {
+        new KeyFrame(Duration.seconds(5),
+            new EventHandler<ActionEvent>() {
 
-                        @Override
-                        public void handle(ActionEvent event) {
-                            //System.out.println("Mise a jour des salons");
-                            majSalons(event);
-                        }
-                    }));
+                @Override
+                public void handle(ActionEvent event) {
+                    //System.out.println("Mise a jour des salons");
+                    majSalons(event);
+                }
+        })
+    );
 
 
 }

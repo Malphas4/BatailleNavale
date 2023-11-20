@@ -36,7 +36,7 @@ public class ClientHandler implements Runnable{
             try{
                 _message=_bufferLecture.readLine();
                 //if code broadcast
-                broadcast(_message);
+                if(_listeClients.size()>1) broadcast(_message);
                 //si code specifique
                 //                    fermetureGlobale(socket, _bufferEcriture, _bufferLecture);
                 //gestion des autres codes;

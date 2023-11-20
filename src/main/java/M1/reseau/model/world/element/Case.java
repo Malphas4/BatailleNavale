@@ -42,7 +42,7 @@ public abstract class Case implements ICase {
      * @param _x
      */
     public void set_x(int _x) {
-        if (_x < 1) throw new IllegalArgumentException("CaseNormal : x est inférieur à 1.");
+        if (_x < -1) throw new IllegalArgumentException("CaseNormal : x est inférieur à -1.");
         this._x = _x;
     }
 
@@ -64,7 +64,7 @@ public abstract class Case implements ICase {
      * @param _y
      */
     public void set_y(int _y) {
-        if (_y < 1) throw new IllegalArgumentException("CaseNormal : y est inférieur à 1.");
+        if (_y < -1) throw new IllegalArgumentException("CaseNormal : y est inférieur à -1.");
         this._y = _y;
     }
 

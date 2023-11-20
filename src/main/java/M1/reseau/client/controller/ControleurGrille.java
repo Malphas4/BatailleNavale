@@ -1,24 +1,24 @@
 package M1.reseau.client.controller;
 
 
-import M1.reseau.model.world.grid.Grille;
+
+import M1.reseau.serveur.singletons.SingletonTCP;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextFlow;
 import javafx.scene.control.PasswordField;
-
-import javax.swing.text.Position;
+import javafx.stage.Stage;
+import java.io.IOException;
 
 public class ControleurGrille {
 
@@ -42,9 +42,10 @@ public class ControleurGrille {
     private Pane _panGrilles;
 
 
-     //variables du constructeur
+     //variables du controleur
      Boolean _placementbateaux;
-     Boolean _PorteAvions,_Croiseur,_ContreTorpilleurs,_Torpilleur=false;
+     Boolean _porteAvions,_croiseur,_contreTorpilleurs,_torpilleur=false;
+     Boolean _monTour=false;
     int _hauteur,largeur=6;//AF apres recuperation coté serveur
     //= 0;
 
@@ -59,16 +60,15 @@ public class ControleurGrille {
     }
     @FXML
     public void initialize() {
-        _placementbateaux=false;
+        _placementbateaux=true;
         Node _joueur ,_adversaire= null;
         HBox Grilles =new HBox(50);
-        System.out.println("initialisation des grilles");
+        System.out.println("initialisation des grilles\n");
 
         boolean enemy = false;
         int ships = 5;
         VBox _maGrille = new VBox();
         VBox _GrilleDeSauron = new VBox();
-        //boolean _proprietaire = proprietaire;
         for (int y = 0; y < 6; y++) {
             HBox colonne = new HBox();
             for (int x = 0; x < 6; x++) {
@@ -80,12 +80,21 @@ public class ControleurGrille {
                     _x=(int)_uneCase.getLayoutX()/31;
                     _y=(int)_uneCase.getParent().getLayoutY()/31;
                     System.out.print("case pointée x:"+_x+" y:"+_y+"\n");
-                    if(!_placementbateaux){
+                    if(_placementbateaux){
+                        System.out.print("placement d'un bateau \n");
+                        //on envoie le debut du bateau a placer
+                        // SingletonTCP.getInstance().message("code".concat(":x").concat(String.valueOf(_x)).concat(";y").concat(String.valueOf(_y)));
 
-                    }
+                    }else if (_monTour){
+                        System.out.print("Feu à volonté\n");
+                        //on envoie la case du tir
+                        // SingletonTCP.getInstance().message("code".concat(":x").concat(String.valueOf(_x)).concat(";y").concat(String.valueOf(_y)));
+                        //on attend le message du serveur
+
+                    }else System.out.print("bateaux deja placées ou pas mon tour\n");
 
 
-                    });
+                });
 
                 colonne.getChildren().add(_uneCase);
             }
@@ -105,20 +114,13 @@ public class ControleurGrille {
                     _x=(int)_uneCase.getLayoutX()/31;
                     _y=(int)_uneCase.getParent().getLayoutY()/31;
                     System.out.print("case pointée ennemie x:"+_x+" y:"+_y+"\n");
+                    if (_monTour &&!_placementbateaux){
+                        //on envoie la case à toucher
+                       // SingletonTCP.getInstance().message("code".concat(":x").concat(String.valueOf(_x)).concat(";y").concat(String.valueOf(_y)));
+                    }else System.out.print("pas mon tour\n");
 
 
                 });
-                // _uneCase.setOnMouseClicked(handler);
-               /* _uneCase.setOnMouseClicked(new EventHandler<ActionEvent>(){
-                    @Override
-                    public void handle(ActionEvent event) {
-                        Node source = (Node) event.getSource();
-                        //= source.();
-                        System.out.println("test case ");
-                        Position pos = (Position) source.getUserData();
-
-                    }
-                });*/
 
                 colonnade.getChildren().add(_uneCase);
             }
@@ -131,14 +133,22 @@ public class ControleurGrille {
 
     }
 
-
-    @FXML
-    void Tirer(MouseEvent event) {
-
-    }
-
     @FXML
     void Abandonner(ActionEvent event) {
+        //on envoie le message d'abandon
+        // SingletonTCP.getInstance().message("code:".concat(InformationsUtilisateurs.getInstance.get_pseudo()));
+        //on retourne au Lobby
+        FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
+        try {
+            Scene sceneGrille=grilleLoader.load();
+            Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stageActuel.setScene(sceneGrille);
+            stageActuel.show();
+        } catch (IOException e) {
+            System.out.print("erreur lors du retour au lobby, fermeture de l'application");
+            Quitter(event);
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -150,103 +160,20 @@ public class ControleurGrille {
     @FXML
     void Quitter(ActionEvent event) {
 
+        //on envoie au serveur le ragequit
+        // SingletonTCP.getInstance().message("code:".concat(InformationsUtilisateurs.getInstance.get_pseudo()));
+        System.out.print("au revoir\n");
+        Platform.exit();
+        //fermeture serveur UDP et TCP AF
+        //SingletonUDP.fermetureSocket();
+        //SingletonTCP.fermetureSocket();
+        System.exit(0);
+
     }
 
 
-    /*public UneGrille(boolean proprietaire, EventHandler<? super MouseEvent> handler, int x, int y) {
-        VBox rows = new VBox();
-        boolean _proprietaire = proprietaire;
-        for ( y = 0; y < 6; y++) {
-            HBox row = new HBox();
-            for ( x = 0; x < 6; x++) {
-                //Cell c = new Cell(x, y, this);
-                Rectangle _uneCase = new Rectangle(x, y, Color.DARKTURQUOISE);
-                _uneCase.setOnMouseClicked(handler);
-                row.getChildren().add(_uneCase);
-            }
 
-            rows.getChildren().add(row);
-        }
 
-    //getChildren().add(rows);
-    }*/
-    /* public GrilleClassique(boolean proprietaire, EventHandler<? super MouseEvent> handler) {
-        VBox rows = new VBox();
-        boolean _proprietaire = proprietaire;
-        for (int y = 0; y < 6; y++) {
-            HBox row = new HBox();
-            for (int x = 0; x < 6; x++) {
-                //Cell c = new Cell(x, y, this);
-                Rectangle _uneCase = new Rectangle(x, y, Color.DARKTURQUOISE);
-                _uneCase.setOnMouseClicked(handler);
-                row.getChildren().add(_uneCase);
-            }
-
-            rows.getChildren().add(row);
-        }*/
-
-       // getChildren().add(rows);
-    //}
 
 
 }
-/* ancient ititilize
-     public void initialize() {
-        Node _joueur ,_adversaire= null;
-        HBox Grilles =null;
-        System.out.println("initialisation des grilles");
-
-        boolean enemy = false;
-        int ships = 5;
-        VBox rows = new VBox();
-        //boolean _proprietaire = proprietaire;
-        for (int y = 0; y < 6; y++) {
-            HBox row = new HBox();
-            for (int x = 0; x < 6; x++) {
-                //Cell c = new Cell(x, y, this);
-                Rectangle _uneCase = new Rectangle(x, y, Color.DARKTURQUOISE);
-               // _uneCase.setOnMouseClicked(handler);
-               /* _uneCase.setOnMouseClicked(new EventHandler<ActionEvent>(){
-                    @Override
-                    public void handle(ActionEvent event) {
-                        Node source = (Node) event.getSource();
-                        //= source.();
-                        System.out.println("test case ");
-                        Position pos = (Position) source.getUserData();
-
-                    }
-                });
-
-                row.getChildren().add(_uneCase);
-                        }
-                        rows.getChildren().add(row);
-                        _joueur=rows;
-
-                        System.out.println("initialisation des du vbox contenant les grilles");
-                        Grilles = new HBox(50, _joueur,_adversaire);
-                        //VBox Grilles = new VBox(50, playerBoard,enemyBoard);
-                        Grilles.setAlignment(Pos.CENTER);
-
-
-                        }
-                        _panGrilles.getChildren().add(Grilles);
-
-
-        for (int i = 0; i < 6; i++) {
-            Button b=new Button("Salon ".concat(String.valueOf(i)));
-            b.setId(String.valueOf(i));
-            System.out.println(i);
-            b.setOnAction(new EventHandler<ActionEvent>(){
-                @Override
-                public void handle(ActionEvent event) {
-                    Node source = (Node) event.getSource();
-                    _salonChoisi= source.getId();
-                    System.out.println("test Salon "+_salonChoisi);
-                }
-            });
-            _listeSalon.getChildren().add(b);
-        }
-
-
-                        }
- */

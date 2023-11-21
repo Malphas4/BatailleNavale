@@ -13,7 +13,9 @@ public class GameService {
     /* Initialisation de la partie */
     private PartieServeur _partie;
 
-    private boolean threadStatus; /* Statut des threads */
+    /* Stockage des sockets des clients */
+    private ClientHandler c1 = null;
+    private ClientHandler c2 = null;
 
     public GameService() {
         _partie = new PartieServeur(8, 8);
@@ -24,15 +26,8 @@ public class GameService {
     }
 
     public void set_partie(PartieServeur _partie) {
+        if (_partie == null) throw new IllegalArgumentException("GameService : La partie ne peut pas être null.");
         this._partie = _partie;
-    }
-
-    public boolean isThreadStatus() {
-        return threadStatus;
-    }
-
-    public void setThreadStatus(boolean threadStatus) {
-        this.threadStatus = threadStatus;
     }
 
 }

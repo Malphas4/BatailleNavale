@@ -1,6 +1,6 @@
 package M1.reseau.serveur.salon;
 
-import M1.reseau.serveur.serveur.chatGlobal.ClientHandler;
+import M1.reseau.serveur.serveur.game.ClientHandler;
 
 import java.util.ArrayList;
 

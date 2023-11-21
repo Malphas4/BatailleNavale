@@ -3,6 +3,7 @@ package M1.reseau.serveur.serveur;
 import java.io.IOException;
 import java.net.*;
 
+/**{@code @Deprecated}  */
 public class ServeurUDP extends Thread{
 
     final static int taille = 1024;

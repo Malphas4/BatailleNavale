@@ -1,4 +1,4 @@
-package M1.reseau.client.CdrClient;
+package M1.reseau.client.cor;
 
 /**
  * Liste des codes hexa dans un fichier dans un pakcage ressources

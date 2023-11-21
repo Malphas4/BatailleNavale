@@ -1,4 +1,4 @@
-package M1.reseau.client.CdrClient;
+package M1.reseau.client.cor;
 
 public class Expert {
     public Expert _suivant = null;

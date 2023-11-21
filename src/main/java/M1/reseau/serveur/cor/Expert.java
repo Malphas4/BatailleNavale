@@ -1,4 +1,4 @@
-package M1.reseau.serveur.CdrServeur;
+package M1.reseau.serveur.cor;
 
 public class Expert {
 

@@ -1,6 +1,6 @@
-package M1.reseau.client.CdrClient;
+package M1.reseau.serveur.cor;
 
-public class expertCase extends Expert{
+public class expertCase extends Expert {
     public void traiter(String requete){
         String code= requete.split(":")[1];
             if(code.equals("01")){

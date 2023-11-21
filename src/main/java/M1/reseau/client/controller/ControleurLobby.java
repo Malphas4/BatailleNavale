@@ -128,7 +128,9 @@ public class ControleurLobby {
             throw new RuntimeException(e);
         }
         try {
-            nbSalons = Integer.parseInt(SingletonUDP.getInstance().reception());
+            String _msgSalons= SingletonUDP.getInstance().reception();
+            System.out.println(_msgSalons);
+            nbSalons = Integer.parseInt(_msgSalons);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

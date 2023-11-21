@@ -65,7 +65,7 @@ public class ControleurPseudo {
             _msgConsigne.setText("Mot de passe manquant ! Veuillez entrer votre mot de passe");
             System.out.print("mdp vide\n");
         }else if(!( _pseudo.isEmpty() ||_mdpInput.isEmpty())) {
-            _connexion = "0C:".concat(_pseudo).concat(";").concat(_mdpInput);
+            _connexion = "0C;".concat(_pseudo).concat(":").concat(_mdpInput);
             System.out.print(_connexion);
             //Mise a jour du pseudonyme dans l'instance
             InformationsUtilisateur.getInstance().set_pseudo(_pseudo);
@@ -80,7 +80,7 @@ public class ControleurPseudo {
 
 
             // traitement de la chaine COR pour savoir quel message traiter
-            String[] _msgT = _messageServeur.split(":");
+            String[] _msgT = _messageServeur.split(";");
             //messahe valide selon COR a la fin
             if (_msgT[0].equals("1C")) {
                 stageActuel.setScene(sceneMenu);

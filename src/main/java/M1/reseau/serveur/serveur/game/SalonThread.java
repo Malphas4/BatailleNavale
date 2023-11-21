@@ -14,6 +14,7 @@ public class SalonThread extends Thread {
 
         // create a ServerSocket instance and bind it to the specified port number
         serverSocket = new ServerSocket(portNumber);
+
     }
 
 

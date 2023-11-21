@@ -30,6 +30,7 @@ public class ServerCodeJoin extends ServerCOR {
 
             // Add player in the game
             _gameService.get_partie().ajouterJoueur(_sp[2]);
+
         } catch (IPartieException e) {
             System.err.println("ServerCodeJoin : Error.");
         }

@@ -9,7 +9,7 @@ import M1.reseau.serveur.serveur.game.SalonThread;
 
 public class ServerCodeInitBateau extends ServerCOR {
     /**
-     * Receive : init bateau;[joueur];[x];[y]
+     * Receive : init bateau;[salon id];[joueur];[x];[y]
      * @param _message
      * @param _salon
      */
@@ -19,15 +19,15 @@ public class ServerCodeInitBateau extends ServerCOR {
 
         String[] _sp = _message.split(";");
 
-        int x = Integer.parseInt(_sp[2]);
-        int y = Integer.parseInt(_sp[3]);
+        int x = Integer.parseInt(_sp[3]);
+        int y = Integer.parseInt(_sp[4]);
 
         CaseBateau _ncase = new CaseBateau(
                 x,
                 y
         );
 
-        if (_gameService.get_partie().get_joueur1().get_pseudo().equals(_sp[1])) {
+        if (_gameService.get_partie().get_joueur1().get_pseudo().equals(_sp[2])) {
             try {
                 _gameService.get_partie().get_joueur1().get_grilleJoueur().supprimerCase(new CaseNormal(x, y));
                 _gameService.get_partie().get_joueur1().get_grilleJoueur().ajouterCase(_ncase);

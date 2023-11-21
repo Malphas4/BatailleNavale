@@ -1,5 +1,8 @@
 package M1.reseau.serveur.serveur.game;
 
+import M1.reseau.serveur.cor.ServerCORBuilder;
+import M1.reseau.serveur.serveur.ServeurGlobale;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -33,22 +36,15 @@ public final class JoueurHandler extends Thread {
 
             while( (_msg = in.readLine()) != null){
 
-                String[] _msgTraitement=_msg.split(";");
+                String [] _sp = _msg.split(";");
 
-
-                //
-                if(_msgTraitement[0].equals("TIR"))
-                    out.println("case a traiter");
-
-                //victoire par défaut
-                else if(_msgTraitement[0].equals("ABANDON"))
-                    out.println("victoire");
-
-                    //on quite le while
-                else if(_msgTraitement[0].equals("EXIT"))
-                    break;
-                else if(_msgTraitement[0].equals("CHAT"))
-                    out.println("chat");
+                ServerCORBuilder
+                        .getInstance()
+                        .get_serverCOR()
+                        .receive(
+                                _msg,
+                                ServeurGlobale.sv.get_salon(_sp[1])
+                                );
 
             }
         }

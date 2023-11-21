@@ -78,6 +78,18 @@ public class SalonThread extends Thread {
     synchronized  public ServerSocket getServerSocket() {
         return serverSocket;
     }
+    public void  messageLocal(String s){
+        try {
+            _j1.message(s);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            _j2.message(s);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     synchronized public void setServerSocket(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;

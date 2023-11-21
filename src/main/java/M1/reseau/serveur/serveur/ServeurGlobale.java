@@ -110,6 +110,7 @@ public class ServeurGlobale {
     }
 
 
+
     synchronized public int addSalon(ThreadSalons t)
     {
         // un client en plus connecté

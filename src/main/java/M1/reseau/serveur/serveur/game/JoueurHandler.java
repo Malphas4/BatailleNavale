@@ -8,18 +8,22 @@ public final class JoueurHandler extends Thread {
     private Socket socket;
     private String _pseudo;
 
+    BufferedReader in = null;
+    PrintWriter out = null;
 
 
-    public JoueurHandler(Socket socket,String pseudo){
+
+    public JoueurHandler(Socket socket,String pseudo) throws IOException {
         setName("ConnectionHandler");
         this.socket = socket;
         _pseudo=pseudo;
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        out = new PrintWriter(socket.getOutputStream(), true);
     }
 
 
     public void run(){
-        BufferedReader in = null;
-        PrintWriter out = null;
+
 
         String _msg;
 
@@ -62,6 +66,7 @@ public final class JoueurHandler extends Thread {
         }
     }
 
+
     /*Deconnexion d'un client, on retire son handler de la liste
      * */
     public void deconnexionClient(){
@@ -82,4 +87,10 @@ public final class JoueurHandler extends Thread {
     }
 
 
+    synchronized public void message(String s) throws IOException {
+        this.out.println(s);
+    }
+    synchronized public String reception() throws IOException {
+        return in.readLine();
+    }
 }

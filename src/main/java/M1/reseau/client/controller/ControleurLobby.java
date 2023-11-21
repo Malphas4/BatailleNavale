@@ -1,9 +1,12 @@
 package M1.reseau.client.controller;
 
+import M1.reseau.client.ClientUDP;
 import M1.reseau.serveur.salon.Salon;
+import M1.reseau.serveur.singletons.SingletonUDP;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,6 +19,7 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -45,7 +49,10 @@ public class ControleurLobby {
 
     //variables pour salons en dynamiques
     int _nbSalons=2;//AF mettre 2
+    int nbSalons=0;
     String _salonChoisi;
+    String _demandeSalons="NBsalons?";
+
     ArrayList<Button> _listeBtnSalon = new ArrayList<>(); //our Collection to hold newly created Buttons
 
 
@@ -84,7 +91,8 @@ public class ControleurLobby {
     @FXML
     public void initialize() {
         System.out.println("initialisation de Lobby et de la liste des salons");
-        for (int i = 0; i < _nbSalons; i++) {
+
+        for (int i = 0; i < nbSalons; i++) {
             Button b=new Button("Salon ".concat(String.valueOf(i)));
             b.setId(String.valueOf(i));
             System.out.println(i);
@@ -93,53 +101,75 @@ public class ControleurLobby {
                 public void handle(ActionEvent event) {
                     Node source = (Node) event.getSource();
                     _salonChoisi= source.getId();
-                    System.out.println("test Salon "+_salonChoisi);
+                    System.out.println("selectionSalon; "+_salonChoisi);
                 }
             });
 
             _listeSalon.getChildren().add(b);
-            fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
-            fiveSecondsWonder.play();
+
 
         }
+        Timeline timer15Secondes = new Timeline(
+                new KeyFrame(Duration.seconds(15),
+                        event -> {
+                            majSalons(event);
+                            System.out.println("timer 15s");
+                        }));
+        timer15Secondes.setCycleCount(Timeline.INDEFINITE);
+        timer15Secondes.play();
 
     }
     @FXML
     void majSalons(ActionEvent event) {
 
-         Button _tempBtn =new Button("test");
-         _tempBtn.setId("4");
-         _listeBtnSalon.add(_tempBtn);
-        _tempBtn.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("test btn dynamique");
-            }
-        });
+        try {
+            SingletonUDP.getInstance().message(_demandeSalons);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            nbSalons = Integer.parseInt(SingletonUDP.getInstance().reception());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < nbSalons; i++) {
+            Button b=new Button("Salon ".concat(String.valueOf(i)));
+            b.setId(String.valueOf(i));
+            System.out.println(i);
+            b.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    Node source = (Node) event.getSource();
+                    _salonChoisi= source.getId();
+                    System.out.println("selectionSalon; "+_salonChoisi);
+                }
+            });
 
-        _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
-        _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
+            _listeSalon.getChildren().add(b);
+            Button _tempBtn =new Button("test");
+            _tempBtn.setId("4");
+            _listeBtnSalon.add(_tempBtn);
+            _tempBtn.setOnAction(new EventHandler<ActionEvent>(){
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("test btn dynamique");
+                        //TODO envoi au serveur du numero du salon
+                    }
+            });
+
+            _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
+            _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
+
+        }
 
 
-    }
 
-    @FXML
-    void majSalonsTimer() {
-
-        Button _tempBtn = new Button("test");
-        _tempBtn.setId("4");
-        _listeBtnSalon.add(_tempBtn);
-        _tempBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("test btn dynamique");
-            }
-        });//handle button click
-        _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
-        _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
+        //handle button click
+       // _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
+        //_listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
 
 
-    }
+    }/*
     Timeline fiveSecondsWonder = new Timeline(
         new KeyFrame(Duration.seconds(5),
             new EventHandler<ActionEvent>() {
@@ -150,7 +180,7 @@ public class ControleurLobby {
                     majSalons(event);
                 }
         })
-    );
+    );*/
 
 
 }

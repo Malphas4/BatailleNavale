@@ -43,7 +43,7 @@ public class ControleurPseudo {
 
 
     @FXML
-    void validationPseudo(ActionEvent event)throws IOException {
+    void validationPseudo(ActionEvent event) throws IOException, InterruptedException {
 
         //recuperation du stage si changement de fenetre
         Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -69,7 +69,6 @@ public class ControleurPseudo {
             System.out.print(_connexion);
             //Mise a jour du pseudonyme dans l'instance
             InformationsUtilisateur.getInstance().set_pseudo(_pseudo);
-
             //envoi et repetion du message
             SingletonUDP.getInstance().message(_connexion);
             _messageServeur = SingletonUDP.getInstance().reception();

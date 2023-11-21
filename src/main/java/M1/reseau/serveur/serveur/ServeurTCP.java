@@ -143,34 +143,7 @@ public class ServeurTCP {
             serveur.close();
         }
 
-        /**
-         * Thread UDP
-         * Theard qui gère les échanges UDP
-         * utilisé pour la connection et l'inscription des joueurs
-         * Peut etre utilisé pour le chat général
-         */
 
-        //Thread t = new Thread(new Runnable() {
-
-        /*@Override
-        public void run() {
-            //instantation du singleton UDP
-            try {
-                SingletonUDP.getInstance();
-            } catch (SocketException | UnknownHostException e) {
-                throw new RuntimeException(e);
-            }
-                try {
-                    System.out.printf(SingletonUDP.getInstance().reception());
-
-                    SingletonUDP.getInstance().message("test");
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    });*/
 
 
     }

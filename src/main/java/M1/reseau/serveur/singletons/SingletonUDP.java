@@ -16,18 +16,20 @@ public class SingletonUDP {
     */
     static  DatagramSocket socketUDP;//= new DatagramSocket();
     final int _taille = 1024;
-    final byte[] _buffer = new byte[_taille];
+    byte[] _buffer = new byte[_taille];
     int _port = 7777;
-    InetAddress _adr= InetAddress.getByName("localhost");
+    InetAddress _adr= InetAddress.getByName("localhost") ;
+    //InetAddress.getLocalHost().getHostAddress();
+    ;
 
     /**
      * Constructeur privé
      */
-    private SingletonUDP(int port, String ad) throws UnknownHostException, SocketException {
-        _port = port;
+    private SingletonUDP( String ad) throws UnknownHostException, SocketException {
+        //_port = port;
         this._adr = InetAddress.getByName(ad);
         // création d'une socket, sans la lier à un port particulier
-        this.socketUDP = new DatagramSocket();
+         this.socketUDP = new DatagramSocket();
 
     }
     /**
@@ -35,12 +37,12 @@ public class SingletonUDP {
      * un seul socket UDP est nécessaire pour le serveur
      */
     private SingletonUDP() throws UnknownHostException, SocketException {
-        //InetAddress _adr = InetAddress.getByName("localhost");
+        InetAddress _adr = InetAddress.getByName("localhost");
         this.socketUDP = new DatagramSocket();
     }
 
     /**
-     * envoi d'un message apr UDP
+     * envoi d'un message par UDP
      * @param s message à envoyer de type String
     *  @throws IOException gestion IO exception
      * @throws UnknownHostException gestion host inconnu (ici localhost initialement
@@ -52,8 +54,9 @@ public class SingletonUDP {
         //Message de type string deviens de type data pour l'envoi
         byte[] data = (s).getBytes();
         //creation du packet UDP
-        DatagramPacket packet = new DatagramPacket(data, data.length);
+        DatagramPacket packet = new DatagramPacket(data, data.length, _adr, _port);
         // envoi du paquet via la socket PROBLEME ICI CAR SERVEUR KAPUT
+        System.out.println("envois de : "+s);
         socketUDP.send(packet);
 
     }
@@ -68,7 +71,8 @@ public class SingletonUDP {
     public String reception() throws IOException {
         DatagramPacket recu = new DatagramPacket(_buffer, _taille);
         socketUDP.receive(recu);
-        String data = new String(recu.getData());
+        _buffer=recu.getData();
+        String data = new String(_buffer,0,recu.getLength());
         System.out.println("Data recu : " + data + "\n");
         return data;
     }

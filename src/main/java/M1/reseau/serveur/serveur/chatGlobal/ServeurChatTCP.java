@@ -16,6 +16,7 @@ public class ServeurChatTCP
 {
     private Vector _tabClients = new Vector(); // contiendra tous les flux de sortie vers les clients
     private int _nbClients=0; // nombre total de clients connectés
+    private int nbSalons=3;
 
 
 
@@ -35,7 +36,7 @@ public class ServeurChatTCP
             //new Thread(serveurUDP).start(
 
             //Lance le thread du serveur UDP en arrière plan
-           // new ServeurUDP(ServeurChatTCP);
+             new serveurUDPchat(ServeurChatTCP);
 
             ServerSocket ss = new ServerSocket(port.intValue()); // ouverture d'un socket serveur sur port
             printWelcome(port);
@@ -99,6 +100,10 @@ public class ServeurChatTCP
 
     //** Methode : retourne le nombre de clients connectés **
     synchronized public int getNbClients()
+    {
+        return _nbClients; // retourne le nombre de clients connectés
+    }
+    synchronized public int getNbSalons()
     {
         return _nbClients; // retourne le nombre de clients connectés
     }

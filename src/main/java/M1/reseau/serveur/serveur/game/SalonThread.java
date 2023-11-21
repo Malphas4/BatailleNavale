@@ -5,11 +5,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 public class SalonThread extends Thread {
 
+
     private ServerSocket serverSocket;
     private int portNumber = 8888;
 
 
-    public SalonThread() throws IOException {
+    public SalonThread(ServeurGlobale sv, ClientHandler j1, Client) throws IOException {
         setName("TcpServer");
 
         // create a ServerSocket instance and bind it to the specified port number

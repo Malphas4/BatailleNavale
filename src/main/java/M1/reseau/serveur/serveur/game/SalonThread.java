@@ -104,11 +104,11 @@ public class SalonThread extends Thread {
         this.serverSocket = serverSocket;
     }
 
-    synchronized public GameService getGameService() {
+    synchronized public GameService get_gameService() {
         return _gameService;
     }
 
-    synchronized public void setGameService(GameService gameService) {
+    synchronized public void set_gameService(GameService gameService) {
         this._gameService = gameService;
     }
 

@@ -1,7 +1,7 @@
 package M1.reseau.model.ship.classic;
 
-import M1.reseau.model.ship.Bateau;
 import M1.reseau.model.exception.IBateauException;
+import M1.reseau.model.ship.Bateau;
 import M1.reseau.model.world.element.ICase;
 
 public class BateauLigne extends Bateau {

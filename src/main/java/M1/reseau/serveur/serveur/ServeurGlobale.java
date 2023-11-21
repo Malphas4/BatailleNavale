@@ -1,7 +1,6 @@
 package M1.reseau.serveur.serveur;
 
 import M1.reseau.serveur.salon.Salon;
-import M1.reseau.serveur.serveur.Threads.ThreadSalons;
 import M1.reseau.serveur.serveur.Threads.ThreadUDP;
 import M1.reseau.serveur.serveur.game.JoueurHandler;
 import M1.reseau.serveur.serveur.game.SalonThread;

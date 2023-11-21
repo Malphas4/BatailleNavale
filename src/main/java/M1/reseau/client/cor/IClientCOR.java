@@ -1,6 +1,5 @@
 package M1.reseau.client.cor;
 
-import M1.reseau.serveur.cor.IServerCOR;
 import M1.reseau.serveur.salon.ISalon;
 
 public interface IClientCOR {

@@ -2,12 +2,11 @@ package M1.reseau.serveur.serveur.chatGlobal;
 
 import M1.reseau.serveur.serveur.Threads.Commandes;
 
+import java.io.PrintWriter;
 import java.net.ServerSocket;
-
-
-import java.net.*;
-import java.io.*;
-import java.util.*;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Vector;
 
 /**DEPRECATED
 * */

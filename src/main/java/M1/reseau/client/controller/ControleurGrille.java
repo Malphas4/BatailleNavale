@@ -1,9 +1,6 @@
 package M1.reseau.client.controller;
 
 
-
-import M1.reseau.model.game.distance.PartieClient;
-import M1.reseau.serveur.singletons.SingletonTCP;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,14 +8,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.TextFlow;
-import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class ControleurGrille {

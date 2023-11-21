@@ -1,7 +1,6 @@
 package M1.reseau.model.ship.classic;
 
 import M1.reseau.model.exception.IBateauException;
-import M1.reseau.model.ship.classic.BateauLigne;
 import M1.reseau.model.world.element.classic.CaseNormal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

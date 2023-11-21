@@ -1,27 +1,22 @@
 package M1.reseau.client.controller;
 
-import M1.reseau.client.ClientUDP;
-import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.singletons.SingletonUDP;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.Node;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
 
 
 public class ControleurLobby {

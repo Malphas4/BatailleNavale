@@ -1,10 +1,8 @@
 package M1.reseau.serveur.serveur.testServeurs;
 
 
-
-
-import java.io.*;
-        import java.net.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 
 
         class ServeurEcho

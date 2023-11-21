@@ -1,7 +1,5 @@
 package M1.reseau.client;
 
-import M1.reseau.serveur.serveur.ServeurUDP;
-
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;

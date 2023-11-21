@@ -2,9 +2,8 @@ package M1.reseau.model.game.local;
 
 import M1.reseau.model.exception.IJoueurException;
 import M1.reseau.model.exception.IPartieException;
-import M1.reseau.model.player.IJoueur;
 import M1.reseau.model.game.Partie;
-import M1.reseau.model.player.Joueur;
+import M1.reseau.model.player.IJoueur;
 import M1.reseau.model.player.classic.JoueurNormal;
 import M1.reseau.model.world.element.ICase;
 import M1.reseau.model.world.element.classic.CaseBateau;

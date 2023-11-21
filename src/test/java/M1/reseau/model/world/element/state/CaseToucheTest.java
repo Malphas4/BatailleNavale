@@ -1,7 +1,6 @@
 package M1.reseau.model.world.element.state;
 
 import M1.reseau.model.world.element.ICase;
-import M1.reseau.model.world.element.state.CaseTouche;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

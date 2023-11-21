@@ -1,7 +1,7 @@
 package M1.reseau.model.world.grid;
 
-import M1.reseau.model.ship.IBateau;
 import M1.reseau.model.exception.IGrilleException;
+import M1.reseau.model.ship.IBateau;
 import M1.reseau.model.world.element.ICase;
 
 import java.util.ArrayList;

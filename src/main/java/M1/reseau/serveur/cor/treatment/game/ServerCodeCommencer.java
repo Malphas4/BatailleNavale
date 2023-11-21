@@ -2,7 +2,6 @@ package M1.reseau.serveur.cor.treatment.game;
 
 import M1.reseau.model.exception.IPartieException;
 import M1.reseau.serveur.cor.ServerCOR;
-import M1.reseau.serveur.salon.ISalon;
 import M1.reseau.serveur.serveur.game.GameService;
 import M1.reseau.serveur.serveur.game.SalonThread;
 

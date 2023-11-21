@@ -1,8 +1,6 @@
 package M1.reseau.client.controller;
 
 
-import M1.reseau.serveur.singletons.SingletonTCP;
-import M1.reseau.serveur.singletons.SingletonUDP;
 import M1.reseau.utilities.InformationsUtilisateur;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

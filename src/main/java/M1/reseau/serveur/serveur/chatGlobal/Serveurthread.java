@@ -1,8 +1,11 @@
 package M1.reseau.serveur.serveur.chatGlobal;
 
 
-import java.net.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 //** Classe associée à chaque client **
 //** Il y aura autant d'instances de cette classe que de clients connectés **

@@ -102,6 +102,10 @@ public class ControleurLobby {
                     Node source = (Node) event.getSource();
                     _salonChoisi= source.getId();
                     System.out.println("selectionSalon; "+_salonChoisi);
+                    //TODO
+                    //SingletonTCP.getInstance().message("salonid;.concat(_salonChoisi)";
+                    //SingletonTCP.getInstance().message("commencer");
+
                 }
             });
 

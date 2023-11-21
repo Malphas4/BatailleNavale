@@ -3,6 +3,7 @@ package M1.reseau.serveur.serveur;
 import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.serveur.Threads.ThreadSalons;
 import M1.reseau.serveur.serveur.Threads.ThreadUDP;
+import M1.reseau.serveur.serveur.game.JoueurHandler;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -16,13 +17,13 @@ public class ServeurGlobale {
     /**
      * variables
      * **/
-    //nb de clienqst connectées
+    //nb de clienst connectées
     int _nbClients=0;
     int _nbSalons=0;
     //vecteur des salons du serveur
     private static Vector<ThreadSalons> _tabSalons = new Vector();
     //vecteurs des différents clients pour chat global par exemple
-    private Vector<ThreadUDP> _tabClients = new Vector();
+    private Vector<JoueurHandler> _tabClients = new Vector();
     public static ServeurGlobale sv;
 
     /**
@@ -99,7 +100,7 @@ public class ServeurGlobale {
         return _tabClients;
     }
 
-    synchronized public int addClient(ThreadUDP t)
+    synchronized public int addClient(JoueurHandler t)
     {
         // un client en plus connecté
         _nbClients++;
@@ -119,4 +120,14 @@ public class ServeurGlobale {
     }
 
 
+    public JoueurHandler get_1Client(String s) {
+        JoueurHandler tempJoueur = null;
+        for (JoueurHandler iterJoueur:_tabClients
+             ) {
+            if(iterJoueur.getName().equals(s))tempJoueur=iterJoueur;
+            break ;
+        }
+        System.out.println("Joueur non existant");
+        return tempJoueur;
+    }
 }

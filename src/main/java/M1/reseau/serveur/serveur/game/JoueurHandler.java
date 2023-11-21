@@ -1,19 +1,19 @@
 package M1.reseau.serveur.serveur.game;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public final class JoueurHandler extends Thread {
 
     private Socket socket;
+    private String _pseudo;
 
 
-    public JoueurHandler(Socket socket){
+
+    public JoueurHandler(Socket socket,String pseudo){
         setName("ConnectionHandler");
         this.socket = socket;
+        _pseudo=pseudo;
     }
 
 
@@ -24,7 +24,6 @@ public final class JoueurHandler extends Thread {
         String _msg;
 
         try{
-
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
 
@@ -62,4 +61,25 @@ public final class JoueurHandler extends Thread {
             }
         }
     }
+
+    /*Deconnexion d'un client, on retire son handler de la liste
+     * */
+    public void deconnexionClient(){
+        //TODO
+       // _salonGlobale.DeleteClient(this);
+    }
+    /*fermeture du socket et des bufffer pour un client
+     * */
+    public void fermetureGlobale(Socket socket, BufferedWriter _bufferEcriture, BufferedReader _bufferLecture){
+        deconnexionClient();
+        try {
+            if(_bufferEcriture !=null) _bufferEcriture.close();
+            if (_bufferLecture!=null) _bufferLecture.close();
+            if(socket !=null) socket.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
 }

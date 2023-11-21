@@ -1,32 +1,58 @@
 package M1.reseau.serveur.serveur;
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import M1.reseau.serveur.serveur.chatGlobal.ServeurChatTCP;
 
-public class ServeurUDP {
+import java.io.IOException;
+import java.net.*;
 
-    public final static int port = 7777;//8532;
+public class ServeurUDP extends Thread{
+
     final static int taille = 1024;
-    final static byte[] buffer = new byte[taille];
+    static byte[] buffer = new byte[taille];
+    String _msg;
+    DatagramSocket socketUDP;
+    Thread _t; // contiendra le thread
 
 
-    public static void main(String argv[]) throws Exception
-    {
 
-
-        final InetAddress _adr= java.net.InetAddress.getByName("localhost");
-        DatagramSocket socket = new DatagramSocket(port);
-        while(true) {
-            System.out.print("boucle");
-            DatagramPacket data = new DatagramPacket(buffer, buffer.length,_adr,port);
-            socket.receive(data);
-            System.out.println(data.getAddress());
-            socket.send(data);
-        }
+    //constructeur
+    public ServeurUDP() throws SocketException, UnknownHostException {
+        int _port = 7777;
+        InetAddress _adr= InetAddress.getByName("localhost");
+        // création d'une socket, sans la lier à un port particulier
+        this.socketUDP = new DatagramSocket();
 
     }
 
 
+    @Override
+    public void run() {
+
+        while (this.isInterrupted()) {
+            System.out.print("UDP en arriere plan\n");
+            try {
+                String reponse="";
+                DatagramPacket recu = new DatagramPacket(buffer, taille);
+                socketUDP.receive(recu);
+                _msg=recu.getData().toString();
+                System.out.printf(_msg);
+                String[] _msgT=_msg.split(":");
+                if(_msgT[0].equals("0C")) {
+                    String[] _msgID = _msgT[1].split(";");
+                    if (_msgID[0].equals("test") && _msgID[1].equals("000")) {
+                        reponse="1C";
+                    }else if (_msgID[0].equals("test") && !(_msgID[1].equals("000"))){
+                        reponse="1E";
+                    }else
+                        reponse="1D";
+                }
+                buffer= reponse.getBytes();
+                DatagramPacket response = new DatagramPacket(buffer, taille,
+                        recu.getAddress(), recu.getPort());
+                socketUDP.send(response);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

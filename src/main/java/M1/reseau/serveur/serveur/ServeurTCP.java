@@ -47,7 +47,7 @@ public class ServeurTCP {
 
 
         //Thread UDP
-        threadUDP.start();
+        //threadUDP.start();
 
         /* thread avec UDP tournant en arrière plan*/
 
@@ -175,38 +175,5 @@ public class ServeurTCP {
 
     }
 
-    static Thread threadUDP = new Thread(new Runnable() {
-        String _msg="";
-        @Override
-        public void run() {
 
-            //instantation du singleton UDP
-            try {
-                SingletonUDP.getInstance();
-            } catch (SocketException | UnknownHostException e) {
-                throw new RuntimeException(e);
-            }
-            while (_statusServeurUDP) {
-                System.out.print("test");
-                System.out.print("UDP en arriere plan\n");
-                try {
-                    _msg=SingletonUDP.getInstance().reception();
-                    System.out.printf(_msg);
-                    //SingletonUDP.getInstance().message("test");
-                    String[] _msgT=_msg.split(":");
-                    if(_msgT[0].equals("0C")) {
-                        String[] _msgID = _msgT[1].split(";");
-                        if (_msgID[0].equals("test") && _msgID[1].equals("000")) {
-                            SingletonUDP.getInstance().message("1C");
-                        }else if (_msgID[0].equals("test") && !(_msgID[1].equals("000"))){
-                            SingletonUDP.getInstance().message("1E");
-                        }else
-                            SingletonUDP.getInstance().message("1D");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    });
 }

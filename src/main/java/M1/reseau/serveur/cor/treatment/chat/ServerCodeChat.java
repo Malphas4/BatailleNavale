@@ -8,7 +8,7 @@ public class ServerCodeChat extends ServerCOR {
 
 
     /**
-     * Receive : chat;[joueur];[message]
+     * Receive : chat;[salon id];[joueur];[message]
      * @param _message
      * @param _salon
      */
@@ -16,10 +16,10 @@ public class ServerCodeChat extends ServerCOR {
     public void execute(String _message, SalonThread _salon) {
         String[] _sp = _message.split(";");
 
-        if (_salon.get_j1().get_pseudo().equals(_sp[1]))
-            _salon.get_j2().sendMessage(_sp[2]);
+        if (_salon.get_j1().get_pseudo().equals(_sp[2]))
+            _salon.get_j2().sendMessage(_sp[3]);
         else
-            _salon.get_j1().sendMessage(_sp[2]);
+            _salon.get_j1().sendMessage(_sp[3]);
     }
 
     /**

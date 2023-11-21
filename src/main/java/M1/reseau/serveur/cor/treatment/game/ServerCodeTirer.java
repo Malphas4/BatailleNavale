@@ -17,7 +17,7 @@ public class ServerCodeTirer extends ServerCOR {
     }
 
     /**
-     * Receive : tirer;[joueur tireur];[joueur victime];[x];[y]
+     * Receive : tirer;[salon id];[joueur tireur];[joueur victime];[x];[y]
      * @param _message
      * @param _salon
      */
@@ -32,7 +32,7 @@ public class ServerCodeTirer extends ServerCOR {
 
         try {
             JoueurNormal _jc = (JoueurNormal) _gameService.get_partie().getJoueurCourant();
-            if (_gameService.get_partie().getJoueurCourant().get_pseudo().equals(_sp[1]))
+            if (_gameService.get_partie().getJoueurCourant().get_pseudo().equals(_sp[2]))
                 throw new IPartieException("ServerCodeTirer : Error player turn.");
 
             JoueurNormal _ja = (JoueurNormal) _gameService.get_partie().getJoueurAdverse();
@@ -41,8 +41,8 @@ public class ServerCodeTirer extends ServerCOR {
             ICase _case = _ja
                     .get_grilleJoueur()
                     .get_caseParCoord(
-                            Integer.parseInt(_sp[3]),
-                            Integer.parseInt(_sp[4])
+                            Integer.parseInt(_sp[4]),
+                            Integer.parseInt(_sp[5])
 
                     );
             _tire.set_case(_case);

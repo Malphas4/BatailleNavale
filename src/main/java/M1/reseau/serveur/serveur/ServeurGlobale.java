@@ -4,6 +4,7 @@ import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.serveur.Threads.ThreadSalons;
 import M1.reseau.serveur.serveur.Threads.ThreadUDP;
 import M1.reseau.serveur.serveur.game.JoueurHandler;
+import M1.reseau.serveur.serveur.game.SalonThread;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,6 +13,7 @@ import java.net.UnknownHostException;
 import java.util.Vector;
 
 public class ServeurGlobale {
+    //GAmesServices
 
 
     /**
@@ -21,10 +23,11 @@ public class ServeurGlobale {
     int _nbClients=0;
     int _nbSalons=0;
     //vecteur des salons du serveur
-    private static Vector<ThreadSalons> _tabSalons = new Vector();
+    private static Vector<SalonThread> _tabSalons = new Vector();
     //vecteurs des différents clients pour chat global par exemple
     private Vector<JoueurHandler> _tabClients = new Vector();
     public static ServeurGlobale sv;
+
 
     /**
      * main
@@ -34,7 +37,12 @@ public class ServeurGlobale {
         // instance de la classe principale
          sv = new ServeurGlobale();
 
-        Thread tcpServeur = new ThreadSalons();
+        Thread tcpServeur = null;
+        try {
+            tcpServeur = new SalonThread( sv, _tabSalons.size());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         tcpServeur.start();
 
 
@@ -111,17 +119,17 @@ public class ServeurGlobale {
 
 
 
-    synchronized public int addSalon(ThreadSalons t)
+    synchronized public int addSalon(SalonThread t)
     {
         // un client en plus connecté
         _nbSalons++;
         //  ajoute le nouveau flux de sortie au tableau
-        _tabSalons.addElement(t);
+        _tabSalons.add(t) ;
         return _tabSalons.size()-1; // on retourne le numéro du client ajouté (size-1)
     }
 
 
-    public JoueurHandler get_1Client(String s) {
+    synchronized public JoueurHandler get_1Client(String s) {
         JoueurHandler tempJoueur = null;
         for (JoueurHandler iterJoueur:_tabClients
              ) {
@@ -131,4 +139,9 @@ public class ServeurGlobale {
         System.out.println("Joueur non existant");
         return tempJoueur;
     }
+    synchronized public SalonThread get_salon(int id) {
+        SalonThread tmp = _tabSalons.get(id);
+        return tmp;
+    }
+
 }

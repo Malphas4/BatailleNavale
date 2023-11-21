@@ -12,7 +12,7 @@ public class SalonThread extends Thread {
 
     private ServerSocket serverSocket;
     private int portNumber = 8888;
-    private GameService _partie;
+    private GameService _gameService;
     public String _nom;
     String _description;
     int _nbMaxJoueur=2;
@@ -42,6 +42,15 @@ public class SalonThread extends Thread {
         setName("TcpServer");
         _serveurGlobale=sv;
         _j1=j1;
+        _j2=null;
+        _id=_serveurGlobale.getNbXlients()+1;
+        // create a ServerSocket instance and bind it to the specified port number
+        serverSocket = new ServerSocket(portNumber);
+    }
+    public SalonThread(ServeurGlobale sv, int id) throws IOException {
+        setName("TcpServer");
+        _serveurGlobale=sv;
+        _j1=null;
         _j2=null;
         _id=_serveurGlobale.getNbXlients()+1;
         // create a ServerSocket instance and bind it to the specified port number
@@ -95,12 +104,12 @@ public class SalonThread extends Thread {
         this.serverSocket = serverSocket;
     }
 
-    synchronized public GameService get_partie() {
-        return _partie;
+    synchronized public GameService getGameService() {
+        return _gameService;
     }
 
-    synchronized public void set_partie(GameService _partie) {
-        this._partie = _partie;
+    synchronized public void setGameService(GameService gameService) {
+        this._gameService = gameService;
     }
 
     synchronized public String get_nom() {

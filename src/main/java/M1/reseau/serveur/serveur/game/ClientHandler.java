@@ -1,4 +1,4 @@
-package M1.reseau.serveur.serveur.chatGlobal;
+package M1.reseau.serveur.serveur.game;
 
 import java.io.*;
 import java.net.Socket;

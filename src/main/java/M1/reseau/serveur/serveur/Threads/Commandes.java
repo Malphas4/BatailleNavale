@@ -1,7 +1,8 @@
-package M1.reseau.serveur.serveur.chatGlobal;
+package M1.reseau.serveur.serveur.Threads;
 import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.salon.SalonPrive;
 import M1.reseau.serveur.serveur.ServeurGlobale;
+import M1.reseau.serveur.serveur.chatGlobal.ServeurChatTCP;
 
 import java.io.*;
 import java.util.ArrayList;

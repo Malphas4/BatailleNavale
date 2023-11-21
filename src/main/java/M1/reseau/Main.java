@@ -78,7 +78,7 @@ public class Main extends Application{
             Scene sceneTest = new Scene(paneTest, 800, 600);*/
         stage.setResizable(false);
         //stage.setScene(sceneLobby);
-        stage.setScene(sceneGrille);
+        stage.setScene(scenePseudo);
         stage.setTitle("Bataille navale");
         //stage.initModality(Modality.NONE);
         //stage.getIcons().add(ImageCache.getInstance().get(".png"));

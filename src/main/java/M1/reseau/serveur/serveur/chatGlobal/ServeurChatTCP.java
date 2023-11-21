@@ -17,17 +17,22 @@ public class ServeurChatTCP
     private Vector _tabClients = new Vector(); // contiendra tous les flux de sortie vers les clients
     private int _nbClients=0; // nombre total de clients connectés
 
+
+
     //** Methode : la première méthode exécutée, elle attend les connexions **
-    public static void main(String args[])
-    {
+    public static void main(String args[]) throws SocketException, UnknownHostException {
         ServeurChatTCP ServeurChatTCP = new ServeurChatTCP(); // instance de la classe principale
+
         try
         {
             Integer port;
+
             if(args.length<=0) port=new Integer("18000"); // si pas d'argument : port 18000 par défaut
             else port = new Integer(args[0]); // sinon il s'agit du numéro de port passé en argument
 
             new Commandes(ServeurChatTCP); // lance le thread de gestion des commandes
+
+            //new Thread(serveurUDP).start(
 
             //Lance le thread du serveur UDP en arrière plan
            // new ServeurUDP(ServeurChatTCP);

@@ -52,7 +52,7 @@ public class SingletonUDP {
         //Message de type string deviens de type data pour l'envoi
         byte[] data = (s).getBytes();
         //creation du packet UDP
-        DatagramPacket packet = new DatagramPacket(data, data.length, _adr, _port);
+        DatagramPacket packet = new DatagramPacket(data, data.length);
         // envoi du paquet via la socket PROBLEME ICI CAR SERVEUR KAPUT
         socketUDP.send(packet);
 

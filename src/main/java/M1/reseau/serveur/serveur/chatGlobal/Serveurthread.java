@@ -7,6 +7,11 @@ import java.io.*;
 //** Classe associée à chaque client **
 //** Il y aura autant d'instances de cette classe que de clients connectés **
 //implémentation de l'interface Runnable (une des 2 méthodes pour créer un thread)
+
+
+/**DEPRECATED
+ * */
+
 class Serveurthread implements Runnable
 {
     private Thread _t; // contiendra le thread du client

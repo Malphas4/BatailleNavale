@@ -12,6 +12,8 @@ public class serveurUDPchat   implements Runnable{
     Thread _t; // contiendra le thread
     ServeurChatTCP _serveurChatTCP;
 
+    /**DEPRECATED
+     * */
 
 
     //constructeur

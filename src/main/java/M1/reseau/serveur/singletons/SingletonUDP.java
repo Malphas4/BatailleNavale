@@ -14,7 +14,7 @@ public class SingletonUDP {
     * Données de l'instance du socket UDP
     *
     */
-    static  DatagramSocket socketUDP;//= new DatagramSocket();
+    static  DatagramSocket socketUDP=null;
     final int _taille = 1024;
     byte[] _buffer = new byte[_taille];
     int _port = 7777;
@@ -58,7 +58,6 @@ public class SingletonUDP {
         // envoi du paquet via la socket PROBLEME ICI CAR SERVEUR KAPUT
         System.out.println("envois de : "+s);
         socketUDP.send(packet);
-
     }
 
     /**
@@ -70,17 +69,22 @@ public class SingletonUDP {
      */
     public String reception() throws IOException {
         DatagramPacket recu = new DatagramPacket(_buffer, _taille);
+        try {
+            //socketUDP.setSoTimeout( 5000);
+        }catch (Exception e){ e.printStackTrace();}
+
         socketUDP.receive(recu);
         _buffer=recu.getData();
         String data = new String(_buffer,0,recu.getLength());
         System.out.println("Data recu : " + data + "\n");
+         _buffer= new byte[_taille];
         return data;
     }
 
     /**
      * fermeture du socket
      */
-    public static void fermetureSocket()  {
+    public static void fermetureSocket(){
         try{
             if(socketUDP != null) socketUDP.close();
         }catch (Exception e){ e.printStackTrace();}

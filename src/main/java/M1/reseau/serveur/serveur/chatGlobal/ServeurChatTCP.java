@@ -1,17 +1,16 @@
 package M1.reseau.serveur.serveur.chatGlobal;
 
-import M1.reseau.serveur.serveur.ServeurUDP;
+import M1.reseau.serveur.serveur.Threads.Commandes;
 
-import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 
 import java.net.*;
 import java.io.*;
 import java.util.*;
 
-//** Classe principale du serveur, gère les infos globales **
+/**DEPRECATED
+* */
 public class ServeurChatTCP
 {
     private Vector _tabClients = new Vector(); // contiendra tous les flux de sortie vers les clients

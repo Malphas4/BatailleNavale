@@ -42,7 +42,7 @@ public class ControleurMenu {
         System.out.print("Aller au Lobby\n");
         //on fixe le type de partie à 1vs 1 pvp
         InformationsUtilisateur.getInstance().set_typePartie(1);
-        FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml.fxml"));
+        FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
         Scene sceneLobby = lobbyLoader.load();
         //ControleurLobby _controleurLobby = lobbyLoader.getController();
         // Appel dialogue pour la demande du pseudo du joueur

@@ -44,8 +44,9 @@ public class ThreadUDP extends Thread{
         System.out.print("UDP en arriere plan\n");
         while (! isInterrupted()) {
             try {
+                _adr=InetAddress.getByName("localhost") ;
                 String reponse = "";
-
+                System.out.print("Serveur en ecoute");
                 //Creaton du packet a recuperer
                 final  int _taille = 1024;
                 byte[] _buffer = new byte[_taille];
@@ -61,7 +62,7 @@ public class ThreadUDP extends Thread{
                 //traitement du message
                 if (_msgT[0].equals("0C")) {
                     String[] _msgID = _msgT[1].split(":");
-                    if (_msgID[0].equals("test") && _msgID[1].equals("test")) {
+                    if (_msgID[0].equals("test") && _msgID[1].equals("0000")) {
                         reponse = "1C";
                     } else if (_msgID[0].equals("test")) {
                         reponse = "1E";
@@ -73,7 +74,8 @@ public class ThreadUDP extends Thread{
                 } else reponse = "err";
                 _buffer = new byte[_taille];
                 _buffer = reponse.getBytes();
-                DatagramPacket response = new DatagramPacket(_buffer, _taille, recu.getAddress(), recu.getPort());
+                DatagramPacket response = new DatagramPacket(_buffer, _buffer.length, recu.getAddress(), recu.getPort());
+                System.out.println("Serveur envoie "+reponse);
                 _socketUDP.send(response);
             } catch (IOException e) {
                 e.printStackTrace();

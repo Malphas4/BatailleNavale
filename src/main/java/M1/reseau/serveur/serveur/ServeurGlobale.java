@@ -1,8 +1,10 @@
 package M1.reseau.serveur.serveur;
 
 import M1.reseau.serveur.salon.Salon;
+import M1.reseau.serveur.serveur.Threads.ThreadSalons;
 import M1.reseau.serveur.serveur.Threads.ThreadUDP;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -14,11 +16,14 @@ public class ServeurGlobale {
     /**
      * variables
      * **/
-
+    //nb de clienqst connectées
+    int _nbClients=0;
+    int _nbSalons=0;
     //vecteur des salons du serveur
-    private static Vector _tabSalons = new Vector();
+    private static Vector<ThreadSalons> _tabSalons = new Vector();
     //vecteurs des différents clients pour chat global par exemple
-    private Vector _tabClients = new Vector();
+    private Vector<ThreadUDP> _tabClients = new Vector();
+    public static ServeurGlobale sv;
 
     /**
      * main
@@ -26,10 +31,17 @@ public class ServeurGlobale {
     // Methode : la première méthode exécutée, elle attend les connexions
     public static void main(String args[]) throws SocketException, UnknownHostException {
         // instance de la classe principale
-       // ServeurMain ServeurMain = new ServeurMain();
+         sv = new ServeurGlobale();
+
+        Thread tcpServeur = new ThreadSalons();
+        tcpServeur.start();
+
+
+
         //Creation d'un salon de départ
+        //Doit être fait dans ThreadSalons normalement
         Salon s1=new Salon();
-        _tabSalons.add(s1);
+        //_tabSalons.add(s1);
         try
         {
             Integer port;
@@ -37,8 +49,8 @@ public class ServeurGlobale {
             if(args.length<=0) port=new Integer("18000");
             // sinon il s'agit du numéro de port passé en argument
             else port = Integer.valueOf(args[0]);
-            ThreadUDP tUDP= new ThreadUDP();
-
+            ThreadUDP tUDP;
+            tUDP = new ThreadUDP(sv);
             tUDP.start();
             //Lance le thread du serveur UDP
            // ServeurUDP serveurUDP = new ServeurUDP(ServeurGlobale);
@@ -75,6 +87,10 @@ public class ServeurGlobale {
     synchronized public int getNbSalons() {
         return _tabSalons.size();
     }
+    synchronized public int getNbXlients() {
+        return _nbClients;
+    }
+
     synchronized public static Vector get_tabSalons() {
         return _tabSalons;
     }
@@ -82,5 +98,22 @@ public class ServeurGlobale {
     synchronized public Vector get_tabClients() {
         return _tabClients;
     }
+    synchronized public int addClient(ThreadUDP t)
+    {
+        // un client en plus connecté
+        _nbClients++;
+        //  ajoute le nouveau flux de sortie au tableau
+        _tabClients.addElement(t);
+        return _tabClients.size()-1; // on retourne le numéro du client ajouté (size-1)
+    }
+    synchronized public int addSalon(ThreadSalons t)
+    {
+        // un client en plus connecté
+        _nbSalons++;
+        //  ajoute le nouveau flux de sortie au tableau
+        _tabSalons.addElement(t);
+        return _tabSalons.size()-1; // on retourne le numéro du client ajouté (size-1)
+    }
+
 
 }

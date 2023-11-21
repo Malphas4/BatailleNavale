@@ -1,7 +1,5 @@
 package M1.reseau.serveur.serveur;
 
-import M1.reseau.serveur.serveur.chatGlobal.ServeurChatTCP;
-
 import java.io.IOException;
 import java.net.*;
 
@@ -12,18 +10,17 @@ public class ServeurUDP extends Thread{
     String _msg;
     DatagramSocket socketUDP;
     Thread _t; // contiendra le thread
-
-
+    ServeurGlobale _serveurmain;
 
     //constructeur
-    public ServeurUDP() throws SocketException, UnknownHostException {
+    public ServeurUDP(ServeurGlobale serveurGlobale) throws SocketException, UnknownHostException {
+        _serveurmain= serveurGlobale; // passage de local en global
+
         int _port = 7777;
         InetAddress _adr= InetAddress.getByName("localhost");
         // création d'une socket, sans la lier à un port particulier
         this.socketUDP = new DatagramSocket();
-
     }
-
 
     @Override
     public void run() {
@@ -45,6 +42,9 @@ public class ServeurUDP extends Thread{
                         reponse="1E";
                     }else
                         reponse="1D";
+                } else if (_msg.equals("NBsalons?")) {
+                    int _nbSalons=_serveurmain.getNbSalons();
+                    reponse=String.valueOf(_nbSalons);
                 }
                 buffer= reponse.getBytes();
                 DatagramPacket response = new DatagramPacket(buffer, taille,

@@ -1,21 +1,22 @@
 package M1.reseau.serveur.serveur;
 
-import M1.reseau.serveur.serveur.chatGlobal.Commandes;
-import M1.reseau.serveur.serveur.chatGlobal.ServeurChatTCP;
+import M1.reseau.serveur.salon.Salon;
+import M1.reseau.serveur.serveur.Threads.ThreadUDP;
 
 import java.net.ServerSocket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Vector;
 
-public class ServeurMain {
+public class ServeurGlobale {
+
 
     /**
      * variables
      * **/
 
     //vecteur des salons du serveur
-    private Vector _tabSalons = new Vector();
+    private static Vector _tabSalons = new Vector();
     //vecteurs des différents clients pour chat global par exemple
     private Vector _tabClients = new Vector();
 
@@ -25,8 +26,10 @@ public class ServeurMain {
     // Methode : la première méthode exécutée, elle attend les connexions
     public static void main(String args[]) throws SocketException, UnknownHostException {
         // instance de la classe principale
-        ServeurMain ServeurMain = new ServeurMain();
-
+       // ServeurMain ServeurMain = new ServeurMain();
+        //Creation d'un salon de départ
+        Salon s1=new Salon();
+        _tabSalons.add(s1);
         try
         {
             Integer port;
@@ -34,19 +37,20 @@ public class ServeurMain {
             if(args.length<=0) port=new Integer("18000");
             // sinon il s'agit du numéro de port passé en argument
             else port = Integer.valueOf(args[0]);
+            ThreadUDP tUDP= new ThreadUDP();
 
-            new Commandes(ServeurMain); // lance le thread de gestion des commandes
-            Thread tUDP= new ServeurUDP(ServeurMain);
             tUDP.start();
-            //Lance le thread du serveur UDP en arrière plan
-            // new ServeurUDP(ServeurChatTCP);
-
-            ServerSocket _socket = new ServerSocket(port.intValue()); // ouverture d'un socket serveur sur port
+            //Lance le thread du serveur UDP
+           // ServeurUDP serveurUDP = new ServeurUDP(ServeurGlobale);
+            // ouverture d'un socket serveur sur port afin d'avoir 1 socket
+            ServerSocket _socket = new ServerSocket(port.intValue());
             affichageLancement(port);
-            /*while (true) // attente en boucle de connexion (bloquant sur ss.accept)
+
+            while (true) // attente en boucle de connexion (bloquant sur ss.accept)
             {
-                new Serveurthread(_socket.accept(),main); // un client se connecte, un nouveau thread client est lancé
-            }*/
+
+               // new Serveurthread(_socket.accept(),main); // un client se connecte, un nouveau thread client est lancé
+            }
         }
         catch (Exception e) { }
     }
@@ -71,4 +75,12 @@ public class ServeurMain {
     synchronized public int getNbSalons() {
         return _tabSalons.size();
     }
+    synchronized public static Vector get_tabSalons() {
+        return _tabSalons;
+    }
+
+    synchronized public Vector get_tabClients() {
+        return _tabClients;
+    }
+
 }

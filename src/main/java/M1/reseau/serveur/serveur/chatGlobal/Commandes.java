@@ -1,7 +1,7 @@
 package M1.reseau.serveur.serveur.chatGlobal;
 import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.salon.SalonPrive;
-import M1.reseau.serveur.serveur.ServeurMain;
+import M1.reseau.serveur.serveur.ServeurGlobale;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class Commandes implements Runnable
 {
     ArrayList<Salon> _listeSalons = new ArrayList<>();
     ServeurChatTCP _serveurChatTCP; // pour utilisation des méthodes de la classe principale
-    ServeurMain _serveurmain; // pour utilisation des méthodes de la classe principale
+    ServeurGlobale _serveurmain; // pour utilisation des méthodes de la classe principale
 
     BufferedReader _in; // pour gestion du flux d'entrée (celui de la console)
     String _strCommande=""; // contiendra la commande tapée
@@ -28,7 +28,7 @@ public class Commandes implements Runnable
         _t = new Thread(this); // instanciation du thread
         _t.start(); // démarrage du thread, la fonction run() est ici lancée
     }
-    public Commandes(ServeurMain serveur)
+    public Commandes(ServeurGlobale serveur)
     {
         _serveurmain=serveur; // passage de local en global
         // le flux d'entrée de la console sera géré plus pratiquement dans un BufferedReader

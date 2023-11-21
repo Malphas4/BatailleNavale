@@ -1,11 +1,9 @@
 package M1.reseau.serveur.serveur.chatGlobal;
 
-import M1.reseau.serveur.serveur.ServeurMain;
-
 import java.io.IOException;
 import java.net.*;
 
-public class serveurUDPchat  extends Thread{
+public class serveurUDPchat   implements Runnable{
 
     final static int taille = 1024;
     static byte[] buffer = new byte[taille];
@@ -30,9 +28,10 @@ public class serveurUDPchat  extends Thread{
 
     @Override
     public void run() {
-
-        while (this.isInterrupted()) {
+       // this._serveurChatTCP.getExtinction()
+        while (true) {
             System.out.print("UDP en arriere plan\n");
+            System.out.flush(); // on affiche tout ce qui est en attente dans le flux
             try {
                 String reponse="";
                 DatagramPacket recu = new DatagramPacket(buffer, taille);
@@ -59,6 +58,9 @@ public class serveurUDPchat  extends Thread{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            System.out.flush(); // on affiche tout ce qui est en attente dans le flux
+
         }
     }
 }

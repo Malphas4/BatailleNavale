@@ -83,10 +83,10 @@ public class ServeurGlobale {
         System.out.println("Creation d'un nouveau salon : tapez \"ns\"");
     }
 
-
     synchronized public int getNbSalons() {
         return _tabSalons.size();
     }
+
     synchronized public int getNbXlients() {
         return _nbClients;
     }
@@ -98,6 +98,7 @@ public class ServeurGlobale {
     synchronized public Vector get_tabClients() {
         return _tabClients;
     }
+
     synchronized public int addClient(ThreadUDP t)
     {
         // un client en plus connecté
@@ -106,6 +107,8 @@ public class ServeurGlobale {
         _tabClients.addElement(t);
         return _tabClients.size()-1; // on retourne le numéro du client ajouté (size-1)
     }
+
+
     synchronized public int addSalon(ThreadSalons t)
     {
         // un client en plus connecté

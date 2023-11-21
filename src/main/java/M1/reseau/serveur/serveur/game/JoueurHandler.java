@@ -43,7 +43,7 @@ public final class JoueurHandler extends Thread {
                         .get_serverCOR()
                         .receive(
                                 _msg,
-                                ServeurGlobale.sv.get_salon(_sp[1])
+                                ServeurGlobale.sv.get_salon(Integer.parseInt(_sp[1]))
                                 );
 
             }

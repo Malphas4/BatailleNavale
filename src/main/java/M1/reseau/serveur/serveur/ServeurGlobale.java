@@ -1,6 +1,7 @@
 package M1.reseau.serveur.serveur;
 
 import M1.reseau.serveur.salon.Salon;
+import M1.reseau.serveur.serveur.Threads.Commandes;
 import M1.reseau.serveur.serveur.Threads.ThreadUDP;
 import M1.reseau.serveur.serveur.game.JoueurHandler;
 import M1.reseau.serveur.serveur.game.SalonThread;
@@ -38,7 +39,7 @@ public class ServeurGlobale {
 
         Thread tcpServeur = null;
         try {
-            tcpServeur = new SalonThread( sv, _tabSalons.size());
+            tcpServeur = new SalonThread();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -64,13 +65,15 @@ public class ServeurGlobale {
            // ServeurUDP serveurUDP = new ServeurUDP(ServeurGlobale);
             // ouverture d'un socket serveur sur port afin d'avoir 1 socket
             ServerSocket _socket = new ServerSocket(port.intValue());
+
+            new Commandes(ServeurGlobale.sv); // lance le thread de gestion des commandes
             affichageLancement(port);
 
-            while (true) // attente en boucle de connexion (bloquant sur ss.accept)
+           /* while (true) // attente en boucle de connexion (bloquant sur ss.accept)
             {
 
                // new Serveurthread(_socket.accept(),main); // un client se connecte, un nouveau thread client est lancé
-            }
+            }*/
         }
         catch (Exception e) { }
     }

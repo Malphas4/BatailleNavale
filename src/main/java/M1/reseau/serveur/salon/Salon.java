@@ -4,16 +4,37 @@ import M1.reseau.serveur.serveur.game.ClientHandler;
 
 import java.util.ArrayList;
 
+/* Deprecated
+import M1.reseau.serveur.bot.EasyMode;
+import M1.reseau.serveur.bot.HardMode;
+import M1.reseau.serveur.bot.MediumMode;
+import M1.reseau.serveur.bot.Mode;
+*/
 public class Salon implements ISalon {
 
     public String _nom;
     String _description;
     int _nbMaxJoueur=2;
     int _nbConnecte=0;
-    //variable qui decide du temsp pour chaque tours
+    //variable qui decide du temps pour chaque tours
     int _temps=30;
     //variable gérant la différence de temps entre l'horloge serveur et la partie
     int debutPartie=0;
+    //variable contenant le mode de jeu (nombre de cases en x et y, difficulté, etc...)
+    //Mode _mode=new MediumMode();
+    //inclusion du modele avec
+    //private PartieClient _partie;
+
+    //Variable contenant le chat du salon
+    String _chatLocale;
+
+    public Salon(String nom, String description, int nbMax) {
+        this._nom = nom;
+        this._description = description;
+        this._nbMaxJoueur = nbMax;
+        this._nbConnecte = 0;
+        //this._mode = new MediumMode();
+    }
 
     /**
      * Les handlers contiennent les thread des 2 joueurs
@@ -30,8 +51,7 @@ public class Salon implements ISalon {
 
     //fonction pour récupérer l'horloge serveur
     //classe singleton possible AF.
-    public int getServeurHorloge(
-    ) {
+    public int getServeurHorloge() {
         return debutPartie;
     }
 
@@ -39,12 +59,28 @@ public class Salon implements ISalon {
 
 
 
-    public  Salon(String nom, String description, int nbMax) {
+   /* public  Salon(String nom, String description, int nbMax, String modedejeu) {
         this._nom = nom;
         this._description = description;
         this._nbMaxJoueur = nbMax;
         this._nbConnecte = 0;
-    }
+        switch (modedejeu) {
+            case "f":
+                this._mode = new EasyMode();
+                break;
+            case "m":
+                this._mode = new MediumMode();
+                break;
+            case "h":
+                this._mode = new HardMode();
+                break;
+            default:
+                this._mode = new MediumMode();
+                break;
+        }*/
+
+
+    //}
     public  Salon() {
         this._nom = "NomDeBase";
         this._description = "partie classique";

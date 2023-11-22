@@ -17,6 +17,15 @@ public class SalonThread extends Thread {
     String _description;
     int _nbMaxJoueur=2;
     int _nbConnecte=0;
+
+    public int get_temps() {
+        return _temps;
+    }
+
+    public void set_temps(int _temps) {
+        this._temps = _temps;
+    }
+
     //variable qui decide du temsp pour chaque tours
     int _temps=30;
     //variable gérant la différence de temps entre l'horloge serveur et la partie

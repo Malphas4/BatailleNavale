@@ -3,6 +3,7 @@ package M1.reseau.serveur.cor.treatment.game;
 import M1.reseau.model.exception.IGrilleException;
 import M1.reseau.model.exception.IJoueurException;
 import M1.reseau.model.exception.IPartieException;
+import M1.reseau.model.player.bot.Bot;
 import M1.reseau.model.player.classic.JoueurNormal;
 import M1.reseau.model.player.visitor.VisitorEstTire;
 import M1.reseau.model.player.visitor.VisitorTirer;
@@ -57,8 +58,32 @@ public class ServerCodeTirer extends ServerCOR {
                 _gameService.get_partie().fin();
             }
             else _gameService.get_partie().tourSuivant();
+
         } catch (IPartieException | IGrilleException | IJoueurException e) {
             System.err.println("ServerCodeTirer : Erreur.");
+        }
+
+        /* If player is bot, we play as the bot */
+        try {
+            if (_gameService.get_partie().getJoueurCourant() instanceof Bot) {
+                Bot _bot = (Bot) _gameService.get_partie().getJoueurCourant();
+                JoueurNormal _ja = (JoueurNormal) _gameService.get_partie().getJoueurAdverse();
+
+                _tire.set_grille(_ja.get_grilleJoueur());
+                _bot.accepte(_tire);
+
+                _tireSubit.set_grille(_ja.get_grilleJoueur());
+                _tireSubit.set_case(_tire.get_case());
+                _ja.accepte(_tireSubit);
+
+                boolean status = _gameService.get_partie().gagnant();
+                if (status) {
+                    _gameService.get_partie().fin();
+                }
+                else _gameService.get_partie().tourSuivant();
+            }
+        } catch (IPartieException | IJoueurException e) {
+            System.err.println("ServerCodeTirer : Error.");
         }
     }
 

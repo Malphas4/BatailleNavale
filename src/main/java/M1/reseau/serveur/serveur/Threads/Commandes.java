@@ -107,8 +107,7 @@ public class Commandes implements Runnable
                     System.out.println("\tLe salon "
                             + _salon.get_id() + " - " + _salon.get_nom()
                             + " a ete cree !");
-                    System.out.println("\tDemarrage du salon ...");
-                    _salon.start();
+
                     ServeurGlobale.sv.addSalon(_salon);
                     System.out.println("\tLe salon est en ligne.");
                 } else {

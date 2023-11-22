@@ -38,11 +38,7 @@ public class ServeurGlobale {
          sv = new ServeurGlobale();
 
         Thread tcpServeur = null;
-        try {
-            tcpServeur = new SalonThread();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        tcpServeur = new SalonThread();
         tcpServeur.start();
 
 

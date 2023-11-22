@@ -38,14 +38,18 @@ public class SalonThread extends Thread {
 
 
 
-    public SalonThread(ServeurGlobale sv, JoueurHandler j1, JoueurHandler j2, int id) throws IOException {
+    public SalonThread(ServeurGlobale sv, JoueurHandler j1, JoueurHandler j2, int id) {
         setName("TcpServer");
-        _serveurGlobale=sv;
+        _serveurGlobale=ServeurGlobale.sv;
         _j1=j1;
         _j2=j2;
         _id=_serveurGlobale.getNbXlients()+1;
         // create a ServerSocket instance and bind it to the specified port number
-        serverSocket = new ServerSocket(portNumber);
+        try {
+            serverSocket = new ServerSocket(portNumber);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         _listeJoueur=new Vector<>();
 
         /* Initialisation du Chronomètre */
@@ -65,14 +69,18 @@ public class SalonThread extends Thread {
         serverSocket = new ServerSocket(portNumber);
     }
 
-    public SalonThread() throws IOException {
+    public SalonThread() {
         setName("TcpServer");
         _serveurGlobale=ServeurGlobale.sv;
         _j1=null;
         _j2=null;
         _id=_serveurGlobale.getNbXlients()+1;
         // create a ServerSocket instance and bind it to the specified port number
-        serverSocket = new ServerSocket(portNumber);
+        try {
+            serverSocket = new ServerSocket(portNumber);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void run(){

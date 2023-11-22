@@ -11,6 +11,13 @@ public final class JoueurHandler extends Thread {
     private Socket socket;
     private String _pseudo;
 
+    public Boolean get_monTour() {
+        return _monTour;
+    }
+
+    Boolean _monTour=true;
+
+
     BufferedReader in = null;
     PrintWriter out = null;
 
@@ -106,7 +113,17 @@ public final class JoueurHandler extends Thread {
     }
     synchronized public void sendMessage(String s) throws IOException {
         this.out.println("chat;"+this._pseudo.concat(";")+s);
+       //TODO allieurs System.err.println(out);
 
+    }
+    synchronized public void sendFinTour() throws IOException {
+        this.out.println("fintour;"+_pseudo);
+        _monTour=true;
+       //TODO allieurs System.err.println(out);
+    }    synchronized public void sendDebutTour() throws IOException {
+        this.out.println("fintour;"+_pseudo);
+        _monTour=true;
+       //TODO allieurs System.err.println(out);
     }
 
 }

@@ -84,7 +84,6 @@ public class VisitorTirer implements IVisitorJoueur {
     public void visite(EasyBot _bot) throws IJoueurException {
         /* Verification arguments non null */
         if (get_grille() == null) throw new IllegalArgumentException("VisitorTirer : La grille ne peut pas être null.");
-        if (get_case() == null) throw new IllegalArgumentException("VisitorTirer : La case ne peut pas être null.");
 
         /* Selection d'une case random */
         ICase _case = null;

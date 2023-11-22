@@ -10,6 +10,10 @@ public class ChronoThread extends Thread {
 
     private LocalDateTime _dateTime = LocalDateTime.now();
 
+    public ChronoThread() {
+
+    }
+
     public ChronoThread(JoueurHandler _j1, JoueurHandler _j2) {
         set_j1(_j1);
         set_j2(_j2);

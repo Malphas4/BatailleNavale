@@ -34,6 +34,7 @@ public class SalonThread extends Thread {
     JoueurHandler _j1,  _j2;
     ServeurGlobale _serveurGlobale;
     Vector<JoueurHandler> _listeJoueur;
+    ChronoThread _chrono;
 
 
 
@@ -46,7 +47,14 @@ public class SalonThread extends Thread {
         // create a ServerSocket instance and bind it to the specified port number
         serverSocket = new ServerSocket(portNumber);
         _listeJoueur=new Vector<>();
+
+        /* Initialisation du Chronomètre */
+        _chrono = new ChronoThread(_j1, _j2);
+
+        /* Start Thread */
+        _chrono.start();
     }
+
     public SalonThread(ServeurGlobale sv, JoueurHandler j1, int id) throws IOException {
         setName("TcpServer");
         _serveurGlobale=sv;
@@ -56,6 +64,7 @@ public class SalonThread extends Thread {
         // create a ServerSocket instance and bind it to the specified port number
         serverSocket = new ServerSocket(portNumber);
     }
+
     public SalonThread(ServeurGlobale sv, int id) throws IOException {
         setName("TcpServer");
         _serveurGlobale=sv;
@@ -65,6 +74,7 @@ public class SalonThread extends Thread {
         // create a ServerSocket instance and bind it to the specified port number
         serverSocket = new ServerSocket(portNumber);
     }
+
     public void run(){
         try{
             while (! isInterrupted()) {
@@ -93,9 +103,11 @@ public class SalonThread extends Thread {
             }
         }
     }
+
     synchronized  public ServerSocket getServerSocket() {
         return serverSocket;
     }
+
     public void  messageLocal(String s){
         try {
             _j1.message(s);
@@ -142,17 +154,41 @@ public class SalonThread extends Thread {
     }
 
     synchronized public void set_j1(JoueurHandler _j1) {
+        _chrono.set_j1(_j1);
         this._j1 = _j1;
+
+        if (_chrono.get_j1() != null
+                && _chrono.get_j2() != null
+                && !_chrono.isAlive())
+            _chrono.start();
     }
     synchronized public void set_j2(JoueurHandler _j2) {
+        _chrono.set_j2(_j2);
         this._j2 = _j2;
+
+        if (_chrono.get_j1() != null
+                && _chrono.get_j2() != null
+                && !_chrono.isAlive())
+            _chrono.start();
     }
 
     synchronized public void set_j1(String sj1) {
         this._j1 = _serveurGlobale.get_1Client(sj1);
+
+        _chrono.set_j1(get_j1());
+        if (_chrono.get_j1() != null
+                && _chrono.get_j2() != null
+                && !_chrono.isAlive())
+            _chrono.start();
     }
     synchronized public void set_j2(String sj2) {
         this._j2 = _serveurGlobale.get_1Client(sj2);
+
+        _chrono.set_j2(get_j2());
+        if (_chrono.get_j1() != null
+                && _chrono.get_j2() != null
+                && !_chrono.isAlive())
+            _chrono.start();
     }
 
     synchronized public JoueurHandler get_j2() {

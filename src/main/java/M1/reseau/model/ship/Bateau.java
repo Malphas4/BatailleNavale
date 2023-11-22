@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+@Deprecated
 public abstract class Bateau implements IBateau {
 
     private UUID _uuid = UUID.randomUUID();

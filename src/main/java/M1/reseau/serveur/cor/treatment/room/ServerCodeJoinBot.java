@@ -31,6 +31,8 @@ public class ServerCodeJoinBot extends ServerCOR {
 
             // Add player in the game
             _gameService.get_partie().ajouterJoueur(_sp[2]);
+
+            // Add bot in game
             try {
                 _gameService.get_partie().set_joueur2(
                         new EasyBot(
@@ -53,6 +55,7 @@ public class ServerCodeJoinBot extends ServerCOR {
      */
     @Override
     public boolean isMessageCorrect(String _message) {
-        return _message.contains("joinbot");
+        String[] _sp = _message.split(";");
+        return _sp[1].equals("joinbot");
     }
 }

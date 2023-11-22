@@ -82,15 +82,12 @@ public class ServerCodeTirer extends ServerCOR {
             if (status) {
                 _gameService.get_partie().fin();
                 String _msg = "gagner;"
-                        + _salon.get_nom()
+                        + _salon.get_id()
                         + ";" + ((_gameService.get_partie().is_aGagner1()) ?
                                                             _gameService.get_partie().get_joueur1().get_pseudo()
                                                             : _gameService.get_partie().get_joueur2().get_pseudo());
-                if (_salon.get_j1().get_pseudo().equals(_jc.get_pseudo())) {
-
-                } else if (_salon.get_j2().get_pseudo().equals(_jc.get_pseudo())) {
-
-                }
+                _salon.get_j1().message(_msg);
+                _salon.get_j2().message(_msg);
             }
             else _gameService.get_partie().tourSuivant();
 
@@ -128,6 +125,7 @@ public class ServerCodeTirer extends ServerCOR {
      */
     @Override
     public boolean isMessageCorrect(String _message) {
-        return _message.contains("tirer");
+        String[] _sp = _message.split(";");
+        return _sp[1].equals("tirer");
     }
 }

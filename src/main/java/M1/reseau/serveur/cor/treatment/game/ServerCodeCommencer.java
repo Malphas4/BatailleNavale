@@ -23,8 +23,8 @@ public class ServerCodeCommencer extends ServerCOR {
         GameService _gameService = _salon.get_gameService();
         try {
             _gameService.get_partie().commencer();
-            _salon.get_j1().message("commencer;" + _salon.get_nom());
-            _salon.get_j2().message("commencer;" + _salon.get_nom());
+            _salon.get_j1().message("commencer;" + _salon.get_id());
+            _salon.get_j2().message("commencer;" + _salon.get_id());
         } catch (IPartieException | IOException e) {
             System.err.println("ServerCodeCommencer : Error.");
         }
@@ -36,6 +36,7 @@ public class ServerCodeCommencer extends ServerCOR {
      */
     @Override
     public boolean isMessageCorrect(String _message) {
-        return _message.contains("commencer");
+        String[] _sp = _message.split(";");
+        return _sp[1].equals("commencer");
     }
 }

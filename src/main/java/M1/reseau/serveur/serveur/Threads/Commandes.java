@@ -15,7 +15,6 @@ import java.util.ArrayList;
 // implémentation de l'interface Runnable (une des 2 méthodes pour créer un thread)
 public class Commandes implements Runnable
 {
-    ArrayList<Salon> _listeSalons = new ArrayList<>();
     ServeurGlobale _serveurmain; // pour utilisation des méthodes de la classe principale
 
     BufferedReader _in; // pour gestion du flux d'entrée (celui de la console)
@@ -44,7 +43,7 @@ public class Commandes implements Runnable
                 else if (_strCommande.equalsIgnoreCase("total")) // commande "total" detectée ...
                 {
                     // ... on affiche le nombre de clients actuellement connectés
-                    System.out.println("Nombre de connectes : " + ServeurGlobale.sv.get_tabClients().size());
+                    System.out.println("Nombre de connectes : " + ServeurGlobale.sv.getNbXlients());
                     System.out.println("--------");
                 }/*
                 else
@@ -77,7 +76,7 @@ public class Commandes implements Runnable
                     //Vector _listeSalons=new Vector(Collection<Salon>);
 
                     for (SalonThread iterSalon : ServeurGlobale.sv.get_tabSalons()) {
-                        if (_listeSalons.isEmpty())
+                        if (ServeurGlobale.sv.get_tabSalons().isEmpty())
                             System.out.print("\tAucun salon n'est disponible\n");
                         else
                             System.out.println("\t"

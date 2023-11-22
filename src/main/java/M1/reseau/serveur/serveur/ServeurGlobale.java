@@ -60,7 +60,7 @@ public class ServeurGlobale {
             //Lance le thread du serveur UDP
            // ServeurUDP serveurUDP = new ServeurUDP(ServeurGlobale);
             // ouverture d'un socket serveur sur port afin d'avoir 1 socket
-            ServerSocket _socket = new ServerSocket(port.intValue());
+            ServerSocket _socket = new ServerSocket(port);
 
             new Commandes(ServeurGlobale.sv); // lance le thread de gestion des commandes
             affichageLancement(port);

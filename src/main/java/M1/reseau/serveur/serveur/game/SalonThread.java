@@ -70,17 +70,19 @@ public class SalonThread extends Thread {
     }
 
     public SalonThread() {
-        setName("TcpServer");
+        // setName("TcpServer");
         _serveurGlobale=ServeurGlobale.sv;
         _j1=null;
         _j2=null;
         _id=_serveurGlobale.getNbXlients()+1;
+
+        set_nom("Room(" + _id + ")");
         // create a ServerSocket instance and bind it to the specified port number
-        try {
+        /*try {
             serverSocket = new ServerSocket(portNumber);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     public void run(){
@@ -101,7 +103,7 @@ public class SalonThread extends Thread {
         catch(IOException e){
             e.printStackTrace();
         }
-        finally{
+        /*finally{
             try{
                 // close the ServerSocket instance before termination
                 serverSocket.close();
@@ -109,8 +111,10 @@ public class SalonThread extends Thread {
             catch(IOException e){
                 e.printStackTrace();
             }
-        }
+        }*/
     }
+
+
 
     synchronized  public ServerSocket getServerSocket() {
         return serverSocket;

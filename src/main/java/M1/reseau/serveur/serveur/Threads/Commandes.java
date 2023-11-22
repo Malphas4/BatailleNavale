@@ -3,7 +3,6 @@ package M1.reseau.serveur.serveur.Threads;
 import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.salon.SalonPrive;
 import M1.reseau.serveur.serveur.ServeurGlobale;
-import M1.reseau.serveur.serveur.chatGlobal.ServeurChatTCP;
 import M1.reseau.serveur.serveur.game.SalonThread;
 
 import java.io.BufferedReader;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 public class Commandes implements Runnable
 {
     ArrayList<Salon> _listeSalons = new ArrayList<>();
-    ServeurChatTCP _serveurChatTCP; // pour utilisation des méthodes de la classe principale
     ServeurGlobale _serveurmain; // pour utilisation des méthodes de la classe principale
 
     BufferedReader _in; // pour gestion du flux d'entrée (celui de la console)
@@ -25,15 +23,6 @@ public class Commandes implements Runnable
     Thread _t; // contiendra le thread
 
     //** Constructeur : initialise les variables nécessaires **
-    public Commandes(ServeurChatTCP serveurChatTCP)
-    {
-        _serveurChatTCP=serveurChatTCP; // passage de local en global
-        // le flux d'entrée de la console sera géré plus pratiquement dans un BufferedReader
-        _in = new BufferedReader(new InputStreamReader(System.in));
-        _t = new Thread(this); // instanciation du thread
-        _t.start(); // démarrage du thread, la fonction run() est ici lancée
-    }
-
     public Commandes(ServeurGlobale serveur)
     {
         _serveurmain=serveur; // passage de local en global
@@ -55,7 +44,7 @@ public class Commandes implements Runnable
                 else if (_strCommande.equalsIgnoreCase("total")) // commande "total" detectée ...
                 {
                     // ... on affiche le nombre de clients actuellement connectés
-                    System.out.println("Nombre de connectes : " + _serveurChatTCP.getNbClients());
+                    System.out.println("Nombre de connectes : " + ServeurGlobale.sv.get_tabClients().size());
                     System.out.println("--------");
                 }/*
                 else

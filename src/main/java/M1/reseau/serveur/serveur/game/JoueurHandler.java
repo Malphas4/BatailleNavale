@@ -15,8 +15,23 @@ public final class JoueurHandler extends Thread {
     PrintWriter out = null;
 
 
+    public Socket getSocket() {
+        return socket;
+    }
 
-    public JoueurHandler(Socket socket,String pseudo) throws IOException {
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
+
+    public String get_pseudo() {
+        return _pseudo;
+    }
+
+    public void set_pseudo(String _pseudo) {
+        this._pseudo = _pseudo;
+    }
+
+    public JoueurHandler(Socket socket, String pseudo) throws IOException {
         setName("ConnectionHandler");
         this.socket = socket;
         _pseudo=pseudo;
@@ -89,4 +104,9 @@ public final class JoueurHandler extends Thread {
     synchronized public String reception() throws IOException {
         return in.readLine();
     }
+    synchronized public void sendMessage(String s) throws IOException {
+        this.out.println("chat;"+this._pseudo.concat(";")+s);
+
+    }
+
 }

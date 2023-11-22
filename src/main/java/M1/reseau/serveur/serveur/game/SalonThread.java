@@ -65,9 +65,9 @@ public class SalonThread extends Thread {
         serverSocket = new ServerSocket(portNumber);
     }
 
-    public SalonThread(ServeurGlobale sv, int id) throws IOException {
+    public SalonThread() throws IOException {
         setName("TcpServer");
-        _serveurGlobale=sv;
+        _serveurGlobale=ServeurGlobale.sv;
         _j1=null;
         _j2=null;
         _id=_serveurGlobale.getNbXlients()+1;

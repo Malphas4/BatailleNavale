@@ -4,6 +4,7 @@ import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.salon.SalonPrive;
 import M1.reseau.serveur.serveur.ServeurGlobale;
 import M1.reseau.serveur.serveur.chatGlobal.ServeurChatTCP;
+import M1.reseau.serveur.serveur.game.SalonThread;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class Commandes implements Runnable
         _t = new Thread(this); // instanciation du thread
         _t.start(); // démarrage du thread, la fonction run() est ici lancée
     }
+
     public Commandes(ServeurGlobale serveur)
     {
         _serveurmain=serveur; // passage de local en global
@@ -47,14 +49,13 @@ public class Commandes implements Runnable
         try
         {
             // si aucune commande n'est tapée, on ne fait rien (bloquant sur _in.readLine())
-            while ((_strCommande=_in.readLine())!=null)
-            {
+            while ((_strCommande=_in.readLine())!=null) {
                 if (_strCommande.equalsIgnoreCase("quit")) // commande "quit" detectée ...
                     System.exit(0); // ... on ferme alors le serveur
-                else if(_strCommande.equalsIgnoreCase("total")) // commande "total" detectée ...
+                else if (_strCommande.equalsIgnoreCase("total")) // commande "total" detectée ...
                 {
                     // ... on affiche le nombre de clients actuellement connectés
-                    System.out.println("Nombre de connectes : "+ _serveurChatTCP.getNbClients());
+                    System.out.println("Nombre de connectes : " + _serveurChatTCP.getNbClients());
                     System.out.println("--------");
                 }/*
                 else
@@ -86,11 +87,15 @@ public class Commandes implements Runnable
                     System.out.print("Informations des salons :\n");
                     //Vector _listeSalons=new Vector(Collection<Salon>);
 
-                    for (Salon iterSalon : _listeSalons) {
+                    for (SalonThread iterSalon : ServeurGlobale.sv.get_tabSalons()) {
                         if (_listeSalons.isEmpty())
-                            System.out.print("  Aucun salon n'est disponible\n");
+                            System.out.print("\tAucun salon n'est disponible\n");
                         else
-                            System.out.print("  " + iterSalon.infos() + "\n");
+                            System.out.println("\t"
+                                    + iterSalon.get_id()
+                                    + " - "
+                                    + iterSalon.get_nom()
+                            );
                     }
 
                 } else if (_strCommande.equalsIgnoreCase("ns")) {
@@ -104,25 +109,22 @@ public class Commandes implements Runnable
                     String _mdp = _in.readLine();
                     if (_mdp.trim().isEmpty()) {
                         _listeSalons.add(new Salon(difficulte, "partie classique"));
-                    } else{
+                    } else {
                         _listeSalons.add(new SalonPrive(difficulte, "partie privée", _mdp));
                     }
-
-
-                } else if (_strCommande.equalsIgnoreCase("ls")) {
-                    System.out.print("liste des joueurs :\n");
-                    for (Salon iterSalon : _listeSalons) {
-                        if (_listeSalons.isEmpty())
-                            System.out.print("  Aucun salon n'est disponible\n");
-                        //else
-                        //  System.out.print("  "+iterSalon.getJoueurPseudo()+"\n");
-                    }
+                } else if (_strCommande.equalsIgnoreCase("create")) { /* create */
+                    System.out.println("\tCreation du salon en cours ...");
+                    SalonThread _salon = new SalonThread();
+                    System.out.println("\tLe salon "
+                            + _salon.get_id() + " - " + _salon.get_nom()
+                            + " a ete cree !");
+                    System.out.println("\tDemarrage du salon ...");
+                    _salon.start();
+                    ServeurGlobale.sv.addSalon(_salon);
+                    System.out.println("\tLe salon est en ligne.");
                 } else {
-                    System.out.print("commande inconnue\n");
+                    System.err.println("La commande " + _strCommande + " n'a pas été reconnue.");
                 }
-
-
-
 
                 System.out.flush(); // on affiche tout ce qui est en attente dans le flux
             }

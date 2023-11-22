@@ -99,11 +99,11 @@ public class ServeurGlobale {
         return _nbClients;
     }
 
-    synchronized public static Vector get_tabSalons() {
+    synchronized public Vector<SalonThread> get_tabSalons() {
         return _tabSalons;
     }
 
-    synchronized public Vector get_tabClients() {
+    synchronized public Vector<JoueurHandler> get_tabClients() {
         return _tabClients;
     }
 
@@ -138,6 +138,11 @@ public class ServeurGlobale {
         System.out.println("Joueur non existant");
         return tempJoueur;
     }
+
+    public static void set_tabSalons(Vector<SalonThread> _tabSalons) {
+        ServeurGlobale._tabSalons = _tabSalons;
+    }
+
     synchronized public SalonThread get_salon(int id) {
         SalonThread tmp = _tabSalons.get(id);
         return tmp;

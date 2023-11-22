@@ -15,6 +15,10 @@ public final class JoueurHandler extends Thread {
         return _monTour;
     }
 
+    public void set_monTour(Boolean _monTour) {
+        this._monTour = _monTour;
+    }
+
     Boolean _monTour=true;
 
 

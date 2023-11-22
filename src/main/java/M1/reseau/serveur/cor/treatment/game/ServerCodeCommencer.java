@@ -5,6 +5,8 @@ import M1.reseau.serveur.cor.ServerCOR;
 import M1.reseau.serveur.serveur.game.GameService;
 import M1.reseau.serveur.serveur.game.SalonThread;
 
+import java.io.IOException;
+
 public class ServerCodeCommencer extends ServerCOR {
 
     public ServerCodeCommencer() {
@@ -21,7 +23,9 @@ public class ServerCodeCommencer extends ServerCOR {
         GameService _gameService = _salon.get_gameService();
         try {
             _gameService.get_partie().commencer();
-        } catch (IPartieException e) {
+            _salon.get_j1().message("commencer;" + _salon.get_nom());
+            _salon.get_j2().message("commencer;" + _salon.get_nom());
+        } catch (IPartieException | IOException e) {
             throw new RuntimeException(e);
         }
     }

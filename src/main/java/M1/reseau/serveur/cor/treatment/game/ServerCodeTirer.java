@@ -12,6 +12,8 @@ import M1.reseau.serveur.cor.ServerCOR;
 import M1.reseau.serveur.serveur.game.GameService;
 import M1.reseau.serveur.serveur.game.SalonThread;
 
+import java.io.IOException;
+
 public class ServerCodeTirer extends ServerCOR {
 
     public ServerCodeTirer() {
@@ -53,13 +55,23 @@ public class ServerCodeTirer extends ServerCOR {
             _tireSubit.set_case(_case);
             _ja.accepte(_tireSubit);
 
+            if (!(_ja instanceof Bot)) {
+                String msg = "toucher;"
+                        + _salon.get_nom()
+                        + ";" + _jc.get_pseudo()
+                        + ";" + _ja.get_pseudo()
+                        + ";" + _sp[4] + ";" + _sp[5];
+                _salon.get_j1().message(msg);
+                _salon.get_j2().message(msg);
+            }
+
             boolean status = _gameService.get_partie().gagnant();
             if (status) {
                 _gameService.get_partie().fin();
             }
             else _gameService.get_partie().tourSuivant();
 
-        } catch (IPartieException | IGrilleException | IJoueurException e) {
+        } catch (IPartieException | IGrilleException | IJoueurException | IOException e) {
             System.err.println("ServerCodeTirer : Erreur.");
         }
 

@@ -179,6 +179,8 @@ public class ControleurGrille {
 
         }
         Grilles.getChildren().add(_GrilleDeSauron);
+        maGrille=_maGrille;
+        saGrille=_GrilleDeSauron;
 
         _panGrilles.getChildren().add(Grilles);
 
@@ -278,8 +280,8 @@ public class ControleurGrille {
             _id = "#".concat(String.valueOf(x).concat(String.valueOf(y)).concat("g2"));
         }
 
-       // Rectangle _uneCase = (Rectangle) lookup(_id);
-        //_uneCase.setFill(c);
+        Rectangle _uneCase = (Rectangle) maGrille.getScene().lookup(_id);
+        _uneCase.setFill(c);
     }
 
 

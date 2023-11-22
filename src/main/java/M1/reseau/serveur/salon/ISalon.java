@@ -1,6 +1,10 @@
 package M1.reseau.serveur.salon;
 
+import M1.reseau.model.game.Partie;
+
 public  interface ISalon {
+
+    Partie _partie = null;
 
     public String getNom();
     public String getDescription();

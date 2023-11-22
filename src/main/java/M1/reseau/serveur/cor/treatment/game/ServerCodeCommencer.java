@@ -26,7 +26,7 @@ public class ServerCodeCommencer extends ServerCOR {
             _salon.get_j1().message("commencer;" + _salon.get_nom());
             _salon.get_j2().message("commencer;" + _salon.get_nom());
         } catch (IPartieException | IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("ServerCodeCommencer : Error.");
         }
     }
 

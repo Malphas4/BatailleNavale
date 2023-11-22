@@ -39,11 +39,11 @@ public class ServerCodeJoinBot extends ServerCOR {
                         )
                 );
             } catch (IJoueurException e) {
-                throw new RuntimeException(e);
+                System.err.println("ServerCodeJoinBot : Error.");
             }
 
         } catch (IPartieException e) {
-            System.err.println("ServerCodeJoin : Error.");
+            System.err.println("ServerCodeJoinBot : Error.");
         }
     }
 

@@ -55,6 +55,7 @@ public class ServerCodeTirer extends ServerCOR {
             _tireSubit.set_case(_case);
             _ja.accepte(_tireSubit);
 
+            /* Sending update to all player */
             if (!(_ja instanceof Bot)) {
                 String msg = "toucher;"
                         + _salon.get_nom()
@@ -65,9 +66,31 @@ public class ServerCodeTirer extends ServerCOR {
                 _salon.get_j2().message(msg);
             }
 
+            if (_salon.get_j1().get_pseudo().equals(_jc.get_pseudo())) {
+                _salon.get_j1().set_monTour(false);
+                _salon.get_j2().set_monTour(true);
+                _salon.get_j1().sendFinTour();
+                _salon.get_j2().sendDebutTour();
+            } else if (_salon.get_j2().get_pseudo().equals(_jc.get_pseudo())) {
+                _salon.get_j1().set_monTour(true);
+                _salon.get_j2().set_monTour(false);
+                _salon.get_j1().sendDebutTour();
+                _salon.get_j2().sendFinTour();
+            }
+
             boolean status = _gameService.get_partie().gagnant();
             if (status) {
                 _gameService.get_partie().fin();
+                String _msg = "gagner;"
+                        + _salon.get_nom()
+                        + ";" + ((_gameService.get_partie().is_aGagner1()) ?
+                                                            _gameService.get_partie().get_joueur1().get_pseudo()
+                                                            : _gameService.get_partie().get_joueur2().get_pseudo());
+                if (_salon.get_j1().get_pseudo().equals(_jc.get_pseudo())) {
+
+                } else if (_salon.get_j2().get_pseudo().equals(_jc.get_pseudo())) {
+
+                }
             }
             else _gameService.get_partie().tourSuivant();
 

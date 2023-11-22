@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.Scene?>
+
 <Scene xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="M1.reseau.client.controller.ControleurGrille">
     <AnchorPane prefHeight="600" prefWidth="800.0">
       <children>
@@ -13,8 +14,8 @@
                      <Button fx:id="_btnAbandon" layoutX="44.0" layoutY="214.0" mnemonicParsing="false" onAction="#Abandonner" prefHeight="25.0" prefWidth="90.0" text="Abandonner" />
                      <Button fx:id="_btnQuitter" layoutX="44.0" layoutY="255.0" mnemonicParsing="false" onAction="#Quitter" prefHeight="25.0" prefWidth="90.0" text="Quitter" />
                      <TextArea fx:id="_infoParties" layoutX="-1.0" layoutY="-1.0" prefHeight="195.0" prefWidth="235.0" text="Bateaux à placer : &#10;&#10;Cliquer sur votre grille pour&#10;placer vos bateaux &#10;dans l'ordre ci dessous &#10;&#10;1 Porte-avions (5 cases) &#10;1 Croiseur (4 cases) &#10;1 Contre-torpilleurs (3 cases)&#10;1 Torpilleur (2 cases)" AnchorPane.bottomAnchor="403.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     <Label fx:id="_labelTimer" layoutX="65.0" layoutY="303.0" text="Timer" visible="false" />
-                     <Label fx:id="_labelChrono" layoutX="65.0" layoutY="320.0" text="0:00" visible="false" />
+                     <Label fx:id="_labelTimer" layoutX="65.0" layoutY="303.0" text="Timer" />
+                     <Label fx:id="_labelChrono" layoutX="65.0" layoutY="320.0" text="0:00" />
                   </children>
                </AnchorPane>
                <AnchorPane>
@@ -30,10 +31,10 @@
                                  <Pane fx:id="_panGrilles" layoutX="3.0" layoutY="54.0" prefHeight="280.0" prefWidth="555.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0" />
                                  <Button fx:id="_btnTorpilleur" layoutX="175.0" layoutY="358.0" mnemonicParsing="false" onAction="#selectionTorpilleur" prefHeight="25.0" prefWidth="67.0" text="Torpilleur" textAlignment="CENTER" />
                                  <Button fx:id="_btnContreTorpille" layoutX="14.0" layoutY="395.0" mnemonicParsing="false" onAction="#selectionContreTorpille" prefHeight="25.0" prefWidth="104.0" text="Contre torpilleur" textAlignment="CENTER" wrapText="true" />
-                                 <Button fx:id="_btnValidationPause" disable="true" layoutX="278.0" layoutY="395.0" mnemonicParsing="false" onAction="#ValiderPoser" prefHeight="25.0" prefWidth="150.0" text="Valider la pose du bateau" textAlignment="CENTER" visible="false" />
-                                 <Button fx:id="_btnRotation" disable="true" layoutX="278.0" layoutY="358.0" mnemonicParsing="false" onAction="#RotationBateau" prefHeight="25.0" prefWidth="150.0" text="Rotation du bateau" textAlignment="CENTER" visible="false" />
+                                 <Button fx:id="_btnValidationPause" layoutX="278.0" layoutY="395.0" mnemonicParsing="false" onAction="#ValiderPoser" prefHeight="25.0" prefWidth="150.0" text="Valider la pose du bateau" textAlignment="CENTER" />
+                                 <Button fx:id="_btnRotation" disable="true" layoutX="278.0" layoutY="358.0" mnemonicParsing="false" onAction="#RotationBateau" prefHeight="25.0" prefWidth="150.0" text="Rotation du bateau" textAlignment="CENTER" />
                                  <Label layoutX="103.0" layoutY="334.0" text="bateaux" />
-                                 <Label layoutX="333.0" layoutY="334.0" text="Actions" visible="false" />
+                                 <Label layoutX="333.0" layoutY="334.0" text="Actions" />
                               </children>
                            </AnchorPane>
                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="400.0">

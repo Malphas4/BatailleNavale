@@ -98,7 +98,7 @@ public class Commandes implements Runnable
                             );
                     }
 
-                } else if (_strCommande.equalsIgnoreCase("ns")) {
+                /*} else if (_strCommande.equalsIgnoreCase("ns")) {
                     System.out.print("creation d'un salon :\n");
                     System.out.print("Difficulté du nouveau salon ? \n options possibles \n f pour facile \n d pour difficile \n m pour moyen" + "\n");
                     String difficulte = _in.readLine();
@@ -108,10 +108,10 @@ public class Commandes implements Runnable
                     System.out.print("mot de passe? laisser vide pour ne pas en attribuer\n");
                     String _mdp = _in.readLine();
                     if (_mdp.trim().isEmpty()) {
-                        _listeSalons.add(new Salon(difficulte, "partie classique"));
+                        _listeSalons.add(new SalonThread(difficulte, "partie classique"));
                     } else {
                         _listeSalons.add(new SalonPrive(difficulte, "partie privée", _mdp));
-                    }
+                    }*/
                 } else if (_strCommande.equalsIgnoreCase("create")) { /* create */
                     System.out.println("\tCreation du salon en cours ...");
                     SalonThread _salon = new SalonThread();

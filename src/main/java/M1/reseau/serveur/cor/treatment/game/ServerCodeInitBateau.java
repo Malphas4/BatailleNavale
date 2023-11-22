@@ -1,6 +1,7 @@
 package M1.reseau.serveur.cor.treatment.game;
 
 import M1.reseau.model.exception.IGrilleException;
+import M1.reseau.model.exception.IPartieException;
 import M1.reseau.model.world.element.classic.CaseBateau;
 import M1.reseau.model.world.element.classic.CaseNormal;
 import M1.reseau.serveur.cor.ServerCOR;
@@ -34,16 +35,15 @@ public class ServerCodeInitBateau extends ServerCOR {
             } catch (IGrilleException e) {
                 throw new RuntimeException(e);
             }
-        } else {
+        } else if (_gameService.get_partie().get_joueur2().get_pseudo().equals(_sp[2])) {
             try {
                 _gameService.get_partie().get_joueur2().get_grilleJoueur().supprimerCase(new CaseNormal(x, y));
                 _gameService.get_partie().get_joueur2().get_grilleJoueur().ajouterCase(_ncase);
             } catch (IGrilleException e) {
                 System.out.println("ServerCodeInitBateau : Error.");
             }
-        }
-
-
+        } else
+            System.err.println("ServerCodeInitBateau : Error.");
     }
 
     /**

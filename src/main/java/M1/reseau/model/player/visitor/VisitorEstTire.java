@@ -88,9 +88,9 @@ public class VisitorEstTire implements IVisitorJoueur {
 
         /* On supprime l'ancienne case de la liste dans la grille du joueur*/
         try {
-            ICase _supCase = _bot.get_grilleBot().get_caseParCoord(get_case().get_x(), get_case().get_y());
-            _bot.get_grilleBot().supprimerCase(_supCase);
-            _bot.get_grilleBot().ajouterCase(_newcase);
+            ICase _supCase = _bot.get_grilleJoueur().get_caseParCoord(get_case().get_x(), get_case().get_y());
+            _bot.get_grilleJoueur().supprimerCase(_supCase);
+            _bot.get_grilleJoueur().ajouterCase(_newcase);
         } catch (IGrilleException e) {
             System.err.println("VisitorEstTire : La case n'a pas pu être supprimé de la grille");
         }

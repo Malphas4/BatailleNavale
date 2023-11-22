@@ -63,6 +63,9 @@ public class ControleurGrille {
 
     @FXML
     private Button _btnValidationPause;
+    boolean _initBateaux=false;
+    VBox maGrille ;
+    VBox saGrille;
 
 
 
@@ -88,19 +91,40 @@ public class ControleurGrille {
     @FXML
     public void initialize() {
         _placementbateaux=true;
+        Boolean proretaire=true;
         Node _joueur ,_adversaire= null;
         HBox Grilles =new HBox(50);
         System.out.println("initialisation des grilles\n");
 
         boolean enemy = false;
         int ships = 5;
+        String _id="";
+        proretaire=true;
         VBox _maGrille = new VBox();
+        Color _couleurEau = Color.DARKTURQUOISE;
+        Color _couleurBord = Color.BLACK;
         VBox _GrilleDeSauron = new VBox();
         for (int y = 0; y < 6; y++) {
             HBox colonne = new HBox();
             for (int x = 0; x < 6; x++) {
+                // selon le propriétaire de la grille
+                if (proretaire) {
+                    //attribution de l'id afin de retrouver la case
+                    _id = String.valueOf(x).concat(String.valueOf(y)).concat("g1");
+                    _couleurEau = Color.DARKTURQUOISE;
+                    _couleurBord = Color.BLACK;
+                    //=String.valueOf(x).concat(String.valueOf(y)).concat("g2")
+                } else {
+                    //attribution de l'id afin de retrouver la case
+                    _id = String.valueOf(x).concat(String.valueOf(y)).concat("g2");
+
+                    _couleurEau = Color.DARKBLUE;
+                    _couleurBord = Color.LIGHTGOLDENRODYELLOW;
+                }
+
                 //Cell c = new Cell(x, y, this);
                 Rectangle _uneCase = new Rectangle(30, 30, Color.DARKTURQUOISE);
+                _uneCase.setId(_id);
                 _uneCase.setStroke(Color.BLACK);
                 _uneCase.setOnMouseClicked(event ->  {
                     int _x,_y;
@@ -158,6 +182,12 @@ public class ControleurGrille {
 
         _panGrilles.getChildren().add(Grilles);
 
+
+
+
+
+
+
     }
 
     @FXML
@@ -209,6 +239,11 @@ public class ControleurGrille {
 
     @FXML
     void ValiderPoser(ActionEvent event) {
+        modifCase(3, 3,Color.GREEN ,true);
+        modifCase(3, 4,Color.GREEN ,true);
+        modifCase(1, 1,Color.GREEN ,true);
+        modifCase(1, 2,Color.GREEN ,true);
+        modifCase(1, 0,Color.GREEN ,true);
 
     }
 
@@ -242,7 +277,9 @@ public class ControleurGrille {
         } else {
             _id = "#".concat(String.valueOf(x).concat(String.valueOf(y)).concat("g2"));
         }
-        _sceneGrille.lookup(_id);
+
+       // Rectangle _uneCase = (Rectangle) lookup(_id);
+        //_uneCase.setFill(c);
     }
 
 

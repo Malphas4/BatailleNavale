@@ -3,6 +3,7 @@ package M1.reseau.client.controller;
 import M1.reseau.serveur.singletons.SingletonUDP;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,6 +24,8 @@ public class ControleurLobby {
 
     @FXML
     private Button _btnRejoindre;
+    @FXML
+    private Button _btnQuitter;
 
     @FXML
     private Button _btnchatLobby;
@@ -117,6 +120,17 @@ public class ControleurLobby {
         timer15Secondes.setCycleCount(Timeline.INDEFINITE);
         timer15Secondes.play();
 
+    }
+
+    @FXML
+    void Quitter(ActionEvent event) {
+        System.out.print("au revoir\n");
+        Platform.exit();
+        //fermeture serveur UDP et TCP AF
+        //SingletonUDP.getInstance().fermet
+        // ureSocket();
+        //SingletonTCP.fermetureSocket();
+        System.exit(0);
     }
     @FXML
     void majSalons(ActionEvent event) {

@@ -4,6 +4,7 @@ import M1.reseau.model.exception.IBateauException;
 import M1.reseau.model.ship.Bateau;
 import M1.reseau.model.world.element.ICase;
 
+@Deprecated
 public class BateauLigne extends Bateau {
 
     private int _maxCase;

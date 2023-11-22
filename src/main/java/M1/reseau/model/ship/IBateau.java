@@ -6,8 +6,9 @@ import M1.reseau.model.world.element.ICase;
 import java.util.List;
 
 /**
- * @Deprecated
+ *
  */
+@Deprecated
 public interface IBateau {
     List<ICase> get_listeCase();
     void set_listeCase(List<ICase> _listeCase);

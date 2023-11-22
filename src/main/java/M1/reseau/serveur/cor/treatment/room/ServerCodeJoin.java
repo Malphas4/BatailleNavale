@@ -42,6 +42,7 @@ public class ServerCodeJoin extends ServerCOR {
      */
     @Override
     public boolean isMessageCorrect(String _message) {
-        return _message.contains("join");
+        String[] _sp = _message.split(";");
+        return _sp[1].equals("join");
     }
 }

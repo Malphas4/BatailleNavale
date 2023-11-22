@@ -159,6 +159,11 @@ public class SalonThread extends Thread {
         return _j2;
     }
 
+    public int get_id() {
+        return _id;
+    }
 
-
+    public void set_id(int _id) {
+        this._id = _id;
+    }
 }

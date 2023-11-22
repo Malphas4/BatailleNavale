@@ -4,17 +4,19 @@ import M1.reseau.serveur.cor.treatment.chat.ServerCodeChat;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeCommencer;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeInitBateau;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeTirer;
+import M1.reseau.serveur.cor.treatment.room.ServerCodeAbandonner;
 import M1.reseau.serveur.cor.treatment.room.ServerCodeJoin;
 import M1.reseau.serveur.cor.treatment.room.ServerCodeJoinBot;
+import M1.reseau.serveur.serveur.game.SalonThread;
 
-public class ServerCORBuilder {
+public class ServerCORBuilder implements IServerCORBuilder {
 
     private static ServerCORBuilder _serverCORBuilder;
 
     private IServerCOR _serverCOR;
 
     private ServerCORBuilder() {
-        IServerCOR sc1, sc2, sc3, sc4, sc5, sc6;
+        IServerCOR sc1, sc2, sc3, sc4, sc5, sc6, sc7;
 
         /* Init COR */
         sc1 = new ServerCodeChat();
@@ -23,6 +25,7 @@ public class ServerCORBuilder {
         sc4 = new ServerCodeInitBateau();
         sc5 = new ServerCodeCommencer();
         sc6 = new ServerCodeTirer();
+        sc7 = new ServerCodeAbandonner();
 
         /* Chaining COR */
         sc1.set_nextNode(sc2);
@@ -30,6 +33,7 @@ public class ServerCORBuilder {
         sc3.set_nextNode(sc4);
         sc4.set_nextNode(sc5);
         sc5.set_nextNode(sc6);
+        sc6.set_nextNode(sc7);
 
         set_serverCOR(sc1);
     }
@@ -53,5 +57,14 @@ public class ServerCORBuilder {
 
     public void set_serverCOR(IServerCOR _serverCOR) {
         this._serverCOR = _serverCOR;
+    }
+
+    /**
+     * @param _message
+     * @param _salon
+     */
+    @Override
+    public void solveServer(String _message, SalonThread _salon) {
+        get_serverCOR().receive(_message, _salon);
     }
 }

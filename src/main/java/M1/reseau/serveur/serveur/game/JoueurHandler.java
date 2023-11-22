@@ -60,17 +60,16 @@ public final class JoueurHandler extends Thread {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
 
-            while( (_msg = in.readLine()) != null){
+            while( (_msg = in.readLine()) != null) {
 
                 String [] _sp = _msg.split(";");
 
                 ServerCORBuilder
-                        .getInstance()
-                        .get_serverCOR()
-                        .receive(
-                                _msg,
-                                ServeurGlobale.sv.get_salon(Integer.parseInt(_sp[1]))
-                                );
+                    .getInstance()
+                    .solveServer(
+                        _msg,
+                        ServeurGlobale.sv.get_salon(Integer.parseInt(_sp[1]))
+                    );
 
             }
         }

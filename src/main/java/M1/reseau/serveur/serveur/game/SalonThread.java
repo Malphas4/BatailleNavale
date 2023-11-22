@@ -139,6 +139,15 @@ public class SalonThread extends Thread {
         this._j2 = _j2;
     }
 
+    synchronized public void set_j1(String sj1) {
+        this._j1 = _serveurGlobale.get_1Client(sj1);
+    }
+    synchronized public void set_j2(String sj2) {
+        this._j2 = _serveurGlobale.get_1Client(sj2);
+    }
+    synchronized public void set_j2(JoueurHandler _j2) {
+        this._j2 = _j2;
+    }
     synchronized public JoueurHandler get_j2() {
         return _j2;
     }

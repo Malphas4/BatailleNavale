@@ -38,8 +38,8 @@ public class ServeurGlobale {
          sv = new ServeurGlobale();
 
         Thread tcpServeur = null;
-        tcpServeur = new SalonThread();
-        tcpServeur.start();
+        //tcpServeur = new SalonThread();
+        //tcpServeur.start();
 
 
 

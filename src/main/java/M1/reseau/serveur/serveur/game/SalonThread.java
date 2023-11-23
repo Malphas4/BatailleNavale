@@ -7,7 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
 
-public class SalonThread extends Thread {
+public class SalonThread /*extends Thread*/ {
 
 
     private ServerSocket serverSocket;
@@ -39,7 +39,7 @@ public class SalonThread extends Thread {
 
 
     public SalonThread(ServeurGlobale sv, JoueurHandler j1, JoueurHandler j2, int id) {
-        setName("TcpServer");
+        //setName("TcpServer");
         _serveurGlobale=ServeurGlobale.sv;
         _j1=j1;
         _j2=j2;
@@ -60,7 +60,7 @@ public class SalonThread extends Thread {
     }
 
     public SalonThread(ServeurGlobale sv, JoueurHandler j1, int id) throws IOException {
-        setName("TcpServer");
+        //setName("TcpServer");
         _serveurGlobale=sv;
         _j1=j1;
         _j2=null;
@@ -85,7 +85,7 @@ public class SalonThread extends Thread {
         }*/
     }
 
-    public void run(){
+    /*public void run(){
         try{
             while (! isInterrupted()) {
 
@@ -112,7 +112,7 @@ public class SalonThread extends Thread {
                 e.printStackTrace();
             }
         }*/
-    }
+    /*}*/
 
 
 

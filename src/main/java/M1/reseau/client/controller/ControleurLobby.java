@@ -143,7 +143,8 @@ public class ControleurLobby {
         try {
             String _msgSalons= SingletonUDP.getInstance().reception();
             System.out.println(_msgSalons);
-            nbSalons = Integer.parseInt(_msgSalons);
+            String[] _strSalons=_msgSalons.split(";");
+            nbSalons = Integer.parseInt(_strSalons[1]);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -160,17 +161,18 @@ public class ControleurLobby {
                 }
             });
 
-            _listeSalon.getChildren().add(b);
-            Button _tempBtn =new Button("test");
-            _tempBtn.setId("4");
-            _listeBtnSalon.add(_tempBtn);
-            _tempBtn.setOnAction(new EventHandler<ActionEvent>(){
+           // _listeSalon.getChildren().add(b);
+            _listeBtnSalon.add(b);
+            //Button _tempBtn =new Button("test");
+           // _tempBtn.setId("4");
+            //_listeBtnSalon.add(_tempBtn);
+            /*_tempBtn.setOnAction(new EventHandler<ActionEvent>(){
                     @Override
                     public void handle(ActionEvent event) {
                         System.out.println("test btn dynamique");
                         //TODO envoi au serveur du numero du salon
                     }
-            });
+            });*/
 
             _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
             _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created

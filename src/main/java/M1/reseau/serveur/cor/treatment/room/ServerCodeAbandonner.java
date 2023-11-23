@@ -29,7 +29,7 @@ public class ServerCodeAbandonner extends ServerCOR {
                 System.err.println("ServerCodeAbandonner : Error.");
             }
         } else System.err.println("ServerCodeAbandonner : Error.");
-        _salon.interrupt();
+       //TODO _salon.interrupt();
     }
 
     /**

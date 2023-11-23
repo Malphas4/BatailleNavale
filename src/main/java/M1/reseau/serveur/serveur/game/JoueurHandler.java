@@ -11,6 +11,9 @@ public final class JoueurHandler extends Thread {
     private Socket socket;
     private String _pseudo;
 
+    public JoueurHandler(String speudo) {
+    }
+
     public Boolean get_monTour() {
         return _monTour;
     }

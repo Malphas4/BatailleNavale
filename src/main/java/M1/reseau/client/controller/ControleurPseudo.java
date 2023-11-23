@@ -87,8 +87,10 @@ public class ControleurPseudo {
 
             }
             if (_msgT[0].equals("1D")) {
-                _btnPseudoConnexion.setDisable(true);
-                _btnPseudoConnexion.setVisible(false);
+                //_btnPseudoConnexion.setDisable(true);
+                //_btnPseudoConnexion.setVisible(false);
+                _msgConsigne.setText("Echec de la connexion");
+
 
             }
         }
@@ -119,7 +121,7 @@ public class ControleurPseudo {
             _msgConsigne.setText("Mot de passe manquant ! \nVeuillez entrer votre mot de passe");
             System.out.print("mdp vide\n");
         }else if(!( _pseudo.isEmpty() ||_mdpInput.isEmpty())) {
-            _inscription = "12:".concat(_pseudo).concat(";").concat(_mdpInput);
+            _inscription = "12;".concat(_pseudo).concat(":").concat(_mdpInput);
             System.out.print(_inscription);
             //Mise a jour du pseudonyme dans l'instance
             SingletonUDP.getInstance().message(_inscription);
@@ -132,7 +134,7 @@ public class ControleurPseudo {
 
 
             // traitement de la chaine COR pour savoir quel message traiter
-            String[] _msgT = _messageServeur.split(":");
+            String[] _msgT = _messageServeur.split(";");
             //messahe valide selon COR a la fin
             if (_msgT[0].equals("12")) {
                 stageActuel.setScene(sceneMenu);
@@ -141,7 +143,15 @@ public class ControleurPseudo {
 
             }
             if (_msgT[0].equals("13")) {
-                _msgConsigne.setText("Compte déjà existant");
+                _msgConsigne.setText("Compte existant, essayez un autre pseudo");
+
+            }
+            if (_msgT[0].equals("20")) {
+                _msgConsigne.setText("Inscription faite");
+
+            }
+            if (_msgT[0].equals("1E")) {
+                _msgConsigne.setText("Connexion impossible");
 
             }
         }

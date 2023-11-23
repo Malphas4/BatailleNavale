@@ -47,7 +47,7 @@ public class ControleurLobby {
 
     //variables pour salons en dynamiques
     int _nbSalons=2;//AF mettre 2
-    int nbSalons=0;
+    int nbSalons;
     String _salonChoisi;
     String _demandeSalons="NBsalons?";
 
@@ -111,14 +111,14 @@ public class ControleurLobby {
 
 
         }
-        Timeline timer15Secondes = new Timeline(
-                new KeyFrame(Duration.seconds(15),
+        Timeline timer10Secondes = new Timeline(
+                new KeyFrame(Duration.seconds(10),
                         event -> {
                             majSalons(event);
-                            System.out.println("timer 15s");
+                            System.out.println("timer 10");
                         }));
-        timer15Secondes.setCycleCount(Timeline.INDEFINITE);
-        timer15Secondes.play();
+        timer10Secondes.setCycleCount(Timeline.INDEFINITE);
+        timer10Secondes.play();
 
     }
 
@@ -134,37 +134,48 @@ public class ControleurLobby {
     }
     @FXML
     void majSalons(ActionEvent event) {
+        _listeSalon.getChildren().clear();
+
 
         try {
             SingletonUDP.getInstance().message(_demandeSalons);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        _listeBtnSalon.clear();
+//        _listeSalon.getChildren().removeAll(_listeSalon.getChildren());
+
         try {
             String _msgSalons= SingletonUDP.getInstance().reception();
             System.out.println(_msgSalons);
             String[] _strSalons=_msgSalons.split(";");
             nbSalons = Integer.parseInt(_strSalons[1]);
+            System.out.println("nb salons AF "+nbSalons);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        for (int i = 0; i < nbSalons; i++) {
-            Button b=new Button("Salon ".concat(String.valueOf(i)));
-            b.setId(String.valueOf(i));
-            System.out.println(i);
+        for (int j = 0; j < nbSalons; j++) {
+            Button b=new Button("Salon ".concat(String.valueOf(j)));
+            System.out.println("creation bouton "+j);
+            b.setId(String.valueOf(j));
+            b.setLayoutX(50);
             b.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent event) {
                     Node source = (Node) event.getSource();
                     _salonChoisi= source.getId();
                     System.out.println("selectionSalon; "+_salonChoisi);
+                    //
+                    //SingletonTCP.getInstance().message("salonid;.concat(_salonChoisi)";
+                    //SingletonTCP.getInstance().message("commencer");
                 }
             });
 
            // _listeSalon.getChildren().add(b);
             _listeBtnSalon.add(b);
             //Button _tempBtn =new Button("test");
-           // _tempBtn.setId("4");
+            //_tempBtn.setId("4");
             //_listeBtnSalon.add(_tempBtn);
             /*_tempBtn.setOnAction(new EventHandler<ActionEvent>(){
                     @Override
@@ -174,10 +185,19 @@ public class ControleurLobby {
                     }
             });*/
 
-            _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
-            _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
+           //remove all Buttons that are currently in the container
+
+           // _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
 
         }
+        /*for (Button iterB:_listeBtnSalon
+        ) {
+            _listeSalon.getChildren().add(iterB);
+
+        }*/
+        _listeSalon.getChildren().removeAll(_listeSalon.getChildren());
+
+        _listeSalon.getChildren().addAll(_listeBtnSalon);
 
 
 

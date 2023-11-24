@@ -7,6 +7,7 @@ public class InformationsUtilisateur {
     /* Informations utilisateurs */
     private String _pseudo;
     private int _salon;
+    int _bot=1;
 
     //1 pour multi, 0 pour solo
     private int _typePartie;
@@ -45,5 +46,13 @@ public class InformationsUtilisateur {
 
     public void set_salon(int salon) {
         this._salon = salon;
+    }
+
+    public void set_bot(int bot) {
+        this._bot = bot;
+    }
+
+    public int get_bot() {
+        return _bot;
     }
 }

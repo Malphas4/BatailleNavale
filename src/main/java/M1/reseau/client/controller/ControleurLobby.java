@@ -1,13 +1,17 @@
 package M1.reseau.client.controller;
 
+import M1.reseau.serveur.singletons.SingletonTCP;
 import M1.reseau.serveur.singletons.SingletonUDP;
+import M1.reseau.utilities.InformationsUtilisateur;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -65,11 +69,21 @@ public class ControleurLobby {
     }
 
     @FXML
-    void joindreSalon(ActionEvent event) {
+    void joindreSalon(ActionEvent event) throws IOException {
 
-            //change de stage
+        //change de stage
 
-          //  thisStage.hide();
+        if(!_salonChoisi.isEmpty()){
+            SingletonTCP.getInstance().message("commencer");
+            FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
+            InformationsUtilisateur.getInstance().set_salon(Integer.parseInt(_salonChoisi));
+            // AnchorPane grille=grilleLoader.load();
+            // Scene sceneGrille = new Scene(grille);
+            Scene sceneGrille=grilleLoader.load();
+        }else System.out.println("pas de salon choisi");
+
+
+        //  thisStage.hide();
         /*quand l'id du salon est selection éet change,
         il faut demander au serveur les infos dudit salon
         , les afficher dans le label prévu
@@ -126,9 +140,9 @@ public class ControleurLobby {
     void Quitter(ActionEvent event) {
         System.out.print("au revoir\n");
         Platform.exit();
+        //TODO
         //fermeture serveur UDP et TCP AF
-        //SingletonUDP.getInstance().fermet
-        // ureSocket();
+        //SingletonUDP.getInstance().fermetureSocket();
         //SingletonTCP.fermetureSocket();
         System.exit(0);
     }
@@ -167,59 +181,26 @@ public class ControleurLobby {
                     _salonChoisi= source.getId();
                     System.out.println("selectionSalon; "+_salonChoisi);
                     //
-                    //SingletonTCP.getInstance().message("salonid;.concat(_salonChoisi)";
-                    //SingletonTCP.getInstance().message("commencer");
+                    try {
+                        SingletonTCP.getInstance().message("salonid;".concat(_salonChoisi));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        SingletonTCP.getInstance().message("infosalon;".concat(_salonChoisi));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
 
-           // _listeSalon.getChildren().add(b);
-            _listeBtnSalon.add(b);
-            //Button _tempBtn =new Button("test");
-            //_tempBtn.setId("4");
-            //_listeBtnSalon.add(_tempBtn);
-            /*_tempBtn.setOnAction(new EventHandler<ActionEvent>(){
-                    @Override
-                    public void handle(ActionEvent event) {
-                        System.out.println("test btn dynamique");
-                        //TODO envoi au serveur du numero du salon
-                    }
-            });*/
-
-           //remove all Buttons that are currently in the container
-
-           // _listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
-
         }
-        /*for (Button iterB:_listeBtnSalon
-        ) {
-            _listeSalon.getChildren().add(iterB);
 
-        }*/
         _listeSalon.getChildren().removeAll(_listeSalon.getChildren());
 
         _listeSalon.getChildren().addAll(_listeBtnSalon);
 
-
-
-        //handle button click
-       // _listeSalon.getChildren().clear(); //remove all Buttons that are currently in the container
-        //_listeSalon.getChildren().addAll(_listeBtnSalon); //then add all your Buttons that you just created
-
-
-    }/*
-    Timeline fiveSecondsWonder = new Timeline(
-        new KeyFrame(Duration.seconds(5),
-            new EventHandler<ActionEvent>() {
-
-                @Override
-                public void handle(ActionEvent event) {
-                    //System.out.println("Mise a jour des salons");
-                    majSalons(event);
-                }
-        })
-    );*/
-
-
+    }
 }
 
 

@@ -43,8 +43,13 @@ public class ControleurMenu {
         InformationsUtilisateur.getInstance().set_typePartie(1);
         FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
         Scene sceneLobby = lobbyLoader.load();
-        //ControleurLobby _controleurLobby = lobbyLoader.getController();
-        // Appel dialogue pour la demande du pseudo du joueur
+
+        //scene pour demander la difficulte si ajout
+//        FXMLLoader menuDifficulteLoader = new FXMLLoader(getClass().getResource("/menuDifficulte.fxml"));
+//        Scene scenemenuDifficulte = menuDifficulteLoader.load();
+//        stageActuel.setScene(scenemenuDifficulte);
+
+
 
         Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageActuel.setScene(sceneLobby);

@@ -21,7 +21,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+@Deprecated
 public class TMP {
 
 

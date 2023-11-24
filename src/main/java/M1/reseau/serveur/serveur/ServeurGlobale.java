@@ -3,6 +3,7 @@ package M1.reseau.serveur.serveur;
 import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.serveur.Threads.Commandes;
 import M1.reseau.serveur.serveur.Threads.ThreadUDP;
+import M1.reseau.serveur.serveur.Threads.ThreadsTCP;
 import M1.reseau.serveur.serveur.game.JoueurHandler;
 import M1.reseau.serveur.serveur.game.SalonThread;
 
@@ -37,9 +38,14 @@ public class ServeurGlobale {
         // instance de la classe principale
          sv = new ServeurGlobale();
 
-        Thread tcpServeur = null;
-        //tcpServeur = new SalonThread();
-        //tcpServeur.start();
+        Thread  ThreadsTCP = null;
+        try {
+            ThreadsTCP = new ThreadsTCP();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ThreadsTCP.start();
+        //sv.start();
 
 
 

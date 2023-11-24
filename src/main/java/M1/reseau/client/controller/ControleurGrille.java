@@ -1,6 +1,10 @@
 package M1.reseau.client.controller;
 
 
+import M1.reseau.model.world.element.Case;
+import M1.reseau.model.world.element.classic.CaseBateau;
+import M1.reseau.serveur.singletons.SingletonTCP;
+import M1.reseau.utilities.InformationsUtilisateur;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +24,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ControleurGrille {
 
@@ -63,21 +68,41 @@ public class ControleurGrille {
 
     @FXML
     private Button _btnValidationPause;
-    boolean _initBateaux=false;
+
     VBox maGrille ;
     VBox saGrille;
+    ArrayList<Case>  _mesBateaux=new ArrayList<>();
+    ArrayList<Case>  _bateauxMechants=new ArrayList<>();
+    ArrayList<Case> _mesBateauxAttenteValidation=new ArrayList<>();
+
+    //initialisation des couleurs utilisées
+    Color _couleurEau = Color.DARKTURQUOISE;
+    Color _couleurBord = Color.BLACK;
+    Color _couleurBateau=Color.GREEN;
+    Color _couleurRocher = Color.DARKGREY;
+    Color _couleurPasDeCible = Color.DARKSLATEBLUE;
+    Color _couleurEpave = Color.DARKRED;
 
 
 
-     //variables du controleur
-     Boolean _placementbateaux;
-     Boolean _porteAvions,_croiseur,_contreTorpilleurs,_torpilleur=false;
-     Boolean _monTour=false;
+
+    //variables du controleur
+     boolean _placementbateaux;
+     boolean _porteAvions,_croiseur,_contreTorpilleurs,_torpilleur=false;
+     boolean _monTour=false;//variable fixant le tour du joueur
+    boolean _positionBateau=true;//variable fisant si le bateau doit etre msi verticalement ou horizontalement
+    //horizon par defaut
     int _hauteur,largeur=8;//AF apres recuperation coté serveur
     //= 0;
 
+    int _monSalon;
+
+
+
+    String _monPseudo;
     int _typeBateau = 0;
     int _nbBateau = 0;
+    String _traitementTCP;
 
 
 
@@ -90,6 +115,11 @@ public class ControleurGrille {
     }
     @FXML
     public void initialize() {
+        //initialoisation des arrays contenant les cases des bateaux
+
+        _mesBateauxAttenteValidation=new ArrayList<>();
+
+
         _placementbateaux=true;
         Boolean proretaire=true;
         Node _joueur ,_adversaire= null;
@@ -101,12 +131,12 @@ public class ControleurGrille {
         String _id="";
         proretaire=true;
         VBox _maGrille = new VBox();
-        Color _couleurEau = Color.DARKTURQUOISE;
-        Color _couleurBord = Color.BLACK;
+
+
         VBox _GrilleDeSauron = new VBox();
-        for (int y = 0; y < 6; y++) {
+        for (int y = 0; y < 8; y++) {
             HBox colonne = new HBox();
-            for (int x = 0; x < 6; x++) {
+            for (int x = 0; x < 8; x++) {
                 // selon le propriétaire de la grille
                 if (proretaire) {
                     //attribution de l'id afin de retrouver la case
@@ -131,15 +161,46 @@ public class ControleurGrille {
                     _x=(int)_uneCase.getLayoutX()/31;
                     _y=(int)_uneCase.getParent().getLayoutY()/31;
                     System.out.print("case pointée x:"+_x+" y:"+_y+"\n");
-                    if(_placementbateaux){
-                        System.out.print("placement d'un bateau \n");
-                        //on envoie le debut du bateau a placer
-                        // SingletonTCP.getInstance().message("code".concat(":x").concat(String.valueOf(_x)).concat(";y").concat(String.valueOf(_y)));
+                    String psd= InformationsUtilisateur.getInstance().get_pseudo();
+                    String salon= String.valueOf(InformationsUtilisateur.getInstance().get_salon());
+                    if (_placementbateaux ) {
+                        for (Case iterEau :_mesBateauxAttenteValidation) {
+                            modifCase(iterEau.get_x(), iterEau.get_y(),_couleurEau, true);
+                        }
+                        _mesBateauxAttenteValidation.clear();
+                        if((_positionBateau &&(_x + _typeBateau < 8)  )||(!_positionBateau &&(_y + _typeBateau < 8))){
+                        for (int k = 0; k < _typeBateau; k++) {
+                            if (_positionBateau) {
+                                if (!casePrise(_mesBateaux,_x+k,_y)){
+                                _mesBateauxAttenteValidation.add(new CaseBateau(_x + k, _y));
+                                modifCase(_x + k, _y, Color.PALEVIOLETRED, true);
 
-                    }else if (_monTour){
+                                }
+                            } else{
+                                if (!casePrise(_mesBateaux,_x,_y+k)) {
+                                    _mesBateauxAttenteValidation.add(new CaseBateau(_x, _y + k));
+                                    modifCase(_x, _y + k, Color.PALEVIOLETRED, true);
+                                }
+
+                            }
+                        }
+                        System.out.print("placement d'un bateau \n");
+
+                    }
+                    /*else if(_nbBateau==4){
+                     */
+                        //transimition des coordonnes des bateaux
+                    }
+                    else if (_monTour){
                         System.out.print("Feu à volonté\n");
                         //on envoie la case du tir
-                        // SingletonTCP.getInstance().message("code".concat(":x").concat(String.valueOf(_x)).concat(";y").concat(String.valueOf(_y)));
+                        try {
+                            SingletonTCP.getInstance().message("tir".concat(":x").concat(String.valueOf(_x)).concat(";y").concat(String.valueOf(_y)));
+                            //TODO
+                            _traitementTCP=SingletonTCP.getInstance().reception();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         //on attend le message du serveur
 
                     }else System.out.print("bateaux deja placées ou pas mon tour\n");
@@ -154,9 +215,9 @@ public class ControleurGrille {
         }
         Grilles.getChildren().add(_maGrille);
 
-        for (int y = 0; y < 6; y++) {
+        for (int y = 0; y < 8; y++) {
             HBox colonnade = new HBox();
-            for (int x = 0; x < 6; x++) {
+            for (int x = 0; x < 8; x++) {
                 //Cell c = new Cell(x, y, this);
                 Rectangle _uneCase = new Rectangle(30, 30, Color.DARKBLUE);
                 _uneCase.setStroke(Color.LIGHTGOLDENRODYELLOW);
@@ -236,16 +297,77 @@ public class ControleurGrille {
 
     @FXML
     void RotationBateau(ActionEvent event) {
+        _positionBateau=!_positionBateau;
 
     }
 
     @FXML
     void ValiderPoser(ActionEvent event) {
-        modifCase(3, 3,Color.GREEN ,true);
+        _mesBateaux.addAll(_mesBateauxAttenteValidation);
+        for (Case unBateau:_mesBateaux) {
+            //Affichage des bateaux
+            modifCase(unBateau.get_x(), unBateau.get_y(), _couleurBateau ,true);
+        }
+        switch (_typeBateau) {
+
+            case 0:
+                System.out.println("pas de bateau choisi");
+                break;
+
+            case 2:
+                System.out.println("torpi");
+                _btnTorpilleur.setVisible(false);
+                _btnTorpilleur.setDisable(true);
+                _torpilleur=true;
+                _nbBateau++;
+                break;
+
+            case 3:
+                System.out.println("contre torpie");
+                _btnContreTorpille.setVisible(false);
+                _btnContreTorpille.setDisable(true);
+               _contreTorpilleurs=true;
+                _nbBateau++;
+
+                break;
+            case 4:
+                System.out.println("croiseur");
+                _btnCroiseur.setVisible(false);
+                _btnCroiseur.setDisable(true);
+                _croiseur=true;
+                _nbBateau++;
+
+                break;
+            case 5:
+                System.out.println("porte-avions");
+                _nbBateau++;
+
+                _btnPorteAv.setVisible(false);
+                _btnPorteAv.setDisable(true);
+               _porteAvions=true;
+                break;
+            default:
+                System.out.println("Choix incorrect");
+
+
+                break;
+        }
+        _typeBateau=0;
+        /*modifCase(3, 3,Color.GREEN ,true);
         modifCase(3, 4,Color.GREEN ,true);
-        modifCase(1, 1,Color.GREEN ,true);
+        modifCase(1, 1, Color.GREEN ,true);
         modifCase(1, 2,Color.GREEN ,true);
-        modifCase(1, 0,Color.GREEN ,true);
+        modifCase(1, 0,Color.GREEN ,true);*/
+        if (_nbBateau>=4){
+            //bateaux mis, on desactive les boutons de pose
+            _btnRotation.setVisible(false);
+            _btnRotation.setDisable(true);
+            _btnValidationPause.setVisible(false);
+            _btnValidationPause.setDisable(true);
+            _placementbateaux=false;
+            //TODO envoi des bateaux
+            System.out.println("Envoi des bateaux au serveur");
+        }
 
     }
 
@@ -283,6 +405,73 @@ public class ControleurGrille {
         Rectangle _uneCase = (Rectangle) maGrille.getScene().lookup(_id);
         _uneCase.setFill(c);
     }
+
+    public String get_monPseudo() {
+        return _monPseudo;
+    }
+
+    public void set_monPseudo(String _monPseudo) {
+        this._monPseudo = _monPseudo;
+    }
+    public boolean casePrise(ArrayList<Case> _aVerifier,int x,int y){
+        for (Case iterPresence : _mesBateauxAttenteValidation) {
+            int cooX = iterPresence.get_x();
+            int cooY = iterPresence.get_y();
+
+            if (cooX == x && cooY == y) {
+                return true;
+            }
+        }
+        return false;  // (x, y) not found
+    }
+    public void bateauLock(int i){
+        switch (i) {
+
+            case 0:
+                System.out.println("pas de bateau mis sur la grille");
+                break;
+
+            case 2:
+                System.out.println("torpi sur la grille");
+                _torpilleur=true;
+                _nbBateau++;
+                break;
+
+            case 3:
+                System.out.println("contre torpie");
+                _btnContreTorpille.setVisible(false);
+                _btnContreTorpille.setDisable(true);
+                _contreTorpilleurs=true;
+                _nbBateau++;
+
+                break;
+            case 4:
+                System.out.println("croiseur");
+                _btnCroiseur.setVisible(false);
+                _btnCroiseur.setDisable(true);
+                _croiseur=true;
+                _nbBateau++;
+
+                break;
+            case 5:
+                System.out.println("porte-avions");
+                _nbBateau++;
+
+                _btnPorteAv.setVisible(false);
+                _btnPorteAv.setDisable(true);
+                _porteAvions=true;
+                break;
+            default:
+                System.out.println("Choix incorrect");
+
+
+                break;
+        }
+
+
+    }
+
+
 
 
 }

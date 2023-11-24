@@ -11,8 +11,8 @@ public final class JoueurHandler extends Thread {
     private Socket socket;
     private String _pseudo;
 
-    public JoueurHandler(String speudo) {
-    }
+
+
 
     public Boolean get_monTour() {
         return _monTour;
@@ -52,6 +52,13 @@ public final class JoueurHandler extends Thread {
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
     }
+    public JoueurHandler(Socket socket) throws IOException {
+        this.socket = socket;
+        _pseudo="pseudo de test";
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        out = new PrintWriter(socket.getOutputStream(), true);
+    }
+
 
 
     public void run(){

@@ -6,10 +6,12 @@ public class InformationsUtilisateur {
 
     /* Informations utilisateurs */
     private String _pseudo;
+    private int _salon;
 
     //1 pour multi, 0 pour solo
     private int _typePartie;
     private InformationsUtilisateur() {
+        _salon=-1;
     }
 
     public static InformationsUtilisateur getInstance() {
@@ -37,4 +39,11 @@ public class InformationsUtilisateur {
         this._typePartie = typePartie;
     }
 
+    public int get_salon() {
+        return _salon;
+    }
+
+    public void set_salon(int salon) {
+        this._salon = salon;
+    }
 }

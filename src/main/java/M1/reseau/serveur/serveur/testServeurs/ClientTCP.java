@@ -1,4 +1,4 @@
-package M1.reseau.client;
+package M1.reseau.serveur.serveur.testServeurs;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

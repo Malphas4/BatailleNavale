@@ -73,8 +73,6 @@ public class ControleurLobby {
         String _reception= SingletonTCP.getInstance().reception();
         String _receptionT[]=_reception.split(";");
         _fieldChatGlobal.setText(_fieldChatGlobal.getText().concat("\n").concat(_receptionT[1]));
-
-
     }
 
     @FXML

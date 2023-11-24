@@ -1,5 +1,6 @@
 package M1.reseau.serveur.serveur.Threads;
 
+import M1.reseau.serveur.serveur.ServeurGlobale;
 import M1.reseau.serveur.serveur.game.JoueurHandler;
 
 import java.io.IOException;
@@ -29,9 +30,9 @@ public class ThreadsTCP  extends Thread {
 
                 // accept a new connection
                 Socket socket = serverSocket.accept();
-
-                // create a new thread to handle communication with the remote client
-                new JoueurHandler(socket).start();
+                JoueurHandler j=new JoueurHandler(socket);
+                ServeurGlobale.sv.addClient(j);
+                j.start();
             }
         }
         catch(IOException e){

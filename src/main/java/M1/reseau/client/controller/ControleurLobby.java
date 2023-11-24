@@ -59,11 +59,20 @@ public class ControleurLobby {
 
 
     @FXML
-    void envoisChatGeneral(ActionEvent event) {
+    void envoisChatGeneral(ActionEvent event) throws IOException {
+        //envoi au serveur d'un message global
+
         String _msgm=_chatInput.getText();
         System.out.println(_msgm);
-        // SingletonTCP.getInstance().message("code:".concat(InformationsUtilisateurs.getInstance.get_pseudo().concat(";").concat(_msgm));
-        //envoi au serveur d'un message global
+        try {
+            SingletonTCP.getInstance().message("msgglobal;".concat(InformationsUtilisateur.getInstance().get_pseudo()).concat(":").concat(_msgm));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //reception du message en broadcast
+        String _reception= SingletonTCP.getInstance().reception();
+        String _receptionT[]=_reception.split(";");
+        _fieldChatGlobal.setText(_fieldChatGlobal.getText().concat("\n").concat(_receptionT[1]));
 
 
     }

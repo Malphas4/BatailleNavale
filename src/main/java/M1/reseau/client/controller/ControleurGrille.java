@@ -59,7 +59,6 @@ public class ControleurGrille {
     @FXML
     private Scene _sceneGrille;
 
-
     @FXML
     private Button _btnRotation;
 
@@ -276,7 +275,21 @@ public class ControleurGrille {
     void EnvoyerMessage(ActionEvent event) {
         String _msgTransit=_textChatpartie.getText();
         //on envoie au serveur le message avec le code pour le chat local
-        // SingletonTCP.getInstance().message("code:".concat(InformationsUtilisateurs.getInstance.get_pseudo().concat(";").concat(_msgTransit)));
+        try {
+            SingletonTCP.getInstance().message("chatlobby;".concat(InformationsUtilisateur.getInstance().get_pseudo().concat(":").concat(_msgTransit)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //reception du message  lobby
+        String _reception= null;
+        try {
+            _reception = SingletonTCP.getInstance().reception();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String[] _receptionT =_reception.split(";");
+        _chatPartie.setText(_chatPartie.getText().concat("\n").concat(_receptionT[1]));
 
     }
 

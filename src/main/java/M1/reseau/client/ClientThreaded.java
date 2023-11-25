@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
+@Deprecated
 public class ClientThreaded {
     /**
      * A rajouter DP état pour la file d'attente

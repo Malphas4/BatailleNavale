@@ -28,11 +28,11 @@
                                  <Button fx:id="_btnPorteAv" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onAction="#selectionPorteAv" prefHeight="25.0" prefWidth="151.0" text="Porte-Avion" textAlignment="CENTER" />
                                  <Label layoutX="85.0" layoutY="26.0" text="Joueur" />
                                  <Label layoutX="281.0" layoutY="26.0" text="Adversaire" />
-                                 <Pane fx:id="_panGrilles" layoutX="3.0" layoutY="54.0" prefHeight="280.0" prefWidth="555.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0" />
+                                 <Pane fx:id="_panGrilles" layoutX="3.0" layoutY="54.0" prefHeight="244.0" prefWidth="555.0" AnchorPane.bottomAnchor="149.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0" />
                                  <Button fx:id="_btnTorpilleur" layoutX="175.0" layoutY="358.0" mnemonicParsing="false" onAction="#selectionTorpilleur" prefHeight="25.0" prefWidth="67.0" text="Torpilleur" textAlignment="CENTER" />
                                  <Button fx:id="_btnContreTorpille" layoutX="14.0" layoutY="395.0" mnemonicParsing="false" onAction="#selectionContreTorpille" prefHeight="25.0" prefWidth="104.0" text="Contre torpilleur" textAlignment="CENTER" wrapText="true" />
                                  <Button fx:id="_btnValidationPause" layoutX="278.0" layoutY="395.0" mnemonicParsing="false" onAction="#ValiderPoser" prefHeight="25.0" prefWidth="150.0" text="Valider la pose du bateau" textAlignment="CENTER" />
-                                 <Button fx:id="_btnRotation" disable="true" layoutX="278.0" layoutY="358.0" mnemonicParsing="false" onAction="#RotationBateau" prefHeight="25.0" prefWidth="150.0" text="Rotation du bateau" textAlignment="CENTER" />
+                                 <Button fx:id="_btnRotation" layoutX="278.0" layoutY="358.0" mnemonicParsing="false" onAction="#RotationBateau" prefHeight="25.0" prefWidth="150.0" text="Rotation du bateau" textAlignment="CENTER" />
                                  <Label layoutX="103.0" layoutY="334.0" text="bateaux" />
                                  <Label layoutX="333.0" layoutY="334.0" text="Actions" />
                               </children>

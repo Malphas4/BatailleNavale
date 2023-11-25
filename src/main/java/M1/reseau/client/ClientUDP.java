@@ -4,7 +4,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-/**{@code @Deprecated}  */
+@Deprecated
 public class ClientUDP {
     final static int taille = 1024;
     final static byte buffer[] = new byte[taille];

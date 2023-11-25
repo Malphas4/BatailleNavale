@@ -3,10 +3,12 @@ package M1.reseau.serveur.serveur;
 import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.serveur.Threads.Commandes;
 import M1.reseau.serveur.serveur.Threads.ThreadUDP;
+import M1.reseau.serveur.serveur.Threads.ThreadsTCP;
 import M1.reseau.serveur.serveur.game.JoueurHandler;
 import M1.reseau.serveur.serveur.game.SalonThread;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -37,9 +39,14 @@ public class ServeurGlobale {
         // instance de la classe principale
          sv = new ServeurGlobale();
 
-        Thread tcpServeur = null;
-        //tcpServeur = new SalonThread();
-        //tcpServeur.start();
+        Thread  ThreadsTCP = null;
+        try {
+            ThreadsTCP = new ThreadsTCP();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ThreadsTCP.start();
+        //sv.start();
 
 
 
@@ -55,8 +62,11 @@ public class ServeurGlobale {
             // sinon il s'agit du numéro de port passé en argument
             else port = Integer.valueOf(args[0]);
             ThreadUDP tUDP;
+            ThreadsTCP tTCP;
             tUDP = new ThreadUDP(sv);
+            tTCP=new ThreadsTCP();
             tUDP.start();
+            tTCP.start();
             //Lance le thread du serveur UDP
            // ServeurUDP serveurUDP = new ServeurUDP(ServeurGlobale);
             // ouverture d'un socket serveur sur port afin d'avoir 1 socket
@@ -146,5 +156,36 @@ public class ServeurGlobale {
         SalonThread tmp = _tabSalons.get(id);
         return tmp;
     }
+
+   synchronized public int _tabClientsTaille() {
+        return _tabClients.size();
+    }
+
+    synchronized public void sendAll(String message)
+    {
+        PrintWriter out; // déclaration d'une variable permettant l'envoi de texte vers le client
+        for (int i = 0; i < sv._tabClientsTaille(); i++) // parcours de la table des connectés
+        {
+            try {
+                _tabClients.elementAt(i).message(message); // extraction de l'élément courant (type PrintWriter)
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            /*if (out != null) // sécurité, l'élément ne doit pas être vide
+            {
+
+            }*/
+        }
+    }
+
+    //** Methode : détruit le client no i **
+   synchronized public void delClient(int i)
+    {
+        _nbClients--; // un client en moins ! snif
+        if (_tabClients.elementAt(i) != null) // l'élément existe ...
+        {
+            _tabClients.removeElementAt(i); // ... on le supprime
+       }
+   }
 
 }

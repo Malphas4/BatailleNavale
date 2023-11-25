@@ -85,6 +85,10 @@ public class ControleurLobby {
         //change de stage
 
         if(!_salonChoisi.isEmpty()){
+            //instantation du singleton TCP
+            // SingletonTCP.getInstance();
+            System.out.println("instantiation du singleton TCP");
+
             //SingletonTCP.getInstance().message("commencer");
             System.out.println("envoi du salon choisi TCP");
             FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));

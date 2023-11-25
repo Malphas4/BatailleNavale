@@ -35,8 +35,7 @@ public class Main extends Application{
             throw new RuntimeException(e);
         }
 
-        //instantation du singleton TCP
-        SingletonTCP.getInstance();
+
 
 
 

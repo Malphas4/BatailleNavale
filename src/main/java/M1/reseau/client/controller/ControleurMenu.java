@@ -43,6 +43,9 @@ public class ControleurMenu {
         InformationsUtilisateur.getInstance().set_typePartie(1);
         FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
         Scene sceneLobby = lobbyLoader.load();
+        System.out.println("envoi de la demande de creation salon bot TCP");
+        SingletonUDP.getInstance();
+
 
         //scene pour demander la difficulte si ajout
 //        FXMLLoader menuDifficulteLoader = new FXMLLoader(getClass().getResource("/menuDifficulte.fxml"));

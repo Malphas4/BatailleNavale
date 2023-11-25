@@ -13,7 +13,7 @@ public class SingletonTCP implements Serializable
     static ObjectOutputStream oos = null;
     static ObjectInputStream ois = null;
     private static ServerSocket serveur;
-    int port = 18000;
+    int port = 9999;
     /** Constructeur privé */
     private SingletonTCP() throws IOException {
         InetAddress host = InetAddress.getLocalHost();

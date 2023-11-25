@@ -73,7 +73,7 @@ public class SalonThread /*extends Thread*/ {
         _serveurGlobale=ServeurGlobale.sv;
         _j1=null;
         _j2=null;
-        _id=_serveurGlobale.getNbXlients()+1;
+        _id=_serveurGlobale.getNbSalons()+1;
 
         set_nom("Room(" + _id + ")");
         // create a ServerSocket instance and bind it to the specified port number

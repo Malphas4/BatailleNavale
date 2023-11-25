@@ -88,6 +88,14 @@ public class ControleurLobby {
             // SingletonTCP.getInstance();
             System.out.println("instantiation du singleton TCP");
 
+            try {
+                SingletonTCP.getInstance().message("join;".concat(_salonChoisi)
+                        .concat(";")
+                        .concat(InformationsUtilisateur.getInstance().get_pseudo()));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
             //SingletonTCP.getInstance().message("commencer");
             System.out.println("envoi du salon choisi TCP");
             FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
@@ -140,7 +148,7 @@ public class ControleurLobby {
 
 
         }
-        majSalons(null);
+        majSalons(new ActionEvent());
         Timeline timer10Secondes = new Timeline(
                 new KeyFrame(Duration.seconds(10),
                         event -> {
@@ -192,19 +200,9 @@ public class ControleurLobby {
                 public void handle(ActionEvent event) {
                     Node source = (Node) event.getSource();
                     _salonChoisi= source.getId();
-                    System.out.println("selectionSalon; "+_salonChoisi);
-                    //
-//                    try {
-//                        SingletonTCP.getInstance().message("salonid;".concat(_salonChoisi));
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    try {
-//                        SingletonTCP.getInstance().message("infosalon;".concat(_salonChoisi));
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
-                }
+                    System.out.println("selectionSalon;"+_salonChoisi);
+
+              }
 
             });
             _listeSalon.getChildren().add(b);

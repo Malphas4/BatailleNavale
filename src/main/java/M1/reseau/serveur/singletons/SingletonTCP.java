@@ -5,23 +5,46 @@ import java.net.*;
 
 public class SingletonTCP implements Serializable
 {
-    InetAddress host = InetAddress.getLocalHost();
-   //pour socket client AF
+    InetAddress host;
+
+    {
+        try {
+            host = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //pour socket client AF
    Socket socket = null;
     static ObjectOutputStream oos = null;
     static ObjectInputStream ois = null;
-    private static ServerSocket serveur;
-    private static SingletonTCP _singletonTCP;
+    private static SingletonTCP _singletonTCP=null;
 
-    int port = 9999;
+    int port = 18000;
     /** Constructeur privé */
-    private SingletonTCP() throws IOException {
-        InetAddress host = InetAddress.getLocalHost();
-        Socket socket = null;
-
-        socket = new Socket(host, port);
-       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+    private SingletonTCP() {
+        InetAddress host = null;
+        try {
+            host = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            socket  = new Socket(host, port);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("CLient TCp lancé au port "+port);
 
     }
@@ -30,7 +53,7 @@ public class SingletonTCP implements Serializable
     private static SingletonTCP INSTANCE;
 
     /** Point d'accès pour l'instance unique du singleton */
-    public static SingletonTCP getInstance() throws IOException {
+    public static SingletonTCP getInstance()  {
         if (_singletonTCP == null) {
             _singletonTCP = new SingletonTCP();
         }
@@ -38,13 +61,13 @@ public class SingletonTCP implements Serializable
     }
 
 
-    public static void fermetureSocket()  {
+    public void fermetureSocket()  {
         try{
-            if(serveur != null) {
+            if(socket != null) {
 
                 oos.close();
                 ois.close();
-                serveur.close();
+                socket.close();
             }
         }catch (IOException e){ e.printStackTrace();}
 

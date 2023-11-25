@@ -69,6 +69,7 @@ public final class JoueurHandler extends Thread {
 
         try{
             synchronized (in){
+                while(!isInterrupted()) in .wait();
 //                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 while( (_msg = in.readLine()) != null) {
 
@@ -91,8 +92,9 @@ public final class JoueurHandler extends Thread {
         }
         catch(IOException e){
             e.printStackTrace();
-        }
-        finally{
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally{
             try{
                 if(socket != null)
                     socket.close(); // Close the socket (closing the socket also closes the input and output streams)

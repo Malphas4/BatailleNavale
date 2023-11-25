@@ -8,6 +8,7 @@ public class InformationsUtilisateur {
     private String _pseudo;
     private int _salon;
     int _bot=1;
+   int  _tmps=30;
 
     //1 pour multi, 0 pour solo
     private int _typePartie;
@@ -54,5 +55,13 @@ public class InformationsUtilisateur {
 
     public int get_bot() {
         return _bot;
+    }
+
+    public void set_tmps(int tmps) {
+        this._tmps = tmps;
+    }
+
+    public int get_tmps() {
+        return _tmps;
     }
 }

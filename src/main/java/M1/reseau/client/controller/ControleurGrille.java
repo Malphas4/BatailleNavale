@@ -274,12 +274,14 @@ public class ControleurGrille {
         //chrono Interne
         if (!_placementbateaux){
             chrono--;
-            SingletonTCP.getInstance().message("chrono;montour?");
-            String[] msgT=SingletonTCP.getInstance().reception().split(";");
-            _monTour= Boolean.parseBoolean(msgT[1]);
+          //  SingletonTCP.getInstance().reception
+                    //("chrono;".concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())));
+            //TODO String[] msgT=SingletonTCP.getInstance().reception().split(";");
+            //_monTour= Boolean.parseBoolean(msgT[1]);
             _labelChrono.setText("00:".concat(String.valueOf(chrono)));
-            if (chrono<=00){
+            if (chrono<=0){
                 chrono=30;
+                _monTour= !_monTour;
             }
         }
         //Chronoserveur ayant la priorite des tours

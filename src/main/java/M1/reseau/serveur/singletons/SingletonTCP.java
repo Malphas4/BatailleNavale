@@ -29,15 +29,6 @@ public class SingletonTCP implements Serializable
     /** Instance unique pré-initialisée */
     private static SingletonTCP INSTANCE;
 
-    static {
-        try {
-            INSTANCE = new SingletonTCP();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /** Point d'accès pour l'instance unique du singleton */
     public static SingletonTCP getInstance() throws IOException {
         if (_singletonTCP == null) {

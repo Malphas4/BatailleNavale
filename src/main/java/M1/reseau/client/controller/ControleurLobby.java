@@ -53,7 +53,6 @@ public class ControleurLobby {
 
 
     //variables pour salons en dynamiques
-    int _nbSalons=2;//AF mettre 2
     int nbSalons;
     String _salonChoisi;
     String _demandeSalons="NBsalons?";
@@ -84,7 +83,7 @@ public class ControleurLobby {
 
         //change de stage
 
-        if(!_salonChoisi.isEmpty()){
+        if(!_salonChoisi.isEmpty()|| _salonChoisi!=null){
             //instantation du singleton TCP
             // SingletonTCP.getInstance();
             System.out.println("instantiation du singleton TCP");
@@ -141,6 +140,7 @@ public class ControleurLobby {
 
 
         }
+        majSalons(null);
         Timeline timer10Secondes = new Timeline(
                 new KeyFrame(Duration.seconds(10),
                         event -> {
@@ -164,8 +164,6 @@ public class ControleurLobby {
     @FXML
     void majSalons(ActionEvent event) {
         _listeSalon.getChildren().clear();
-
-
         try {
             SingletonUDP.getInstance().message(_demandeSalons);
         } catch (IOException e) {
@@ -196,24 +194,26 @@ public class ControleurLobby {
                     _salonChoisi= source.getId();
                     System.out.println("selectionSalon; "+_salonChoisi);
                     //
-                    try {
-                        SingletonTCP.getInstance().message("salonid;".concat(_salonChoisi));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    try {
-                        SingletonTCP.getInstance().message("infosalon;".concat(_salonChoisi));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+//                    try {
+//                        SingletonTCP.getInstance().message("salonid;".concat(_salonChoisi));
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    try {
+//                        SingletonTCP.getInstance().message("infosalon;".concat(_salonChoisi));
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
                 }
+
             });
-
+            _listeSalon.getChildren().add(b);
         }
+//        _listeSalon.getChildren().addAll(_listeBtnSalon);
+//        _listeSalon.getChildren().removeAll(_listeSalon.getChildren());
+//
+//        _listeSalon.getChildren().addAll(_listeBtnSalon);
 
-        _listeSalon.getChildren().removeAll(_listeSalon.getChildren());
-
-        _listeSalon.getChildren().addAll(_listeBtnSalon);
 
     }
 }

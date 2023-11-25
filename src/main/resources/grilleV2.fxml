@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <Scene xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="M1.reseau.client.controller.ControleurGrille">
-    <AnchorPane prefHeight="600" prefWidth="800.0">
+    <AnchorPane minHeight="600" minWidth="800.0">
       <children>
          <SplitPane dividerPositions="0.29797979797979796" prefHeight="600.0" prefWidth="800.0">
             <items>

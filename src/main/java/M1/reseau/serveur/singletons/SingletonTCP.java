@@ -1,9 +1,7 @@
 package M1.reseau.serveur.singletons;
 
 import java.io.*;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 
 public class SingletonTCP implements Serializable
 {
@@ -13,16 +11,18 @@ public class SingletonTCP implements Serializable
     static ObjectOutputStream oos = null;
     static ObjectInputStream ois = null;
     private static ServerSocket serveur;
+    private static SingletonTCP _singletonTCP;
+
     int port = 9999;
     /** Constructeur privé */
     private SingletonTCP() throws IOException {
         InetAddress host = InetAddress.getLocalHost();
         Socket socket = null;
 
-        serveur = new ServerSocket(port);
-        ObjectOutputStream oos = null;
-        ObjectInputStream ois = null;
-        System.out.println("CLient TCp lancé au port 18 000");
+        socket = new Socket(host, port);
+       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+        System.out.println("CLient TCp lancé au port "+port);
 
     }
 
@@ -39,9 +39,11 @@ public class SingletonTCP implements Serializable
     }
 
     /** Point d'accès pour l'instance unique du singleton */
-    public static SingletonTCP getInstance()
-    {
-        return INSTANCE;
+    public static SingletonTCP getInstance() throws IOException {
+        if (_singletonTCP == null) {
+            _singletonTCP = new SingletonTCP();
+        }
+        return SingletonTCP._singletonTCP;
     }
 
 
@@ -65,10 +67,10 @@ public class SingletonTCP implements Serializable
         //Message de type string deviens de type data pour l'envoi
         byte[] data = (s).getBytes();
         //recuperation de la socket output
-        OutputStream output = socket.getOutputStream();
-        output.write(data);
-        PrintWriter writer = new PrintWriter(output, true);
-        output.write(data);
+        OutputStream out = socket.getOutputStream();
+        oos.write(data);
+        PrintWriter writer = new PrintWriter(oos, true);
+        oos.write(data);
 
 
     }
@@ -82,9 +84,8 @@ public class SingletonTCP implements Serializable
      */
     public String reception() throws IOException {
 
-        InputStream in = socket.getInputStream();
         //You can wrap the InputStream object in an InputStreamReader or BufferedReader to read data at higher level (character and String). For example, using InputStreamReader:
-        InputStreamReader reader = new InputStreamReader(in);
+        InputStreamReader reader = new InputStreamReader(ois);
         String s = reader.toString();
         System.out.printf("message du serveur : "+s+"\n");
         return s;

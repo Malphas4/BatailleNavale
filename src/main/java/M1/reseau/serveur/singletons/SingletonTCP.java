@@ -68,6 +68,7 @@ public class SingletonTCP implements Serializable
         byte[] data = (s).getBytes();
         //recuperation de la socket output
         OutputStream out = socket.getOutputStream();
+        System.out.printf("envoi du message TCP : "+s+"\n");
         oos.write(data);
         PrintWriter writer = new PrintWriter(oos, true);
         oos.write(data);

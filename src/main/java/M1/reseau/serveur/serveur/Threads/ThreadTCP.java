@@ -4,11 +4,10 @@ import M1.reseau.serveur.serveur.ServeurGlobale;
 import M1.reseau.serveur.serveur.game.JoueurHandler;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ThreadsTCP  extends Thread {
+public class ThreadTCP extends Thread {
 
     ServeurGlobale sv;
 
@@ -16,7 +15,7 @@ public class ThreadsTCP  extends Thread {
     private ServerSocket serverSocket;
     private int portNumber = 9999;
 
-    public ThreadsTCP() throws IOException {
+    public ThreadTCP() throws IOException {
         setName("ThreadsTCP");
         System.out. println("serveur TCP initialisé");
 

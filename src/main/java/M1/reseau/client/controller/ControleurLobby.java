@@ -67,15 +67,16 @@ public class ControleurLobby {
 
         String _msgm=_chatInput.getText();
         System.out.println(_msgm);
-        try {
-            SingletonTCP.getInstance().message("msgglobal;".concat(InformationsUtilisateur.getInstance().get_pseudo()).concat(":").concat(_msgm));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            SingletonTCP.getInstance().message("chat;".concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).concat(InformationsUtilisateur.getInstance().get_pseudo()).concat(":").concat(_msgm));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+        System.out.println("envoi du message global");
         //reception du message en broadcast
-        String _reception= SingletonTCP.getInstance().reception();
-        String _receptionT[]=_reception.split(";");
-        _fieldChatGlobal.setText(_fieldChatGlobal.getText().concat("\n").concat(_receptionT[1]));
+//        String _reception= SingletonTCP.getInstance().reception();
+//        String _receptionT[]=_reception.split(";");
+//        _fieldChatGlobal.setText(_fieldChatGlobal.getText().concat("\n").concat(_receptionT[1]));
     }
 
     @FXML
@@ -84,7 +85,8 @@ public class ControleurLobby {
         //change de stage
 
         if(!_salonChoisi.isEmpty()){
-            SingletonTCP.getInstance().message("commencer");
+            //SingletonTCP.getInstance().message("commencer");
+            System.out.println("envoi du salon choisi TCP");
             FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
             InformationsUtilisateur.getInstance().set_salon(Integer.parseInt(_salonChoisi));
             // AnchorPane grille=grilleLoader.load();

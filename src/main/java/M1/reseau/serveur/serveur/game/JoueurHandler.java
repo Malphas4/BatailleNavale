@@ -47,6 +47,7 @@ public final class JoueurHandler extends Thread {
 
     public JoueurHandler(Socket socket, String pseudo) throws IOException {
         setName("ConnectionHandler");
+        System.out.println("initialisation d'un nouveau JoueurHandler "+_pseudo);
         this.socket = socket;
         _pseudo=pseudo;
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -67,21 +68,26 @@ public final class JoueurHandler extends Thread {
         String _msg;
 
         try{
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
+            synchronized (in){
+//                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                while( (_msg = in.readLine()) != null) {
 
-            while( (_msg = in.readLine()) != null) {
+                    String [] _sp = _msg.split(";");
 
-                String [] _sp = _msg.split(";");
+                    ServerCORBuilder
+                            .getInstance()
+                            .solveServer(
+                                    _msg,
+                                    ServeurGlobale.sv.get_salon(Integer.parseInt(_sp[1]))
+                            );
 
-                ServerCORBuilder
-                    .getInstance()
-                    .solveServer(
-                        _msg,
-                        ServeurGlobale.sv.get_salon(Integer.parseInt(_sp[1]))
-                    );
-
+                }
             }
+            synchronized (out){
+                out = new PrintWriter(socket.getOutputStream(), true);
+            }
+
+
         }
         catch(IOException e){
             e.printStackTrace();

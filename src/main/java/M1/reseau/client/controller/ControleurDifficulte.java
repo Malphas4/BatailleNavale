@@ -31,22 +31,26 @@ public class ControleurDifficulte {
     @FXML
     void difficile(ActionEvent event)  {
         InformationsUtilisateur.getInstance().set_bot(3);
-        try {
-            SingletonTCP.getInstance().message("setbot;3");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//           // SingletonTCP.getInstance().message("setbot;3");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+        System.out.println("bot moyen");
+
 
     }
 
     @FXML
     void facile(ActionEvent event) {
         InformationsUtilisateur.getInstance().set_bot(1);
-        try {
-            SingletonTCP.getInstance().message("setbot;1");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//         //   SingletonTCP.getInstance().message("setbot;1");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+        System.out.println("bot moyen");
+
 
 
     }
@@ -54,11 +58,12 @@ public class ControleurDifficulte {
     @FXML
     void moyen(ActionEvent event) {
         InformationsUtilisateur.getInstance().set_bot(2);
-        try {
+       /* try {
             SingletonTCP.getInstance().message("setbot;2");
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
+        System.out.println("bot moyen");
 
 
     }

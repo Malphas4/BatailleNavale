@@ -3,7 +3,7 @@ package M1.reseau.serveur.serveur;
 import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.serveur.Threads.Commandes;
 import M1.reseau.serveur.serveur.Threads.ThreadUDP;
-import M1.reseau.serveur.serveur.Threads.ThreadsTCP;
+import M1.reseau.serveur.serveur.Threads.ThreadTCP;
 import M1.reseau.serveur.serveur.game.JoueurHandler;
 import M1.reseau.serveur.serveur.game.SalonThread;
 
@@ -42,7 +42,7 @@ public class ServeurGlobale {
         Thread  tTCP = null;
 
         try {
-            tTCP = new ThreadsTCP();
+            tTCP = new ThreadTCP();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

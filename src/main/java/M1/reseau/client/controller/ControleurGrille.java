@@ -199,13 +199,14 @@ public class ControleurGrille {
                     else if (_monTour){
                         System.out.print("Feu à volonté\n");
                         //on envoie la case du tir
-                        try {
-                            SingletonTCP.getInstance().message("tir".concat(":x").concat(String.valueOf(_x)).concat(";y").concat(String.valueOf(_y)));
+//                        try {
+                            System.out.println("envoi du tir TCP");
+                            //SingletonTCP.getInstance().message("tir".concat(":x").concat(String.valueOf(_x)).concat(";y").concat(String.valueOf(_y)));
                             //TODO
-                            _traitementTCP=SingletonTCP.getInstance().reception();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+                            //_traitementTCP=SingletonTCP.getInstance().reception();
+//                        } catch (IOException e) {
+//                            throw new RuntimeException(e);
+//                        }
                         //on attend le message du serveur
 
                     }else System.out.print("bateaux deja placées ou pas mon tour\n");
@@ -310,21 +311,25 @@ public class ControleurGrille {
     void EnvoyerMessage(ActionEvent event) {
         String _msgTransit=_textChatpartie.getText();
         //on envoie au serveur le message avec le code pour le chat local
-        try {
-            SingletonTCP.getInstance().message("chatlobby;".concat(InformationsUtilisateur.getInstance().get_pseudo().concat(":").concat(_msgTransit)));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//           // SingletonTCP.getInstance().message("chatsalon;".concat(InformationsUtilisateur.getInstance().get_pseudo().concat(":").concat(_msgTransit)));
+        System.out.println("bot moyen");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
 
         //reception du message  lobby
-        String _reception= null;
-        try {
-            _reception = SingletonTCP.getInstance().reception();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        String[] _receptionT =_reception.split(";");
-        _chatPartie.setText(_chatPartie.getText().concat("\n").concat(_receptionT[1]));
+//        String _reception= null;
+//        try {
+//            _reception = SingletonTCP.getInstance().reception();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        String[] _receptionT =_reception.split(";");
+//        _chatPartie.setText(_chatPartie.getText().concat("\n").concat(_receptionT[1]));
+        System.out.println("message lobby recu");
+
 
     }
 

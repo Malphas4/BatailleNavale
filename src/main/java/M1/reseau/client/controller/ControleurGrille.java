@@ -5,16 +5,15 @@ import M1.reseau.model.world.element.Case;
 import M1.reseau.model.world.element.classic.CaseBateau;
 import M1.reseau.serveur.singletons.SingletonTCP;
 import M1.reseau.utilities.InformationsUtilisateur;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -22,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,12 +67,18 @@ public class ControleurGrille {
 
     @FXML
     private Button _btnValidationPause;
+    @FXML
+    private Label _labelChrono;
+    @FXML
+    private Label _labelTimer;
+
 
     VBox maGrille ;
     VBox saGrille;
     ArrayList<Case>  _mesBateaux=new ArrayList<>();
     ArrayList<Case>  _bateauxMechants=new ArrayList<>();
     ArrayList<Case> _mesBateauxAttenteValidation=new ArrayList<>();
+    int chrono=30;
 
     //initialisation des couleurs utilisées
     Color _couleurEau = Color.DARKTURQUOISE;
@@ -245,11 +251,38 @@ public class ControleurGrille {
         _panGrilles.getChildren().add(Grilles);
 
 
+        //chrono tours
+        Timeline timer1Seconde = new Timeline(
+                new KeyFrame(Duration.seconds(1),
+                        event -> {
+                            try {
+                                majChrono();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            System.out.println("timer 1s");
+                        }));
+        timer1Seconde.setCycleCount(Timeline.INDEFINITE);
+        timer1Seconde.play();
 
 
 
 
+    }
 
+    private void majChrono() throws IOException {
+        //chrono Interne
+        if (!_placementbateaux){
+            chrono--;
+            SingletonTCP.getInstance().message("chrono;montour?");
+            String[] msgT=SingletonTCP.getInstance().reception().split(";");
+            _monTour= Boolean.parseBoolean(msgT[1]);
+            _labelChrono.setText("00:".concat(String.valueOf(chrono)));
+            if (chrono<=00){
+                chrono=30;
+            }
+        }
+        //Chronoserveur ayant la priorite des tours
     }
 
     @FXML
@@ -488,3 +521,4 @@ public class ControleurGrille {
 
 
 }
+//http://www.javaperspective.com/tcp-servers-and-clients.html

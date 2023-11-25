@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -48,6 +49,8 @@ public class ControleurLobby {
 
     @FXML
     private VBox _listeSalon;
+
+
 
     //variables pour salons en dynamiques
     int _nbSalons=2;//AF mettre 2
@@ -140,7 +143,6 @@ public class ControleurLobby {
                         }));
         timer10Secondes.setCycleCount(Timeline.INDEFINITE);
         timer10Secondes.play();
-
     }
 
     @FXML

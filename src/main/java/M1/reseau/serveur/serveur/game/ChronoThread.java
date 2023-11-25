@@ -1,88 +1,80 @@
 package M1.reseau.serveur.serveur.game;
 
+import M1.reseau.model.exception.IPartieException;
+
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 public class ChronoThread extends Thread {
 
-    private JoueurHandler _j1;
-    private JoueurHandler _j2;
+    private SalonThread _salon;
 
-    private LocalDateTime _dateTime = LocalDateTime.now();
+    private int _time;
 
     public ChronoThread() {
 
     }
 
-    public ChronoThread(JoueurHandler _j1, JoueurHandler _j2) {
-        set_j1(_j1);
-        set_j2(_j2);
+    public ChronoThread(SalonThread _salon) {
+        set_salon(_salon);
+        set_time(30);
     }
 
-    public JoueurHandler get_j1() {
-        return _j1;
+    public SalonThread get_salon() {
+        return _salon;
     }
 
-    public void set_j1(JoueurHandler _j1) {
-        this._j1 = _j1;
+    public void set_salon(SalonThread _salon) {
+        this._salon = _salon;
     }
 
-    public JoueurHandler get_j2() {
-        return _j2;
+    public int get_time() {
+        return _time;
     }
 
-    public void set_j2(JoueurHandler _j2) {
-        this._j2 = _j2;
+    public void set_time(int _time) {
+        this._time = _time;
     }
 
-    public LocalDateTime get_dateTime() {
-        return _dateTime;
-    }
-
-    public void set_dateTime(LocalDateTime _dateTime) {
-        this._dateTime = _dateTime;
-    }
-
-    /**
-     * If this thread was constructed using a separate
-     * {@code Runnable} run object, then that
-     * {@code Runnable} object's {@code run} method is called;
-     * otherwise, this method does nothing and returns.
-     * <p>
-     * Subclasses of {@code Thread} should override this method.
-     *
-     * @see #start()
-     * @see #stop()
-     * @see Thread(ThreadGroup, Runnable, String)
-     */
     @Override
     public void run() {
-        synchronized (get_j1()) {
-            synchronized (get_j2()) {
-                while (!isInterrupted()) {
-                    try {
-                        get_j1().wait();
-                        get_j2().wait();
-                    } catch (InterruptedException e) {
-                        System.err.println("ChronoThread : Fail to wait.");
-                    }
-                }
-                String _message = "chrono;"
-                        + get_dateTime()
-                        + ";" + LocalDateTime.now();
+        while (!isInterrupted()) {
+
+            String _message = null;
+            String _pseudo = null;
+
+            if (_salon.get_gameService().get_partie().is_commence()) {
+                
                 try {
-                    get_j1().message(_message);
-                    get_j2().message(_message);
+                    _pseudo = _salon.get_gameService().get_partie().getJoueurCourant().get_pseudo();
+                } catch (IPartieException e) {
+                    System.err.println();
+                }
+
+                _message = "chrono;"
+                        + _salon.get_id()
+                        + ";" + _pseudo
+                        + ";" + get_time();
+
+                try {
+                    if (get_time() <= 0) {
+                        set_time(30);
+                        _salon.get_gameService().get_partie().tourSuivant();
+                    }
+                    _salon.get_j1().message(_message);
+                    _salon.get_j2().message(_message);
                 } catch (IOException e) {
                     System.err.println("ChronoThread : Fail to send message.");
+                } catch (IPartieException e) {
+                    System.err.println("ChronoThread : Fail to switch game round.");
                 }
 
                 try {
-                    sleep(300);
+                    sleep(1000);
                 } catch (InterruptedException e) {
                     System.err.println("ChronoThread : Fail to sleep.");
                 }
 
+                set_time(get_time() - 1);
             }
         }
     }

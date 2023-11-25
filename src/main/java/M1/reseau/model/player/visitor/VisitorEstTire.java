@@ -102,7 +102,26 @@ public class VisitorEstTire implements IVisitorJoueur {
      */
     @Override
     public void visite(MediumBot _bot) throws IJoueurException {
+        /* Verification arguments non null */
+        if (get_grille() == null) throw new IllegalArgumentException("VisitorEstTire : La grille ne peut pas être null.");
+        if (get_case() == null) throw new IllegalArgumentException("VisitorEstTire : La case ne peut pas être null.");
 
+        /* Verification que la grille contient la case */
+        if (!get_grille().isDansLaGrille(get_case())) throw new IJoueurException("VisitorEstTire : La case n'est pas dans la grille.");
+
+        /* Si la case est valide */
+        if (!get_case().isTirable()) throw new IJoueurException("VisitorEstTire : La case n'est pas valide.");
+
+        ICase _newcase = setupCaseEtat();
+
+        /* On supprime l'ancienne case de la liste dans la grille du joueur*/
+        try {
+            ICase _supCase = _bot.get_grilleJoueur().get_caseParCoord(get_case().get_x(), get_case().get_y());
+            _bot.get_grilleJoueur().supprimerCase(_supCase);
+            _bot.get_grilleJoueur().ajouterCase(_newcase);
+        } catch (IGrilleException e) {
+            System.err.println("VisitorEstTire : La case n'a pas pu être supprimé de la grille");
+        }
     }
 
     /**

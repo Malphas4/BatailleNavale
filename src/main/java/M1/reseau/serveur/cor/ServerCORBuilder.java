@@ -1,6 +1,6 @@
 package M1.reseau.serveur.cor;
 
-import M1.reseau.serveur.cor.treatment.chat.ServerCodeChat;
+import M1.reseau.serveur.cor.treatment.chat.ServerCodeChatSalon;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeCommencer;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeInitBateau;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeTirer;
@@ -11,7 +11,7 @@ import M1.reseau.serveur.serveur.game.SalonThread;
 
 public class ServerCORBuilder implements IServerCORBuilder {
 
-    private static ServerCORBuilder _serverCORBuilder;
+    private static ServerCORBuilder _serverCORBuilder = null;
 
     private IServerCOR _serverCOR;
 
@@ -19,7 +19,7 @@ public class ServerCORBuilder implements IServerCORBuilder {
         IServerCOR sc1, sc2, sc3, sc4, sc5, sc6, sc7;
 
         /* Init COR */
-        sc1 = new ServerCodeChat();
+        sc1 = new ServerCodeChatSalon();
         sc2 = new ServerCodeJoinBot();
         sc3 = new ServerCodeJoin();
         sc4 = new ServerCodeInitBateau();

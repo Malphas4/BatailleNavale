@@ -42,37 +42,40 @@ public class ChronoThread extends Thread {
             String _message = null;
             String _pseudo = null;
 
-            try {
-                _pseudo = _salon.get_gameService().get_partie().getJoueurCourant().get_pseudo();
-            } catch (IPartieException e) {
-                throw new RuntimeException(e);
-            }
-
-            _message = "chrono;"
-                    + _salon.get_id()
-                    + ";" + _pseudo
-                    + ";" + get_time();
-
-            try {
-                if (get_time() <= 0) {
-                    set_time(30);
-                    _salon.get_gameService().get_partie().tourSuivant();
+            if (_salon.get_gameService().get_partie().is_commence()) {
+                
+                try {
+                    _pseudo = _salon.get_gameService().get_partie().getJoueurCourant().get_pseudo();
+                } catch (IPartieException e) {
+                    System.err.println();
                 }
-                _salon.get_j1().message(_message);
-                _salon.get_j2().message(_message);
-            } catch (IOException e) {
-                System.err.println("ChronoThread : Fail to send message.");
-            } catch (IPartieException e) {
-                System.err.println("ChronoThread : Fail to switch game round.");
-            }
 
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                System.err.println("ChronoThread : Fail to sleep.");
-            }
+                _message = "chrono;"
+                        + _salon.get_id()
+                        + ";" + _pseudo
+                        + ";" + get_time();
 
-            set_time(get_time() - 1);
+                try {
+                    if (get_time() <= 0) {
+                        set_time(30);
+                        _salon.get_gameService().get_partie().tourSuivant();
+                    }
+                    _salon.get_j1().message(_message);
+                    _salon.get_j2().message(_message);
+                } catch (IOException e) {
+                    System.err.println("ChronoThread : Fail to send message.");
+                } catch (IPartieException e) {
+                    System.err.println("ChronoThread : Fail to switch game round.");
+                }
+
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    System.err.println("ChronoThread : Fail to sleep.");
+                }
+
+                set_time(get_time() - 1);
+            }
         }
     }
 }

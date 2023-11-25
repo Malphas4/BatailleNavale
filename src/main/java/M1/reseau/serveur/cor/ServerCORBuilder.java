@@ -1,5 +1,6 @@
 package M1.reseau.serveur.cor;
 
+import M1.reseau.serveur.cor.treatment.chat.ServerCodeChat;
 import M1.reseau.serveur.cor.treatment.chat.ServerCodeChatSalon;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeCommencer;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeInitBateau;
@@ -16,7 +17,7 @@ public class ServerCORBuilder implements IServerCORBuilder {
     private IServerCOR _serverCOR;
 
     private ServerCORBuilder() {
-        IServerCOR sc1, sc2, sc3, sc4, sc5, sc6, sc7;
+        IServerCOR sc1, sc2, sc3, sc4, sc5, sc6, sc7, sc8;
 
         /* Init COR */
         sc1 = new ServerCodeChatSalon();
@@ -26,6 +27,7 @@ public class ServerCORBuilder implements IServerCORBuilder {
         sc5 = new ServerCodeCommencer();
         sc6 = new ServerCodeTirer();
         sc7 = new ServerCodeAbandonner();
+        sc8 = new ServerCodeChat();
 
         /* Chaining COR */
         sc1.set_nextNode(sc2);
@@ -34,6 +36,7 @@ public class ServerCORBuilder implements IServerCORBuilder {
         sc4.set_nextNode(sc5);
         sc5.set_nextNode(sc6);
         sc6.set_nextNode(sc7);
+        sc7.set_nextNode(sc8);
 
         set_serverCOR(sc1);
     }

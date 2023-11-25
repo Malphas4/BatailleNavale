@@ -39,13 +39,14 @@ public class ServeurGlobale {
         // instance de la classe principale
          sv = new ServeurGlobale();
 
-        Thread  ThreadsTCP = null;
+        Thread  tTCP = null;
+
         try {
-            ThreadsTCP = new ThreadsTCP();
+            tTCP = new ThreadsTCP();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        ThreadsTCP.start();
+        tTCP.start();
         //sv.start();
 
 
@@ -62,11 +63,8 @@ public class ServeurGlobale {
             // sinon il s'agit du numéro de port passé en argument
             else port = Integer.valueOf(args[0]);
             ThreadUDP tUDP;
-            ThreadsTCP tTCP;
             tUDP = new ThreadUDP(sv);
-            tTCP=new ThreadsTCP();
             tUDP.start();
-            tTCP.start();
             //Lance le thread du serveur UDP
            // ServeurUDP serveurUDP = new ServeurUDP(ServeurGlobale);
             // ouverture d'un socket serveur sur port afin d'avoir 1 socket

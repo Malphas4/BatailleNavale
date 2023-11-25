@@ -3,7 +3,7 @@ package M1.reseau.serveur.serveur;
 import java.io.IOException;
 import java.net.*;
 
-/**{@code @Deprecated}  */
+@Deprecated
 public class ServeurUDP extends Thread{
 
     final static int taille = 1024;
@@ -12,7 +12,6 @@ public class ServeurUDP extends Thread{
     DatagramSocket socketUDP;
     Thread _t; // contiendra le thread
     ServeurGlobale _serveurmain;
-
     //constructeur
     public ServeurUDP(ServeurGlobale serveurGlobale) throws SocketException, UnknownHostException {
         _serveurmain= serveurGlobale; // passage de local en global

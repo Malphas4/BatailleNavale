@@ -5,6 +5,9 @@ package M1.reseau.client.cor;
  * UDP est seulement utilisé pour l'identification et l'attribution de l'identifiant
  * TCP reprend la main après
  */
+@Deprecated
+//Pas utilisé, connexion et salons gérés par UDp dans le thread
+//chrono;pseudo/idSalon/temps en int a afficher
 public class expertIdentification   extends Expert {
     public void traiter(String requete){
         String code= requete.split(":")[0];
@@ -17,5 +20,9 @@ public class expertIdentification   extends Expert {
         if(_suivant != null){
             _suivant.traiter(requete);
         }
+    }
+    public boolean valider(String _message) {
+        String[] _sp = _message.split(";");
+        return _sp[0].equals("chrono");
     }
 }

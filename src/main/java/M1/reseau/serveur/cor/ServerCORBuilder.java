@@ -11,7 +11,7 @@ import M1.reseau.serveur.serveur.game.SalonThread;
 
 public class ServerCORBuilder implements IServerCORBuilder {
 
-    private static ServerCORBuilder _serverCORBuilder;
+    private static ServerCORBuilder _serverCORBuilder == null;
 
     private IServerCOR _serverCOR;
 

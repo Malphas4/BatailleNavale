@@ -4,10 +4,13 @@ import M1.reseau.serveur.serveur.ServeurGlobale;
 import M1.reseau.serveur.serveur.game.JoueurHandler;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ThreadsTCP  extends Thread {
+
+    ServeurGlobale sv;
 
 
     private ServerSocket serverSocket;
@@ -15,6 +18,7 @@ public class ThreadsTCP  extends Thread {
 
     public ThreadsTCP() throws IOException {
         setName("ThreadsTCP");
+        sv=ServeurGlobale.sv;
         // create a ServerSocket instance and bind it to the specified port number
         try {
             serverSocket = new ServerSocket(portNumber);

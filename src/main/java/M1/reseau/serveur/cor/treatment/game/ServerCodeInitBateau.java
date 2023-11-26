@@ -19,6 +19,8 @@ public class ServerCodeInitBateau extends ServerCOR {
         System.out.println("\t> ServerCodeInitBateau : Init Bateau");
         GameService _gameService = _salon.get_gameService();
 
+        System.out.println("\t\t ServerCodeInitBateau - message : " + _message);
+
         String[] _sp = _message.split(";");
 
         int x = Integer.parseInt(_sp[3]);

@@ -119,62 +119,58 @@ public class ClientUDP extends Thread {
 
 
     boolean connexionUDP(){
-        System.out.println("votre pseudo ?");
-        s = scan.nextLine();
-        System.out.println("no is ="+a);
 
-        System.out.println("enter a string");
-        s = scan.nextLine();
-        int c = System.in.read();
-        Syste
-        if (_pseudo.trim().isEmpty()||_pseudo.trim().equals("pseudonyme")) {
-        //alerte AF
-        //_msgConsigne.setText("Pseudo manquant ! Veuillez entrer votre speudo et votre mot de passe");
-        System.out.print("pseudo vide\n");
-        } else if (_mdpInput.trim().isEmpty()){
-            _msgConsigne.setText("Mot de passe manquant ! Veuillez entrer votre mot de passe");
-            System.out.print("mdp vide\n");
-        }else if(!( _pseudo.isEmpty() ||_mdpInput.isEmpty())) {
-            _connexion = "0C;".concat(_pseudo).concat(":").concat(_mdpInput);
-            System.out.print(_connexion);
-            //Mise a jour du pseudonyme dans l'instance
-            InformationsUtilisateur.getInstance().set_pseudo(_pseudo);
-            //envoi et repetion du message
-            //TODO
-            // SingletonUDP.getInstance().message(_connexion);
+        boolean co=false;
+        while(!co){
+            System.out.println("votre pseudo ?");
+            s = scan.nextLine();
+            System.out.println("entrer votre mdp");
+            str = scan.nextLine();
+            if (str.trim().isEmpty()||str.trim().equals("pseudonyme")) {//alerte AF
+                System.out.println("probleme mdp");
+                String _connexion = "0C;".concat(s).concat(":").concat(str);
+                //System.out.print(_connexion);
+                //Mise a jour du pseudonyme dans l'instance
+                InformationsUtilisateur.getInstance().set_pseudo(s);
 
+                try {
+                    message(_connexion);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                String _messageServeur= null;
+                try {
+                    _messageServeur = reception();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                // traitement de la chaine COR pour savoir quel message traiter
+                String[] _msgT = _messageServeur.split(";");
+                //message valide selon COR a la fin
+                if (_msgT[0].equals("1C")) {
+                    co= true;
 
+                }
+                if (_msgT[0].equals("1D")) {
 
+                    System.out.println("Echec de la connexion; Procedure d'isncription");
+                    inscritpion();
 
-            // traitement de la chaine COR pour savoir quel message traiter
-            String[] _msgT = _messageServeur.split(";");
-            //message valide selon COR a la fin
-            if (_msgT[0].equals("1C")) {
-                return false;
-
+                }
             }
-            if (_msgT[0].equals("1D")) {
-                //_btnPseudoConnexion.setDisable(true);
-                //_btnPseudoConnexion.setVisible(false);
-                _msgConsigne.setText("Echec de la connexion");
-                return false;
 
 
-            }
         }
+
 
     }
 
 
     @FXML
-    void inscriptionPseudo(ActionEvent event) throws IOException {
+    void inscription() throws IOException {
         System.out.print("inscription\n");
-
         //recuperation du stage si changement de fenetre
-        Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));
-        ControleurMenu _controleurMenu = menuLoader.getController();
-        Scene sceneMenu = menuLoader.load();
+        
         String _pseudo=_champPseudo.getText();
         String _mdpInput=_mdp.getText();
         String _inscription="";

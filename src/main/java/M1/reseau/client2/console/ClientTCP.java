@@ -13,7 +13,7 @@ public final class ClientTCP {
         BufferedReader in = null;
         PrintWriter out = null;
 
-        while(!isIn)
+       // while(insInterru)
         try{
 
             socket = new Socket("127.0.0.1", 9999);
@@ -48,7 +48,7 @@ public final class ClientTCP {
     }
 
 
-    public static void main(String[] args){
-        new TcpClient().process();
-    }
+//    public static void main(String[] args){
+//        new TcpClient().process();
+//    }
 }

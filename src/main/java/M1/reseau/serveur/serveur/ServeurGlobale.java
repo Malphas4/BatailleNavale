@@ -140,12 +140,13 @@ public class ServeurGlobale {
 
     synchronized public JoueurHandler get_1Client(String s) {
         JoueurHandler tempJoueur = null;
-        for (JoueurHandler iterJoueur:_tabClients
-             ) {
-            if(iterJoueur.getName().equals(s))tempJoueur=iterJoueur;
-            break ;
+        for (JoueurHandler iterJoueur:_tabClients) {
+            if(iterJoueur.get_pseudo().equals(s)) {
+                tempJoueur = iterJoueur;
+                break;
+            }
         }
-        System.out.println("Joueur non existant");
+        if (tempJoueur == null) System.out.println("Joueur non existant");
         return tempJoueur;
     }
 
@@ -154,7 +155,7 @@ public class ServeurGlobale {
     }
 
     synchronized public SalonThread get_salon(int id) {
-        if (id <= 0) return null;
+        if (id < 0) return null;
         SalonThread tmp = _tabSalons.get(id);
         return tmp;
     }

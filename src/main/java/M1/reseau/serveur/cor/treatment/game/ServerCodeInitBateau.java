@@ -16,6 +16,7 @@ public class ServerCodeInitBateau extends ServerCOR {
      */
     @Override
     public void execute(String _message, SalonThread _salon) {
+        System.out.println("|\tInput message : Init Bateau");
         GameService _gameService = _salon.get_gameService();
 
         String[] _sp = _message.split(";");

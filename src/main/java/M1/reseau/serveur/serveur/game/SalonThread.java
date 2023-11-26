@@ -75,6 +75,7 @@ public class SalonThread extends Thread {
         _j1=null;
         _j2=null;
         _id=_serveurGlobale.getNbSalons()+1;
+        _gameService = new GameService();
 
         set_nom("Room(" + _id + ")");
         // create a ServerSocket instance and bind it to the specified port number
@@ -192,5 +193,13 @@ public class SalonThread extends Thread {
 
     public void set_id(int _id) {
         this._id = _id;
+    }
+
+    public ChronoThread get_chrono() {
+        return _chrono;
+    }
+
+    public void set_chrono(ChronoThread _chrono) {
+        this._chrono = _chrono;
     }
 }

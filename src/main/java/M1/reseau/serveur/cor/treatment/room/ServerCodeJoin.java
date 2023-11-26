@@ -20,7 +20,7 @@ public class ServerCodeJoin extends ServerCOR {
      */
     @Override
     public void execute(String _message, SalonThread _salon) {
-        System.out.println("|\tInput message : Message salon");
+        System.out.println("|\tInput message : join salon");
         GameService _gameService = _salon.get_gameService();
 
         String[] _sp = _message.split(";");
@@ -37,11 +37,13 @@ public class ServerCodeJoin extends ServerCOR {
             if (_salon.get_j1() != null && _salon.get_j2() != null) {
                 _salon.get_j1().message(
                         "join;"
-                        + _salon.get_j2().get_pseudo()
+                                + _salon.get_id()
+                                + ";" + _salon.get_j2().get_pseudo()
                 );
                 _salon.get_j2().message(
                         "join;"
-                        + _salon.get_j1().get_pseudo()
+                                + _salon.get_id()
+                                + ";" + _salon.get_j1().get_pseudo()
                 );
             }
 
@@ -50,7 +52,7 @@ public class ServerCodeJoin extends ServerCOR {
         } catch (IOException e) {
             System.err.println("ServerCodeJoin : Error sending message.");
         }
-        System.out.println("|\tInput message : Fin Message Salon");
+        System.out.println("|\tInput message : Fin join salon");
     }
 
     /**

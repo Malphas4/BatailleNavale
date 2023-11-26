@@ -512,9 +512,9 @@ public class ControleurGrille {
 
         }
         String Bato=("commencer;")
-                .concat(InformationsUtilisateur.getInstance().get_pseudo())
+                .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
                 .concat(";")
-                .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()));
+        .concat(InformationsUtilisateur.getInstance().get_pseudo());
         try {
             SingletonTCP.getInstance().message(Bato);
         } catch (IOException e) {

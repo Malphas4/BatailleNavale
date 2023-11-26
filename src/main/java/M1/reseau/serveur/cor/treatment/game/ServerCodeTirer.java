@@ -101,8 +101,18 @@ public class ServerCodeTirer extends ServerCOR {
             }
             else _gameService.get_partie().tourSuivant();
 
-        } catch (IPartieException | IGrilleException | IJoueurException | IOException e) {
-            System.err.println("ServerCodeTirer : Erreur.");
+        } catch (IPartieException e) {
+            System.err.println("ServerCodeTirer : Partie.");
+            e.printStackTrace();
+        } catch (IGrilleException e) {
+            System.err.println("ServerCodeTirer : Grille.");
+            e.printStackTrace();
+        } catch (IJoueurException e) {
+            System.err.println("ServerCodeTirer : Joueur.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("ServerCodeTirer : IOException.");
+            e.printStackTrace();
         }
 
         /* If player is bot, we play as the bot */
@@ -138,10 +148,15 @@ public class ServerCodeTirer extends ServerCOR {
                 _gameService.get_partie().tourSuivant();
                 System.out.println("\t\t> ServerCodeTirer : Fin Execute bot");
             }
-        } catch (IPartieException | IJoueurException e) {
-            System.err.println("ServerCodeTirer : Error.");
+        } catch (IPartieException e) {
+            System.err.println("ServerCodeTirer : Erreur Partie.");
+            e.printStackTrace();
+        } catch (IJoueurException e) {
+            System.err.println("ServerCodeTirer : Erreur joueur.");
+            e.printStackTrace();
         } catch (IOException e) {
             System.err.println("ServerCodeTirer : Bot can't send tirer.");
+            e.printStackTrace();
         }
 
         System.out.println("\t> ServerCodeTirer : Fin Execute");

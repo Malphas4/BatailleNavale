@@ -127,7 +127,7 @@ public class ControleurLobby {
             //reception du pseudo adversaire
             String s=  SingletonTCP.getInstance().reception();
             String []sT=s.split(";");
-            InformationsUtilisateur.getInstance().set_adversaire(sT[3]);
+            InformationsUtilisateur.getInstance().set_adversaire(sT[2]);
 
             InformationsUtilisateur.getInstance().set_salon(Integer.parseInt(_salonChoisi));
             Scene grille=grilleLoader.load();

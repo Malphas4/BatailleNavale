@@ -14,7 +14,7 @@ public class ServerCodeCommencer extends ServerCOR {
     }
 
     /**
-     * Receive : commencer;[salon id];[joueur]
+     * Receive : commencer;[salon id]
      * @param _message
      * @param _salon
      */
@@ -25,8 +25,9 @@ public class ServerCodeCommencer extends ServerCOR {
             _gameService.get_partie().commencer();
             _salon.get_j1().message("commencer;" + _salon.get_id());
             _salon.get_j2().message("commencer;" + _salon.get_id());
+            _salon.get_chrono().set_time(31);
         } catch (IPartieException | IOException e) {
-            System.err.println("ServerCodeCommencer : Error.");
+            System.err.println("ServerCodeCommencer : La partie ne peut pas commencer.");
         }
     }
 

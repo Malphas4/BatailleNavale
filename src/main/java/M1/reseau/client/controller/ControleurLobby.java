@@ -67,6 +67,7 @@ public class ControleurLobby {
     @FXML
     void envoisChatGeneral(ActionEvent event) throws IOException {
         //envoi au serveur d'un message global
+        //TODO COR en arrière plan
 
         String _msgm=_chatInput.getText();
         System.out.println(_msgm);
@@ -75,8 +76,7 @@ public class ControleurLobby {
                     "chat;"
                             .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
                             .concat(";")
-                            .concat(InformationsUtilisateur.getInstance()
-                                    .get_pseudo())
+                            .concat(InformationsUtilisateur.getInstance().get_pseudo())
                             .concat(";")
                             .concat(_msgm));
         } catch (IOException e) {

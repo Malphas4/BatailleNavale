@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Client2 {
     public static void main(String[] args) {
-
+        
     }
 
     public void afficherGrille(JoueurNormal _joueur) {

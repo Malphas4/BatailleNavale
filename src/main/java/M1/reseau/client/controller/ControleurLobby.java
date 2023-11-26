@@ -206,6 +206,7 @@ public class ControleurLobby {
     }
     @FXML
     void majSalons(ActionEvent event) {
+        String[] _strSalons;
         _listeSalon.getChildren().clear();
         try {
             SingletonUDP.getInstance().message(_demandeSalons);
@@ -218,7 +219,7 @@ public class ControleurLobby {
         try {
             String _msgSalons= SingletonUDP.getInstance().reception();
             System.out.println(_msgSalons);
-            String[] _strSalons=_msgSalons.split(";");
+            _strSalons=_msgSalons.split(";");
             nbSalons = Integer.parseInt(_strSalons[1]);
             System.out.println("nb salons AF "+nbSalons);
 
@@ -228,7 +229,7 @@ public class ControleurLobby {
         for (int j = 0; j < nbSalons; j++) {
             Button b=new Button("Salon ".concat(String.valueOf(j)));
             System.out.println("creation bouton "+j);
-            b.setId(String.valueOf(j));
+            b.setId(_strSalons[j]);
             b.setLayoutX(50);
             b.setOnAction(new EventHandler<ActionEvent>(){
                 @Override

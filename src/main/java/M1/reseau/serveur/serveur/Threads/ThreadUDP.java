@@ -3,6 +3,7 @@ package M1.reseau.serveur.serveur.Threads;
 import M1.reseau.model.player.Joueur;
 import M1.reseau.serveur.serveur.ServeurGlobale;
 import M1.reseau.serveur.serveur.game.JoueurHandler;
+import M1.reseau.serveur.serveur.game.SalonThread;
 
 import java.io.IOException;
 import java.net.*;
@@ -82,6 +83,11 @@ public class ThreadUDP extends Thread{
                 } else if (_msg.equals("NBsalons?")) {
                     int _nbSalons = _sv.getNbSalons();
                     reponse = "NBsalons;".concat(String.valueOf(_nbSalons));
+                    for (int i = 0; i < _nbSalons; i++) {
+                        SalonThread unSalon=_sv.get_salon(i);
+                        reponse.concat(";");
+                        reponse.concat(String.valueOf(unSalon));
+                    }
                 }else if(_msgT[0].equals("12")){
                     System.out.println("inscription en cours");
                     boolean dejaIsncrit=true;

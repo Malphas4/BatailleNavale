@@ -31,7 +31,7 @@ public class ServerCodeTourSuivant extends ServerCOR {
                 _gameService.get_partie().tourSuivant();
                 _jc = _gameService.get_partie().getJoueurCourant().get_pseudo();
                 _salon.get_j1().message("tour suivant;" + _salon.get_id() + _jc);
-                _salon.get_j2().message("commencer;" + _salon.get_id() + _jc);
+                _salon.get_j2().message("tour suivant;" + _salon.get_id() + _jc);
                 _salon.get_chrono().set_time(30);
             }
         } catch (IPartieException | IOException e) {

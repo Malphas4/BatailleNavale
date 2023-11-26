@@ -11,8 +11,15 @@ import M1.reseau.model.world.element.state.CaseTouche;
 import java.util.Scanner;
 
 public class Client2 {
+
+    private boolean _menuGlobal = true;
+    private boolean _menuConnexion = false;
+    private boolean _menuInscription = false;
+    private boolean _menuSalon = false;
+    private boolean _menuGame = false;
+
     public static void main(String[] args) {
-        
+
     }
 
     public void afficherGrille(JoueurNormal _joueur) {
@@ -73,31 +80,28 @@ public class Client2 {
         }
     }
 
-    public void menuConnexion() {
-        System.out.println("=============== Menu de connexion ===============");
-        Scanner _scan = new Scanner();
-        System.out.println("votre login : ");
-        String _login = _scan.next();
-        System.out.println("mot de passe : ");
-        String _password = _scan.next();
+    public void menuGame() {
+        System.out.println("=============== Menu du jeu ===============");
+        System.out.println("1\\ Afficher la grille");
+        System.out.println("2\\ Tirer une case");
+        System.out.println("3\\ Quitter");
 
-        // TODO Vérificaiton de conenxion
-    }
-
-    public void menuInscription() {
-        System.out.println("=============== Menu d'incription ===============");
         Scanner _scan = new Scanner(System.in);
-        System.out.println("votre login : ");
-        String _login = _scan.next();
-        System.out.println("mot de passe : ");
-        String _password = _scan.next();
+        int _choice = _scan.nextInt();
+
+        switch (_choice) {
+            case 1 : {
+
+            }
+            case 2 : {
+
+            }
+            case 3 : {
+
+            }
+            default:
+                System.err.println("Le choix est incorrecte.");
+        }
     }
 
-    public void menuSalon() {
-        // TODO requête salon
-        int _nbSalon = 10;
-
-        for (int i = 0; i < _nbSalon; i++)
-            System.out.println();
-    }
 }

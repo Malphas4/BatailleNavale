@@ -175,9 +175,7 @@ public class PartieClient extends Partie {
      */
     @Override
     public boolean gagnant() {
-        for (ICase _case : get_joueur().get_grilleJoueur().get_listeCase())
-            if (_case instanceof CaseBateau) return false;
-        return true;
+        return is_aGagner();
     }
 
     /***************************************

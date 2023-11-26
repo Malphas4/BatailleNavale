@@ -154,6 +154,7 @@ public class ServeurGlobale {
     }
 
     synchronized public SalonThread get_salon(int id) {
+        if (id <= 0) return null;
         SalonThread tmp = _tabSalons.get(id);
         return tmp;
     }

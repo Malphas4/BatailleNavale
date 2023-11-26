@@ -17,8 +17,9 @@ public class ServerCodeChat extends ServerCOR {
      */
     @Override
     public void execute(String _message, SalonThread _salon) {
-        String[] _sp = _message.split(";");
+        System.out.println("|\tInput message : Message global");
         ServeurGlobale.sv.sendAll(_message);
+        System.out.println("|\tInput message : End");
     }
 
     /**
@@ -28,6 +29,7 @@ public class ServerCodeChat extends ServerCOR {
     @Override
     public boolean isMessageCorrect(String _message) {
         String[] _sp = _message.split(";");
-        return _sp[1].equals("chat");
+        System.out.println("> chat salon : " + _sp[0] + " - " + _sp[0].equalsIgnoreCase("chat"));
+        return _sp[0].equalsIgnoreCase("chat");
     }
 }

@@ -34,6 +34,7 @@ public class ServerCodeChatSalon extends ServerCOR {
     @Override
     public boolean isMessageCorrect(String _message) {
         String[] _sp = _message.split(";");
-        return _sp[1].equals("chat salon");
+        System.out.println("> chat salon : " + _sp[0] + " - " + _sp[0].equalsIgnoreCase("chat salon"));
+        return _sp[0].equalsIgnoreCase("chat salon");
     }
 }

@@ -53,6 +53,6 @@ public class ServerCodeInitBateau extends ServerCOR {
     @Override
     public boolean isMessageCorrect(String _message) {
         String[] _sp = _message.split(";");
-        return _sp[1].equals("init bateau");
+        return _sp[0].equals("init bateau");
     }
 }

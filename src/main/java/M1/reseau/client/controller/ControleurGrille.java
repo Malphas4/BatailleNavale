@@ -262,7 +262,7 @@ public class ControleurGrille {
                         String[] _traitementTCP2=_traitementTCP.split(";");
                         //toucher;[salon id];[tireur];[victime];[x];[y];[statut case]
                         //Exemple : toucher;0;j1;j2;4;5;true
-                        //si victime je suis la victime
+                        //si victime je suis la cible
                         if(_traitementTCP2[3].equals(InformationsUtilisateur.getInstance().get_pseudo())){
                             if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
                                 modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,true);
@@ -534,6 +534,30 @@ public class ControleurGrille {
                 if (sT[0].equals("commencer") && sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())) {
                     _monTour = true;
                     debutCrono = true;
+                }else {
+                    try {
+                        _traitementTCP=SingletonTCP.getInstance().reception();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    String[] _traitementTCP2=_traitementTCP.split(";");
+                    //toucher;[salon id];[tireur];[victime];[x];[y];[statut case]
+                    //Exemple : toucher;0;j1;j2;4;5;true
+                    //si victime je suis la cible
+                    if(_traitementTCP2[3].equals(InformationsUtilisateur.getInstance().get_pseudo())){
+                        if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
+                            modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,true);
+                        }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){
+                            modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,true);
+                        }
+                    }else{//si je suis le tireur
+                        if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
+                            modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,true);
+                        }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){
+                            modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,true);
+                        }
+                    }
+
                 }
                 /*try {
                     String s = SingletonTCP.getInstance().reception();

@@ -24,8 +24,8 @@ public class ServerCodeCommencer extends ServerCOR {
         try {
             _gameService.get_partie().commencer();
             String _jc = _gameService.get_partie().getJoueurCourant().get_pseudo();
-            _salon.get_j1().message("commencer;" + _salon.get_id() + _jc);
-            _salon.get_j2().message("commencer;" + _salon.get_id() + _jc);
+            _salon.get_j1().message("commencer;" + _salon.get_id() + ";" + _jc);
+            _salon.get_j2().message("commencer;" + _salon.get_id() + ";" + _jc);
             _salon.get_chrono().set_time(30);
         } catch (IPartieException | IOException e) {
             System.err.println("ServerCodeCommencer : La partie ne peut pas commencer.");
@@ -39,6 +39,7 @@ public class ServerCodeCommencer extends ServerCOR {
     @Override
     public boolean isMessageCorrect(String _message) {
         String[] _sp = _message.split(";");
+        System.out.println("> ServerCodeCommencer : " + _sp[0] + " - " + _sp[0].equalsIgnoreCase("commencer"));
         return _sp[0].equalsIgnoreCase("commencer");
     }
 }

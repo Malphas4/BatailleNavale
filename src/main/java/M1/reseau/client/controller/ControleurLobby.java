@@ -212,7 +212,7 @@ public class ControleurLobby {
         String[] _strSalons;
         _listeSalon.getChildren().clear();
         try {
-            SingletonUDP.getInstance().message(_demandeSalons);
+            SingletonUDP.getInstance().message(_salonChoisi);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

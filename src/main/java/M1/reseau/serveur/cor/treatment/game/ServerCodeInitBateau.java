@@ -16,7 +16,7 @@ public class ServerCodeInitBateau extends ServerCOR {
      */
     @Override
     public void execute(String _message, SalonThread _salon) {
-        System.out.println("|\tInput message : Init Bateau");
+        System.out.println("\t> ServerCodeInitBateau : Init Bateau");
         GameService _gameService = _salon.get_gameService();
 
         String[] _sp = _message.split(";");
@@ -24,10 +24,7 @@ public class ServerCodeInitBateau extends ServerCOR {
         int x = Integer.parseInt(_sp[3]);
         int y = Integer.parseInt(_sp[4]);
 
-        CaseBateau _ncase = new CaseBateau(
-                x,
-                y
-        );
+        CaseBateau _ncase = new CaseBateau(x, y);
 
         if (_gameService.get_partie().get_joueur1().get_pseudo().equals(_sp[2])) {
             try {
@@ -41,10 +38,12 @@ public class ServerCodeInitBateau extends ServerCOR {
                 _gameService.get_partie().get_joueur2().get_grilleJoueur().supprimerCase(new CaseNormal(x, y));
                 _gameService.get_partie().get_joueur2().get_grilleJoueur().ajouterCase(_ncase);
             } catch (IGrilleException e) {
-                System.out.println("ServerCodeInitBateau : Error.");
+                System.out.println("ServerCodeInitBateau : Erreur Grille.");
             }
         } else
-            System.err.println("ServerCodeInitBateau : Error.");
+            System.err.println("ServerCodeInitBateau : Erreur.");
+
+        System.out.println("\t> ServerCodeInitBateau : Fin Execute.");
     }
 
     /**

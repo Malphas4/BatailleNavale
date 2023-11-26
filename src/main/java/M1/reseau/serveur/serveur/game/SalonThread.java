@@ -18,6 +18,9 @@ public class SalonThread extends Thread {
     int _nbMaxJoueur=2;
     int _nbConnecte=0;
 
+    private boolean _ready_j1;
+    private boolean _ready_j2;
+
     public int get_temps() {
         return _temps;
     }
@@ -65,6 +68,9 @@ public class SalonThread extends Thread {
         _j1=j1;
         _j2=null;
         _id=_serveurGlobale.getNbXlients()+1;
+
+        /* Initialisation du Chronomètre */
+        _chrono = new ChronoThread(this);
         // create a ServerSocket instance and bind it to the specified port number
         //serverSocket = new ServerSocket(portNumber);
     }
@@ -74,7 +80,7 @@ public class SalonThread extends Thread {
         _serveurGlobale=ServeurGlobale.sv;
         _j1=null;
         _j2=null;
-        _id=_serveurGlobale.getNbSalons()+1;
+        _id=_serveurGlobale.getNbSalons();
         _gameService = new GameService();
 
         set_nom("Room(" + _id + ")");
@@ -201,5 +207,21 @@ public class SalonThread extends Thread {
 
     public void set_chrono(ChronoThread _chrono) {
         this._chrono = _chrono;
+    }
+
+    public boolean is_ready_j1() {
+        return _ready_j1;
+    }
+
+    public void set_ready_j1(boolean _ready_j1) {
+        this._ready_j1 = _ready_j1;
+    }
+
+    public boolean is_ready_j2() {
+        return _ready_j2;
+    }
+
+    public void set_ready_j2(boolean _ready_j2) {
+        this._ready_j2 = _ready_j2;
     }
 }

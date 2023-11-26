@@ -168,7 +168,7 @@ public class ControleurLobby {
                 public void handle(ActionEvent event) {
                     Node source = (Node) event.getSource();
                     _salonChoisi= source.getId();
-                    System.out.println("selectionSalon; "+_salonChoisi);
+                   // System.out.println("selectionSalon; "+_salonChoisi);
                     //chat salon;[salon id];[joueur];[message
                     //SingletonTCP.getInstance().message("salonid;.concat(_salonChoisi)";
                     //SingletonTCP.getInstance().message("commencer");
@@ -212,7 +212,7 @@ public class ControleurLobby {
         String[] _strSalons;
         _listeSalon.getChildren().clear();
         try {
-            SingletonUDP.getInstance().message(_salonChoisi);
+            SingletonUDP.getInstance().message(_demandeSalons);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -232,8 +232,7 @@ public class ControleurLobby {
         for (int j = 0; j < nbSalons; j++) {
             Button b=new Button("Salon ".concat(String.valueOf(j)));
             System.out.println("creation bouton "+j);
-//            b.setId(_strSalons[j]);
-            b.setId(String.valueOf(j));
+            b.setId(_strSalons[j]);
             b.setLayoutX(50);
             b.setOnAction(new EventHandler<ActionEvent>(){
                 @Override

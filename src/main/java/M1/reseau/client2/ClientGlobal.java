@@ -9,6 +9,7 @@ import M1.reseau.model.world.element.classic.CaseBateau;
 import M1.reseau.model.world.element.classic.CaseNormal;
 import M1.reseau.model.world.element.state.CaseRate;
 import M1.reseau.model.world.element.state.CaseTouche;
+import M1.reseau.utilities.InformationsUtilisateur;
 
 import java.util.Scanner;
 
@@ -28,7 +29,7 @@ public class ClientGlobal {
     private static ClientGlobal _clientGlobal;
 
     public ClientGlobal() {
-
+        set_game(new GameClient());
     }
 
     public static void main(String[] args) {
@@ -170,9 +171,87 @@ public class ClientGlobal {
         }
     }
 
+    public void menuGlobal() {
+        System.out.println("=============== Menu du global ===============");
+        System.err.println("Pour quitter faire -1");
+        System.out.println("0\\ Connexion");
+        System.out.println("1\\ Inscription");
+        System.out.println("2\\ Choix du salon");
+        System.out.println("3\\ Chat Global");
+        System.out.println("4\\ Entrer dans la partie");
+
+        Scanner _scan = new Scanner(System.in);
+        int _choice = 0;
+
+        while (_choice <= -1) {
+            _choice = _scan.nextInt();
+            switch (_choice) {
+                case 0 : {
+                    menuConnexion();
+                }
+                case 1 : {
+                    menuInscription();
+                }
+                case 2 : {
+                    menuSalon();
+                }
+                case 3 : {
+
+                }
+                case 4: {
+                    menuGame();
+                }
+                default:
+                    System.err.println("La sélection n'est pas reconnue.");
+            }
+        }
+
+    }
+
+    public void menuConnexion() {
+        System.out.println("=============== Connexion ===============");
+        Scanner _scan = new Scanner(System.in);
+        System.out.println("login : ");
+        String _login = _scan.next();
+        System.out.println("password : ");
+        String _password = _scan.next();
+
+        // TODO UDP connexion
+
+    }
+
+    public void menuInscription() {
+        System.out.println("=============== Inscription ===============");
+        Scanner _scan = new Scanner(System.in);
+        System.out.println("login : ");
+        String _login = _scan.next();
+        System.out.println("password : ");
+        String _password = _scan.next();
+
+        // TODO UDP inscription
+    }
+
+    public void menuSalon() {
+        System.out.println("=============== Menu de sélection de salon ===============");
+        // TODO request salon
+        int _nbSalon = 10;
+        for (int i = 0; i < _nbSalon; i++) {
+            System.out.println(i + " - Room(" + i + ")");
+        }
+        Scanner _scan = new Scanner(System.in);
+        int _choice = _scan.nextInt();
+
+        // TODO join le salon
+        get_clientTCP().message(
+                "join;"
+                + _choice
+                + ";" + InformationsUtilisateur.getInstance().get_pseudo()
+        );
+    }
+
     public void menuGame() {
         System.out.println("=============== Menu du jeu ===============");
-        System.out.println("2\\ Initialisation de la grille");
+        System.out.println("0\\ Initialisation de la grille");
         System.out.println("1\\ Afficher la grille");
         System.out.println("2\\ Tirer une case");
         System.out.println("3\\ Quitter");

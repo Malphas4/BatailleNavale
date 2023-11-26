@@ -19,9 +19,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 
@@ -66,16 +69,20 @@ public class ControleurLobby {
 
         String _msgm=_chatInput.getText();
         System.out.println(_msgm);
-//        try {
-//            SingletonTCP.getInstance().message("chat;".concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).concat(InformationsUtilisateur.getInstance().get_pseudo()).concat(":").concat(_msgm));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            SingletonTCP.getInstance().message("chat;".
+                    concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).
+                    concat(";").
+                    concat(InformationsUtilisateur.getInstance().
+                            get_pseudo()).concat(";").concat(_msgm));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("envoi du message global");
-        //reception du message en broadcast
-//        String _reception= SingletonTCP.getInstance().reception();
-//        String _receptionT[]=_reception.split(";");
-//        _fieldChatGlobal.setText(_fieldChatGlobal.getText().concat("\n").concat(_receptionT[1]));
+          //reception du message en broadcast
+        String _reception= SingletonTCP.getInstance().reception();
+        String _receptionT[]=_reception.split(";");
+        _fieldChatGlobal.setText(_fieldChatGlobal.getText().concat("\n").concat(_receptionT[1]));
     }
 
     @FXML
@@ -96,13 +103,15 @@ public class ControleurLobby {
                 throw new RuntimeException(e);
             }
 
-            //SingletonTCP.getInstance().message("commencer");
+            //
             System.out.println("envoi du salon choisi TCP");
             FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
             InformationsUtilisateur.getInstance().set_salon(Integer.parseInt(_salonChoisi));
-            // AnchorPane grille=grilleLoader.load();
-            // Scene sceneGrille = new Scene(grille);
-            Scene sceneGrille=grilleLoader.load();
+            Scene grille=grilleLoader.load();
+            Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stageActuel.setScene(grille);
+            stageActuel.show();
+
         }else System.out.println("pas de salon choisi");
 
 
@@ -136,8 +145,8 @@ public class ControleurLobby {
                 public void handle(ActionEvent event) {
                     Node source = (Node) event.getSource();
                     _salonChoisi= source.getId();
-                    System.out.println("selectionSalon; "+_salonChoisi);
-                    //TODO
+                   // System.out.println("selectionSalon; "+_salonChoisi);
+                    //chat salon;[salon id];[joueur];[message
                     //SingletonTCP.getInstance().message("salonid;.concat(_salonChoisi)";
                     //SingletonTCP.getInstance().message("commencer");
 
@@ -165,8 +174,14 @@ public class ControleurLobby {
         Platform.exit();
         //TODO
         //fermeture serveur UDP et TCP AF
-        //SingletonUDP.getInstance().fermetureSocket();
-        //SingletonTCP.fermetureSocket();
+        try {
+            SingletonUDP.getInstance().fermetureSocket();
+        } catch (SocketException e) {
+            throw new RuntimeException(e);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+        SingletonTCP.getInstance().fermetureSocket();
         System.exit(0);
     }
     @FXML

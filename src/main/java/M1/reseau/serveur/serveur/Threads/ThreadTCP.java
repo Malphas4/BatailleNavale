@@ -33,17 +33,17 @@ public class ThreadTCP extends Thread {
 
     public void run(){
         try{
-            while (! isInterrupted()) {
+            while (!isInterrupted()) {
 
                 // accept a new connection
-                System.out. println("serveur TCP en attente de connexion");
+                System.out.println("serveur TCP en attente de connexion");
                 Socket socket = serverSocket.accept();
-                System.out. println("client se connectant");
+                System.out.println("client se connectant");
                 JoueurHandler j=new JoueurHandler(socket);
-                System.out. println("creation du JoueurHandler");
-
+                System.out.println("creation du JoueurHandler");
                 ServeurGlobale.sv.addClient(j);
                 j.start();
+
             }
         }
         catch(IOException e){

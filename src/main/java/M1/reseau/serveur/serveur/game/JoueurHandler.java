@@ -70,8 +70,8 @@ public final class JoueurHandler extends Thread {
         try{
             synchronized (in){
                 while(!isInterrupted()) in .wait();
-//                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 while( (_msg = in.readLine()) != null) {
+                    System.out.println(get_pseudo()+"a recu "+_msg);
 
                     String [] _sp = _msg.split(";");
 
@@ -87,8 +87,6 @@ public final class JoueurHandler extends Thread {
             synchronized (out){
                 out = new PrintWriter(socket.getOutputStream(), true);
             }
-
-
         }
         catch(IOException e){
             e.printStackTrace();

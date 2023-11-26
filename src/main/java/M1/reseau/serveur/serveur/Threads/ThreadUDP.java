@@ -57,7 +57,7 @@ public class ThreadUDP extends Thread{
             try {
                 _adr=InetAddress.getByName("localhost") ;
                 String reponse = "";
-                System.out.print("Serveur UDP en ecoute");
+//                System.out.print("Serveur UDP en ecoute");
                 //Creaton du packet a recuperer
                 final  int _taille = 1024;
                 byte[] _buffer = new byte[_taille];
@@ -67,7 +67,7 @@ public class ThreadUDP extends Thread{
                 _socketUDP.receive(recu);
                 //recuperation des données
                 String _msg = new String(recu.getData(), 0, recu.getLength());
-                System.out.println("Data par serveur avec UDP recu : " + _msg + "\n");
+              //  System.out.println("Data par serveur avec UDP recu : " + _msg + "\n");
                 //Separation du message recu
                 String[] _msgT = _msg.split(";");
                 //traitement du message
@@ -114,7 +114,7 @@ public class ThreadUDP extends Thread{
                 _buffer = new byte[_taille];
                 _buffer = reponse.getBytes();
                 DatagramPacket response = new DatagramPacket(_buffer, _buffer.length, recu.getAddress(), recu.getPort());
-                System.out.println("Serveur  envoie avec UDP "+reponse);
+              //  System.out.println("Serveur  envoie avec UDP "+reponse);
                 _socketUDP.send(response);
             } catch (IOException e) {
                 e.printStackTrace();

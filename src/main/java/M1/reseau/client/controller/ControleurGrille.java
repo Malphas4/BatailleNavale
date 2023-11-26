@@ -4,6 +4,7 @@ package M1.reseau.client.controller;
 import M1.reseau.model.world.element.Case;
 import M1.reseau.model.world.element.classic.CaseBateau;
 import M1.reseau.serveur.singletons.SingletonTCP;
+import M1.reseau.serveur.singletons.SingletonUDP;
 import M1.reseau.utilities.InformationsUtilisateur;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -197,18 +198,7 @@ public class ControleurGrille {
                         //transimition des coordonnes des bateaux
                     }
                     else if (_monTour){
-                        System.out.print("Feu à volonté\n");
-                        //on envoie la case du tir
-//                        try {
-                            System.out.println("envoi du tir TCP");
-                            //SingletonTCP.getInstance().message("tir".concat(":x").concat(String.valueOf(_x)).concat(";y").concat(String.valueOf(_y)));
-                            //TODO
-                            //_traitementTCP=SingletonTCP.getInstance().reception();
-//                        } catch (IOException e) {
-//                            throw new RuntimeException(e);
-//                        }
-                        //on attend le message du serveur
-
+                        System.out.print("Blue on blue\n");
                     }else System.out.print("bateaux deja placées ou pas mon tour\n");
 
 
@@ -233,8 +223,33 @@ public class ControleurGrille {
                     _y=(int)_uneCase.getParent().getLayoutY()/31;
                     System.out.print("case pointée ennemie x:"+_x+" y:"+_y+"\n");
                     if (_monTour &&!_placementbateaux){
-                        //on envoie la case à toucher
-                       // SingletonTCP.getInstance().message("code".concat(":x").concat(String.valueOf(_x)).concat(";y").concat(String.valueOf(_y)));
+                        //TODO on envoie la case à toucher
+                        //on envoie la case du tir
+//                        try {
+                        System.out.println("envoi du tir TCP");
+                        // Receive : tirer;[salon id];[joueur tireur];[joueur victime];[x];[y]
+                        try {
+                            SingletonTCP.getInstance().message(
+                                    "tirer;".
+                                            concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).
+                                            concat(";").
+                                            concat(InformationsUtilisateur.getInstance().get_pseudo()).
+                                            concat(";").
+                                            //concat( pseudo ennemi PROBLEME), .concat(";")
+                                                    concat(String.valueOf(_x)).
+                                            concat(";")
+                                            .concat(String.valueOf(_y)));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        //TODO
+                        //_traitementTCP=SingletonTCP.getInstance().reception();
+
+//                        } catch (IOException e) {
+//                            throw new RuntimeException(e);
+//                        }
+                        //on attend le message du serveur et on change la case de couleur en fonction du resultat
+
                     }else System.out.print("pas mon tour\n");
 
 
@@ -291,6 +306,8 @@ public class ControleurGrille {
     @FXML
     void Abandonner(ActionEvent event) {
         //on envoie le message d'abandon
+        messageAbandon();
+        InformationsUtilisateur.getInstance().set_salon(-1);
         // SingletonTCP.getInstance().message("code:".concat(InformationsUtilisateurs.getInstance.get_pseudo()));
         //on retourne au Lobby
         FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
@@ -311,23 +328,28 @@ public class ControleurGrille {
     void EnvoyerMessage(ActionEvent event) {
         String _msgTransit=_textChatpartie.getText();
         //on envoie au serveur le message avec le code pour le chat local
-//        try {
-//           // SingletonTCP.getInstance().message("chatsalon;".concat(InformationsUtilisateur.getInstance().get_pseudo().concat(":").concat(_msgTransit)));
-        System.out.println("bot moyen");
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+          SingletonTCP.getInstance().message("chat salon;".
+                  concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())
+                  .concat(";")
+                  .concat(InformationsUtilisateur.getInstance().get_pseudo().
+                  concat(";")
+                                  .concat(_msgTransit))));
+      // System.out.println("bot moyen");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+       }
 
 
         //reception du message  lobby
-//        String _reception= null;
-//        try {
-//            _reception = SingletonTCP.getInstance().reception();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        String[] _receptionT =_reception.split(";");
-//        _chatPartie.setText(_chatPartie.getText().concat("\n").concat(_receptionT[1]));
+         String _reception= null;
+        try {
+            _reception = SingletonTCP.getInstance().reception();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String[] _receptionT =_reception.split(";");
+        _chatPartie.setText(_chatPartie.getText().concat("\n").concat(_receptionT[1]));
         System.out.println("message lobby recu");
 
 
@@ -335,15 +357,29 @@ public class ControleurGrille {
 
     @FXML
     void Quitter(ActionEvent event) {
-
+        messageAbandon();
         //on envoie au serveur le ragequit
-        // SingletonTCP.getInstance().message("code:".concat(InformationsUtilisateurs.getInstance.get_pseudo()));
         System.out.print("au revoir\n");
+       // SingletonUDP.getInstance().fermetureSocket();
+        //SingletonTCP.getInstance().fermetureSocket();
         Platform.exit();
         //fermeture serveur UDP et TCP AF
-        //SingletonUDP.fermetureSocket();
-        //SingletonTCP.fermetureSocket();
+
         System.exit(0);
+
+    }
+
+    private void messageAbandon() {
+        //abandonner;[salon id];[joueur id]
+        try {
+            SingletonTCP.getInstance().message(
+                    ("abandonner,".
+                    concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).
+                    concat(";").
+                    concat(InformationsUtilisateur.getInstance().get_pseudo())));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -420,6 +456,12 @@ public class ControleurGrille {
             _placementbateaux=false;
             //TODO envoi des bateaux
             System.out.println("Envoi des bateaux au serveur");
+            for (Case unBateau:_mesBateaux) {
+                //envoi d'une case bateau
+                modifCase(unBateau.get_x(), unBateau.get_y(), _couleurBateau ,true);
+            }
+
+
         }
 
     }

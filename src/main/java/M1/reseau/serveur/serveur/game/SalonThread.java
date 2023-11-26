@@ -4,13 +4,14 @@ import M1.reseau.serveur.serveur.ServeurGlobale;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Vector;
 
-public class SalonThread /*extends Thread*/ {
+public class SalonThread extends Thread {
 
 
-    private ServerSocket serverSocket;
-    private int portNumber = 8888;
+   // private ServerSocket serverSocket;
+   //private int portNumber = 8888;
     private GameService _gameService;
     public String _nom;
     String _description;
@@ -44,11 +45,11 @@ public class SalonThread /*extends Thread*/ {
         _j2=j2;
         _id=_serveurGlobale.getNbXlients()+1;
         // create a ServerSocket instance and bind it to the specified port number
-        try {
-            serverSocket = new ServerSocket(portNumber);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            serverSocket = new ServerSocket(portNumber);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
         _listeJoueur=new Vector<>();
 
         /* Initialisation du Chronomètre */
@@ -65,7 +66,7 @@ public class SalonThread /*extends Thread*/ {
         _j2=null;
         _id=_serveurGlobale.getNbXlients()+1;
         // create a ServerSocket instance and bind it to the specified port number
-        serverSocket = new ServerSocket(portNumber);
+        //serverSocket = new ServerSocket(portNumber);
     }
 
     public SalonThread() {
@@ -115,8 +116,11 @@ public class SalonThread /*extends Thread*/ {
 
 
 
-    synchronized  public ServerSocket getServerSocket() {
-        return serverSocket;
+    synchronized  public Socket getServerSocketj1() {
+        return _j1.getSocket();
+    }
+    synchronized  public Socket getServerSocketj2() {
+        return _j2.getSocket();
     }
 
     public void  messageLocal(String s){
@@ -132,9 +136,9 @@ public class SalonThread /*extends Thread*/ {
         }
     }
 
-    synchronized public void setServerSocket(ServerSocket serverSocket) {
+   /* synchronized public void setServerSocket(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
-    }
+    }*/
 
     synchronized public GameService get_gameService() {
         return _gameService;

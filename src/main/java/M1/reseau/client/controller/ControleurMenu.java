@@ -1,6 +1,7 @@
 package M1.reseau.client.controller;
 
 
+import M1.reseau.serveur.singletons.SingletonTCP;
 import M1.reseau.serveur.singletons.SingletonUDP;
 import M1.reseau.utilities.InformationsUtilisateur;
 import javafx.application.Platform;
@@ -44,6 +45,17 @@ public class ControleurMenu {
         FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
         Scene sceneLobby = lobbyLoader.load();
         System.out.println("envoi de la demande de creation salon bot TCP");
+
+        try {
+            SingletonTCP.getInstance().message("join;".
+                    concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).
+                    concat(";").
+                    concat(InformationsUtilisateur.getInstance().
+                            get_pseudo()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         SingletonUDP.getInstance();
 
 
@@ -69,10 +81,6 @@ public class ControleurMenu {
         // Scene sceneGrille = new Scene(grille);
          Scene sceneGrille=grilleLoader.load();
 
-        // Appel dialogue pour la demande du pseudo du joueur 1
-
-        // Appel dialogue pour la demande du pseudo du joueur 2
-
         //ControleurMenu ControleurGrille = grilleLoader.getController();
         Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageActuel.setScene(sceneGrille);
@@ -84,8 +92,7 @@ public class ControleurMenu {
         System.out.print("au revoir\n");
         Platform.exit();
         //fermeture serveur UDP et TCP AF
-        //SingletonUDP.getInstance().fermet
-        // ureSocket();
+        //SingletonUDP.getInstance().fermetureSocket();
         //SingletonTCP.fermetureSocket();
         System.exit(0);
     }

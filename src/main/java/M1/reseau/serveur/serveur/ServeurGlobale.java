@@ -161,6 +161,7 @@ public class ServeurGlobale {
 
     synchronized public void sendAll(String message)
     {
+        System.out.print("message global : "+message);
         PrintWriter out; // déclaration d'une variable permettant l'envoi de texte vers le client
         for (int i = 0; i < sv._tabClientsTaille(); i++) // parcours de la table des connectés
         {

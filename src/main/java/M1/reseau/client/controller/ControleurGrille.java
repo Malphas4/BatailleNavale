@@ -497,9 +497,9 @@ public class ControleurGrille {
                             .concat(";")
                             .concat(InformationsUtilisateur.getInstance().get_pseudo())
                             .concat(";")
-                            .concat(String.valueOf(unBateau.get_x()))
+                            .concat(String.valueOf(unBateau.get_x()+1))
                             .concat(";")
-                            .concat(String.valueOf(unBateau.get_y()));
+                            .concat(String.valueOf(unBateau.get_y()+1));
                         try {
                             SingletonTCP.getInstance().message(Bato);
                         } catch (IOException e) {

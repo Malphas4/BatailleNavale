@@ -116,6 +116,8 @@ public class ThreadUDP extends Thread{
                    // }
 
 
+                } else if (_msgT[0].equals("chat")){
+                    msgAll(reponse=_msgT[1]);
                 }else reponse = "err";
                 _buffer = new byte[_taille];
                 _buffer = reponse.getBytes();
@@ -127,5 +129,11 @@ public class ThreadUDP extends Thread{
             }
         }
 
+    }
+
+    private void msgAll(String s) {
+        _buffer = new byte[_taille];
+        _buffer = s.getBytes();
+        DatagramPacket response = new DatagramPacket(_buffer, _buffer.length, 2, recu.getPort());
     }
 }

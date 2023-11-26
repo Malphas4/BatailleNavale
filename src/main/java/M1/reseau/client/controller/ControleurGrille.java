@@ -258,6 +258,7 @@ public class ControleurGrille {
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
+                        System.out.println("Au pas de tir!"+_traitementTCP);
                         String[] _traitementTCP2=_traitementTCP.split(";");
                         //toucher;[salon id];[tireur];[victime];[x];[y];[statut case]
                         if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
@@ -514,8 +515,8 @@ public class ControleurGrille {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                String[] sT = toString().split(";");
-                System.out.println("ERREUR COMMENCER"+ s);
+                String[] sT = s.split(";");
+
                 if (sT[0].equals("commencer") && sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())) {
                     _monTour = true;
                     debutCrono = true;

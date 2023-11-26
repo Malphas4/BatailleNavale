@@ -317,11 +317,10 @@ public class ControleurGrille {
                     //("chrono;".concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())));
             //TODO String[] msgT=SingletonTCP.getInstance().reception().split(";");
             //_monTour= Boolean.parseBoolean(msgT[1]);
-            _labelChrono.setText("00:".concat(String.valueOf(chrono)));
-            if (chrono<=0){
+            //_labelChrono.setText("00:".concat(String.valueOf(chrono)));
                 chrono=30;
                //_monTour= !_monTour;
-               SingletonTCP.getInstance().message("tour suivant;"
+                SingletonTCP.getInstance().message("tour suivant;"
                        .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
                                .concat(";")
                        .concat(InformationsUtilisateur.getInstance().get_pseudo()));
@@ -334,9 +333,13 @@ public class ControleurGrille {
                 String[] sT= toString().split(";");
                 if (sT[0].equals("tour suivant") &&sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())){
                     _monTour=true;
-                }else _monTour=false;
+                    debutCrono=true;
+                }else {
+                    _monTour=false;
+                    debutCrono=false;
+                }
 
-            }
+
         }
         //Chronoserveur ayant la priorite des tours
     }
@@ -510,6 +513,7 @@ public class ControleurGrille {
         }
         String Bato=("commencer;")
                 .concat(InformationsUtilisateur.getInstance().get_pseudo())
+                .concat(";")
                 .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()));
         try {
             SingletonTCP.getInstance().message(Bato);
@@ -524,8 +528,9 @@ public class ControleurGrille {
         String[] sT= toString().split(";");
         if (sT[0].equals("commencer") &&sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())){
             _monTour=true;
+            debutCrono=true;
         }
-        debutCrono=true;
+
 
 
 
@@ -591,50 +596,50 @@ public class ControleurGrille {
         }
         return false;  // (x, y) not found
     }
-    public void bateauLock(int i){
-        switch (i) {
+//    public void bateauLock(int i){
+//        switch (i) {
+//
+//            case 0:
+//                System.out.println("pas de bateau mis sur la grille");
+//                break;
+//
+//            case 2:
+//                System.out.println("torpi sur la grille");
+//                _torpilleur=true;
+//                _nbBateau++;
+//                break;
+//
+//            case 3:
+//                System.out.println("contre torpie");
+//                _btnContreTorpille.setVisible(false);
+//                _btnContreTorpille.setDisable(true);
+//                _contreTorpilleurs=true;
+//                _nbBateau++;
+//
+//                break;
+//            case 4:
+//                System.out.println("croiseur");
+//                _btnCroiseur.setVisible(false);
+//                _btnCroiseur.setDisable(true);
+//                _croiseur=true;
+//                _nbBateau++;
+//
+//                break;
+//            case 5:
+//                System.out.println("porte-avions");
+//                _nbBateau++;
+//
+//                _btnPorteAv.setVisible(false);
+//                _btnPorteAv.setDisable(true);
+//                _porteAvions=true;
+//                break;
+//            default:
+//                System.out.println("Choix incorrect");
+//                break;
+//        }
 
-            case 0:
-                System.out.println("pas de bateau mis sur la grille");
-                break;
 
-            case 2:
-                System.out.println("torpi sur la grille");
-                _torpilleur=true;
-                _nbBateau++;
-                break;
-
-            case 3:
-                System.out.println("contre torpie");
-                _btnContreTorpille.setVisible(false);
-                _btnContreTorpille.setDisable(true);
-                _contreTorpilleurs=true;
-                _nbBateau++;
-
-                break;
-            case 4:
-                System.out.println("croiseur");
-                _btnCroiseur.setVisible(false);
-                _btnCroiseur.setDisable(true);
-                _croiseur=true;
-                _nbBateau++;
-
-                break;
-            case 5:
-                System.out.println("porte-avions");
-                _nbBateau++;
-
-                _btnPorteAv.setVisible(false);
-                _btnPorteAv.setDisable(true);
-                _porteAvions=true;
-                break;
-            default:
-                System.out.println("Choix incorrect");
-                break;
-        }
-
-
-    }
+//    }
     //void gagner(); TODO
 
     //void perdu();TODO

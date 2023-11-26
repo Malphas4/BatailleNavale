@@ -76,14 +76,6 @@ public class Main extends Application{
         Scene sceneGrille = grilleLoader.load();
         ControleurGrille ControleurGrille = grilleLoader.getController();
 
-
-        //initialisation des modeles
-        //fonction
-        //            DataModel model = new DataModel();
-        //            ControleurMenu.initModel(model);
-        //            ControleurPseudo.initModel(model);
-        //            menuController.initModel(model);
-
         /*generation de la fenetre
         Pane paneTest = new Pane();
         Scene sceneTest = new Scene(paneTest, 800, 600);*/

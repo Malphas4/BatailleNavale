@@ -84,42 +84,9 @@ public class SalonThread extends Thread {
         _gameService = new GameService();
 
         set_nom("Room(" + _id + ")");
-        // create a ServerSocket instance and bind it to the specified port number
-        /*try {
-            serverSocket = new ServerSocket(portNumber);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
+
     }
 
-    /*public void run(){
-        try{
-            while (! isInterrupted()) {
-
-                // accept a new connection
-                Socket socket = serverSocket.accept();
-
-                // create a new thread to handle communication with the remote client
-                //new JoueurHandler(socket).start();
-
-                //recuperation depuis ServeurGlobale pour la les recréer
-                _j1.start();
-                _j2.start();
-            }
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        /*finally{
-            try{
-                // close the ServerSocket instance before termination
-                serverSocket.close();
-            }
-            catch(IOException e){
-                e.printStackTrace();
-            }
-        }*/
-    /*}*/
 
 
 

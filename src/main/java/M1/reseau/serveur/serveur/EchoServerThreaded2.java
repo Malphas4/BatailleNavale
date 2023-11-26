@@ -99,52 +99,6 @@ public class EchoServerThreaded2 {
             }
         }
 
-        /*private PartieServeur messageAction(PartieServeur _partie, String _message) {
-            String[] _sp = _message.split(";");
-            VisitorTirer _tirer = new VisitorTirer();
-            VisitorEstTire _estTirer = new VisitorEstTire();
-            try {
-                if (_message.contains("ajouter")) { // ajouter;[pseudo]
-                    _partie.ajouterJoueur(_sp[1]);
-                } else if (_message.contains("commencer")) { // commencer
-                    _partie.commencer();
-                } else if (_message.contains("tirer")) { // tirer;[x];[y]
-                    JoueurNormal _joueur = (JoueurNormal) _partie.getJoueurCourant();
-                    // On récupère le joueur adverse
-                    JoueurNormal _joueurAdverse = (JoueurNormal) _partie.getJoueurAdverse();
-                    // On tire sur la grille de touche du joueur 1 (courant)
-                    _tirer.set_grille(_joueurAdverse.get_grilleJoueur());
-                    // On récupère la case
-                    ICase _case = _joueurAdverse
-                            .get_grilleJoueur()
-                            .get_caseParCoord(Integer.parseInt(_sp[1]),
-                                    Integer.parseInt(_sp[2]));
-                    _tirer.set_case(_case);
-                    _joueur.accepte(_tirer);
-
-                    // On tire sur la grille du joueur 2 (adverse) sur sa grille
-                    _estTirer.set_grille(_joueurAdverse.get_grilleJoueur());
-                    _estTirer.set_case(_case);
-                    _joueurAdverse.accepte(_estTirer);
-
-                    // TODO Envoyer message au joueur adverse pour dire que la case [x][y] a été touché
-                    // Côté client, ça veut dire que c'est le tour du joueur
-
-                    // Le joueur passe son tour
-                    _partie.tourSuivant();
-                } else if (_message.contains("fin")) { // fin
-                    _partie.fin();
-                } else if (_message.contains("chat")) { // chat;[pseudo];[message]
-
-                } else if (_message.contains("broadcast")) { // broadcast;[pseudo];[message]
-
-                }
-            } catch (IPartieException | IGrilleException | IJoueurException e) {
-                throw new RuntimeException(e);
-            }
-
-            return _partie;
-        }*/
     }
 }
 

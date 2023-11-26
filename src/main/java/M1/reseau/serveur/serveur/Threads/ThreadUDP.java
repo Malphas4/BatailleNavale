@@ -110,12 +110,6 @@ public class ThreadUDP extends Thread{
                     }
 
 
-                    //while(it1.hasNext()){
-                     //   String key = it1.next();
-                      //  if(key.equals("3")) myMap.put(key+"new", "new3");
-                   // }
-
-
                 } else if (_msgT[0].equals("chat")){
                     msgAll(reponse=_msgT[1]);
                 }else reponse = "err";

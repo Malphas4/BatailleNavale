@@ -134,6 +134,10 @@ public class ThreadUDP extends Thread{
     private void msgAll(String s) {
         _buffer = new byte[_taille];
         _buffer = s.getBytes();
-        DatagramPacket response = new DatagramPacket(_buffer, _buffer.length, 2, recu.getPort());
+        try {
+            DatagramPacket response = new DatagramPacket(_buffer, _buffer.length, InetAddress.getByName("255.255.255.255"),18000);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -95,6 +95,7 @@ public class ControleurLobby {
         //change de stage
 
         if(!_salonChoisi.isEmpty()|| _salonChoisi!=null){
+            _fieldChatGlobal.setText("En attente d'un autre joueur");
             //instantation du singleton TCP
             // SingletonTCP.getInstance();
             System.out.println("instantiation du singleton TCP");

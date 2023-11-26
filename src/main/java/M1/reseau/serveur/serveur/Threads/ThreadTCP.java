@@ -48,7 +48,7 @@ public class ThreadTCP extends Thread {
 
             }
         } catch(IOException e){
-            e.printStackTrace();
+            System.err.println("Le serveur TCP est DEAD.");
         } finally{
             try{
                 // close the ServerSocket instance before termination

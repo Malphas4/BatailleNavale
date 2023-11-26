@@ -5,6 +5,7 @@ import M1.reseau.serveur.serveur.ServeurGlobale;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Vector;
 
 public final class JoueurHandler extends Thread {
 
@@ -67,7 +68,6 @@ public final class JoueurHandler extends Thread {
         String _msg;
 
         try{
-
             while(!isInterrupted()) {
 
                 while ((_msg = in.readLine()) != null) {
@@ -88,7 +88,12 @@ public final class JoueurHandler extends Thread {
             }
         }
         catch(IOException e){
-            e.printStackTrace();
+            System.err.println("La connexion a été interrompue.");
+            Vector<SalonThread> _salons =  ServeurGlobale.sv.get_tabSalons();
+            for (SalonThread _salon : _salons) {
+                if (_salon.get_j1() == this) _salon.set_j1((JoueurHandler) null);
+                if (_salon.get_j2() == this) _salon.set_j1((JoueurHandler) null);
+            }
         } finally{
             try{
                 if(socket != null)

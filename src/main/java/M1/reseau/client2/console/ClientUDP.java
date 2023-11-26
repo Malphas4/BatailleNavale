@@ -1,4 +1,4 @@
-package M1.reseau.client.console;
+package M1.reseau.client2.console;
 
 import M1.reseau.client.controller.ControleurMenu;
 import M1.reseau.serveur.singletons.SingletonUDP;

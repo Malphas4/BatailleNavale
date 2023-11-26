@@ -1,4 +1,4 @@
-package M1.reseau.client.console;
+package M1.reseau.client2.console;
 import java.io.BufferedReader;
         import java.io.IOException;
         import java.io.InputStreamReader;

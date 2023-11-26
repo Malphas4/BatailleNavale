@@ -466,30 +466,47 @@ public class ControleurGrille {
             for (Case unBateau:_mesBateaux) {
                 //envoi d'une case bateau
                 modifCase(unBateau.get_x(), unBateau.get_y(), _couleurBateau ,true);
+                String Bato=("init bateau;")
+                        .concat(InformationsUtilisateur.getInstance().get_pseudo())
+                        .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
+                        .concat(String.valueOf(unBateau.get_x()))
+                        .concat(String.valueOf(unBateau.get_y()));
+
             }
 
 
+
         }
+        String Bato=("commencer;")
+                .concat(InformationsUtilisateur.getInstance().get_pseudo())
+                .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()));
 
     }
 
     @FXML
-    void selectionContreTorpille(ActionEvent event) {
+    void selectionContreTorpille(ActionEvent event)
+    {
+        _mesBateauxAttenteValidation.clear();
         _typeBateau = 3;
     }
 
     @FXML
-    void selectionCroiseur(ActionEvent event) {
+    void selectionCroiseur(ActionEvent event)
+    {
+        _mesBateauxAttenteValidation.clear();
+
         _typeBateau = 4;
     }
 
     @FXML
     void selectionPorteAv(ActionEvent event) {
+        _mesBateauxAttenteValidation.clear();
         _typeBateau = 5;
     }
 
     @FXML
     void selectionTorpilleur(ActionEvent event) {
+        _mesBateauxAttenteValidation.clear();
         _typeBateau = 2;
 
     }

@@ -5,6 +5,8 @@ import M1.reseau.serveur.cor.ServerCOR;
 import M1.reseau.serveur.serveur.game.GameService;
 import M1.reseau.serveur.serveur.game.SalonThread;
 
+import java.io.IOException;
+
 public class ServerCodeJoin extends ServerCOR {
 
     public ServerCodeJoin() {
@@ -31,8 +33,21 @@ public class ServerCodeJoin extends ServerCOR {
             // Add player in the game
             _gameService.get_partie().ajouterJoueur(_sp[2]);
 
+            if (_salon.get_j1() != null && _salon.get_j2() != null) {
+                _salon.get_j1().message(
+                        "join;"
+                        + _salon.get_j2().get_pseudo()
+                );
+                _salon.get_j2().message(
+                        "join;"
+                        + _salon.get_j1().get_pseudo()
+                );
+            }
+
         } catch (IPartieException e) {
             System.err.println("ServerCodeJoin : Error.");
+        } catch (IOException e) {
+            System.err.println("ServerCodeJoin : Error sending message.");
         }
     }
 

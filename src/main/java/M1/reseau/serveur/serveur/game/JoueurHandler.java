@@ -89,11 +89,10 @@ public final class JoueurHandler extends Thread {
             }
         }
         catch(IOException e){
-            System.err.println("La connexion a été interrompue.");
-            Vector<SalonThread> _salons =  ServeurGlobale.sv.get_tabSalons();
-            for (SalonThread _salon : _salons) {
+            System.err.println("JoueurHandler : La connexion a été interrompue.");
+            for (SalonThread _salon : ServeurGlobale.sv.get_tabSalons()) {
                 if (_salon.get_j1() == this) _salon.set_j1((JoueurHandler) null);
-                if (_salon.get_j2() == this) _salon.set_j1((JoueurHandler) null);
+                if (_salon.get_j2() == this) _salon.set_j2((JoueurHandler) null);
             }
         } finally{
             try{
@@ -101,7 +100,7 @@ public final class JoueurHandler extends Thread {
                     socket.close(); // Close the socket (closing the socket also closes the input and output streams)
             }
             catch(IOException e){
-                e.printStackTrace();
+                System.err.println("JoueurHandler : Le socket est fermé.");
             }
         }
     }

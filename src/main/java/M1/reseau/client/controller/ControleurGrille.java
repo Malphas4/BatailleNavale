@@ -433,109 +433,107 @@ public class ControleurGrille {
 
     @FXML
     void ValiderPoser(ActionEvent event) {
-        _mesBateaux.addAll(_mesBateauxAttenteValidation);
-        for (Case unBateau:_mesBateaux) {
-            //Affichage des bateaux
-            modifCase(unBateau.get_x(), unBateau.get_y(), _couleurBateau ,true);
-        }
-        switch (_typeBateau) {
+        if(!_mesBateauxAttenteValidation.isEmpty()) {
+            _mesBateaux.addAll(_mesBateauxAttenteValidation);
+            for (Case unBateau : _mesBateaux) {
+                //Affichage des bateaux
+                modifCase(unBateau.get_x(), unBateau.get_y(), _couleurBateau, true);
+            }
+            switch (_typeBateau) {
 
-            case 0:
-                System.out.println("pas de bateau choisi");
-                break;
+                case 0:
+                    System.out.println("pas de bateau choisi");
+                    break;
 
-            case 2:
-                System.out.println("torpi");
-                _btnTorpilleur.setVisible(false);
-                _btnTorpilleur.setDisable(true);
-                _torpilleur=true;
-                _nbBateau++;
-                break;
+                case 2:
+                    System.out.println("torpi");
+                    _btnTorpilleur.setVisible(false);
+                    _btnTorpilleur.setDisable(true);
+                    _torpilleur = true;
+                    _nbBateau++;
+                    break;
 
-            case 3:
-                System.out.println("contre torpie");
-                _btnContreTorpille.setVisible(false);
-                _btnContreTorpille.setDisable(true);
-               _contreTorpilleurs=true;
-                _nbBateau++;
+                case 3:
+                    System.out.println("contre torpie");
+                    _btnContreTorpille.setVisible(false);
+                    _btnContreTorpille.setDisable(true);
+                    _contreTorpilleurs = true;
+                    _nbBateau++;
 
-                break;
-            case 4:
-                System.out.println("croiseur");
-                _btnCroiseur.setVisible(false);
-                _btnCroiseur.setDisable(true);
-                _croiseur=true;
-                _nbBateau++;
+                    break;
+                case 4:
+                    System.out.println("croiseur");
+                    _btnCroiseur.setVisible(false);
+                    _btnCroiseur.setDisable(true);
+                    _croiseur = true;
+                    _nbBateau++;
 
-                break;
-            case 5:
-                System.out.println("porte-avions");
-                _nbBateau++;
-
-                _btnPorteAv.setVisible(false);
-                _btnPorteAv.setDisable(true);
-               _porteAvions=true;
-                break;
-            default:
-                System.out.println("Choix incorrect");
-
-
-                break;
-        }
-        _typeBateau=0;
+                    break;
+                case 5:
+                    System.out.println("porte-avions");
+                    _nbBateau++;
+                    _btnPorteAv.setVisible(false);
+                    _btnPorteAv.setDisable(true);
+                    _porteAvions = true;
+                    break;
+                default:
+                    System.out.println("Choix incorrect");
+                    break;
+            }
+            _typeBateau = 0;
         /*modifCase(3, 3,Color.GREEN ,true);
         modifCase(3, 4,Color.GREEN ,true);
         modifCase(1, 1, Color.GREEN ,true);
         modifCase(1, 2,Color.GREEN ,true);
         modifCase(1, 0,Color.GREEN ,true);*/
-        if (_nbBateau>=4){
-            //bateaux mis, on desactive les boutons de pose
-            _btnRotation.setVisible(false);
-            _btnRotation.setDisable(true);
-            _btnValidationPause.setVisible(false);
-            _btnValidationPause.setDisable(true);
-            _placementbateaux=false;
-            //TODO envoi des bateaux
-            System.out.println("Envoi des bateaux au serveur");
-            for (Case unBateau:_mesBateaux) {
-                //envoi d'une case bateau
-                modifCase(unBateau.get_x(), unBateau.get_y(), _couleurBateau ,true);
-                String Bato=("init bateau;")
+            if (_nbBateau >= 4) {
+                //bateaux mis, on desactive les boutons de pose
+                _btnRotation.setVisible(false);
+                _btnRotation.setDisable(true);
+                _btnValidationPause.setVisible(false);
+                _btnValidationPause.setDisable(true);
+                _placementbateaux = false;
+                //TODO envoi des bateaux
+                System.out.println("Envoi des bateaux au serveur");
+                for (Case unBateau : _mesBateaux) {
+                    //envoi d'une case bateau
+                    modifCase(unBateau.get_x(), unBateau.get_y(), _couleurBateau, true);
+                    String Bato = ("init bateau;")
+                            .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
+                            .concat(";")
+                            .concat(InformationsUtilisateur.getInstance().get_pseudo())
+                            .concat(";")
+                            .concat(String.valueOf(unBateau.get_x()))
+                            .concat(";")
+                            .concat(String.valueOf(unBateau.get_y()));
+
+                }
+                String Bato = ("commencer;")
                         .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
                         .concat(";")
-                        .concat(InformationsUtilisateur.getInstance().get_pseudo())
-                        .concat(";")
-                        .concat(String.valueOf(unBateau.get_x()))
-                        .concat(";")
-                        .concat(String.valueOf(unBateau.get_y()));
+                        .concat(InformationsUtilisateur.getInstance().get_pseudo());
+                try {
+                    SingletonTCP.getInstance().message(Bato);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    String s = SingletonTCP.getInstance().reception();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                String[] sT = toString().split(";");
+                if (sT[0].equals("commencer") && sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())) {
+                    _monTour = true;
+                    debutCrono = true;
+                }
+
 
             }
 
 
 
         }
-        String Bato=("commencer;")
-                .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
-                .concat(";")
-        .concat(InformationsUtilisateur.getInstance().get_pseudo());
-        try {
-            SingletonTCP.getInstance().message(Bato);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            String s =SingletonTCP.getInstance().reception();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        String[] sT= toString().split(";");
-        if (sT[0].equals("commencer") &&sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())){
-            _monTour=true;
-            debutCrono=true;
-        }
-
-
-
 
     }
 

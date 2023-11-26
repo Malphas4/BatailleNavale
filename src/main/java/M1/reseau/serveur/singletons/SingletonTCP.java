@@ -17,8 +17,8 @@ public class SingletonTCP extends  Thread implements Serializable
 
     //pour socket client AF
    Socket socket = null;
-    BufferedReader in = null;
-    PrintWriter out = null;
+   public  BufferedReader in = null;
+    public  PrintWriter out = null;
 
 
     private static SingletonTCP _singletonTCP=null;
@@ -87,7 +87,6 @@ public class SingletonTCP extends  Thread implements Serializable
         out.println(s);
 
     }
-
     /**
      * reception d'un message avec TCP
      *  @return message recu de type String

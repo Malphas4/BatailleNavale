@@ -41,7 +41,7 @@ public class GameClient {
 
             // Création de la case et remplacement dans la grille
             CaseBateau _bCase = new CaseBateau(_x, _y);
-            _clientTCP.message("");
+            //_clientTCP.message("");
 
         } while (_x > 0 && _y > 0);
     }

@@ -218,7 +218,7 @@ public class ClientUDP extends Thread {
 
     void choisirSalon() {
         String[] _strSalons;
-        int _salonChoisi;
+        int _salonChoisi = 0;
         int nbSalons;
         String _msgSalons;
         String _demandeSalons="NBsalons?";
@@ -234,17 +234,17 @@ public class ClientUDP extends Thread {
             if (strP.equals("1v1")) {
                 InformationsUtilisateur.getInstance().set_typePartie(1);
                 System.out.println("partie multi");
-                try {
+                /*try {
                     ClientTCP.message("join;".concat(String.valueOf(_salonChoisi))
                             .concat(";")
                             .concat(InformationsUtilisateur.getInstance().get_pseudo()));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
-                }
+                }*/
 
                 System.out.println("envoi du salon choisi TCP");
                 //reception du pseudo adversaire
-                String s = ClientTCP.reception();
+               // String s = ClientTCP.reception();
                 String[] sT = s.split(";");
                 InformationsUtilisateur.getInstance().set_adversaire(sT[2]);
 
@@ -264,7 +264,7 @@ public class ClientUDP extends Thread {
                 }
                 System.out.println("envoi du salon choisi TCP");
                 //reception du pseudo adversaire
-                String s = ClientTCP.reception();
+              //  String s = ClientTCP.reception();
                 String[] sT = s.split(";");
                 InformationsUtilisateur.getInstance().set_adversaire(sT[2]);
 

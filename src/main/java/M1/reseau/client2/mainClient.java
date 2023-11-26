@@ -16,9 +16,9 @@ public class mainClient {
     public static void main(String args[]) throws SocketException, UnknownHostException {
         // instance de la classe principale
 
-        cg = new ClientGlobale();
+        //cg = new ClientGlobale();
 
-        Thread  tTCP = null;
+        Thread tTCP = null;
 
         try {
             tTCP = new ClientTCP();
@@ -28,16 +28,14 @@ public class mainClient {
         //sv.start();
 
 
-
         //Creation d'un salon de départ
         //Doit être fait dans ThreadSalons normalement
-        Salon s1=new Salon();
+        Salon s1 = new Salon();
         //_tabSalons.add(s1);
-        try
-        {
+        try {
             Integer port;
             // si pas d'argument : port 18000 par défaut
-            if(args.length<=0) port=new Integer("7777");
+            if (args.length <= 0) port = new Integer("7777");
                 // sinon il s'agit du numéro de port passé en argument
             else port = Integer.valueOf(args[0]);
 
@@ -54,15 +52,16 @@ public class mainClient {
 
                // new Serveurthread(_socket.accept(),main); // un client se connecte, un nouveau thread client est lancé
             }*/
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e) {e.printStackTrace(); }
         tTCP.start();
 
     }
 
-    /**Affichage du prompt serveur initial
-     *
-     * */
+    /**
+     * Affichage du prompt serveur initial
+     */
     static private void affichageLancement(Integer port) {
         System.out.println("--------");
         System.out.println("Serveur en ligne");
@@ -75,3 +74,4 @@ public class mainClient {
         // System.out.println("Liste des joueurs : tapez \"lj\"");
         System.out.println("Creation d'un nouveau salon : tapez \"create\"");
     }
+}

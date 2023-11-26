@@ -8,6 +8,8 @@ import M1.reseau.serveur.cor.ServerCOR;
 import M1.reseau.serveur.serveur.game.GameService;
 import M1.reseau.serveur.serveur.game.SalonThread;
 
+import java.io.IOException;
+
 public class ServerCodeJoinBot extends ServerCOR {
 
     public ServerCodeJoinBot() {
@@ -21,6 +23,7 @@ public class ServerCodeJoinBot extends ServerCOR {
      */
     @Override
     public void execute(String _message, SalonThread _salon) {
+        System.out.println("\t> execute Code joinbot");
         GameService _gameService = _salon.get_gameService();
 
         String[] _sp = _message.split(";");
@@ -41,12 +44,24 @@ public class ServerCodeJoinBot extends ServerCOR {
                         )
                 );
             } catch (IJoueurException e) {
-                System.err.println("ServerCodeJoinBot : Error.");
+                System.err.println("ServerCodeJoinBot : Le joueur a un problème.");
             }
 
         } catch (IPartieException e) {
-            System.err.println("ServerCodeJoinBot : Error.");
+            System.err.println("ServerCodeJoinBot : La partie a un problème.");
         }
+
+        try {
+            _salon.get_j1().message(
+                    "join;"
+                            + _salon.get_id()
+                            + ";" + _gameService.get_partie().get_joueur2().get_pseudo()
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("\tEnd execute code join");
     }
 
     /**
@@ -56,6 +71,7 @@ public class ServerCodeJoinBot extends ServerCOR {
     @Override
     public boolean isMessageCorrect(String _message) {
         String[] _sp = _message.split(";");
-        return _sp[0].equals("joinbot");
+        System.out.println(">_message : " + _sp[0] + " - " + _sp[0].equalsIgnoreCase("joinbot"));
+        return _sp[0].equalsIgnoreCase("joinbot");
     }
 }

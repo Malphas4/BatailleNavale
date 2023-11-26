@@ -501,7 +501,11 @@ public class ControleurGrille {
                             .concat(String.valueOf(unBateau.get_x()))
                             .concat(";")
                             .concat(String.valueOf(unBateau.get_y()));
-
+                        try {
+                            SingletonTCP.getInstance().message(Bato);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                 }
                 String Bato = ("commencer;")
                         .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))

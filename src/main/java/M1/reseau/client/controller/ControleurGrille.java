@@ -252,7 +252,6 @@ public class ControleurGrille {
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
-                        _monTour=false;
                         //TODO
                         try {
                             _traitementTCP=SingletonTCP.getInstance().reception();
@@ -266,6 +265,8 @@ public class ControleurGrille {
                         }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){
                             modifCase(Integer.parseInt(_traitementTCP2[4]),Integer.parseInt(_traitementTCP2[5]),_couleurPasDeCible,false);
                         }
+                        _monTour=false;
+                        chrono=30;
 
 
 //                        } catch (IOException e) {
@@ -310,38 +311,26 @@ public class ControleurGrille {
     }
 
     private void majChrono() throws IOException {
-        //chrono Interne
-        if (!_placementbateaux && debutCrono){
-            chrono--;
-          //  SingletonTCP.getInstance().reception
-                    //("chrono;".concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())));
-            //TODO String[] msgT=SingletonTCP.getInstance().reception().split(";");
-            //_monTour= Boolean.parseBoolean(msgT[1]);
-            //_labelChrono.setText("00:".concat(String.valueOf(chrono)));
-               //_monTour= !_monTour;
+        if(_monTour)chrono--;
+        if (chrono<=0){
+
                 SingletonTCP.getInstance().message("tour suivant;"
-                       .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
-                               .concat(";")
-                       .concat(InformationsUtilisateur.getInstance().get_pseudo()));
-
-                try {
-                    String s =SingletonTCP.getInstance().reception();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                String[] sT= toString().split(";");
-                if (sT[0].equals("tour suivant") &&sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())) {
-
-                    _monTour = true;
-                    debutCrono = true;
-                }  else {
-                    _monTour=false;
-                    debutCrono=false;
-                    chrono=30;
-
-                }
-
-
+               .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
+               .concat(";")
+               .concat(InformationsUtilisateur.getInstance().get_pseudo()));
+            try {
+                String s =SingletonTCP.getInstance().reception();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            String[] sT= toString().split(";");
+            if (sT[0].equals("tour suivant") &&sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())) {
+                _monTour = true;
+                debutCrono = true;
+            }  else {
+                debutCrono=false;
+            }
+            chrono=30;
         }
         //Chronoserveur ayant la priorite des tours
     }
@@ -435,6 +424,7 @@ public class ControleurGrille {
 
     @FXML
     void ValiderPoser(ActionEvent event) {
+        String s;
         if(!_mesBateauxAttenteValidation.isEmpty()) {
             _mesBateaux.addAll(_mesBateauxAttenteValidation);
             for (Case unBateau : _mesBateaux) {
@@ -520,11 +510,12 @@ public class ControleurGrille {
                     throw new RuntimeException(e);
                 }
                 try {
-                    String s = SingletonTCP.getInstance().reception();
+                   s = SingletonTCP.getInstance().reception();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 String[] sT = toString().split(";");
+                System.out.println("ERREUR COMMENCER"+ s);
                 if (sT[0].equals("commencer") && sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())) {
                     _monTour = true;
                     debutCrono = true;
@@ -664,5 +655,37 @@ public class ControleurGrille {
     }
 
 }
+/*
+    private void majChrono() throws IOException {
+        //chrono Interne
+        if (!_placementbateaux){
+            chrono--;
+            //  SingletonTCP.getInstance().reception
+            //("chrono;".concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())));
+            //TODO String[] msgT=SingletonTCP.getInstance().reception().split(";");
+            //_monTour= Boolean.parseBoolean(msgT[1]);
+            //_labelChrono.setText("00:".concat(String.valueOf(chrono)));
+            //_monTour= !_monTour;
+            SingletonTCP.getInstance().message("tour suivant;"
+                    .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
+                    .concat(";")
+                    .concat(InformationsUtilisateur.getInstance().get_pseudo()));
+
+            try {
+                String s =SingletonTCP.getInstance().reception();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            String[] sT= toString().split(";");
+            if (sT[0].equals("tour suivant") &&sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())) {
+
+                _monTour = true;
+                debutCrono = true;
+            }  else {
+                debutCrono=false;
 
 
+            }
+        }
+        //Chronoserveur ayant la priorite des tours
+    }*/

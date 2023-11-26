@@ -42,9 +42,9 @@ public class ControleurMenu {
         System.out.print("Aller au Lobby\n");
         //on fixe le type de partie à 1vs 1 pvp
         InformationsUtilisateur.getInstance().set_typePartie(1);
+
         FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
         Scene sceneLobby = lobbyLoader.load();
-        System.out.println("envoi de la demande de creation salon bot TCP");
 
 
         SingletonUDP.getInstance();

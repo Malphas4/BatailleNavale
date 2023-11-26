@@ -46,7 +46,6 @@ public class ServeurGlobale {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        tTCP.start();
         //sv.start();
 
 
@@ -79,7 +78,9 @@ public class ServeurGlobale {
                // new Serveurthread(_socket.accept(),main); // un client se connecte, un nouveau thread client est lancé
             }*/
         }
-        catch (Exception e) { }
+        catch (Exception e) {e.printStackTrace(); }
+        tTCP.start();
+
     }
 
     /**Affichage du prompt serveur initial
@@ -94,8 +95,8 @@ public class ServeurGlobale {
         System.out.println("Quitter : tapez \"quit\"");
         System.out.println("Nombre de connectes : tapez \"total\"");
         System.out.println("Liste des salons : tapez \"ls\"");
-        System.out.println("Liste des joueurs : tapez \"lj\"");
-        System.out.println("Creation d'un nouveau salon : tapez \"ns\"");
+       // System.out.println("Liste des joueurs : tapez \"lj\"");
+        System.out.println("Creation d'un nouveau salon : tapez \"create\"");
     }
 
     synchronized public int getNbSalons() {

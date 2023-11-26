@@ -80,6 +80,7 @@ public class ControleurGrille {
     ArrayList<Case>  _bateauxMechants=new ArrayList<>();
     ArrayList<Case> _mesBateauxAttenteValidation=new ArrayList<>();
     int chrono=30;
+    boolean debutCrono=false;
 
     //initialisation des couleurs utilisées
     Color _couleurEau = Color.DARKTURQUOISE;
@@ -251,8 +252,21 @@ public class ControleurGrille {
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
+                        _monTour=false;
                         //TODO
-                        //_traitementTCP=SingletonTCP.getInstance().reception();
+                        try {
+                            _traitementTCP=SingletonTCP.getInstance().reception();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        String[] _traitementTCP2=_traitementTCP.split(";");
+                        //toucher;[salon id];[tireur];[victime];[x];[y];[statut case]
+                        if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
+                            modifCase(Integer.parseInt(_traitementTCP2[4]),Integer.parseInt(_traitementTCP2[5]),_couleurEpave,false);
+                        }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){
+                            modifCase(Integer.parseInt(_traitementTCP2[4]),Integer.parseInt(_traitementTCP2[5]),_couleurPasDeCible,false);
+                        }
+
 
 //                        } catch (IOException e) {
 //                            throw new RuntimeException(e);
@@ -297,7 +311,7 @@ public class ControleurGrille {
 
     private void majChrono() throws IOException {
         //chrono Interne
-        if (!_placementbateaux){
+        if (!_placementbateaux && debutCrono){
             chrono--;
           //  SingletonTCP.getInstance().reception
                     //("chrono;".concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())));
@@ -306,7 +320,22 @@ public class ControleurGrille {
             _labelChrono.setText("00:".concat(String.valueOf(chrono)));
             if (chrono<=0){
                 chrono=30;
-                _monTour= !_monTour;
+               //_monTour= !_monTour;
+               SingletonTCP.getInstance().message("tour suivant;"
+                       .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
+                               .concat(";")
+                       .concat(InformationsUtilisateur.getInstance().get_pseudo()));
+
+                try {
+                    String s =SingletonTCP.getInstance().reception();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                String[] sT= toString().split(";");
+                if (sT[0].equals("tour suivant") &&sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())){
+                    _monTour=true;
+                }else _monTour=false;
+
             }
         }
         //Chronoserveur ayant la priorite des tours
@@ -482,6 +511,23 @@ public class ControleurGrille {
         String Bato=("commencer;")
                 .concat(InformationsUtilisateur.getInstance().get_pseudo())
                 .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()));
+        try {
+            SingletonTCP.getInstance().message(Bato);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            String s =SingletonTCP.getInstance().reception();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String[] sT= toString().split(";");
+        if (sT[0].equals("commencer") &&sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())){
+            _monTour=true;
+        }
+        debutCrono=true;
+
+
 
     }
 
@@ -584,15 +630,21 @@ public class ControleurGrille {
                 break;
             default:
                 System.out.println("Choix incorrect");
-
-
                 break;
         }
 
 
     }
+    //void gagner(); TODO
 
+    //void perdu();TODO
+    void TraitemenString(){
 
+    }
+    void envoiString(String s){
 
+    }
 
 }
+
+

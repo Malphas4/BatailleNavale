@@ -93,6 +93,10 @@ public final class JoueurHandler extends Thread {
             for (SalonThread _salon : ServeurGlobale.sv.get_tabSalons()) {
                 if (_salon.get_j1() == this) _salon.set_j1((JoueurHandler) null);
                 if (_salon.get_j2() == this) _salon.set_j2((JoueurHandler) null);
+                if (_salon.get_gameService().get_partie().get_joueur1().equals(get_pseudo()))
+                    _salon.get_gameService().get_partie().set_joueur1(null);
+                if (_salon.get_gameService().get_partie().get_joueur2().equals(get_pseudo()))
+                    _salon.get_gameService().get_partie().set_joueur2(null);
             }
         } finally{
             try{

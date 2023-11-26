@@ -48,7 +48,7 @@ public class ServerCodeJoin extends ServerCOR {
             }
 
         } catch (IPartieException e) {
-            System.err.println("ServerCodeJoin : Error.");
+            System.err.println("ServerCodeJoin : Partie erreur.");
         } catch (IOException e) {
             System.err.println("ServerCodeJoin : Error sending message.");
         }

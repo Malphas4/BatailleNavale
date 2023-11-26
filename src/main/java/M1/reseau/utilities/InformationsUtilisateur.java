@@ -10,6 +10,16 @@ public class InformationsUtilisateur {
     int _bot=1;
    int  _tmps=30;
 
+    public String get_adversaire() {
+        return _adversaire;
+    }
+
+    public void set_adversaire(String _adversaire) {
+        this._adversaire = _adversaire;
+    }
+
+    String _adversaire="bot";
+
     //1 pour multi, 0 pour solo
     private int _typePartie;
     private InformationsUtilisateur() {
@@ -64,4 +74,6 @@ public class InformationsUtilisateur {
     public int get_tmps() {
         return _tmps;
     }
+
+
 }

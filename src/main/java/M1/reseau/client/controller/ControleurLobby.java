@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -81,11 +82,11 @@ public class ControleurLobby {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("envoi du message global");
-          //reception du message en broadcast
+        System.out.println("attente reception du message;");
+        //reception du message en broadcast
         String _reception= SingletonTCP.getInstance().reception();
         String _receptionT[]=_reception.split(";");
-        _fieldChatGlobal.setText(_fieldChatGlobal.getText().concat("\n").concat(_receptionT[1]));
+        _fieldChatGlobal.setText(_fieldChatGlobal.getText().concat("\n").concat(_receptionT[3]));
     }
 
     @FXML
@@ -122,6 +123,12 @@ public class ControleurLobby {
             //
             System.out.println("envoi du salon choisi TCP");
             FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
+
+            //reception du pseudo adversaire
+            String s=  SingletonTCP.getInstance().reception();
+            String []sT=s.split(";");
+            InformationsUtilisateur.getInstance().set_adversaire(sT[3]);
+
             InformationsUtilisateur.getInstance().set_salon(Integer.parseInt(_salonChoisi));
             Scene grille=grilleLoader.load();
             Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -170,7 +170,7 @@ public class ServeurGlobale {
         for (int i = 0; i < sv._tabClientsTaille(); i++) // parcours de la table des connectés
         {
             try {
-                _tabClients.elementAt(i).message(message); // extraction de l'élément courant (type PrintWriter)
+                _tabClients.get(i).message(message); // extraction de l'élément courant (type PrintWriter)
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -185,9 +185,9 @@ public class ServeurGlobale {
    synchronized public void delClient(int i)
     {
         _nbClients--; // un client en moins ! snif
-        if (_tabClients.elementAt(i) != null) // l'élément existe ...
+        if (_tabClients.get(i) != null) // l'élément existe ...
         {
-            _tabClients.removeElementAt(i); // ... on le supprime
+            _tabClients.remove(i); // ... on le supprime
        }
    }
 

@@ -28,9 +28,11 @@ public class ThreadTCP extends Thread {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        System.out.println("Serveur TCP fin initialisation");
     }
 
-
+    @Override
     public void run(){
         try{
             while (!isInterrupted()) {
@@ -39,17 +41,15 @@ public class ThreadTCP extends Thread {
                 System.out.println("serveur TCP en attente de connexion");
                 Socket socket = serverSocket.accept();
                 System.out.println("client se connectant");
-                JoueurHandler j=new JoueurHandler(socket);
+                JoueurHandler j = new JoueurHandler(socket);
                 System.out.println("creation du JoueurHandler");
                 ServeurGlobale.sv.addClient(j);
                 j.start();
 
             }
-        }
-        catch(IOException e){
+        } catch(IOException e){
             e.printStackTrace();
-        }
-        finally{
+        } finally{
             try{
                 // close the ServerSocket instance before termination
                 serverSocket.close();

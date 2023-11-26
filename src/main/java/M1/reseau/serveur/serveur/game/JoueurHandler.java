@@ -53,6 +53,7 @@ public final class JoueurHandler extends Thread {
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
     }
+
     public JoueurHandler(Socket socket) throws IOException {
         this.socket = socket;
         _pseudo="pseudotest";
@@ -60,16 +61,16 @@ public final class JoueurHandler extends Thread {
         out = new PrintWriter(socket.getOutputStream(), true);
     }
 
-
-
+    @Override
     public void run(){
-
 
         String _msg;
 
         try{
             synchronized (in){
-                while(!isInterrupted()) in .wait();
+                while(!isInterrupted())
+                    in.wait();
+
                 while( (_msg = in.readLine()) != null) {
                     System.out.println(get_pseudo()+"a recu "+_msg);
 
@@ -84,9 +85,16 @@ public final class JoueurHandler extends Thread {
                             );
 
                 }
+                in.notifyAll();
             }
-            synchronized (out){
+
+            synchronized (out) {
+                while (!isInterrupted())
+                    out.wait();
+
                 out = new PrintWriter(socket.getOutputStream(), true);
+
+                out.notifyAll();
             }
         }
         catch(IOException e){

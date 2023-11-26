@@ -23,7 +23,7 @@ public class SingletonTCP implements Serializable
 
     private static SingletonTCP _singletonTCP=null;
 
-    int port = 18000;
+    int port = 9999;
     /** Constructeur privé */
     private SingletonTCP() {
         InetAddress host = null;

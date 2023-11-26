@@ -262,6 +262,7 @@ public class ControleurGrille {
                         System.out.println("Au pas de tir!"+_traitementTCP);
                         String[] _traitementTCP2=_traitementTCP.split(";");
                         //toucher;[salon id];[tireur];[victime];[x];[y];[statut case]
+                        //Exemple : toucher;0;j1;j2;4;5;true
                         if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
                             modifCase(Integer.parseInt(_traitementTCP2[4]),Integer.parseInt(_traitementTCP2[5]),_couleurEpave,false);
                         }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){

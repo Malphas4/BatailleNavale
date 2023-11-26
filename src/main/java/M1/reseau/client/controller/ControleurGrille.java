@@ -585,7 +585,7 @@ public class ControleurGrille {
         }
 
         Rectangle _uneCase = (Rectangle) maGrille.getScene().lookup(_id);
-        _uneCase.setFill(c);
+        if (_uneCase!=null)_uneCase.setFill(c);
     }
 
     public String get_monPseudo() {

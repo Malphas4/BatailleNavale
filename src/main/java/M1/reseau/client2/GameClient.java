@@ -1,6 +1,5 @@
 package M1.reseau.client2;
 
-import M1.reseau.client.console.ClientTCP;
 import M1.reseau.model.game.distance.PartieClient;
 import M1.reseau.model.world.element.classic.CaseBateau;
 
@@ -25,14 +24,6 @@ public class GameClient {
         this._partie = _partie;
     }
 
-    public ClientTCP get_clientTCP() {
-        return _clientTCP;
-    }
-
-    public void set_clientTCP(ClientTCP _clientTCP) {
-        this._clientTCP = _clientTCP;
-    }
-
     public void requestPlayerSetup() {
         System.out.println("=============== Initialisation du placement des bateaux du joueurs ===============");
         int _x;
@@ -53,9 +44,5 @@ public class GameClient {
             _clientTCP.message("");
 
         } while (_x > 0 && _y > 0);
-    }
-
-    public void sendMessageTCP(String _message) {
-
     }
 }

@@ -17,8 +17,10 @@ public class SingletonTCP implements Serializable
 
     //pour socket client AF
    Socket socket = null;
-    static ObjectOutputStream oos = null;
-    static ObjectInputStream ois = null;
+    BufferedReader in = null;
+    PrintWriter out = null;
+
+
     private static SingletonTCP _singletonTCP=null;
 
     int port = 18000;
@@ -36,12 +38,12 @@ public class SingletonTCP implements Serializable
             throw new RuntimeException(e);
         }
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         try {
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            out = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -65,8 +67,8 @@ public class SingletonTCP implements Serializable
         try{
             if(socket != null) {
 
-                oos.close();
-                ois.close();
+                in.close();
+                out.close();
                 socket.close();
             }
         }catch (IOException e){ e.printStackTrace();}
@@ -81,12 +83,9 @@ public class SingletonTCP implements Serializable
         //Message de type string deviens de type data pour l'envoi
         byte[] data = (s).getBytes();
         //recuperation de la socket output
-        OutputStream out = socket.getOutputStream();
         System.out.printf("envoi du message TCP : "+s+"\n");
-        oos.write(data);
-        PrintWriter writer = new PrintWriter(oos, true);
-        oos.write(data);
-
+        //OutputStream out = socket.getOutputStream();
+        out.println(s);
 
     }
 
@@ -100,9 +99,8 @@ public class SingletonTCP implements Serializable
     public String reception() throws IOException {
 
         //You can wrap the InputStream object in an InputStreamReader or BufferedReader to read data at higher level (character and String). For example, using InputStreamReader:
-        InputStreamReader reader = new InputStreamReader(ois);
-        String s = reader.toString();
-        System.out.printf("message du serveur : "+s+"\n");
+        String s= in.readLine();
+        System.out.println("message recu TCP" +s);
         return s;
     }
         

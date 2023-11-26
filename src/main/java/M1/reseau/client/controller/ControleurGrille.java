@@ -265,18 +265,17 @@ public class ControleurGrille {
                         //si victime je suis la cible
                         if(_traitementTCP2[3].equals(InformationsUtilisateur.getInstance().get_pseudo())){
                             if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
-                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,true);
+                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,false);
                             }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){
-                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,true);
+                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,false);
                             }
                         }else{//si je suis le tireur
                             if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
-                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,true);
+                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,false);
                             }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){
-                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,true);
+                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,false);
                             }
                         }
-
                         _monTour=false;
                         chrono=30;
 

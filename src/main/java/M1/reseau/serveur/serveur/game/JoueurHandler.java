@@ -53,11 +53,12 @@ public final class JoueurHandler extends Thread {
         _pseudo=pseudo;
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
+
     }
 
     public JoueurHandler(Socket socket) throws IOException {
         this.socket = socket;
-        _pseudo="pseudotest";
+        _pseudo="pseudonyme";
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
     }
@@ -74,7 +75,7 @@ public final class JoueurHandler extends Thread {
                     System.out.println(get_pseudo() + " a recu : " + _msg);
 
                     String[] _sp = _msg.split(";");
-                    set_pseudo(_sp[2]);
+                    if (_pseudo.equals("pseudonyme"))set_pseudo(_sp[2]);
 
                     ServerCORBuilder
                             .getInstance()

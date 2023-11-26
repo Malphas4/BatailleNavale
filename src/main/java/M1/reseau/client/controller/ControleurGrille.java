@@ -253,7 +253,7 @@ public class ControleurGrille {
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
-                        //TODO
+
                         try {
                             _traitementTCP=SingletonTCP.getInstance().reception();
                         } catch (IOException e) {
@@ -262,11 +262,21 @@ public class ControleurGrille {
                         String[] _traitementTCP2=_traitementTCP.split(";");
                         //toucher;[salon id];[tireur];[victime];[x];[y];[statut case]
                         //Exemple : toucher;0;j1;j2;4;5;true
-                        if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
-                            modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,false);
-                        }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){
-                            modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,false);
+                        //si victime je suis la victime
+                        if(_traitementTCP2[3].equals(InformationsUtilisateur.getInstance().get_pseudo())){
+                            if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
+                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,true);
+                            }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){
+                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,true);
+                            }
+                        }else{//si je suis le tireur
+                            if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
+                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,true);
+                            }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){
+                                modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,true);
+                            }
                         }
+
                         _monTour=false;
                         chrono=30;
 
@@ -315,7 +325,6 @@ public class ControleurGrille {
     private void majChrono() throws IOException {
         if(_monTour)chrono--;
         if (chrono<=0){
-
                 SingletonTCP.getInstance().message("tour suivant;"
                .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
                .concat(";")
@@ -334,7 +343,7 @@ public class ControleurGrille {
             }
             chrono=30;
         }
-        //Chronoserveur ayant la priorite des tours
+
     }
 
     @FXML

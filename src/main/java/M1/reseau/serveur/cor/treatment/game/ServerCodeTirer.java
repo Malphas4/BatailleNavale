@@ -8,6 +8,7 @@ import M1.reseau.model.player.classic.JoueurNormal;
 import M1.reseau.model.player.visitor.VisitorEstTire;
 import M1.reseau.model.player.visitor.VisitorTirer;
 import M1.reseau.model.world.element.ICase;
+import M1.reseau.model.world.element.state.CaseTouche;
 import M1.reseau.serveur.cor.ServerCOR;
 import M1.reseau.serveur.serveur.game.GameService;
 import M1.reseau.serveur.serveur.game.SalonThread;
@@ -57,11 +58,14 @@ public class ServerCodeTirer extends ServerCOR {
 
             /* Sending update to all player */
             if (!(_ja instanceof Bot)) {
+                // toucher;[salon id];[tireur];[victime];[x];[y];[statut case]
                 String msg = "toucher;"
                         + _salon.get_nom()
                         + ";" + _jc.get_pseudo()
                         + ";" + _ja.get_pseudo()
-                        + ";" + _sp[4] + ";" + _sp[5];
+                        + ";" + _sp[4]
+                        + ";" + _sp[5]
+                        + ";" + ((_case instanceof CaseTouche) ? "true": "false");
                 _salon.get_j1().message(msg);
                 _salon.get_j2().message(msg);
             }
@@ -108,14 +112,27 @@ public class ServerCodeTirer extends ServerCOR {
                 _tireSubit.set_case(_tire.get_case());
                 _ja.accepte(_tireSubit);
 
+                String msg = "toucher;"
+                        + _salon.get_nom()
+                        + ";" + _bot.get_pseudo()
+                        + ";" + _ja.get_pseudo()
+                        + ";" + _tire.get_case().get_x()
+                        + ";" + _tire.get_case().get_y()
+                        + ";" + ((_tire.get_case() instanceof CaseTouche) ? "true": "false");
+                _salon.get_j1().message(msg);
+
                 boolean status = _gameService.get_partie().gagnant();
                 if (status) {
                     _gameService.get_partie().fin();
                 }
                 else _gameService.get_partie().tourSuivant();
+                _gameService.get_partie().tourSuivant();
+
             }
         } catch (IPartieException | IJoueurException e) {
             System.err.println("ServerCodeTirer : Error.");
+        } catch (IOException e) {
+            System.err.println("ServerCodeTirer : Bot can't send tirer.");
         }
     }
 

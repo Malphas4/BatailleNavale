@@ -240,15 +240,16 @@ public class ControleurGrille {
                         // Receive : tirer;[salon id];[joueur tireur];[joueur victime];[x];[y]
                         try {
                             SingletonTCP.getInstance().message(
-                                    "tirer;".
-                                            concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).
-                                            concat(";").
-                                            concat(InformationsUtilisateur.getInstance().get_pseudo()).
-                                            concat(";").
-                                            //concat( pseudo ennemi PROBLEME), .concat(";")
-                                                    concat(String.valueOf(_x)).
-                                            concat(";")
-                                            .concat(String.valueOf(_y)));
+                            "tirer;"
+                            .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
+                            .concat(";")
+                            .concat(InformationsUtilisateur.getInstance().get_pseudo())
+                            .concat(";")
+                            .concat(InformationsUtilisateur.getInstance().get_adversaire())
+                            .concat(";")
+                            .concat(String.valueOf(_x)).
+                            concat(";")
+                            .concat(String.valueOf(_y)));
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }

@@ -21,6 +21,7 @@ public class ServerCodeTourSuivant extends ServerCOR {
      */
     @Override
     public void execute(String _message, SalonThread _salon) {
+        System.out.println("\t> ServerCodeTourSuivant : Execute");
         GameService _gameService = _salon.get_gameService();
 
         String[] _sp = _message.split(";");
@@ -30,6 +31,8 @@ public class ServerCodeTourSuivant extends ServerCOR {
             if (_jc.equalsIgnoreCase(_sp[2])) {
                 _gameService.get_partie().tourSuivant();
                 _jc = _gameService.get_partie().getJoueurCourant().get_pseudo();
+                System.out.println("\t\t> ServerCodeTourSuivant - envoyer : ");
+                System.out.println("\t\t> " + "tour suivant;" + _salon.get_id() + _jc);
                 _salon.get_j1().message("tour suivant;" + _salon.get_id() + _jc);
                 _salon.get_j2().message("tour suivant;" + _salon.get_id() + _jc);
                 _salon.get_chrono().set_time(30);
@@ -37,6 +40,7 @@ public class ServerCodeTourSuivant extends ServerCOR {
         } catch (IPartieException | IOException e) {
             System.err.println("ServerCodeCommencer : La partie ne peut pas commencer.");
         }
+        System.out.println("\t> ServerCodeTourSuivant : Fin Execute");
     }
 
     /**
@@ -46,6 +50,7 @@ public class ServerCodeTourSuivant extends ServerCOR {
     @Override
     public boolean isMessageCorrect(String _message) {
         String[] _sp = _message.split(";");
-        return _sp[0].equals("tour suivant");
+        System.out.println("> ServerCodeTourSuivant : " + _sp[0] + " - " + _sp[0].equalsIgnoreCase("tour suivant"));
+        return _sp[0].equalsIgnoreCase("tour suivant");
     }
 }

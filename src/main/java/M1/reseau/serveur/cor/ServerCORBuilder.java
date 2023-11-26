@@ -5,6 +5,7 @@ import M1.reseau.serveur.cor.treatment.chat.ServerCodeChatSalon;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeCommencer;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeInitBateau;
 import M1.reseau.serveur.cor.treatment.game.ServerCodeTirer;
+import M1.reseau.serveur.cor.treatment.game.ServerCodeTourSuivant;
 import M1.reseau.serveur.cor.treatment.room.ServerCodeAbandonner;
 import M1.reseau.serveur.cor.treatment.room.ServerCodeJoin;
 import M1.reseau.serveur.cor.treatment.room.ServerCodeJoinBot;
@@ -17,7 +18,7 @@ public class ServerCORBuilder implements IServerCORBuilder {
     private IServerCOR _serverCOR;
 
     private ServerCORBuilder() {
-        IServerCOR sc1, sc2, sc3, sc4, sc5, sc6, sc7, sc8;
+        IServerCOR sc1, sc2, sc3, sc4, sc5, sc6, sc7, sc8, sc9;
 
         /* Init COR */
         sc1 = new ServerCodeChatSalon();
@@ -28,6 +29,7 @@ public class ServerCORBuilder implements IServerCORBuilder {
         sc6 = new ServerCodeTirer();
         sc7 = new ServerCodeAbandonner();
         sc8 = new ServerCodeChat();
+        sc9 = new ServerCodeTourSuivant();
 
         /* Chaining COR */
         sc1.set_nextNode(sc2);
@@ -37,6 +39,7 @@ public class ServerCORBuilder implements IServerCORBuilder {
         sc5.set_nextNode(sc6);
         sc6.set_nextNode(sc7);
         sc7.set_nextNode(sc8);
+        sc8.set_nextNode(sc9);
 
         set_serverCOR(sc1);
     }

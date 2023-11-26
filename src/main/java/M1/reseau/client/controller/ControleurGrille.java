@@ -276,8 +276,14 @@ public class ControleurGrille {
                                 modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,false);
                             }
                         }
-                        _monTour=false;
-                        chrono=30;
+                        if (_traitementTCP2[2].equalsIgnoreCase(InformationsUtilisateur.getInstance().get_pseudo())) {
+                            _monTour = false;
+                            debutCrono = false;
+                            chrono = 30;
+                        } else {
+                            _monTour = true;
+                            debutCrono = true;
+                        }
 
 
 //                        } catch (IOException e) {
@@ -533,7 +539,7 @@ public class ControleurGrille {
                 if (sT[0].equals("commencer") && sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())) {
                     _monTour = true;
                     debutCrono = true;
-                }else {
+                } else {
                     try {
                         _traitementTCP=SingletonTCP.getInstance().reception();
                     } catch (IOException e) {
@@ -556,6 +562,9 @@ public class ControleurGrille {
                             modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,true);
                         }
                     }
+
+                    _monTour = true;
+                    debutCrono = true;
 
                 }
                 /*try {

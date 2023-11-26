@@ -27,9 +27,11 @@ public class ServerCodeTirer extends ServerCOR {
      */
     @Override
     public void execute(String _message, SalonThread _salon) {
+        System.out.println("\t> ServerCodeTirer : Execute");
         GameService _gameService = _salon.get_gameService();
 
         String[] _sp = _message.split(";");
+        System.out.println("\t\t> ServerCodeTirer - message : " + _message);
 
         VisitorTirer _tire = new VisitorTirer();
         VisitorEstTire _tireSubit = new VisitorEstTire();
@@ -66,6 +68,8 @@ public class ServerCodeTirer extends ServerCOR {
                         + ";" + _sp[4]
                         + ";" + _sp[5]
                         + ";" + ((_case instanceof CaseTouche) ? "true": "false");
+                System.out.println("\t\t> ServerCodeTirer - toucher : Message envoyé vers j1 et j2");
+                System.out.println("\t\t\t>" + msg);
                 _salon.get_j1().message(msg);
                 _salon.get_j2().message(msg);
             }
@@ -90,6 +94,8 @@ public class ServerCodeTirer extends ServerCOR {
                         + ";" + ((_gameService.get_partie().is_aGagner1()) ?
                                                             _gameService.get_partie().get_joueur1().get_pseudo()
                                                             : _gameService.get_partie().get_joueur2().get_pseudo());
+                System.out.println("\t\t> ServerCodeTirer - gagner : Message envoyé vers j1 et j2");
+                System.out.println("\t\t\t>" + _msg);
                 _salon.get_j1().message(_msg);
                 _salon.get_j2().message(_msg);
             }
@@ -102,6 +108,7 @@ public class ServerCodeTirer extends ServerCOR {
         /* If player is bot, we play as the bot */
         try {
             if (_gameService.get_partie().getJoueurCourant() instanceof Bot) {
+                System.out.println("\t\t> ServerCodeTirer : Execute Bot");
                 Bot _bot = (Bot) _gameService.get_partie().getJoueurCourant();
                 JoueurNormal _ja = (JoueurNormal) _gameService.get_partie().getJoueurAdverse();
 
@@ -119,6 +126,8 @@ public class ServerCodeTirer extends ServerCOR {
                         + ";" + _tire.get_case().get_x()
                         + ";" + _tire.get_case().get_y()
                         + ";" + ((_tire.get_case() instanceof CaseTouche) ? "true": "false");
+                System.out.println("\t\t> ServerCodeTirer - bot tir: Message envoyé de bot vers j1");
+                System.out.println("\t\t\t>" + msg);
                 _salon.get_j1().message(msg);
 
                 boolean status = _gameService.get_partie().gagnant();
@@ -127,13 +136,15 @@ public class ServerCodeTirer extends ServerCOR {
                 }
                 else _gameService.get_partie().tourSuivant();
                 _gameService.get_partie().tourSuivant();
-
+                System.out.println("\t\t> ServerCodeTirer : Fin Execute bot");
             }
         } catch (IPartieException | IJoueurException e) {
             System.err.println("ServerCodeTirer : Error.");
         } catch (IOException e) {
             System.err.println("ServerCodeTirer : Bot can't send tirer.");
         }
+
+        System.out.println("\t> ServerCodeTirer : Fin Execute");
     }
 
     /**

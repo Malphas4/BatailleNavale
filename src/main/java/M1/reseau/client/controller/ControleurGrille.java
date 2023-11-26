@@ -317,7 +317,7 @@ public class ControleurGrille {
         InformationsUtilisateur.getInstance().set_salon(-1);
         // SingletonTCP.getInstance().message("code:".concat(InformationsUtilisateurs.getInstance.get_pseudo()));
         //on retourne au Lobby
-        FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
+        FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("/menuv2.fxml"));
         try {
             Scene sceneLobby = lobbyLoader.load();
             Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();

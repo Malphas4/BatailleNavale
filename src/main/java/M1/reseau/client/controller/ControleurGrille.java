@@ -501,9 +501,12 @@ public class ControleurGrille {
                 //envoi d'une case bateau
                 modifCase(unBateau.get_x(), unBateau.get_y(), _couleurBateau ,true);
                 String Bato=("init bateau;")
-                        .concat(InformationsUtilisateur.getInstance().get_pseudo())
                         .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
+                        .concat(";")
+                        .concat(InformationsUtilisateur.getInstance().get_pseudo())
+                        .concat(";")
                         .concat(String.valueOf(unBateau.get_x()))
+                        .concat(";")
                         .concat(String.valueOf(unBateau.get_y()));
 
             }

@@ -10,7 +10,7 @@ import M1.reseau.model.world.element.state.CaseTouche;
 
 import java.util.Scanner;
 
-public class Client2 {
+public class ClientGlobal {
 
     private boolean _menuGlobal = true;
     private boolean _menuConnexion = false;

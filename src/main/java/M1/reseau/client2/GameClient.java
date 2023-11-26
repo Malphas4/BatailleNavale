@@ -9,14 +9,12 @@ import java.util.Scanner;
 public class GameClient {
 
     private PartieClient _partie;
-    private ClientTCP _clientTCP;
 
     // Configuration côté serveur
 
 
-    public GameClient(ClientTCP _clientTCP) {
+    public GameClient() {
         set_partie(new PartieClient(8, 8));
-        set_clientTCP(_clientTCP);
     }
 
     public PartieClient get_partie() {

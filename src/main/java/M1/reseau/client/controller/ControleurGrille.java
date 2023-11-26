@@ -529,6 +529,16 @@ public class ControleurGrille {
                     _monTour = true;
                     debutCrono = true;
                 }
+                /*try {
+                    String s = SingletonTCP.getInstance().reception();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                String[] sT = toString().split(";");
+                if (sT[0].equals("join") && sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())) {
+                    _monTour = true;
+                    debutCrono = true;
+                }*/
 
 
             }

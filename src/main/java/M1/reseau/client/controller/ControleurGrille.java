@@ -318,7 +318,6 @@ public class ControleurGrille {
             //TODO String[] msgT=SingletonTCP.getInstance().reception().split(";");
             //_monTour= Boolean.parseBoolean(msgT[1]);
             //_labelChrono.setText("00:".concat(String.valueOf(chrono)));
-                chrono=30;
                //_monTour= !_monTour;
                 SingletonTCP.getInstance().message("tour suivant;"
                        .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
@@ -331,12 +330,15 @@ public class ControleurGrille {
                     throw new RuntimeException(e);
                 }
                 String[] sT= toString().split(";");
-                if (sT[0].equals("tour suivant") &&sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())){
-                    _monTour=true;
-                    debutCrono=true;
-                }else {
+                if (sT[0].equals("tour suivant") &&sT[2].equals(InformationsUtilisateur.getInstance().get_pseudo())) {
+
+                    _monTour = true;
+                    debutCrono = true;
+                }  else {
                     _monTour=false;
                     debutCrono=false;
+                    chrono=30;
+
                 }
 
 
@@ -414,7 +416,7 @@ public class ControleurGrille {
         //abandonner;[salon id];[joueur id]
         try {
             SingletonTCP.getInstance().message(
-                    ("abandonner,".
+                    ("abandonner;".
                     concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).
                     concat(";").
                     concat(InformationsUtilisateur.getInstance().get_pseudo())));

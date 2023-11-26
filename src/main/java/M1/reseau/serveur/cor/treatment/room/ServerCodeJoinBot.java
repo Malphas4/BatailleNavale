@@ -56,6 +56,6 @@ public class ServerCodeJoinBot extends ServerCOR {
     @Override
     public boolean isMessageCorrect(String _message) {
         String[] _sp = _message.split(";");
-        return _sp[1].equals("joinbot");
+        return _sp[0].equals("joinbot");
     }
 }

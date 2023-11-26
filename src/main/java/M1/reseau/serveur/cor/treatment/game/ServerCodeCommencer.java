@@ -37,6 +37,6 @@ public class ServerCodeCommencer extends ServerCOR {
     @Override
     public boolean isMessageCorrect(String _message) {
         String[] _sp = _message.split(";");
-        return _sp[1].equals("commencer");
+        return _sp[0].equals("commencer");
     }
 }

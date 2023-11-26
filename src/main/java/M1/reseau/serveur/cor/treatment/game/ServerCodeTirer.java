@@ -126,6 +126,6 @@ public class ServerCodeTirer extends ServerCOR {
     @Override
     public boolean isMessageCorrect(String _message) {
         String[] _sp = _message.split(";");
-        return _sp[1].equals("tirer");
+        return _sp[0].equals("tirer");
     }
 }

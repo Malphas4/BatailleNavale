@@ -71,11 +71,14 @@ public class ControleurLobby {
         String _msgm=_chatInput.getText();
         System.out.println(_msgm);
         try {
-            SingletonTCP.getInstance().message("chat;".
-                    concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).
-                    concat(";").
-                    concat(InformationsUtilisateur.getInstance().
-                    get_pseudo()).concat(";").concat(_msgm));
+            SingletonTCP.getInstance().message(
+                    "chat;"
+                            .concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon()))
+                            .concat(";")
+                            .concat(InformationsUtilisateur.getInstance()
+                                    .get_pseudo())
+                            .concat(";")
+                            .concat(_msgm));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

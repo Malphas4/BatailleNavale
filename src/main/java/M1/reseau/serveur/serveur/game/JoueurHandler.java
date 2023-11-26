@@ -67,14 +67,13 @@ public final class JoueurHandler extends Thread {
         String _msg;
 
         try{
-            synchronized (in){
-                while(!isInterrupted())
-                    in.wait();
 
-                while( (_msg = in.readLine()) != null) {
-                    System.out.println(get_pseudo()+"a recu "+_msg);
+            while(!isInterrupted()) {
 
-                    String [] _sp = _msg.split(";");
+                while ((_msg = in.readLine()) != null) {
+                    System.out.println(get_pseudo() + " a recu : " + _msg);
+
+                    String[] _sp = _msg.split(";");
                     set_pseudo(_sp[2]);
 
                     ServerCORBuilder
@@ -85,22 +84,11 @@ public final class JoueurHandler extends Thread {
                             );
 
                 }
-                in.notifyAll();
-            }
-
-            synchronized (out) {
-                while (!isInterrupted())
-                    out.wait();
-
                 out = new PrintWriter(socket.getOutputStream(), true);
-
-                out.notifyAll();
             }
         }
         catch(IOException e){
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         } finally{
             try{
                 if(socket != null)

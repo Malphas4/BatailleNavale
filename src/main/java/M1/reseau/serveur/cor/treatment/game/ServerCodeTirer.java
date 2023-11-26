@@ -38,7 +38,8 @@ public class ServerCodeTirer extends ServerCOR {
 
         try {
             JoueurNormal _jc = (JoueurNormal) _gameService.get_partie().getJoueurCourant();
-            if (_gameService.get_partie().getJoueurCourant().get_pseudo().equals(_sp[2]))
+            System.out.println("\t\t\t> ServerCodeTirer - jc : " + _jc.get_pseudo() + " - tireur : " + _sp[2]);
+            if (!_jc.get_pseudo().equalsIgnoreCase(_sp[2]))
                 throw new IPartieException("ServerCodeTirer : Error player turn.");
 
             JoueurNormal _ja = (JoueurNormal) _gameService.get_partie().getJoueurAdverse();

@@ -35,7 +35,7 @@ public class ChronoThread extends Thread {
         this._time = _time;
     }
 
-    @Override
+    /*@Override
     public void run() {
         while (!isInterrupted()) {
 
@@ -45,7 +45,7 @@ public class ChronoThread extends Thread {
             if (_salon.get_gameService().get_partie().is_commence()) {
                 
                 try {
-                    _pseudo = _salon.get_gameService().get_partie().getJoueurCourant().get_pseudo();
+                    _pseudo = _salon.get_gameService().get_partie().getJoueurAdverse().get_pseudo();
                 } catch (IPartieException e) {
                     System.err.println();
                 }
@@ -54,6 +54,12 @@ public class ChronoThread extends Thread {
                         + _salon.get_id()
                         + ";" + _pseudo
                         + ";" + get_time();
+
+                try {
+                    sleep(30000);
+                } catch (InterruptedException e) {
+                    System.err.println("ChronoThread : Fail to sleep.");
+                }
 
                 try {
                     if (get_time() <= 0) {
@@ -68,14 +74,8 @@ public class ChronoThread extends Thread {
                     System.err.println("ChronoThread : Fail to switch game round.");
                 }
 
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    System.err.println("ChronoThread : Fail to sleep.");
-                }
-
-                set_time(get_time() - 1);
+                set_time(get_time() - 30);
             }
         }
-    }
+    }*/
 }

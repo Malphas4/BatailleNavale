@@ -46,15 +46,6 @@ public class ControleurMenu {
         Scene sceneLobby = lobbyLoader.load();
         System.out.println("envoi de la demande de creation salon bot TCP");
 
-        try {
-            SingletonTCP.getInstance().message("join;".
-                    concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).
-                    concat(";").
-                    concat(InformationsUtilisateur.getInstance().
-                            get_pseudo()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         SingletonUDP.getInstance();
 
@@ -76,10 +67,11 @@ public class ControleurMenu {
         System.out.print("Jouer en local\n");
         //on fixe le type de partie à 1vs serveur pve
         InformationsUtilisateur.getInstance().set_typePartie(0);
-        FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
+        FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/lobby.fxml"));
         // AnchorPane grille=grilleLoader.load();
         // Scene sceneGrille = new Scene(grille);
          Scene sceneGrille=grilleLoader.load();
+
 
         //ControleurMenu ControleurGrille = grilleLoader.getController();
         Stage stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();

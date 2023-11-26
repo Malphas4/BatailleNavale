@@ -121,6 +121,13 @@ public class ControleurGrille {
     }
     @FXML
     public void initialize() {
+        //disable le chat local si la partie est contre un bot
+        _chatPartie.setText("Le chat du salon est inactif contre un bot");
+        _btnChatPartie.setDisable(true);
+        _textChatpartie.setDisable(true);
+        _chatPartie.setDisable(true);
+
+
         //initialoisation des arrays contenant les cases des bateaux
 
         _mesBateauxAttenteValidation=new ArrayList<>();
@@ -276,7 +283,7 @@ public class ControleurGrille {
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-                            System.out.println("timer 1s");
+                            //System.out.println("timer 1s");
                         }));
         timer1Seconde.setCycleCount(Timeline.INDEFINITE);
         timer1Seconde.play();

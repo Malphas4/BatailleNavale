@@ -94,15 +94,28 @@ public class ControleurLobby {
             //instantation du singleton TCP
             // SingletonTCP.getInstance();
             System.out.println("instantiation du singleton TCP");
-
-            try {
-                SingletonTCP.getInstance().message("join;".concat(_salonChoisi)
-                        .concat(";")
-                        .concat(InformationsUtilisateur.getInstance().get_pseudo()));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if(InformationsUtilisateur.getInstance().get_typePartie()==1) {
+                System.out.println("partie multi");
+                try {
+                    SingletonTCP.getInstance().message("join;".concat(_salonChoisi)
+                            .concat(";")
+                            .concat(InformationsUtilisateur.getInstance().get_pseudo()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }else {
+                System.out.println("partie solo");
+                //demande de connexion
+                try {
+                    SingletonTCP.getInstance().message("joinbot;".
+                            concat(String.valueOf(InformationsUtilisateur.getInstance().get_salon())).
+                            concat(";").
+                            concat(InformationsUtilisateur.getInstance().
+                                    get_pseudo()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
-
             //
             System.out.println("envoi du salon choisi TCP");
             FXMLLoader grilleLoader = new FXMLLoader(getClass().getResource("/grilleV2.fxml"));
@@ -216,6 +229,7 @@ public class ControleurLobby {
                     Node source = (Node) event.getSource();
                     _salonChoisi= source.getId();
                     System.out.println("selectionSalon;"+_salonChoisi);
+                    InformationsUtilisateur.getInstance().set_salon(Integer.parseInt(_salonChoisi));
 
               }
 

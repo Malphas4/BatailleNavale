@@ -247,9 +247,9 @@ public class ControleurGrille {
                             .concat(";")
                             .concat(InformationsUtilisateur.getInstance().get_adversaire())
                             .concat(";")
-                            .concat(String.valueOf(_x)).
+                            .concat(String.valueOf(_x+1)).
                             concat(";")
-                            .concat(String.valueOf(_y)));
+                            .concat(String.valueOf(_y+1)));
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -259,14 +259,13 @@ public class ControleurGrille {
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
-                        System.out.println("Au pas de tir!"+_traitementTCP);
                         String[] _traitementTCP2=_traitementTCP.split(";");
                         //toucher;[salon id];[tireur];[victime];[x];[y];[statut case]
                         //Exemple : toucher;0;j1;j2;4;5;true
                         if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("true")){
-                            modifCase(Integer.parseInt(_traitementTCP2[4]),Integer.parseInt(_traitementTCP2[5]),_couleurEpave,false);
+                            modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurEpave,false);
                         }else if (_traitementTCP2[0].equals("toucher")&& _traitementTCP2[6].equals("false")){
-                            modifCase(Integer.parseInt(_traitementTCP2[4]),Integer.parseInt(_traitementTCP2[5]),_couleurPasDeCible,false);
+                            modifCase(Integer.parseInt(_traitementTCP2[4])-1,Integer.parseInt(_traitementTCP2[5])-1,_couleurPasDeCible,false);
                         }
                         _monTour=false;
                         chrono=30;

@@ -117,10 +117,12 @@ public class ServeurGlobale {
 
     synchronized public int addClient(JoueurHandler t)
     {
+        System.out.println("Début de l'ajout d'un client");
         // un client en plus connecté
         _nbClients++;
         //  ajoute le nouveau flux de sortie au tableau
-        _tabClients.addElement(t);
+        _tabClients.add(t);
+        System.out.println("Clients : " + _tabClients.toString());
         return _tabClients.size()-1; // on retourne le numéro du client ajouté (size-1)
     }
 

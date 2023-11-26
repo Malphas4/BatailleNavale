@@ -1,5 +1,6 @@
 package M1.reseau.client2;
 
+import M1.reseau.client2.console.ClientTCP;
 import M1.reseau.serveur.salon.Salon;
 import M1.reseau.serveur.serveur.ServeurGlobale;
 import M1.reseau.serveur.serveur.Threads.Commandes;
@@ -15,12 +16,12 @@ public class mainClient {
     public static void main(String args[]) throws SocketException, UnknownHostException {
         // instance de la classe principale
 
-        sv = new mainClient();
+        cg = new ClientGlobale();
 
         Thread  tTCP = null;
 
         try {
-            tTCP = new ThreadTCP();
+            tTCP = new ClientTCP();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -36,12 +37,10 @@ public class mainClient {
         {
             Integer port;
             // si pas d'argument : port 18000 par défaut
-            if(args.length<=0) port=new Integer("18000");
+            if(args.length<=0) port=new Integer("7777");
                 // sinon il s'agit du numéro de port passé en argument
             else port = Integer.valueOf(args[0]);
-            ThreadUDP tUDP;
-            tUDP = new ThreadUDP(sv);
-            tUDP.start();
+
             //Lance le thread du serveur UDP
             // ServeurUDP serveurUDP = new ServeurUDP(ServeurGlobale);
             // ouverture d'un socket serveur sur port afin d'avoir 1 socket

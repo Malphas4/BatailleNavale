@@ -1,5 +1,7 @@
 package M1.reseau.client2;
 
+import M1.reseau.client2.console.ClientTCP;
+import M1.reseau.client2.console.ClientUDP;
 import M1.reseau.model.exception.IGrilleException;
 import M1.reseau.model.player.classic.JoueurNormal;
 import M1.reseau.model.world.element.ICase;
@@ -18,8 +20,96 @@ public class ClientGlobal {
     private boolean _menuSalon = false;
     private boolean _menuGame = false;
 
+    private GameClient _game;
+
+    private ClientTCP _clientTCP;
+    private ClientUDP _clientUDP;
+
+    private static ClientGlobal _clientGlobal;
+
+    public ClientGlobal() {
+
+    }
+
     public static void main(String[] args) {
 
+    }
+
+    public static ClientGlobal getInstance() {
+        if (get_clientGlobal() == null) return new ClientGlobal();
+        return get_clientGlobal();
+    }
+
+    public boolean is_menuGlobal() {
+        return _menuGlobal;
+    }
+
+    public void set_menuGlobal(boolean _menuGlobal) {
+        this._menuGlobal = _menuGlobal;
+    }
+
+    public boolean is_menuConnexion() {
+        return _menuConnexion;
+    }
+
+    public void set_menuConnexion(boolean _menuConnexion) {
+        this._menuConnexion = _menuConnexion;
+    }
+
+    public boolean is_menuInscription() {
+        return _menuInscription;
+    }
+
+    public void set_menuInscription(boolean _menuInscription) {
+        this._menuInscription = _menuInscription;
+    }
+
+    public boolean is_menuSalon() {
+        return _menuSalon;
+    }
+
+    public void set_menuSalon(boolean _menuSalon) {
+        this._menuSalon = _menuSalon;
+    }
+
+    public boolean is_menuGame() {
+        return _menuGame;
+    }
+
+    public void set_menuGame(boolean _menuGame) {
+        this._menuGame = _menuGame;
+    }
+
+    public GameClient get_game() {
+        return _game;
+    }
+
+    public void set_game(GameClient _game) {
+        this._game = _game;
+    }
+
+    public ClientTCP get_clientTCP() {
+        return _clientTCP;
+    }
+
+    public void set_clientTCP(ClientTCP _clientTCP) {
+        this._clientTCP = _clientTCP;
+    }
+
+    public ClientUDP get_clientUDP() {
+        return _clientUDP;
+    }
+
+    public void set_clientUDP(ClientUDP _clientUDP) {
+        this._clientUDP = _clientUDP;
+    }
+
+    public static ClientGlobal get_clientGlobal() {
+        return _clientGlobal;
+    }
+
+    public static void set_clientGlobal(ClientGlobal _clientGlobal) {
+        ClientGlobal._clientGlobal = _clientGlobal;
     }
 
     public void afficherGrille(JoueurNormal _joueur) {
@@ -82,6 +172,7 @@ public class ClientGlobal {
 
     public void menuGame() {
         System.out.println("=============== Menu du jeu ===============");
+        System.out.println("2\\ Initialisation de la grille");
         System.out.println("1\\ Afficher la grille");
         System.out.println("2\\ Tirer une case");
         System.out.println("3\\ Quitter");

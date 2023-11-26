@@ -25,14 +25,6 @@ public class GameClient {
         this._partie = _partie;
     }
 
-    public ClientTCP get_clientTCP() {
-        return _clientTCP;
-    }
-
-    public void set_clientTCP(ClientTCP _clientTCP) {
-        this._clientTCP = _clientTCP;
-    }
-
     public void requestPlayerSetup() {
         System.out.println("=============== Initialisation du placement des bateaux du joueurs ===============");
         int _x;
